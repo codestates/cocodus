@@ -14,8 +14,13 @@ app.use(
   })
 );
 // router
+const userRouter = require("./routes/user");
+const boardRouter = require("./routes/board");
+
 app.get("/", (req, res) => {
   res.send("Happy5happy5, hacking!");
 });
+app.use("/user", userRouter);
+app.use("/board", boardRouter);
 
 module.exports = app;
