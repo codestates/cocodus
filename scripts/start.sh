@@ -1,3 +1,4 @@
 #!/bin/bash
+set -e
 cd /home/ubuntu/cocodus/server
-authbind --deep pm2 start server.js
+sudo pm2 start server.js
