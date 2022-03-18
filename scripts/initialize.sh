@@ -1,5 +1,7 @@
 #!/bin/bash
+node -v
+npm -v
 cd /home/ubuntu/cocodus/server
 npm install
-sudo npm i -g pm2
+npm install pm2@latest -g
 sudo apt-get update
