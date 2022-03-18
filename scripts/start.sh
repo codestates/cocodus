@@ -1,5 +1,4 @@
 #!/bin/bash
-whereis pm2
-whereis node
-whereis nvm
-pm2 start /home/ubuntu/cocodus/server/server.js
+ls -a
+cd /home/ubuntu/cocodus/server
+pm2 start server.js
