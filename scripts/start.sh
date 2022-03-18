@@ -1,4 +1,4 @@
 #!/bin/bash
 cd /home/ubuntu/cocodus/server
-sudo ln -s "$(which pm2)" /usr/bin/pm2
+ls -a
 pm2 start server.js
