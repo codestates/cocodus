@@ -1,4 +1,4 @@
 #!/bin/bash
-ls -a
+export PATH=$PATH:/usr/bin
 cd /home/ubuntu/cocodus/server
-pm2 start server.js
+sudo pm2 start server.js
