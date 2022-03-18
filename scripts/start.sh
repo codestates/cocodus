@@ -1,3 +1,3 @@
 #!/bin/bash
 cd /home/ubuntu/cocodus/server
-/usr/local/bin/pm2 start ~/server.js -i 0 --name "admin" &
+/home/ubuntu/.nvm/versions/node/v16.14.0/bin/pm2 start cocodus/server/server.js
