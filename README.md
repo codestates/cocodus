@@ -13,7 +13,7 @@ cocodus는 '함께, 같이'를 뜻하는 영어 단어 접두사 'co-'와 code, 
 
 ## Creator
 ### Trainer
-열심히 코딩 공부하는 사람들이 모였습니다. 그래서 Trainer!
+열심히 코딩 공부하는 사람들이 모였습니다. 그래서 Trainer!   
 (사실 팀장이 포켓몬 트레이너 😅)
 ### Members
 - 자세한 소개는 여기서 → https://github.com/codestates/cocodus/wiki/WorkLog
