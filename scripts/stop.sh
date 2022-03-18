@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "stop.sh start here------------------------------"
 node -v
 npm -v
 nvm -v
