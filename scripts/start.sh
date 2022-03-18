@@ -1,3 +1,4 @@
 #!/bin/bash
 cd /home/ubuntu/cocodus/server
-echo $PATH
+whereis pm2
+whereis node
