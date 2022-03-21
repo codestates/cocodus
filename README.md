@@ -1,7 +1,7 @@
 ## cocodus
 ![readme](https://user-images.githubusercontent.com/73992484/158941495-ca5ed878-b84f-43bd-8591-1ae943a060c8.png)
 
-**우리 동네 코딩 모임 정보 공유 플랫폼, cocodus**
+[**우리 동네 코딩 모임 정보 공유 플랫폼, cocodus**](https://cocodus.site)
 
 ### About
 cocodus는 '함께, 같이'를 뜻하는 영어 단어 접두사 'co-'와 code, 그리고 us를 붙여서 지은 이름입니다.   
