@@ -30,7 +30,7 @@ cocodus는 '함께, 같이'를 뜻하는 영어 단어 접두사 'co-'와 code, 
 열심히 코딩 공부하는 사람들이 모였습니다. 그래서 Trainer!   
 
 ### Members
-- 자세한 소개는 여기서 → https://github.com/codestates/cocodus/wiki/WorkLog
+- 자세한 소개는 여기서 → https://github.com/codestates/cocodus/wiki/Team-Introduction
 - 김현덕 / 팀장 / 백엔드 / https://github.com/ToyCon
 - 권민주 / 프론트엔드 / https://github.com/Minju20200305
 - 권순일 / 프론트엔드 / https://github.com/sun-one95
