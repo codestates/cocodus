@@ -25,7 +25,7 @@ export default function Header() {
             </Button>
           </div>
 
-          <Image src="../public/TeamWork.png" alt="" />
+          <Image src="TeamWork.png" alt="" />
         </Flex>
       </Container>
     </StyledHeader>
