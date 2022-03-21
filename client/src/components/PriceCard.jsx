@@ -18,7 +18,7 @@ function PriceCard() {
         <BackgroundSqure />
         <Content>
           <PlanTitle>리액트 조원 구함니다</PlanTitle>
-          <Icon src="../public/React-icon.svg.png" />
+          <Icon src="React-icon.svg.png" />
 
           {features.map((item) => {
             <FeatureListItem>
