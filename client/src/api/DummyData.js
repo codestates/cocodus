@@ -1,0 +1,42 @@
+export default [
+  {
+    id: 0,
+    title: "같이 모각코 하실 분",
+    content: "모각코 구함요",
+    icon: "react",
+    meetingpoint: "서울 서대문구 오량길 선선카페",
+    date: "2022년 3월 18일 오후 6시",
+  },
+  {
+    id: 1,
+    title: "리액트 하실 분",
+    content: "리액트 구함요",
+    icon: "react",
+    meetingpoint: "서울 서대문구 오량길 선선카페",
+    date: "2022년 3월 18일 오후 6시",
+  },
+  {
+    id: 2,
+    title: "같이 자바스크립트하실 분",
+    content: "자바스크립트 구함요",
+    icon: "자바스크립트",
+    meetingpoint: "서울 종로구 선원로 코워킹스페이스",
+    date: " 2022년 3월 20일 오후 8시",
+  },
+  {
+    id: 3,
+    title: "같이 파이선 하실 분",
+    content: "파이선 구함요",
+    icon: "파이선",
+    meetingpoint: "서울 성북구 전원로 카페 에녹",
+    date: " 2022년 3월 21일 오후 3시",
+  },
+  {
+    id: 4,
+    title: "같이 코틀린 하실 분",
+    content: "코틀린 구함요",
+    icon: "코틀린",
+    meetingpoint: "서울 서대문구 오량길 선선카페",
+    date: "2022년 3월 18일 오후 6시",
+  },
+];
