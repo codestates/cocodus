@@ -30,6 +30,7 @@ function CardSection(props) {
   const [like, setLike] = useState(0);
   return (
     <Container>
+
       <Flex>
         <Card>
           <BackgroundSqure />
@@ -42,6 +43,7 @@ function CardSection(props) {
               <FeatureListItem>
                 <span>{props.data.content}</span>
               </FeatureListItem>
+
 
               <span
                 onClick={() => {
