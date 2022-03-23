@@ -2,7 +2,7 @@ import React from "react";
 import { AiOutlineLike } from "react-icons/ai";
 import { CgEye } from "react-icons/cg";
 import { ImShare } from "react-icons/im";
-import { IconsBlock, IconAndText, Text } from "./LikesViewShare.styled";
+import { IconsBlock, IconAndText, Text } from "./LikesViewShareIcon.styled";
 
 function LikesViewShareIcon(props) {
   return (

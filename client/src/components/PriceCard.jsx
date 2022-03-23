@@ -20,7 +20,7 @@ function PriceCard() {
   return (
     <div>
       {data.map((a, i) => {
-        return <CardSection data={data[i]} />;
+        return <CardSection data={data[i]} key={"CardSection" + i} />;
       })}
     </div>
   );
@@ -35,7 +35,7 @@ function CardSection(props) {
           <BackgroundSqure />
           <ContentDiv>
             <DivContainer>
-              <Icon src="../public/React-icon.svg.png" />
+              <Icon src="React-icon.svg.png" />
             </DivContainer>
             <DivContainer>
               <PlanTitle>{props.data.title}</PlanTitle>
