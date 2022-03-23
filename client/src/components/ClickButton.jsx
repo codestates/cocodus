@@ -1,7 +1,7 @@
 import React from "react";
-import { BtnGroup, Btn } from "./Register.styled";
+import { BtnGroup, Btn } from "./Register/Register.styled";
 
-function Button({ click1, click2 }) {
+function ClickButton({ click1, click2 }) {
   return (
     <>
       <BtnGroup>
@@ -12,4 +12,4 @@ function Button({ click1, click2 }) {
   );
 }
 
-export default Button;
+export default ClickButton;
