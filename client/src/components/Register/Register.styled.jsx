@@ -1,12 +1,6 @@
 // 등록, 수정, 조회 폼 디자인
 
-import styled, { css, createGlobalStyle } from "styled-components";
-
-export const GlobalStyle = createGlobalStyle`
-  body {
-    background: rgba(179, 210, 220, 0.075);
-  }
-`;
+import styled, { css } from "styled-components";
 
 export const Section = styled.section`
   background: #ffffff;
@@ -38,6 +32,14 @@ export const Title = styled.input`
 export const Div = styled.div`
   font-weight: 500;
   font-size: 18px;
+  ${(props) =>
+    props.huge &&
+    css`
+      position: absolute;
+      right: 3rem;
+      color: rgba(196, 196, 196);
+      font-size: 20px;
+    `};
 `;
 
 // 사용언어, 언어셀렉박스
@@ -54,11 +56,13 @@ export const FlexBox = styled.div`
       position: absolute;
       right: 3rem;
       margin-top: 1.5rem;
-    `}
+    `};
 `;
 
 // 언어, 지역 셀렉박스
 export const InputBox = styled.input`
+  color: ${(props) => props.color};
+  text-shadow: ${(props) => props.textShadow};
   background: rgba(196, 196, 196, 0.26);
   font-size: 16px;
   font-family: initial;
@@ -69,6 +73,13 @@ export const InputBox = styled.input`
   border: 1px solid #ced4da;
   border-radius: 10px;
   margin-right: ${(props) => props.ri};
+  ${(props) =>
+    props.focus &&
+    css`
+      &:focus {
+        outline: none;
+      }
+    `}
 `;
 
 export const Label = styled.label`
