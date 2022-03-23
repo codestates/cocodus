@@ -4,9 +4,17 @@ module.exports = {
     await queryInterface.createTable("Post_comments", {
       user_email: {
         type: Sequelize.STRING,
+        references: {
+          model: "Users",
+          key: "email",
+        },
       },
       post_id: {
-        type: Sequelize.STRING,
+        type: Sequelize.UUID,
+        references: {
+          model: "Posts",
+          key: "id",
+        },
       },
       comment: {
         type: Sequelize.STRING,

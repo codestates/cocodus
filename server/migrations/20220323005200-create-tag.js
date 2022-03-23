@@ -6,9 +6,9 @@ module.exports = {
       {
         id: {
           allowNull: false,
-          autoIncrement: true,
           primaryKey: true,
-          type: Sequelize.INTEGER,
+          type: Sequelize.UUID,
+          unique: true,
         },
         stack: {
           type: Sequelize.STRING,

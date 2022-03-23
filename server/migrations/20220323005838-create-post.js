@@ -6,15 +6,16 @@ module.exports = {
       {
         id: {
           allowNull: false,
-          autoIncrement: true,
           primaryKey: true,
-          type: Sequelize.INTEGER,
-        },
-        id: {
-          type: Sequelize.STRING,
+          type: Sequelize.UUID,
+          unique: true,
         },
         user_email: {
           type: Sequelize.STRING,
+          references: {
+            model: "Users",
+            key: "email",
+          },
         },
         title: {
           type: Sequelize.STRING,
@@ -26,13 +27,13 @@ module.exports = {
           type: Sequelize.BOOLEAN,
         },
         veiw_count: {
-          type: Sequelize.STRING,
+          type: Sequelize.INTEGER,
         },
         total_like: {
-          type: Sequelize.STRING,
+          type: Sequelize.INTEGER,
         },
         total_comment: {
-          type: Sequelize.STRING,
+          type: Sequelize.INTEGER,
         },
         location: {
           type: Sequelize.STRING,
