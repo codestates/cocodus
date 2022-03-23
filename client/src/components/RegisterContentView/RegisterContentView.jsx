@@ -9,7 +9,7 @@ import {
   InputBox,
   Label,
   CheckBox,
-} from "./Register.styled";
+} from "../Register/Register.styled";
 import { ContentBlock } from "./RegisterContentView.styled";
 import Comment from "../Comment/Comment";
 import LikesViewShareIcon from "../LikesViewShareIcon/LikesViewShareIcon";
