@@ -5,6 +5,7 @@ import { Container } from "./components/styles/Container.styled";
 import GlobalStyles from "./components/styles/Global";
 import PriceCard from "./components/PriceCard";
 import LanguageIcon from "./components/LanguageIcon";
+import RegisterPage from "./Pages/RegisterPage";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -17,14 +18,15 @@ function App() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <div>
-        <GlobalStyles />
-        <Header />
-        <LanguageIcon />
-        <PriceCard />
-      </div>
-    </ThemeProvider>
+    // <ThemeProvider theme={theme}>
+    //   <div>
+    //     <GlobalStyles />
+    //     <Header />
+    //     <LanguageIcon />
+    //     <PriceCard />
+    //   </div>
+    // </ThemeProvider>
+    <RegisterPage />
   );
 }
 
