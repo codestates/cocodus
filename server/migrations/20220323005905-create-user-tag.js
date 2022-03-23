@@ -6,9 +6,17 @@ module.exports = {
       {
         user_email: {
           type: Sequelize.STRING,
+          references: {
+            model: "Users",
+            key: "email",
+          },
         },
         tag_id: {
-          type: Sequelize.STRING,
+          type: Sequelize.UUID,
+          references: {
+            model: "Tags",
+            key: "id",
+          },
         },
       },
       {
