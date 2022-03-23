@@ -27,7 +27,7 @@ export const ContentDiv = styled.div`
   justify-content: space-between;
 `;
 
-export const divContainer = styled.div`
+export const DivContainer = styled.div`
   padding: 10px;
 `;
 

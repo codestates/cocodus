@@ -6,7 +6,7 @@ import {
   FeatureListItem,
   Icon,
   BackgroundSqure,
-  divContainer,
+  DivContainer,
   Align,
 } from "./styles/PriceCard.styled";
 import { Button } from "./styles/Button.styled";
@@ -30,20 +30,18 @@ function CardSection(props) {
   const [like, setLike] = useState(0);
   return (
     <Container>
-
       <Flex>
         <Card>
           <BackgroundSqure />
           <ContentDiv>
-            <divContainer>
+            <DivContainer>
               <Icon src="../public/React-icon.svg.png" />
-            </divContainer>
-            <divContainer>
+            </DivContainer>
+            <DivContainer>
               <PlanTitle>{props.data.title}</PlanTitle>
               <FeatureListItem>
                 <span>{props.data.content}</span>
               </FeatureListItem>
-
 
               <span
                 onClick={() => {
@@ -53,14 +51,14 @@ function CardSection(props) {
                 ♥️{like}
               </span>
               <span>👀</span>
-            </divContainer>
-            <divContainer>
+            </DivContainer>
+            <DivContainer>
               <PlanTitle></PlanTitle>
               일자: {props.data.date}
               <br></br>
               위치: {props.data.meetingpoint}
               <Button>지도 크게 보기</Button>
-            </divContainer>
+            </DivContainer>
           </ContentDiv>
         </Card>
       </Flex>
