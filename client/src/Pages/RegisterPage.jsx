@@ -3,6 +3,7 @@
 import React from "react";
 import ClickButton from "../components/ClickButton";
 import Register from "../components/Register/Register";
+import NavBar from "../components/NavBar/NavBar";
 
 function RegisterPage(props) {
   return (

@@ -36,10 +36,10 @@ function Register() {
   return (
     <>
       <Section>
-        <Title type="text" placeholder="제목을 입력하세요" />
+        <Title type="text" placeholder="제목을 입력하세요" top="2rem" />
         <FlexBox>
           <Div>글쓴이</Div>
-          <InputBox type="text" value="김코딩" width="15%" />
+          <InputBox type="text" defaultValue="김코딩" width="15%" readOnly />
         </FlexBox>
         <FlexBox>
           <Div>사용 언어</Div>
@@ -49,7 +49,7 @@ function Register() {
         })} */}
           <datalist id="list">
             {Languages.map((Lan, idx) => {
-              return <option key={idx} value={Lan} />;
+              return <option key={idx} defaultValue={Lan} readOnly />;
             })}
           </datalist>
           <Label>
@@ -64,7 +64,11 @@ function Register() {
         <TestEditorForm />
         <FlexBox top="2rem">
           <Div>위치</Div>
-          <InputBox type="text" value="서울 서대문구 연희로 32 만동제과" />
+          <InputBox
+            type="text"
+            defaultValue="서울 서대문구 연희로 32 만동제과"
+            readOnly
+          />
         </FlexBox>
       </Section>
     </>

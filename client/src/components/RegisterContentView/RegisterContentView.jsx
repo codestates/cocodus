@@ -22,17 +22,23 @@ function DetailContent(props) {
         textShadow="0 0 0 black"
         borderBottom="none"
         top="1rem"
-        value="React 스터디 모집합니다."
+        defaultValue="React 스터디 모집합니다."
         readOnly
       />
       <FlexBox>
         <Div>글쓴이</Div>
-        <InputBox type="text" value="김코딩" width="15%" focus />
+        <InputBox type="text" value="김코딩" width="15%" focus readOnly />
         <Div huge>2022-03-23</Div>
       </FlexBox>
       <FlexBox>
         <Div>사용 언어</Div>
-        <InputBox type="text" ri="1rem" value="react.js" readOnly focus />
+        <InputBox
+          type="text"
+          ri="1rem"
+          defaultValue="react.js"
+          readOnly
+          focus
+        />
         <Label>
           <CheckBox type="checkbox" id="online" disabled />
           온라인 가능
@@ -76,7 +82,7 @@ function DetailContent(props) {
         <Div>위치</Div>
         <InputBox
           type="text"
-          value="서울 서대문구 연희로 32 만동제과"
+          defaultValue="서울 서대문구 연희로 32 만동제과"
           readOnly
           focus
         />
