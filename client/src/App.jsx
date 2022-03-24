@@ -7,6 +7,7 @@ import RegisterPage from "./Pages/RegisterPage";
 import RegisterContentViewPage from "./Pages/RegisterContentViewPage";
 import Home from "./Pages/Home";
 import NavBar from "../src/components/NavBar/NavBar";
+import Error from "./Pages/ErrorPage";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -33,6 +34,7 @@ function App() {
               path="/RegisterContentViewPage"
               element={<RegisterContentViewPage />}
             />
+            <Route exact path="/error" element={<Error />} />
           </Routes>
         </Router>
       </div>
