@@ -2,14 +2,11 @@ import React from "react";
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import Header from "./components/Header";
-import { Container } from "./components/styles/Container.styled";
-import GlobalStyles from "./components/styles/Global";
-import PriceCard from "./components/PriceCard";
-import LanguageIcon from "./components/LanguageIcon";
-
+import RegisterEditPage from "./Pages/RegisterEditPage";
 import RegisterPage from "./Pages/RegisterPage";
-
+import RegisterContentViewPage from "./Pages/RegisterContentViewPage";
+import Home from "./Pages/Home";
+import NavBar from "../src/components/NavBar/NavBar";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -22,23 +19,24 @@ function App() {
   };
 
   return (
-
     <ThemeProvider theme={theme}>
       <div>
-        <GlobalStyles />
-        <Header />
-        <LanguageIcon />
-        <PriceCard />
-
+        {" "}
+        <NavBar />
         <Router>
           <Routes>
-            <Route exact path="/" />
-            <Route path="/register" element={<RegisterEditPage />} />
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/registeredit" element={<RegisterEditPage />} />
+            <Route exact path="/register" element={<RegisterPage />} />
+            <Route
+              exact
+              path="/RegisterContentViewPage"
+              element={<RegisterContentViewPage />}
+            />
           </Routes>
         </Router>
       </div>
     </ThemeProvider>
-
   );
 }
 
