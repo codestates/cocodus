@@ -36,7 +36,7 @@ function Register() {
   return (
     <>
       <Section>
-        <Title type="text" placeholder="제목을 입력하세요" />
+        <Title type="text" placeholder="제목을 입력하세요" top="2rem" />
         <FlexBox>
           <Div>글쓴이</Div>
           <InputBox type="text" defaultValue="김코딩" width="15%" readOnly />
