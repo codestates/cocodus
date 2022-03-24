@@ -5,6 +5,7 @@ import { Flex } from "./styles/Flex.styled";
 import React, { useState } from "react";
 import Modal from "../Modal";
 import styled from "styled-components";
+import axios from "axios";
 export default function Header() {
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -14,6 +15,14 @@ export default function Header() {
   const closeModal = () => {
     setModalOpen(false);
   };
+  const naverHandle = async (list) => {
+    let temp = await axios.get("http://localhost:8080/user/login", {
+      headers: {
+        oauth_source: list,
+      },
+    });
+  };
+  const list = ["Naver", "Kakaotalk", "Google"];
   return (
     <StyledHeader>
       <Container>
@@ -22,18 +31,17 @@ export default function Header() {
           <Button>새 게시글 쓰기</Button>
           <Button onClick={openModal}>로그인</Button>
           <Modal open={modalOpen} close={closeModal} header="소셜 로그인">
-            <img
-              style={{ width: "100px", marginLeft: "20px" }}
-              src="Naver.png"
-            />
-            <img
-              style={{ width: "100px", marginLeft: "20px" }}
-              src="Kakaotalk.png"
-            />
-            <img
-              style={{ width: "100px", marginLeft: "20px" }}
-              src="Google.png"
-            />
+            {list.map((x, i) => (
+              <img
+                onClick={() => naverHandle(x)}
+                style={{
+                  width: "100px",
+                  marginLeft: "20px",
+                  cursor: "pointer",
+                }}
+                src={x + ".png"}
+              />
+            ))}
           </Modal>
         </Nav>
         <Flex>

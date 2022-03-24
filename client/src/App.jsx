@@ -10,7 +10,6 @@ import LanguageIcon from "./components/LanguageIcon";
 
 import RegisterPage from "./Pages/RegisterPage";
 
-
 function App() {
   const [count, setCount] = useState(0);
   const theme = {
@@ -22,7 +21,6 @@ function App() {
   };
 
   return (
-
     <ThemeProvider theme={theme}>
       <div>
         <GlobalStyles />
@@ -33,12 +31,11 @@ function App() {
         <Router>
           <Routes>
             <Route exact path="/" />
-            <Route path="/register" element={<RegisterEditPage />} />
+            {/* <Route path="/register" element={<RegisterEditPage />} /> */}
           </Routes>
         </Router>
       </div>
     </ThemeProvider>
-
   );
 }
 
