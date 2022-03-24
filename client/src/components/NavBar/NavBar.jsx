@@ -29,8 +29,13 @@ export default function NavBar() {
       <StyledHeader>
         <Container>
           <Nav>
-            <Logo src="logo2.png" alt="" />
-            <Button>새 게시글 쓰기</Button>
+            <a href="/">
+              <Logo src="logo2.png" alt="" />
+            </a>
+
+            <a href="/register">
+              <Button>새 게시글 쓰기</Button>
+            </a>
             <Button onClick={openModal}>로그인</Button>
             <Modal open={modalOpen} close={closeModal} header="소셜 로그인">
               <img
