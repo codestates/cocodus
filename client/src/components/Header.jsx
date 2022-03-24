@@ -18,7 +18,7 @@ export default function Header() {
     <StyledHeader>
       <Container>
         <Nav>
-          <Logo src="../public/logo2.png" alt="" />
+          <Logo src="logo2.png" alt="" />
           <Button>새 게시글 쓰기</Button>
           <Button onClick={openModal}>로그인</Button>
           <Modal open={modalOpen} close={closeModal} header="소셜 로그인">
