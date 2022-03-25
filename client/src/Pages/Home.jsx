@@ -7,7 +7,7 @@ import GlobalStyles from "../components/styles/Global";
 import PriceCard from "../components/PriceCard";
 import LanguageIcon from "../components/LanguageIcon";
 import NavBar from "../components/NavBar/NavBar";
-
+import Recruiting from "../components/LandingPageButtons/LandingPageButtons";
 function Home() {
   const [count, setCount] = useState(0);
   const theme = {
@@ -25,6 +25,7 @@ function Home() {
 
         <Header />
         <LanguageIcon />
+        <Recruiting />
         <PriceCard />
       </div>
     </ThemeProvider>
