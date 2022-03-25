@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 app.use(
   cors({
-    origin: ["http://localhost"],
+    origin: ["http://localhost:3000"],
     credentials: true,
     methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT"],
   })

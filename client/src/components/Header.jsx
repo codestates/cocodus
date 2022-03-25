@@ -6,15 +6,16 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "../components/Modal/Modal";
 import styled from "styled-components";
+import axios from "axios";
 export default function Header() {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const openModal = () => {
-    setModalOpen(true);
+  const handleModal = () => {
+    setModalOpen(!modalOpen);
   };
-  const closeModal = () => {
-    setModalOpen(false);
-  };
+
+  const loginHandle = async (list) => {};
+  const list = ["Naver", "Kakaotalk", "Google"];
   return (
     <StyledHeader>
       <Container>
