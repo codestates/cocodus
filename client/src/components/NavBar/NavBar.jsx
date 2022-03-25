@@ -5,17 +5,38 @@ import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import GlobalStyles from "../../components/styles/Global";
 import Modal from "../Modal/Modal";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-export default function NavBar() {
+import axios from "axios";
+export default function NavBar({}) {
   const [modalOpen, setModalOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  let navigate = useNavigate();
 
   const openModal = () => {
     setModalOpen(true);
   };
   const closeModal = () => {
     setModalOpen(false);
+    setEmail("");
+    setPassword("");
   };
 
+  const inputHandler = (e) => {
+    if (e.target.id === "email") {
+      setEmail(e.target.value);
+    } else if (e.target.id === "password") {
+      setPassword(e.target.value);
+    }
+  };
+  const submitHandler = async () => {
+    setModalOpen(false);
+    let temp = await axios.post("http://localhost:8080/user/login", {
+      data: { email, password },
+    });
+    console.log(temp);
+  };
   const theme = {
     colors: {
       header: "#ebfbff",
@@ -50,6 +71,24 @@ export default function NavBar() {
                 style={{ width: "100px", marginLeft: "20px" }}
                 src="Google.png"
               />
+              <form action="/register">
+                <input
+                  onChange={inputHandler}
+                  placeholder="email"
+                  type="text"
+                  id="email"
+                  value={email}
+                  autoComplete="off"
+                />
+                <input
+                  onChange={inputHandler}
+                  placeholder="psw"
+                  type="password"
+                  value={password}
+                  id="password"
+                />
+              </form>
+              <button onClick={submitHandler}>로그인</button>
             </Modal>
           </Nav>
         </Container>

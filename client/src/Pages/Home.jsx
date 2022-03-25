@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import Header from "../components/Header";
 import { Container } from "../components/styles/Container.styled";
@@ -9,7 +8,6 @@ import LanguageIcon from "../components/LanguageIcon";
 import NavBar from "../components/NavBar/NavBar";
 import LandingPageCheckbox from "../components/LandingPageButtons/LandingPageButtons";
 function Home() {
-  const [count, setCount] = useState(0);
   const theme = {
     colors: {
       header: "#ebfbff",
