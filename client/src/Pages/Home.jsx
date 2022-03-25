@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
-import {
-  Header,
-  PriceCard,
-  LanguageIcon,
-  GlobalStyles,
-  Container,
-  NavBar,
-} from "../components/";
+import Header from "../components/Header";
+import { Container } from "../components/styles/Container.styled";
+import GlobalStyles from "../components/styles/Global";
+import PriceCard from "../components/PriceCard";
+import LanguageIcon from "../components/LanguageIcon";
+import NavBar from "../components/NavBar/NavBar";
+import Recruiting from "../components/LandingPageButtons/LandingPageButtons";
 
 function Home() {
   const theme = {
@@ -25,6 +24,7 @@ function Home() {
 
         <Header />
         <LanguageIcon />
+        <Recruiting />
         <PriceCard />
       </div>
     </ThemeProvider>
