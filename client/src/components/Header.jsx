@@ -9,19 +9,11 @@ import axios from "axios";
 export default function Header() {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const openModal = () => {
-    setModalOpen(true);
+  const handleModal = () => {
+    setModalOpen(!modalOpen);
   };
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-  const naverHandle = async (list) => {
-    let temp = await axios.get("http://localhost:8080/user/login", {
-      headers: {
-        oauth_source: list,
-      },
-    });
-  };
+
+  const loginHandle = async (list) => {};
   const list = ["Naver", "Kakaotalk", "Google"];
   return (
     <StyledHeader>
@@ -29,11 +21,12 @@ export default function Header() {
         <Nav>
           <Logo src="logo2.png" alt="" />
           <Button>새 게시글 쓰기</Button>
-          <Button onClick={openModal}>로그인</Button>
-          <Modal open={modalOpen} close={closeModal} header="소셜 로그인">
+          <Button onClick={handleModal}>로그인</Button>
+          <Modal open={modalOpen} close={handleModal} header="소셜 로그인">
             {list.map((x, i) => (
               <img
-                onClick={() => naverHandle(x)}
+                key={list + i}
+                onClick={() => loginHandle(x)}
                 style={{
                   width: "100px",
                   marginLeft: "20px",
