@@ -6,8 +6,7 @@ import GlobalStyles from "../components/styles/Global";
 import PriceCard from "../components/PriceCard";
 import LanguageIcon from "../components/LanguageIcon";
 import NavBar from "../components/NavBar/NavBar";
-import Recruiting from "../components/LandingPageButtons/LandingPageButtons";
-
+import LandingPageCheckbox from "../components/LandingPageButtons/LandingPageButtons";
 function Home() {
   const theme = {
     colors: {
@@ -24,7 +23,8 @@ function Home() {
 
         <Header />
         <LanguageIcon />
-        <Recruiting />
+        <LandingPageCheckbox />
+
         <PriceCard />
       </div>
     </ThemeProvider>
