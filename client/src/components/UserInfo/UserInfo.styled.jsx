@@ -10,6 +10,7 @@ export const FlexBox = styled.div`
 export const Div = styled.div`
   font-weight: 500;
   font-size: 18px;
+  margin-bottom: 1rem;
 `;
 
 export const InputBox = styled.input`
@@ -21,6 +22,5 @@ export const InputBox = styled.input`
   overflow: hidden;
   border: 1px solid #ced4da;
   border-radius: 10px;
-  margin-top: 1rem;
   margin-right: ${(props) => props.ri};
 `;
