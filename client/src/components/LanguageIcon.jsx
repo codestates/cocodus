@@ -3,7 +3,14 @@ import styled from "styled-components";
 import { ContainerForIcon } from "./styles/ContainerForIcon.styled";
 export default function LanguageIcon() {
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <ContainerForIcon>
         <img style={{ padding: "10px 10px" }} src="JS.png" />
         <img style={{ padding: "10px 10px" }} src="TS.png" />
