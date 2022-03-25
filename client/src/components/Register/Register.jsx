@@ -2,7 +2,6 @@
 
 import React from "react";
 import TestEditorForm from "../TestEditorForm";
-
 import {
   Section,
   Title,
@@ -12,27 +11,9 @@ import {
   Label,
   CheckBox,
 } from "./Register.styled";
+import LangOptTag from "../LangOptTag";
 
 function Register() {
-  const Languages = [
-    "C",
-    "C+",
-    "C#",
-    "Spring",
-    "JavaScript",
-    "TypeScript",
-    "React.js",
-    "Vue.js",
-    "Node.js",
-    "Python",
-    "Django",
-    "GO",
-    "Swift",
-    "Kotlin",
-    "Angular.js",
-    "Ruby",
-  ];
-
   return (
     <>
       <Section>
@@ -43,23 +24,15 @@ function Register() {
         </FlexBox>
         <FlexBox>
           <Div>사용 언어</Div>
-          <InputBox type="text" list="list" ri="1rem" />
-          {/* {hashArr.map((el) => {
-          return <div>{el}</div>;
-        })} */}
-          <datalist id="list">
-            {Languages.map((Lan, idx) => {
-              return <option key={idx} defaultValue={Lan} readOnly />;
-            })}
-          </datalist>
-          <Label>
-            <CheckBox type="checkbox" id="online" />
-            온라인 가능
-          </Label>
+          <LangOptTag />
         </FlexBox>
         <FlexBox>
           <Div>일시</Div>
           <InputBox type="datetime-local"></InputBox>
+          <Label>
+            <CheckBox type="checkbox" id="online" />
+            온라인 가능
+          </Label>
         </FlexBox>
         <TestEditorForm />
         <FlexBox top="2rem">
