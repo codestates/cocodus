@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 app.use(
   cors({
-    origin: ["http://localhost"],
+    origin: ["http://localhost:3000"],
     credentials: true,
     methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT"],
   })
@@ -16,7 +16,13 @@ app.use(
 // router
 const userRouter = require("./routes/user");
 const boardRouter = require("./routes/board");
-
+const jwtTest = require("./controllers/token/index");
+app.get("/jwtTest", (req, res) => {
+  jwtTest.sendAccessToken(
+    res,
+    jwtTest.generateAccessToken({ email: "happy5happy5@gmail.com" })
+  );
+});
 app.get("/", (req, res) => {
   res.send("Cocodus, hacking!");
 });

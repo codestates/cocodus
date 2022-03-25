@@ -1,10 +1,14 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import Header from "./components/Header";
-import { Container } from "./components/styles/Container.styled";
-import GlobalStyles from "./components/styles/Global";
-import PriceCard from "./components/PriceCard";
-
+import { NavBar } from "../src/components";
+import {
+  RegisterEditPage,
+  RegisterPage,
+  RegisterContentViewPage,
+  Home,
+  Error,
+} from "./Pages";
 function App() {
   const [count, setCount] = useState(0);
   const theme = {
@@ -18,10 +22,20 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <GlobalStyles />
-        <Header />
-
-        <PriceCard />
+        <Router>
+          <NavBar />
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/registeredit" element={<RegisterEditPage />} />
+            <Route exact path="/register" element={<RegisterPage />} />
+            <Route
+              exact
+              path="/RegisterContentViewPage"
+              element={<RegisterContentViewPage />}
+            />
+            <Route exact path="/error" element={<Error />} />
+          </Routes>
+        </Router>
       </div>
     </ThemeProvider>
   );
