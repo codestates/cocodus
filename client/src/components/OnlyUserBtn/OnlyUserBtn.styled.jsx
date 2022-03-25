@@ -5,7 +5,8 @@ import styled from "styled-components";
 export const UserBlock = styled.div`
   display: flex;
   position: absolute;
-  top: 10%;
+  /* top: 10%; */
+  padding-top: 30px;
   right: 16%;
 `;
 
