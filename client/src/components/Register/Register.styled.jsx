@@ -32,6 +32,7 @@ export const Title = styled.input`
 export const Div = styled.div`
   font-weight: 500;
   font-size: 18px;
+  margin-right: 1rem;
   ${(props) =>
     props.huge &&
     css`
@@ -68,7 +69,6 @@ export const InputBox = styled.input`
   font-family: initial;
   width: ${(props) => props.width || "30%"};
   padding: 10px 8px;
-  margin-left: 1rem;
   overflow: hidden;
   border: 1px solid #ced4da;
   border-radius: 10px;
