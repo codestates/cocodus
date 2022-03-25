@@ -23,6 +23,7 @@ export const Text = styled.textarea`
   resize: none;
   display: block;
   font-family: inherit;
+  font-size: 18px;
   padding: 1rem 1rem 1.5rem;
   box-sizing: border-box;
   outline: none;
