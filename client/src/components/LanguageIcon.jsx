@@ -2,7 +2,14 @@ import React from "react";
 import { ContainerForIcon } from "./styles/ContainerForIcon.styled";
 export default function LanguageIcon({ stackHandler }) {
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <ContainerForIcon>
         <img
           id={"JS"}
