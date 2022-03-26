@@ -8,6 +8,7 @@ import Modal from "../Modal/Modal";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+import { AiOutlineDesktop } from "react-icons/ai";
 export default function NavBar({}) {
   const [modalOpen, setModalOpen] = useState(false);
   const [email, setEmail] = useState("");
@@ -31,11 +32,12 @@ export default function NavBar({}) {
     }
   };
   const submitHandler = async () => {
-    setModalOpen(false);
+    // setModalOpen(false);=
     let temp = await axios.post("http://localhost:8080/user/login", {
       data: { email, password },
     });
-    console.log(temp);
+
+    // console.log(temp);
   };
   const theme = {
     colors: {
