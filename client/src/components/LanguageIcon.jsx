@@ -1,7 +1,6 @@
 import React from "react";
-import styled from "styled-components";
 import { ContainerForIcon } from "./styles/ContainerForIcon.styled";
-export default function LanguageIcon() {
+export default function LanguageIcon({ stackHandler }) {
   return (
     <div
       style={{
@@ -12,8 +11,18 @@ export default function LanguageIcon() {
       }}
     >
       <ContainerForIcon>
-        <img style={{ padding: "10px 10px" }} src="JS.png" />
-        <img style={{ padding: "10px 10px" }} src="TS.png" />
+        <img
+          id={"JS"}
+          onClick={(e) => stackHandler(e.target.id)}
+          style={{ padding: "10px 10px" }}
+          src="JS.png"
+        />
+        <img
+          id={"TS"}
+          onClick={(e) => stackHandler(e.target.id)}
+          style={{ padding: "10px 10px" }}
+          src="TS.png"
+        />
         <img style={{ padding: "10px 10px" }} src="React.png" />
         <img style={{ padding: "10px 10px" }} src="view.png" />
         <img style={{ padding: "10px 10px" }} src="node.png" />
