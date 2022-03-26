@@ -39,4 +39,20 @@ export default [
     meetingpoint: "서울 서대문구 오량길 선선카페",
     date: "2022년 3월 18일 오후 6시",
   },
+  {
+    id: 5,
+    title: "같이 코틀린 하실 분",
+    content: "코틀린 구함요",
+    icon: "JS",
+    meetingpoint: "서울 서대문구 오량길 선선카페",
+    date: "2022년 3월 18일 오후 6시",
+  },
+  {
+    id: 6,
+    title: "같이 코틀린 하실 분",
+    content: "코틀린 구함요",
+    icon: "TS",
+    meetingpoint: "서울 서대문구 오량길 선선카페",
+    date: "2022년 3월 18일 오후 6시",
+  },
 ];
