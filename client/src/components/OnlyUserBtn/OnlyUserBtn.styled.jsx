@@ -7,12 +7,5 @@ export const UserBlock = styled.div`
   position: absolute;
   /* top: 10%; */
   padding-top: 30px;
-  right: 16%;
-`;
-
-export const Div = styled.div`
-  cursor: pointer;
-  & + & {
-    margin-left: 0.25rem;
-  }
+  right: 20%;
 `;

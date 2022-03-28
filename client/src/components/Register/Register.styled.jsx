@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 export const Section = styled.section`
   background: #ffffff;
   position: relative;
-  width: ${(props) => props.width || "70%"};
+  width: ${(props) => props.width || "65%"};
   margin: 0 auto;
   margin-top: ${(props) => props.top};
   margin-bottom: 4rem;
@@ -99,7 +99,7 @@ export const CheckBox = styled(InputBox)`
 // 취소, 등록 버튼 담는 block
 export const BtnGroup = styled.div`
   position: absolute;
-  right: 16%;
+  right: 20%;
   margin-top: 1rem;
 `;
 
