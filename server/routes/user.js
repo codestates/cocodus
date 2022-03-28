@@ -6,6 +6,11 @@ const { userController } = require("../controllers");
 // * POST /user/signup
 router.post("/signup", userController.signup.post);
 
+router.get("/signup", userController.signup.get);
+
+router.get("/signup/github", userController.signup.github);
+
+router.get("/github", userController.github.get);
 // * GET /user/signin
 router.get("/login", userController.login.get);
 
