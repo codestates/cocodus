@@ -15,7 +15,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   Tag.init(
     {
-      id: DataTypes.UUID,
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+        comment: "고유번호 UUID",
+      },
       stack: DataTypes.STRING,
     },
     {
