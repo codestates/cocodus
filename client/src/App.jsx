@@ -1,14 +1,14 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import RegisterEditPage from "./Pages/RegisterEditPage";
-import RegisterPage from "./Pages/RegisterPage";
-import RegisterContentViewPage from "./Pages/RegisterContentViewPage";
-import Home from "./Pages/Home";
-import NavBar from "../src/components/NavBar/NavBar";
-import Error from "./Pages/ErrorPage";
-
+import { NavBar } from "../src/components";
+import {
+  RegisterEditPage,
+  RegisterPage,
+  RegisterContentViewPage,
+  Home,
+  Error,
+} from "./Pages";
 function App() {
   const [count, setCount] = useState(0);
   const theme = {
@@ -22,9 +22,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        {" "}
-        <NavBar />
         <Router>
+          <NavBar />
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/registeredit" element={<RegisterEditPage />} />

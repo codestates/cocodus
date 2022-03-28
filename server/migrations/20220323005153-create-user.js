@@ -15,6 +15,15 @@ module.exports = {
         image: {
           type: Sequelize.STRING,
         },
+        provider: {
+          type: Sequelize.STRING,
+        },
+        accesstoken: {
+          type: Sequelize.STRING,
+        },
+        refreshtoken: {
+          type: Sequelize.STRING,
+        },
         createdAt: {
           allowNull: false,
           type: Sequelize.DATE,

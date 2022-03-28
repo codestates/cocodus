@@ -18,7 +18,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   Post.init(
     {
-      id: DataTypes.UUID,
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+        comment: "고유번호 UUID",
+      },
       user_email: DataTypes.STRING,
       title: DataTypes.STRING,
       body: DataTypes.STRING,

@@ -1,15 +1,16 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
-import Header from "../components/Header";
-import { Container } from "../components/styles/Container.styled";
-import GlobalStyles from "../components/styles/Global";
-import PriceCard from "../components/PriceCard";
-import LanguageIcon from "../components/LanguageIcon";
-import NavBar from "../components/NavBar/NavBar";
+import {
+  Header,
+  PriceCard,
+  LanguageIcon,
+  GlobalStyles,
+  Container,
+  NavBar,
+} from "../components/";
 
 function Home() {
-  const [count, setCount] = useState(0);
+  const [stack, setStack] = useState([]);
   const theme = {
     colors: {
       header: "#ebfbff",
@@ -17,15 +18,20 @@ function Home() {
       footer: "#00333",
     },
   };
-
+  const stackHandler = (e) => {
+    if (stack.indexOf(e) === -1) {
+      setStack([...stack, e]);
+    } else {
+      setStack([...stack.filter((x) => x !== e)]);
+    }
+  };
   return (
     <ThemeProvider theme={theme}>
       <div>
         <GlobalStyles />
-
         <Header />
-        <LanguageIcon />
-        <PriceCard />
+        <LanguageIcon stackHandler={stackHandler} />
+        <PriceCard stack={stack} />
       </div>
     </ThemeProvider>
   );

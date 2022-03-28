@@ -6,41 +6,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "../components/Modal/Modal";
 import styled from "styled-components";
+import axios from "axios";
 export default function Header() {
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const openModal = () => {
-    setModalOpen(true);
-  };
-  const closeModal = () => {
-    setModalOpen(false);
-  };
   return (
     <StyledHeader>
       <Container>
-        {/*} // <Nav>
-        //   <Logo src="logo2.png" alt="" />
-        //   <Link to="/register">
-        //     <Button>새 게시글 쓰기</Button>
-        //   </Link>
-        //   <Button onClick={openModal}>로그인</Button>
-        //   <Modal open={modalOpen} close={closeModal} header="소셜 로그인">
-        //     <img
-        //       style={{ width: "100px", marginLeft: "20px" }}
-        //       src="Naver.png"
-        //     />
-        //     <img
-        //       style={{ width: "100px", marginLeft: "20px" }}
-        //       src="Kakaotalk.png"
-        //     />
-        //     <img
-        //       style={{ width: "100px", marginLeft: "20px" }}
-        //       src="Google.png"
-        //     />
-        //   </Modal>
-        // </Nav>
-
-  */}
         <Flex>
           <div>
             <h1> 모각코 같이 하실 분! 어디 없나요?</h1>

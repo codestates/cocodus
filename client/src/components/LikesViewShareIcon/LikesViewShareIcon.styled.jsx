@@ -11,6 +11,7 @@ export const IconsBlock = styled.div`
 // 아이콘과 그 수를 묶음
 export const IconAndText = styled.div`
   display: flex;
+  overflow: hidden;
   & + & {
     margin-left: 1rem;
   }
@@ -22,4 +23,13 @@ export const Text = styled.div`
   align-items: center;
   justify-content: center;
   margin-left: 0.25rem;
+`;
+
+export const TextArea = styled.textarea`
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
 `;
