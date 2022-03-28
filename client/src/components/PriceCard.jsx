@@ -1,33 +1,72 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
-  Content,
+  ContentDiv,
   PlanTitle,
   FeatureListItem,
   Icon,
   BackgroundSqure,
+  DivContainer,
+  Align,
 } from "./styles/PriceCard.styled";
 import { Button } from "./styles/Button.styled";
 import { Container } from "./styles/Container.styled";
+import { Flex } from "./styles/Flex.styled";
+import Data from "../api/DummyData";
 
-function PriceCard() {
-  const [features] = useState(["조원 구해요", "어떤걸 만들어볼까요"]);
+function PriceCard({ stack }) {
+  const [data, data변경] = useState(Data);
+  return (
+    <div>
+      {stack.length
+        ? data
+            .filter((x) => stack.indexOf(x.icon) > -1)
+            .map((x, i, a) => {
+              return <CardSection data={x} key={"CardSection" + i} />;
+            })
+        : data.map((x, i) => {
+            return <CardSection data={x} key={"CardSection" + i} />;
+          })}
+    </div>
+  );
+}
+
+function CardSection(props) {
+  const [like, setLike] = useState(0);
   return (
     <Container>
-      <Card>
-        <BackgroundSqure />
-        <Content>
-          <PlanTitle>리액트 조원 구함니다</PlanTitle>
-          <Icon src="../public/React-icon.svg.png" />
+      <Flex>
+        <Card>
+          <BackgroundSqure />
+          <ContentDiv>
+            <DivContainer>
+              <Icon src="React-icon.svg.png" />
+            </DivContainer>
+            <DivContainer>
+              <PlanTitle>{props.data.title}</PlanTitle>
+              <FeatureListItem>
+                <span>{props.data.content}</span>
+              </FeatureListItem>
 
-          {features.map((item) => {
-            <FeatureListItem>
-              <span>{item}</span>
-            </FeatureListItem>;
-          })}
-          <Button>들어가기</Button>
-        </Content>
-      </Card>
+              <span
+                onClick={() => {
+                  setLike(like + 1);
+                }}
+              >
+                ♥️{like}
+              </span>
+              <span>👀</span>
+            </DivContainer>
+            <DivContainer>
+              <PlanTitle></PlanTitle>
+              일자: {props.data.date}
+              <br></br>
+              위치: {props.data.meetingpoint}
+              <Button>지도 크게 보기</Button>
+            </DivContainer>
+          </ContentDiv>
+        </Card>
+      </Flex>
     </Container>
   );
 }

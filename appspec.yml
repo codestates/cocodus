@@ -5,9 +5,6 @@ files:
     destination: /home/ubuntu/cocodus
 
 hooks:
-  BeforeInstall:
-    - location: scripts/before.sh
-      runas: root
   ApplicationStop:
     - location: scripts/stop.sh
       runas: root

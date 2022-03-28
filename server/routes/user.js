@@ -6,22 +6,32 @@ const { userController } = require("../controllers");
 // * POST /user/signup
 router.post("/signup", userController.signup.post);
 
-// * POST /user/signin
-router.get("/signin", userController.signin.get);
+router.get("/signup", userController.signup.get);
 
-// * POST /user/info
+router.get("/signup/github", userController.signup.github);
+
+router.get("/github", userController.github.get);
+// * GET /user/signin
+router.get("/login", userController.login.get);
+
+router.post("/login", userController.login.post);
+
+// * POST /user/logout
+router.post("/logout", userController.logout.post);
+
+// * GET /user/info
 router.get("/info", userController.info.get);
 
-// * POST /user/info
+// * PATCH /user/info
 router.patch("/info", userController.info.patch);
 
-// * POST /user/info
+// * DELETE /user/info
 router.delete("/info", userController.info.delete);
 
 // * POST /user/note
 router.post("/note", userController.note.post);
 
-// * POST /user/note
+// * DELETE /user/note
 router.delete("/note", userController.note.delete);
 
 module.exports = router;

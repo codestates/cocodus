@@ -1,7 +1,9 @@
 module.exports = {
   signup: require("./signup"),
   signout: require("./signout"),
-  signin: require("./signin"),
+  login: require("./login"),
+  logout: require("./logout"),
   info: require("./info"),
   note: require("./note"),
+  github: require("./github"),
 };

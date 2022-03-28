@@ -19,6 +19,18 @@ export const Content = styled.div`
   justify-content: center;
 `;
 
+export const ContentDiv = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const DivContainer = styled.div`
+  padding: 10px;
+`;
+
 export const PlanTitle = styled.div`
   font-size: 1.23rem;
 `;
@@ -50,6 +62,7 @@ export const Icon = styled.img`
   flex: 0 0 auto;
   margin-bottom: 2rem;
   border-radius: 50%;
+  margin-right: 10px;
 `;
 
 export const BackgroundSqure = styled.div`
@@ -60,4 +73,9 @@ export const BackgroundSqure = styled.div`
   width: 200%;
   height: 100%;
   background: rgba(255, 255, 255, 0.1);
+`;
+
+export const Align = styled.div`
+  display: flex;
+  align-items: center;
 `;
