@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   ContentDiv,
@@ -13,15 +13,20 @@ import { Button } from "./styles/Button.styled";
 import { Container } from "./styles/Container.styled";
 import { Flex } from "./styles/Flex.styled";
 import Data from "../api/DummyData";
-import styled from "styled-components";
 
-function PriceCard() {
+function PriceCard({ stack }) {
   const [data, data변경] = useState(Data);
   return (
     <div>
-      {data.map((a, i) => {
-        return <CardSection data={data[i]} key={"CardSection" + i} />;
-      })}
+      {stack.length
+        ? data
+            .filter((x) => stack.indexOf(x.icon) > -1)
+            .map((x, i, a) => {
+              return <CardSection data={x} key={"CardSection" + i} />;
+            })
+        : data.map((x, i) => {
+            return <CardSection data={x} key={"CardSection" + i} />;
+          })}
     </div>
   );
 }

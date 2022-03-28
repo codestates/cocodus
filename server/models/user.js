@@ -18,10 +18,15 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
-      email: DataTypes.STRING,
+      email: {
+        type: DataTypes.STRING,
+        primaryKey: true,
+        comment: "고유 email",
+      },
       name: DataTypes.STRING,
       image: DataTypes.STRING,
       provider: DataTypes.STRING,
+      accesstoken: DataTypes.STRING,
     },
     {
       sequelize,
