@@ -27,7 +27,6 @@ module.exports = (sequelize, DataTypes) => {
       image: DataTypes.STRING,
       provider: DataTypes.STRING,
       accesstoken: DataTypes.STRING,
-      refreshtoken: DataTypes.STRING,
     },
     {
       sequelize,
