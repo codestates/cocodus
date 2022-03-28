@@ -1,5 +1,5 @@
 import React from "react";
-import { UserBlock, Div } from "./OnlyUserBtn.styled";
+import { UserBlock } from "./OnlyUserBtn.styled";
 import { Button } from "../styles/Button.styled";
 
 function OnlyUserBtn(props) {
