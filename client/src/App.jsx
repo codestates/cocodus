@@ -9,6 +9,7 @@ import {
   Home,
   Error,
 } from "./Pages";
+
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [accessToken, setAccessToken] = useState("");
@@ -38,6 +39,7 @@ function App() {
       <div>
         <Router>
           <NavBar isLogin={isLogin} />
+
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/registeredit" element={<RegisterEditPage />} />
