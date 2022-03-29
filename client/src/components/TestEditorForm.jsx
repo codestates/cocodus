@@ -21,6 +21,9 @@ const MyBlock = styled.div`
     font-size: 1.125rem;
     background: rgba(196, 196, 196, 0.26);
   }
+  .DraftEditor-editorContainer {
+    z-index: 0;
+  }
 `;
 
 const TestEditorForm = () => {
