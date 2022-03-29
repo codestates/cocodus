@@ -57,7 +57,7 @@ export default function NavBar({ isLogin }) {
               >
                 <img
                   style={{ width: "100px", marginLeft: "20px" }}
-                  src="Naver.png"
+                  src="Github.png"
                 />
               </a>
               <img
