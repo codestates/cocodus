@@ -1,9 +1,9 @@
 // 언어 선택 태그 기능
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import Select from "react-select";
 
-function LangOptTag() {
+function LangOptTag({ onChange }) {
   const LangList = useMemo(
     () => [
       { value: "c", label: "C" },
@@ -27,12 +27,6 @@ function LangOptTag() {
     ],
     []
   );
-
-  // const [likeLan, setLikeLan] = useState("");
-
-  const onChange = (e) => {
-    // console.log(e[0].value);
-  };
 
   const customStyles = {
     control: (css) => ({
