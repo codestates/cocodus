@@ -60,7 +60,7 @@ export default function NavBar({ isLogin, setIsLogin, setAccessToken }) {
               >
                 <img
                   style={{ width: "100px", marginLeft: "20px" }}
-                  src="Naver.png"
+                  src="Github.png"
                 />
               </a>
               <img

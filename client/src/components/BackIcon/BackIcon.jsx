@@ -4,6 +4,7 @@ import { Icon } from "./BackIcon.styled";
 import { Outlet, useNavigate } from "react-router-dom";
 
 function BackIcon(props) {
+  const navigate = useNavigate();
   const goBack = () => {
     // 이전 페이지로 이동
     navigate(-1);
