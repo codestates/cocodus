@@ -10,11 +10,11 @@ module.exports = {
           type: Sequelize.UUID,
           unique: true,
         },
-        user_email: {
+        user_id: {
           type: Sequelize.STRING,
           references: {
             model: "Users",
-            key: "email",
+            key: "id",
           },
         },
         title: {

@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         comment: "고유번호 UUID",
       },
-      user_email: DataTypes.STRING,
+      user_id: DataTypes.STRING,
       title: DataTypes.STRING,
       body: DataTypes.STRING,
       recruiting: DataTypes.BOOLEAN,

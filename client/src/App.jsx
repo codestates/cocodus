@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { NavBar } from "../src/components";
@@ -11,7 +11,21 @@ import {
 } from "./Pages";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [isLogin, setIsLogin] = useState(false);
+  const [accessToken, setAccessToken] = useState("");
+  useEffect(() => {
+    const re = /access_token/;
+    let acc_String = window.document.cookie
+      .split(";")
+      .filter((x) => (x.match(re) ? true : false))[0];
+    if (acc_String) {
+      setAccessToken(acc_String.split("=")[1]);
+    }
+  }, []);
+  useEffect(() => {
+    if (accessToken) setIsLogin(true);
+    else setIsLogin(false);
+  }, [accessToken]);
   const theme = {
     colors: {
       header: "#ebfbff",
@@ -24,7 +38,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <div>
         <Router>
-          <NavBar />
+          <NavBar isLogin={isLogin} />
 
           <Routes>
             <Route exact path="/" element={<Home />} />

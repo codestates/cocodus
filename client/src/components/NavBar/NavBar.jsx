@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import { AiOutlineDesktop } from "react-icons/ai";
-export default function NavBar({}) {
+export default function NavBar({ isLogin }) {
   const [modalOpen, setModalOpen] = useState(false);
   let navigate = useNavigate();
 
@@ -18,8 +18,6 @@ export default function NavBar({}) {
   };
   const closeModal = () => {
     setModalOpen(false);
-    setEmail("");
-    setPassword("");
   };
 
   const theme = {
@@ -35,14 +33,19 @@ export default function NavBar({}) {
       <StyledHeader>
         <Container>
           <Nav>
-            <a href="/">
-              <Logo src="logo2.png" alt="" />
-            </a>
-
-            <a href="/register">
-              <Button>새 게시글 쓰기</Button>
-            </a>
-            <Button onClick={openModal}>로그인</Button>
+            <Logo onClick={() => navigate("/")} src="logo2.png" alt="" />
+            {isLogin ? (
+              <>
+                <Button onClick={() => navigate("/register")}>
+                  새 게시글 쓰기
+                </Button>
+                <Button>마이페이지</Button>
+              </>
+            ) : (
+              <>
+                <Button onClick={openModal}>로그인</Button>
+              </>
+            )}
             <Modal open={modalOpen} close={closeModal} header="소셜 로그인">
               <a
                 href={
