@@ -9,6 +9,7 @@ import {
   Home,
   Error,
 } from "./Pages";
+
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [accessToken, setAccessToken] = useState("");
@@ -43,6 +44,7 @@ function App() {
             setIsLogin={setIsLogin}
             setAccessToken={setAccessToken}
           />
+
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/registeredit" element={<RegisterEditPage />} />
