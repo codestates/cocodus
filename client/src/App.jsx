@@ -9,6 +9,7 @@ import {
   Home,
   Error,
 } from "./Pages";
+
 function App() {
   const [count, setCount] = useState(0);
   const theme = {
@@ -24,6 +25,7 @@ function App() {
       <div>
         <Router>
           <NavBar />
+
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/registeredit" element={<RegisterEditPage />} />
