@@ -8,7 +8,7 @@ module.exports = {
   get: async (req, res) => {},
   github: async (req, res) => {
     const { code } = req.query;
-    const test = await axios({
+    const acctokenCall = await axios({
       url: "https://github.com/login/oauth/access_token",
       method: "POST",
       headers: {
@@ -20,8 +20,9 @@ module.exports = {
         code: code,
       },
     });
-    const { access_token } = test.data;
-    const test2 = await axios({
+    console.log(acctokenCall.data);
+    const { access_token } = acctokenCall.data;
+    const userInfoCall = await axios({
       url: "https://api.github.com/user",
       method: "GET",
       headers: {
@@ -30,7 +31,7 @@ module.exports = {
       },
     });
     //91889129
-    console.log(test2.data.html_url); //happy5happy5
+    console.log(userInfoCall.data.html_url); //happy5happy5
     // User.create(
     //   {
     //     id: test2.data.html_url,
@@ -40,8 +41,9 @@ module.exports = {
     // );
     res
       .status(200)
-      .cookie("access_token", access_token)
-      .cookie("asdfadsf", 12341234)
+      .cookie("access_token", access_token, {
+        maxAge: 300000, //300초 뒤에 쿠키 사라짐
+      })
       // .send("토큰이가는지보고싶습니다");
       //.redirect("http://cocodus.site/");
       .redirect("http://localhost:3000/");
