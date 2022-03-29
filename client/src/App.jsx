@@ -13,7 +13,6 @@ function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [accessToken, setAccessToken] = useState("");
   useEffect(() => {
-    console.log("로그인확인할께요");
     const re = /access_token/;
     let acc_String = window.document.cookie
       .split(";")
