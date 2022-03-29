@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { NavBar } from "../src/components";
@@ -8,9 +8,29 @@ import {
   RegisterContentViewPage,
   Home,
   Error,
+  MyLikesPage,
+  MyPostPage,
+  UserInfoEditPage,
+  UserInfoRegisterPage,
 } from "./Pages";
+
 function App() {
-  const [count, setCount] = useState(0);
+  const [isLogin, setIsLogin] = useState(false);
+  const [accessToken, setAccessToken] = useState("");
+  useEffect(() => {
+    const re = /access_token/;
+    let acc_String = window.document.cookie
+      .split(";")
+      .filter((x) => (x.match(re) ? true : false))[0];
+    if (acc_String) {
+      setAccessToken(acc_String.split("=")[1]);
+    }
+  }, []);
+  useEffect(() => {
+    if (accessToken) setIsLogin(true);
+    else setIsLogin(false);
+  }, [accessToken, isLogin]);
+
   const theme = {
     colors: {
       header: "#ebfbff",
@@ -23,7 +43,12 @@ function App() {
     <ThemeProvider theme={theme}>
       <div>
         <Router>
-          <NavBar />
+          <NavBar
+            isLogin={isLogin}
+            setIsLogin={setIsLogin}
+            setAccessToken={setAccessToken}
+          />
+
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/registeredit" element={<RegisterEditPage />} />
@@ -32,6 +57,14 @@ function App() {
               exact
               path="/RegisterContentViewPage"
               element={<RegisterContentViewPage />}
+            />
+            <Route exact path="/mylikes" element={<MyLikesPage />} />
+            <Route exact path="/mypost" element={<MyPostPage />} />
+            <Route exact path="/userinfoedit" element={<UserInfoEditPage />} />
+            <Route
+              exact
+              path="/userinforegister"
+              element={<UserInfoRegisterPage />}
             />
             <Route exact path="/error" element={<Error />} />
           </Routes>

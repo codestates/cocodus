@@ -9,35 +9,18 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import { AiOutlineDesktop } from "react-icons/ai";
-export default function NavBar({}) {
+export default function NavBar({ isLogin, setIsLogin, setAccessToken }) {
   const [modalOpen, setModalOpen] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   let navigate = useNavigate();
 
-  const openModal = () => {
-    setModalOpen(true);
-  };
-  const closeModal = () => {
-    setModalOpen(false);
-    setEmail("");
-    setPassword("");
+  const modalHandle = () => {
+    setModalOpen(!modalOpen);
   };
 
-  const inputHandler = (e) => {
-    if (e.target.id === "email") {
-      setEmail(e.target.value);
-    } else if (e.target.id === "password") {
-      setPassword(e.target.value);
-    }
-  };
-  const submitHandler = async () => {
-    // setModalOpen(false);=
-    let temp = await axios.post("http://localhost:8080/user/login", {
-      data: { email, password },
-    });
-
-    // console.log(temp);
+  const logoutHandle = () => {
+    window.document.cookie = "access_token" + "=; Max-Age=-99999999;";
+    setIsLogin(false);
+    setAccessToken("");
   };
   const theme = {
     colors: {
@@ -52,19 +35,34 @@ export default function NavBar({}) {
       <StyledHeader>
         <Container>
           <Nav>
-            <a href="/">
-              <Logo src="logo2.png" alt="" />
-            </a>
-
-            <a href="/register">
-              <Button>새 게시글 쓰기</Button>
-            </a>
-            <Button onClick={openModal}>로그인</Button>
-            <Modal open={modalOpen} close={closeModal} header="소셜 로그인">
-              <img
-                style={{ width: "100px", marginLeft: "20px" }}
-                src="Naver.png"
-              />
+            <Logo onClick={() => navigate("/")} src="logo2.png" alt="" />
+            {isLogin ? (
+              <>
+                <Button onClick={() => navigate("/register")}>
+                  새 게시글 쓰기
+                </Button>
+                <Button>마이페이지</Button>
+                <Button onClick={logoutHandle}>로그아웃</Button>
+              </>
+            ) : (
+              <>
+                <Button onClick={modalHandle}>로그인</Button>
+              </>
+            )}
+            <Modal open={modalOpen} close={modalHandle} header="소셜 로그인">
+              <a
+                href={
+                  "https://github.com/login/oauth/authorize" +
+                  "?client_id=a3992310760bdbc99e31" +
+                  "&redirect_uri=http://localhost:8080/user/signup/github" +
+                  "&scope=user:email"
+                }
+              >
+                <img
+                  style={{ width: "100px", marginLeft: "20px" }}
+                  src="Naver.png"
+                />
+              </a>
               <img
                 style={{ width: "100px", marginLeft: "20px" }}
                 src="Kakaotalk.png"
@@ -73,24 +71,6 @@ export default function NavBar({}) {
                 style={{ width: "100px", marginLeft: "20px" }}
                 src="Google.png"
               />
-              <form action="/register">
-                <input
-                  onChange={inputHandler}
-                  placeholder="email"
-                  type="text"
-                  id="email"
-                  value={email}
-                  autoComplete="off"
-                />
-                <input
-                  onChange={inputHandler}
-                  placeholder="psw"
-                  type="password"
-                  value={password}
-                  id="password"
-                />
-              </form>
-              <button onClick={submitHandler}>로그인</button>
             </Modal>
           </Nav>
         </Container>

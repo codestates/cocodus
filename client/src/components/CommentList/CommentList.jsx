@@ -12,30 +12,33 @@ import {
   Btn,
 } from "./CommentList.styled";
 import { commentStore } from "../../Store/Comment-zustand";
+import { commentModalStore } from "../../Store/Modal-zustand";
+import { updateCommentStore } from "../../Store/UpdateComment-zustand";
+import DeleteModal from "../DeleteRegisterSubModal/DeleteModal";
+import Modal from "../Modal/Modal";
 
 function Comment({ comment }) {
-  // 수정한 내용의 상태
-  const [input, setInput] = useState("");
-  // 클릭시 수정입력란 창
-  const [visible, setVisible] = useState(false);
-  const { removeMsg, updateMsg } = commentStore();
-  const onRemove = (id) => {
-    alert("삭제하시겠습니까?");
-    removeMsg(id);
-  };
+  const { input, visible, visibleOpen, visibleClose, chgInput } =
+    updateCommentStore();
+  // 모달
+  const { modalOpen, openModal, closeModal } = commentModalStore();
+
+  const { updateMsg } = commentStore();
+
+  // 수정 버튼 클릭시
   const onClick = () => {
-    setInput(comment.msg);
-    setVisible(true);
+    chgInput(comment.msg);
+    visibleOpen();
   };
   const onChange = (e) => {
-    setInput(e.target.value);
+    chgInput(e.target.value);
   };
   // 엔터키를 입력시 수정 처리되는 함수
   const handleKeydown = (e) => {
     if (e.key === "Enter") {
       updateMsg(input, comment.id);
-      setVisible(false);
-      setInput("");
+      visibleClose();
+      chgInput("");
     }
   };
   return (
@@ -48,7 +51,10 @@ function Comment({ comment }) {
         </div>
         <BtnBlock>
           <Btn onClick={onClick}>수정</Btn>
-          <Btn onClick={() => onRemove(comment.id)}>삭제</Btn>
+          <Btn onClick={openModal}>삭제</Btn>
+          <Modal open={modalOpen} header="알림">
+            <DeleteModal id={comment.id} closeModal={closeModal} />
+          </Modal>
         </BtnBlock>
       </FlexBox>
       <Msg>

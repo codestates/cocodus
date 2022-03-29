@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   User_like.init(
     {
-      user_email: DataTypes.STRING,
+      user_id: DataTypes.STRING,
       post_id: DataTypes.UUID,
     },
     {
