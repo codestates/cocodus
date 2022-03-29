@@ -8,6 +8,10 @@ import {
   RegisterContentViewPage,
   Home,
   Error,
+  MyLikesPage,
+  MyPostPage,
+  UserInfoEditPage,
+  UserInfoRegisterPage,
 } from "./Pages";
 
 function App() {
@@ -53,6 +57,14 @@ function App() {
               exact
               path="/RegisterContentViewPage"
               element={<RegisterContentViewPage />}
+            />
+            <Route exact path="/mylikes" element={<MyLikesPage />} />
+            <Route exact path="/mypost" element={<MyPostPage />} />
+            <Route exact path="/userinfoedit" element={<UserInfoEditPage />} />
+            <Route
+              exact
+              path="/userinforegister"
+              element={<UserInfoRegisterPage />}
             />
             <Route exact path="/error" element={<Error />} />
           </Routes>
