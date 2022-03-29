@@ -24,7 +24,8 @@ function App() {
   useEffect(() => {
     if (accessToken) setIsLogin(true);
     else setIsLogin(false);
-  }, [accessToken]);
+  }, [accessToken, isLogin]);
+
   const theme = {
     colors: {
       header: "#ebfbff",
@@ -37,7 +38,11 @@ function App() {
     <ThemeProvider theme={theme}>
       <div>
         <Router>
-          <NavBar isLogin={isLogin} />
+          <NavBar
+            isLogin={isLogin}
+            setIsLogin={setIsLogin}
+            setAccessToken={setAccessToken}
+          />
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/registeredit" element={<RegisterEditPage />} />
