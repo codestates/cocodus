@@ -50,6 +50,9 @@ export const registerStore = create((set) => ({
   placeName: "",
   // 도로명 주소
   roadAddress: "",
+  // 위도(y), 경도(x)
+  latitudeY: "",
+  longitudeX: "",
 
   // place onChange 함수
   chgPlace: (value) =>
@@ -63,5 +66,7 @@ export const registerStore = create((set) => ({
       markerNow: value,
       placeName: value.place_name,
       roadAddress: value.road_address_name,
+      latitudeY: value.y,
+      longitudeX: value.x,
     })),
 }));
