@@ -12,15 +12,17 @@ import {
   CheckBox,
 } from "./Register.styled";
 import LangOptTag from "../LangOptTag";
+import KakaoMap from "../KakaoMap";
 
 function Register() {
+  const [markerNow, setMarkerNow] = useState({});
+  const [place, setPlace] = useState("");
   const [inputs, setInputs] = useState({
     title: "",
     date: "",
     online: false,
     address: "",
   });
-
   const { title, date, online, address } = inputs;
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -30,14 +32,11 @@ function Register() {
       [name]: value,
     });
   };
-
   // 기술 스택 태그
   const [tag, setTag] = useState([]);
-
   const onTagChange = (e) => {
     e.map((el) => setTag([...tag, el.label]));
   };
-
   // 온라인 가능 여부
   const onCheckChange = (e) => {
     const { name, checked } = e.target;
@@ -46,7 +45,6 @@ function Register() {
       [name]: checked,
     });
   };
-
   // 메세지
   const [content, setContent] = useState("");
   const onMsgChange = (e) => {
@@ -95,13 +93,12 @@ function Register() {
         <TestEditorForm onChange={onMsgChange} />
         <FlexBox top="2rem">
           <Div>위치</Div>
-          <InputBox
-            name="address"
-            type="text"
-            readOnly
-            onChange={onChange}
-            value={address}
-          />
+          {console.log(markerNow)}
+          <KakaoMap
+            setMarkerNow={setMarkerNow}
+            place={place}
+            setPlace={setPlace}
+          ></KakaoMap>
         </FlexBox>
       </Section>
     </>
