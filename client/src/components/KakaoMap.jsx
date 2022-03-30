@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import kakaoApi from "../api/kakaoApi";
+import { registerStore } from "../Store/Register-zustand";
 let map;
 let ps;
 let infowindow;
-export default function KakaoMap({ setMarkerNow, place, setPlace }) {
+
+export default function KakaoMap() {
+  const { place, chgPlace, chgMarker } = registerStore();
   // const [place, setPlace] = useState("");
   // const [markerNow, setMarkerNow] = useState({});
   useEffect(() => {
@@ -25,7 +28,8 @@ export default function KakaoMap({ setMarkerNow, place, setPlace }) {
     if (placeName) {
       ps.keywordSearch(
         placeName,
-        kakaoApi.placeSCB(map, infowindow, setMarkerNow)
+        // kakaoApi.placeSCB(map, infowindow, setMarkerNow)
+        kakaoApi.placeSCB(map, infowindow, chgMarker)
       );
     } else alert("야 빈칸넣지마라 오류난다");
   }
@@ -34,7 +38,7 @@ export default function KakaoMap({ setMarkerNow, place, setPlace }) {
       {/* {markerNow ? console.log(markerNow) : null}
       {markerNow.road_address_name} */}
       <input
-        onChange={(e) => setPlace(e.target.value)}
+        onChange={(e) => chgPlace(e.target.value)}
         onKeyUp={(e) => {
           e.key === "Enter" ? placeSearch(place) : null;
         }}
