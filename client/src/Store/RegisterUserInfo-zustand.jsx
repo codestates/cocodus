@@ -14,7 +14,7 @@ export const registerUserInfoStore = create((set) => ({
     })),
 
   // 유저 이미지 제거 함수
-  delImg: (img) =>
+  delImg: () =>
     set((state) => ({
       userImg: "UserIcon.png",
     })),
