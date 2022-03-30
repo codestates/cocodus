@@ -3,7 +3,6 @@
 import React from "react";
 import ClickButton from "../components/ClickButton";
 import Register from "../components/Register/Register";
-import NavBar from "../components/NavBar/NavBar";
 import Modal from "../components/Modal/Modal";
 import { registerModalStore } from "../Store/Modal-zustand";
 import RegisterModal from "../components/DeleteRegisterSubModal/RegisterModal";

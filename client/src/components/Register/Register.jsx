@@ -12,48 +12,55 @@ import {
   CheckBox,
 } from "./Register.styled";
 import LangOptTag from "../LangOptTag";
+import KakaoMap from "../KakaoMap";
+import { registerStore } from "../../Store/Register-zustand";
 
 function Register() {
-  const [inputs, setInputs] = useState({
-    title: "",
-    date: "",
-    online: false,
-    address: "",
-  });
+  // const [markerNow, setMarkerNow] = useState({});
+  // const [place, setPlace] = useState("");
+  const {
+    inputs,
+    tag,
+    place,
+    markerNow,
+    chgInput,
+    chgOnline,
+    chgTag,
+    chgMsg,
+    chgPlace,
+    chgMarker,
+  } = registerStore();
 
-  const { title, date, online, address } = inputs;
+  const { title, date, online } = inputs;
   const onChange = (e) => {
     const { name, value } = e.target;
     console.log(value);
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
+    chgInput(name, value);
   };
 
   // 기술 스택 태그
-  const [tag, setTag] = useState([]);
-
   const onTagChange = (e) => {
-    e.map((el) => setTag([...tag, el.label]));
+    // console.log(e);
+    const opts = e.map((el) => el.value);
+    // console.log(opts);
+    console.log(tag);
+    chgTag(opts);
   };
 
   // 온라인 가능 여부
   const onCheckChange = (e) => {
     const { name, checked } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: checked,
-    });
+    console.log(online);
+    chgOnline(name, checked);
   };
 
   // 메세지
-  const [content, setContent] = useState("");
   const onMsgChange = (e) => {
     // console.log(e.blocks);
-    const text = e.blocks.map((el) => el.text);
+    let text = e.blocks.map((el) => el.text);
     console.log(text.join(" "));
-    setContent(text.join(" "));
+    text = text.join(" ");
+    chgMsg(text);
   };
   return (
     <>
@@ -88,6 +95,7 @@ function Register() {
               type="checkbox"
               id="online"
               onChange={onCheckChange}
+              value={online}
             />
             온라인 가능
           </Label>
@@ -95,13 +103,8 @@ function Register() {
         <TestEditorForm onChange={onMsgChange} />
         <FlexBox top="2rem">
           <Div>위치</Div>
-          <InputBox
-            name="address"
-            type="text"
-            readOnly
-            onChange={onChange}
-            value={address}
-          />
+          {console.log(markerNow)}
+          <KakaoMap />
         </FlexBox>
       </Section>
     </>

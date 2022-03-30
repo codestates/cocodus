@@ -39,6 +39,19 @@ export const withdrawalModalStore = create((set) => ({
     })),
 }));
 
+// 유저정보등록페이지에서 유저 정보 등록 버튼 클릭했을 때,
+export const userInfoRegisterModalStore = create((set) => ({
+  modalOpen2: false,
+  openModal2: () =>
+    set((state) => ({
+      modalOpen2: true,
+    })),
+  closeModal2: () =>
+    set((state) => ({
+      modalOpen2: false,
+    })),
+}));
+
 // 유저 정보 수정 버튼 클릭했을 때,
 export const userInfoEditModalStore = create((set) => ({
   modalOpen: false,

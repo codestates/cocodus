@@ -1,6 +1,5 @@
 import React from "react";
 import { BtnGroup, Btn } from "./Register/Register.styled";
-import DeleteUserModal from "./DeleteRegisterSubModal/DeleteUserModal";
 import {
   Logo,
   Subject,
@@ -10,6 +9,7 @@ import {
 function ClickButton({ click1, click2, Modal, store1, store2, text, Tag }) {
   return (
     <>
+      {/* 버튼 두개가 모두 모달이 필요할 때 */}
       {store1 ? (
         <BtnGroup>
           <Btn onClick={store1().openModal}>{click1}</Btn>
@@ -29,6 +29,7 @@ function ClickButton({ click1, click2, Modal, store1, store2, text, Tag }) {
           </Modal>
         </BtnGroup>
       ) : (
+        /* 버튼 1개가 모달이 필요할 때 */
         <BtnGroup>
           <Btn>{click1}</Btn>
           <Btn onClick={store2().openModal2}>{click2}</Btn>
