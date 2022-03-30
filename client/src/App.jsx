@@ -13,10 +13,13 @@ import {
   UserInfoEditPage,
   UserInfoRegisterPage,
 } from "./Pages";
-
+// {markerNow ? console.log(markerNow) : null}
+// {markerNow.road_address_name}
+// <KakaoMap setMarkerNow={setMarkerNow}></KakaoMap>
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [accessToken, setAccessToken] = useState("");
+
   useEffect(() => {
     const re = /access_token/;
     let acc_String = window.document.cookie
@@ -30,7 +33,6 @@ function App() {
     if (accessToken) setIsLogin(true);
     else setIsLogin(false);
   }, [accessToken, isLogin]);
-
   const theme = {
     colors: {
       header: "#ebfbff",
@@ -51,8 +53,8 @@ function App() {
 
           <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route exact path="/registeredit" element={<RegisterEditPage />} />
             <Route exact path="/register" element={<RegisterPage />} />
+            <Route exact path="/registeredit" element={<RegisterEditPage />} />
             <Route
               exact
               path="/RegisterContentViewPage"
