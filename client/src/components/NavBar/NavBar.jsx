@@ -9,17 +9,19 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import { AiOutlineDesktop } from "react-icons/ai";
-export default function NavBar({ isLogin }) {
+export default function NavBar({ isLogin, setIsLogin, setAccessToken }) {
   const [modalOpen, setModalOpen] = useState(false);
   let navigate = useNavigate();
 
-  const openModal = () => {
-    setModalOpen(true);
-  };
-  const closeModal = () => {
-    setModalOpen(false);
+  const modalHandle = () => {
+    setModalOpen(!modalOpen);
   };
 
+  const logoutHandle = () => {
+    window.document.cookie = "access_token" + "=; Max-Age=-99999999;";
+    setIsLogin(false);
+    setAccessToken("");
+  };
   const theme = {
     colors: {
       header: "#ebfbff",
@@ -40,13 +42,14 @@ export default function NavBar({ isLogin }) {
                   새 게시글 쓰기
                 </Button>
                 <Button>마이페이지</Button>
+                <Button onClick={logoutHandle}>로그아웃</Button>
               </>
             ) : (
               <>
-                <Button onClick={openModal}>로그인</Button>
+                <Button onClick={modalHandle}>로그인</Button>
               </>
             )}
-            <Modal open={modalOpen} close={closeModal} header="소셜 로그인">
+            <Modal open={modalOpen} close={modalHandle} header="소셜 로그인">
               <a
                 href={
                   "https://github.com/login/oauth/authorize" +
@@ -57,7 +60,7 @@ export default function NavBar({ isLogin }) {
               >
                 <img
                   style={{ width: "100px", marginLeft: "20px" }}
-                  src="Naver.png"
+                  src="Github.png"
                 />
               </a>
               <img
