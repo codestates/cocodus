@@ -10,6 +10,8 @@ import {
   InputBox,
   Label,
   CheckBox,
+  PlaceBox,
+  PlaceInputBox,
 } from "./Register.styled";
 import LangOptTag from "../LangOptTag";
 import KakaoMap from "../KakaoMap";
@@ -103,13 +105,30 @@ function Register() {
           </Label>
         </FlexBox>
         <TestEditorForm onChange={onMsgChange} />
-        <FlexBox top="2rem">
+
+        <PlaceBox>
           <Div>위치</Div>
           {console.log(markerNow)}
-          <InputBox type="text" value={placeName} onChange={chgPlace} />
-          <InputBox type="text" value={roadAddress} onChange={chgMarker} />
+          <Div>
+            <div>
+              <PlaceInputBox
+                type="text"
+                value={placeName}
+                onChange={chgPlace}
+                placeholder="상호명이 표시됩니다"
+              />
+            </div>
+            <div>
+              <PlaceInputBox
+                type="text"
+                value={roadAddress}
+                onChange={chgMarker}
+                placeholder="도로명 주소가 표시됩니다"
+              />
+            </div>
+          </Div>
           <KakaoMap />
-        </FlexBox>
+        </PlaceBox>
       </Section>
     </>
   );

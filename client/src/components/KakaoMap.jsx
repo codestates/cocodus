@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import kakaoApi from "../api/kakaoApi";
+import styled from "styled-components";
 import { registerStore } from "../Store/Register-zustand";
 let map;
 let ps;
@@ -8,7 +9,7 @@ let infowindow;
 export default function KakaoMap() {
   const { place, chgPlace, chgMarker } = registerStore();
   // const [place, setPlace] = useState("");
-  // const [markerNow, setMarkerNow] = useState({});
+  const [markerNow, setMarkerNow] = useState({});
   useEffect(() => {
     if (!Kakao.isInitialized()) {
       Kakao.init("JAVASCRIPT_KEY");
@@ -34,17 +35,47 @@ export default function KakaoMap() {
     } else alert("야 빈칸넣지마라 오류난다");
   }
   return (
-    <div>
-      {/* {markerNow ? console.log(markerNow) : null}
-      {markerNow.road_address_name} */}
-      <input
+    <Div>
+      {markerNow ? console.log(markerNow) : null}
+      {markerNow.road_address_name}
+      <Input
         onChange={(e) => chgPlace(e.target.value)}
         onKeyUp={(e) => {
           e.key === "Enter" ? placeSearch(place) : null;
         }}
-      ></input>
+        placeholder="미팅장소를 입력하고 엔터를 눌러 주세요"
+      ></Input>
 
-      <div id="map" style={{ width: "500px", height: "400px" }}></div>
-    </div>
+      <div id="map" style={{ width: "930px", height: "400px" }}></div>
+    </Div>
   );
 }
+
+export const Input = styled.input`
+  color: ${(props) => props.color};
+  text-shadow: ${(props) => props.textShadow};
+  background: rgba(196, 196, 196, 0.26);
+  font-size: 16px;
+  font-family: initial;
+  width: 930px;
+  padding: 10px 8px;
+  overflow: hidden;
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-right: ${(props) => props.ri};
+  ${(props) =>
+    props.focus &&
+    css`
+      &:focus {
+        outline: none;
+      }
+    `}
+`;
+
+export const Div = styled.div`
+  position: relative;
+  width: 70%;
+  margin: 0 auto;
+`;
