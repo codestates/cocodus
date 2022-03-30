@@ -10,6 +10,8 @@ router.get("/signup", userController.signup.get);
 
 router.get("/signup/github", userController.signup.github);
 
+router.get("/signup/google", userController.signup.google);
+
 router.get("/github", userController.github.get);
 // * GET /user/signin
 router.get("/login", userController.login.get);
