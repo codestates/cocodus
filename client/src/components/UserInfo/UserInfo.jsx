@@ -10,9 +10,8 @@ function UserInfo(props) {
 
   // 닉네임 변경할 때,
   const onNickChange = (e) => {
-    const { name, value } = e.target;
     // console.log(value);
-    chgInput(name, value);
+    chgInput(e.target.value);
   };
 
   // 기술 스택 태그
