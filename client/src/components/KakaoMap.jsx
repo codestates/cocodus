@@ -8,7 +8,7 @@ let infowindow;
 export default function KakaoMap() {
   const { place, chgPlace, chgMarker } = registerStore();
   // const [place, setPlace] = useState("");
-  // const [markerNow, setMarkerNow] = useState({});
+  const [markerNow, setMarkerNow] = useState({});
   useEffect(() => {
     if (!Kakao.isInitialized()) {
       Kakao.init("JAVASCRIPT_KEY");
@@ -35,8 +35,8 @@ export default function KakaoMap() {
   }
   return (
     <div>
-      {/* {markerNow ? console.log(markerNow) : null}
-      {markerNow.road_address_name} */}
+      {markerNow ? console.log(markerNow) : null}
+      {markerNow.road_address_name}
       <input
         onChange={(e) => chgPlace(e.target.value)}
         onKeyUp={(e) => {
@@ -44,7 +44,7 @@ export default function KakaoMap() {
         }}
       ></input>
 
-      <div id="map" style={{ width: "500px", height: "400px" }}></div>
+      <div id="map" style={{ width: "900px", height: "400px" }}></div>
     </div>
   );
 }

@@ -23,6 +23,8 @@ function Register() {
     tag,
     place,
     markerNow,
+    placeName,
+    riadAddress,
     chgInput,
     chgOnline,
     chgTag,
