@@ -6,12 +6,52 @@ module.exports = {
     res.status(200).send("test signuppost");
   },
   get: async (req, res) => {},
+  google: async (req, res) => {
+    // const tokenCall = await axios({
+    //   url: "https://accounts.google.com/o/oauth2/v2/auth",
+    //   method: "POST",
+    //   headers: {
+    //     accept: "application/json",
+    //   },
+    //   params: {
+    //     client_id:
+    //       "286406699597-7mlmmmhid7n5dph3g3ce3s90do65bk4i.apps.googleusercontent.com",
+    //     client_secret: "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",
+    //     response_type: "token",
+    //     redirect_uri: "http://localhost:8080/user/signup/google",
+    //     scope: "https://www.googleapis.com/auth/userinfo.email",
+    //   },
+    // });
+    console.log(req);
+    res.redirect("http://localhost:3000");
+
+    //   res.redirect(
+    //     "https://accounts.google.com/o/oauth2/v2/auth/?client_id=" +
+    //       process.env.GOOGLE_CLIENT_ID +
+    //       // "&client_secret=" +
+    //       // process.env.GOOGLE_CLIENT_SECRET +
+    //       "&response_type=token&redirect_uri=http://localhost:8080/user/signup/google" +
+    //       "&scope=https://www.googleapis.com/auth/userinfo.email"
+    //   );
+    // } else {
+    //   console.log(res);
+    //   res.redirect("http://localhost:3000/");
+    // }
+
+    // res
+    //   .status(200)
+    //   .cookie("access_token", access_token, {
+    //     maxAge: 300000, //300초 뒤에 쿠키 사라짐
+    //   })
+    //   //.redirect("http://cocodus.site/");
+    // .redirect("http://localhost:3000/");
+  },
   github: async (req, res) => {
     const { code } = req.query;
     if (!code) return res.status(401).redirect("http://localhost:3000/");
     const acctokenCall = await axios({
       url: "https://github.com/login/oauth/access_token",
-      method: "POST",
+      method: "GET",
       headers: {
         accept: "application/json",
       },
