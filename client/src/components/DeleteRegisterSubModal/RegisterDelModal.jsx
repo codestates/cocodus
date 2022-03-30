@@ -10,6 +10,7 @@ import {
 } from "./DeleteModal.styled";
 
 function RegisterDelModal({ closeModal }) {
+  // 게시물 삭제하는 함수
   const onRemove = () => {
     closeModal();
   };

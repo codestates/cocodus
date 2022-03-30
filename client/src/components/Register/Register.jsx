@@ -24,7 +24,7 @@ function Register() {
     place,
     markerNow,
     placeName,
-    riadAddress,
+    roadAddress,
     chgInput,
     chgOnline,
     chgTag,
@@ -106,6 +106,8 @@ function Register() {
         <FlexBox top="2rem">
           <Div>위치</Div>
           {console.log(markerNow)}
+          <InputBox type="text" value={placeName} onChange={chgPlace} />
+          <InputBox type="text" value={roadAddress} onChange={chgMarker} />
           <KakaoMap />
         </FlexBox>
       </Section>
