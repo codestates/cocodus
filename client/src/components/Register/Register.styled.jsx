@@ -115,7 +115,5 @@ export const Btn = styled.button`
   margin-top: ${(props) => props.top};
   margin-bottom: 2rem;
   cursor: pointer;
-  & + & {
-    margin-left: 1rem;
-  }
+  margin-left: 1rem;
 `;

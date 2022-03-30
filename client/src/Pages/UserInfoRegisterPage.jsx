@@ -6,6 +6,9 @@ import ClickButton from "../components/ClickButton";
 import ImgUpload from "../components/ImgUpload/ImgUpload";
 import TitleContent from "../components/TitleContent";
 import UserInfo from "../components/UserInfo/UserInfo";
+import Modal from "../components/Modal/Modal";
+import { userInfoRegisterModalStore } from "../Store/Modal-zustand";
+import RegisterUserInfoModal from "../components/DeleteRegisterSubModal/RegisterUserInfoModal";
 
 function UserInfoRegisterPage(props) {
   return (
@@ -14,7 +17,13 @@ function UserInfoRegisterPage(props) {
       <TitleContent text="내 정보 작성" />
       <ImgUpload />
       <UserInfo />
-      <ClickButton click1="취소하기" click2="등록하기" />
+      <ClickButton
+        click1="취소하기"
+        click2="등록하기"
+        Modal={Modal}
+        store2={userInfoRegisterModalStore}
+        Tag={RegisterUserInfoModal}
+      />
     </>
   );
 }
