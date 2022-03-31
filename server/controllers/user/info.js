@@ -21,7 +21,8 @@ module.exports = {
         },
         { fields: ["name", "roadAddress", "placeName", "x", "y"] }
       );
-      return res.redirect("http://localhost:3000").send("okay");
+
+      return res.status(200).send("okay");
     } else return res.status(404).send("user dosen't exist");
   },
   delete: async (req, res) => {
