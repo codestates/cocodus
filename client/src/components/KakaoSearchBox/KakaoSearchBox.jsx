@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { PlaceBox, PlaceInputBox, Div } from "./KakaoSearchBox.styled";
-import { registerStore } from "../../Store/Register-zustand";
+import { registerUserInfoStore } from "../../Store/RegisterUserInfo-zustand";
 function KakaoSearchBox() {
   // const [markerNow, setMarkerNow] = useState({});
   // const [place, setPlace] = useState("");
@@ -11,7 +11,7 @@ function KakaoSearchBox() {
 
     chgPlace,
     chgMarker,
-  } = registerStore();
+  } = registerUserInfoStore();
   return (
     <PlaceBox>
       <Div>위치</Div>

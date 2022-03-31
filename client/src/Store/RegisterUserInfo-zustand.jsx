@@ -30,4 +30,33 @@ export const registerUserInfoStore = create((set) => ({
     set((state) => ({
       tag: [...opts],
     })),
+
+  // 지도(주소) 관련 변수
+  // 검색명
+  place: "",
+  // 마커 즉, 검색한 주소의 정보가 담긴 객체
+  markerNow: {},
+  // 상호명
+  placeName: "",
+  // 도로명 주소
+  roadAddress: "",
+  // 위도(y), 경도(x)
+  latitudeY: "",
+  longitudeX: "",
+
+  // place onChange 함수
+  chgPlace: (value) =>
+    set((state) => ({
+      place: value,
+    })),
+
+  // markerNow onChange 함수
+  chgMarker: (value) =>
+    set((state) => ({
+      markerNow: value,
+      placeName: value.place_name,
+      roadAddress: value.road_address_name,
+      latitudeY: value.y,
+      longitudeX: value.x,
+    })),
 }));

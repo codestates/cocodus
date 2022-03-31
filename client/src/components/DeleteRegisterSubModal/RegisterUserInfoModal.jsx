@@ -8,9 +8,38 @@ import {
   ModalBtnBlock,
   ModalBtn,
 } from "./DeleteModal.styled";
+import { registerUserInfoStore } from "../../Store/RegisterUserInfo-zustand";
+import { accessTokenStore } from "../../Store/accesstoken-zustand";
+import axios from "axios";
 
 function RegisterUserInfoModal({ closeModal }) {
-  const onRemove = () => {
+  // 닉네임, 관심 기술 태그, 이미지(보류), 위치
+  const {
+    userImg,
+    nickName,
+    tag,
+    placeName,
+    roadAddress,
+    latitudeY,
+    longitudeX,
+  } = registerUserInfoStore();
+  const { accessToken, cocodusId } = accessTokenStore();
+  // 회원 정보 등록하는 함수
+  const onRegister = async () => {
+    const userData = await axios({
+      method: "PATCH",
+      url: "http://localhost:8080/user/info",
+      data: {
+        accessToken,
+        id: cocodusId,
+        name: nickName,
+        roadAddress,
+        placeName,
+        y: latitudeY,
+        x: longitudeX,
+      },
+    });
+    console.log(userData);
     closeModal();
   };
   return (
@@ -24,7 +53,7 @@ function RegisterUserInfoModal({ closeModal }) {
         <ModalBtn onClick={closeModal} color="#2E9AFE" font="#ffff">
           취소하기
         </ModalBtn>
-        <ModalBtn onClick={() => onRemove()}>등록하기</ModalBtn>
+        <ModalBtn onClick={() => onRegister()}>등록하기</ModalBtn>
       </ModalBtnBlock>
     </>
   );
