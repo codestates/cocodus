@@ -7,10 +7,8 @@ module.exports = {
   },
   get: async (req, res) => {},
   kakao: async (req, res) => {
-    // console.log(req.query);
     const code = req.query.code;
     const tokenCall = await axios({
-      // token을 받아옵니다
       url: "https://kauth.kakao.com/oauth/token",
       method: "POST",
       headers: {
@@ -24,7 +22,6 @@ module.exports = {
         client_secret: process.env.KAKAO_CLIENT_SECRET,
       },
     });
-    console.log(tokenCall.data);
     if (!tokenCall.data)
       return res.status(403).redirect("http://localhost:3000/");
     const accessToken = tokenCall.data.access_token;
@@ -53,14 +50,6 @@ module.exports = {
       })
       .redirect("http://localhost:3000/");
   },
-  oauth: async (req, res) => {
-    res.redirect(
-      "https://kauth.kakao.com/oauth/authorize" +
-        "?client_id=7f6f770eb46de1c098398a5231a5909d" +
-        "&redirect_uri=http://localhost:8080/user/signup/kakao/oauth" +
-        "&response_type=code"
-    );
-  },
   google: async (req, res) => {
     const code = req.query.code; // accounts.google 에서 우리 서버로 보내준 http 메시지 중에서 code를 빼내는 부분입니다
     if (!code) return res.status(401).redirect("http://localhost:3000/");
@@ -80,7 +69,6 @@ module.exports = {
         grant_type: "authorization_code",
       },
     });
-    console.log(tokenCall.data);
     if (!tokenCall.data)
       return res.status(403).redirect("http://localhost:3000/");
     const accessToken = tokenCall.data.access_token;
