@@ -40,6 +40,7 @@ const TestEditorForm = ({ onChange }) => {
     <>
       <MyBlock>
         <Editor
+          editiorState={editorState}
           // 에디터와 툴바 모두에 적용되는 클래스
           wrapperClassName="wrapper-class"
           // 에디터 주변에 적용된 클래스

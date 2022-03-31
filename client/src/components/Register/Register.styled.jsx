@@ -115,7 +115,35 @@ export const Btn = styled.button`
   margin-top: ${(props) => props.top};
   margin-bottom: 2rem;
   cursor: pointer;
-  & + & {
-    margin-left: 1rem;
-  }
+  margin-left: 1rem;
+`;
+
+export const PlaceBox = styled.div`
+  display: flex;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+export const PlaceInputBox = styled.input`
+  color: ${(props) => props.color};
+  text-shadow: ${(props) => props.textShadow};
+  background: rgba(196, 196, 196, 0.26);
+  font-size: 16px;
+  font-family: initial;
+  width: 930px;
+  padding: 10px 8px;
+  overflow: hidden;
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: ${(props) => props.ri};
+  ${(props) =>
+    props.focus &&
+    css`
+      &:focus {
+        outline: none;
+      }
+    `}
 `;

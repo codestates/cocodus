@@ -10,48 +10,61 @@ import {
   InputBox,
   Label,
   CheckBox,
+  PlaceBox,
+  PlaceInputBox,
 } from "./Register.styled";
 import LangOptTag from "../LangOptTag";
 import KakaoMap from "../KakaoMap";
+import { registerStore } from "../../Store/Register-zustand";
 
 function Register() {
-  const [markerNow, setMarkerNow] = useState({});
-  const [place, setPlace] = useState("");
-  const [inputs, setInputs] = useState({
-    title: "",
-    date: "",
-    online: false,
-    address: "",
-  });
-  const { title, date, online, address } = inputs;
+  // const [markerNow, setMarkerNow] = useState({});
+  // const [place, setPlace] = useState("");
+  const {
+    inputs,
+    tag,
+    place,
+    markerNow,
+    placeName,
+    roadAddress,
+    chgInput,
+    chgOnline,
+    chgTag,
+    chgMsg,
+    chgPlace,
+    chgMarker,
+  } = registerStore();
+
+  const { title, date, online } = inputs;
   const onChange = (e) => {
     const { name, value } = e.target;
     console.log(value);
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
+    chgInput(name, value);
   };
+
   // 기술 스택 태그
-  const [tag, setTag] = useState([]);
   const onTagChange = (e) => {
-    e.map((el) => setTag([...tag, el.label]));
+    // console.log(e);
+    const opts = e.map((el) => el.value);
+    // console.log(opts);
+    console.log(tag);
+    chgTag(opts);
   };
+
   // 온라인 가능 여부
   const onCheckChange = (e) => {
     const { name, checked } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: checked,
-    });
+    console.log(online);
+    chgOnline(name, checked);
   };
+
   // 메세지
-  const [content, setContent] = useState("");
   const onMsgChange = (e) => {
     // console.log(e.blocks);
-    const text = e.blocks.map((el) => el.text);
+    let text = e.blocks.map((el) => el.text);
     console.log(text.join(" "));
-    setContent(text.join(" "));
+    text = text.join(" ");
+    chgMsg(text);
   };
   return (
     <>
@@ -86,20 +99,36 @@ function Register() {
               type="checkbox"
               id="online"
               onChange={onCheckChange}
+              value={online}
             />
             온라인 가능
           </Label>
         </FlexBox>
         <TestEditorForm onChange={onMsgChange} />
-        <FlexBox top="2rem">
+
+        <PlaceBox>
           <Div>위치</Div>
           {console.log(markerNow)}
-          <KakaoMap
-            setMarkerNow={setMarkerNow}
-            place={place}
-            setPlace={setPlace}
-          ></KakaoMap>
-        </FlexBox>
+          <Div>
+            <div>
+              <PlaceInputBox
+                type="text"
+                value={placeName}
+                onChange={chgPlace}
+                placeholder="상호명이 표시됩니다"
+              />
+            </div>
+            <div>
+              <PlaceInputBox
+                type="text"
+                value={roadAddress}
+                onChange={chgMarker}
+                placeholder="도로명 주소가 표시됩니다"
+              />
+            </div>
+          </Div>
+          <KakaoMap />
+        </PlaceBox>
       </Section>
     </>
   );
