@@ -4,21 +4,25 @@ module.exports = {
     res.status(200).send("test userinfoget");
   },
   patch: async (req, res) => {
-    const name = req.data;
-    const id = req.data;
-    const accesstoken = req.data;
+    if (!req.data) return res.send({}); //바디에 정보가 없을때임
+    if (!(req.data.name && req.data.id && req.data.accesstoken))
+      return res.send({}); //바디에 name,id,accesstoken이 없으면 안됨
+    const { id, accesstoken, name, roadAddress, placeName, x, y } = req.data;
+    //여기에서 세션에 저장한 엑세스토큰 유효성 검사해야함
     let validation = await User.findOne({ where: { id, accesstoken } });
     if (validation) {
       User.create(
         {
-          name: name,
-          //("상호명"+","+"도로명"+","+"")
+          name,
+          roadAddress,
+          placeName,
+          x,
+          y,
         },
-        { fields: ["name"] }
+        { fields: ["name", "roadAddress", "placeName", "x", "y"] }
       );
-    }
-
-    res.status(200).send("test userinfopatch");
+      return res.redirect("http://localhost:3000").send("okay");
+    } else return res.status(404).send("user dosen't exist");
   },
   delete: async (req, res) => {
     res.status(200).send("test userinfodelete");
