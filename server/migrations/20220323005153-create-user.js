@@ -15,13 +15,19 @@ module.exports = {
         image: {
           type: Sequelize.STRING,
         },
-        provider: {
-          type: Sequelize.STRING,
-        },
         accesstoken: {
           type: Sequelize.STRING,
         },
-        refreshtoken: {
+        roadAddress: {
+          type: Sequelize.STRING,
+        },
+        placeName: {
+          type: Sequelize.STRING,
+        },
+        x: {
+          type: Sequelize.STRING,
+        },
+        y: {
           type: Sequelize.STRING,
         },
         createdAt: {
