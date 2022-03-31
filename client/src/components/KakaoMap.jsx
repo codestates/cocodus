@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import kakaoApi from "../api/kakaoApi";
 import styled from "styled-components";
-import { registerStore } from "../Store/Register-zustand";
+import { registerUserInfoStore } from "../Store/RegisterUserInfo-zustand";
 let map;
 let ps;
 let infowindow;
 
 export default function KakaoMap() {
-  const { place, chgPlace, chgMarker } = registerStore();
+  const { place, chgPlace, chgMarker, markerNow } = registerUserInfoStore();
   // const [place, setPlace] = useState("");
-  const [markerNow, setMarkerNow] = useState({});
+  // const [markerNow, setMarkerNow] = useState({});
   useEffect(() => {
     if (!Kakao.isInitialized()) {
       Kakao.init("JAVASCRIPT_KEY");
