@@ -10,7 +10,7 @@ module.exports = {
         },
       },
       post_id: {
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
         references: {
           model: "Posts",
           key: "id",

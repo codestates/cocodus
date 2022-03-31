@@ -11,6 +11,7 @@ module.exports = {
     const { id, accesstoken, name, roadAddress, placeName, x, y } = req.body;
     //여기에서 세션에 저장한 엑세스토큰 유효성 검사해야함
     let validation = await User.findOne({ where: { id, accesstoken } });
+    console.log({ validation });
     if (validation) {
       User.update(
         {

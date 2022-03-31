@@ -134,7 +134,7 @@ module.exports = {
       },
     });
 
-    const id = userInfoCall.data.html_url;
+    const id = userInfoCall.data.html_url.split("//")[1];
     console.log(id); //https://github.com/happy5happy5
     let validation = await User.findOne({ where: { id } });
     if (validation) {

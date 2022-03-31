@@ -12,7 +12,7 @@ module.exports = {
           },
         },
         tag_id: {
-          type: Sequelize.UUID,
+          type: Sequelize.INTEGER,
           references: {
             model: "Tags",
             key: "id",
