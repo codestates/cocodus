@@ -6,45 +6,106 @@ module.exports = {
     res.status(200).send("test signuppost");
   },
   get: async (req, res) => {},
+  kakao: async (req, res) => {
+    const code = req.query.code;
+    const tokenCall = await axios({
+      url: "https://kauth.kakao.com/oauth/token",
+      method: "POST",
+      headers: {
+        accept: "application/json",
+      },
+      params: {
+        grant_type: "authorization_code",
+        client_id: process.env.KAKAO_CLIENT_ID,
+        redirect_uri: "http://localhost:8080/user/signup/kakao",
+        code: code,
+        client_secret: process.env.KAKAO_CLIENT_SECRET,
+      },
+    });
+    if (!tokenCall.data)
+      return res.status(403).redirect("http://localhost:3000/");
+    const accessToken = tokenCall.data.access_token;
+    if (!accessToken) return res.status(403).redirect("http://localhost:3000/");
+    //카카오에서 이메일 정보를 받아오기 위한 코드 작성 필요
+    //토큰 잘 들어오는 것 확인함
+    //access_token, token_type, refresh_token, id_token, expires_in, scope, refresh_token_expires_in
+    {
+      /*let validation = await User.findOne({ where: { id } }); DB에 회원정보 저장하는 부분 작성 필요
+    if (validation) {
+      //만약에 회원가입하는데 아이디가 있다면 여기서 뭔가 딴 짓을 해야한다.
+    } else {
+      User.create(
+        {
+          id,
+          access_token,
+        },
+        { fields: ["id", "access_token"] }
+      );
+    }*/
+    }
+    res
+      .status(200)
+      .cookie("access_token", accessToken, {
+        maxAge: 360000, //360초 뒤에 쿠키 사라짐
+      })
+      .redirect("http://localhost:3000/");
+  },
   google: async (req, res) => {
-    // const tokenCall = await axios({
-    //   url: "https://accounts.google.com/o/oauth2/v2/auth",
-    //   method: "POST",
+    const code = req.query.code; // accounts.google 에서 우리 서버로 보내준 http 메시지 중에서 code를 빼내는 부분입니다
+    if (!code) return res.status(401).redirect("http://localhost:3000/");
+    //만약 코드가 없으면 그냥 원래페이지로 리다이렉트
+    const tokenCall = await axios({
+      // token을 받아옵니다
+      url: "https://www.googleapis.com/oauth2/v4/token",
+      method: "POST",
+      headers: {
+        accept: "application/json",
+      },
+      params: {
+        code,
+        client_id: process.env.GOOGLE_CLIENT_ID,
+        client_secret: process.env.GOOGLE_CLIENT_SECRET,
+        redirect_uri: "http://localhost:8080/user/signup/google",
+        grant_type: "authorization_code",
+      },
+    });
+    if (!tokenCall.data)
+      return res.status(403).redirect("http://localhost:3000/");
+    const accessToken = tokenCall.data.access_token;
+    if (!accessToken) return res.status(403).redirect("http://localhost:3000/");
+    //구글에서 이메일 정보를 받아오기 위한 코드
+    // const userInfoCall = await axios({
+    //   url: "https://api.github.com/user",
+    //   method: "GET",
     //   headers: {
     //     accept: "application/json",
-    //   },
-    //   params: {
-    //     client_id:
-    //       "286406699597-7mlmmmhid7n5dph3g3ce3s90do65bk4i.apps.googleusercontent.com",
-    //     client_secret: "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",
-    //     response_type: "token",
-    //     redirect_uri: "http://localhost:8080/user/signup/google",
-    //     scope: "https://www.googleapis.com/auth/userinfo.email",
+    //     authorization: `token ${access_token}`,
     //   },
     // });
-    console.log(req);
-    res.redirect("http://localhost:3000");
 
-    //   res.redirect(
-    //     "https://accounts.google.com/o/oauth2/v2/auth/?client_id=" +
-    //       process.env.GOOGLE_CLIENT_ID +
-    //       // "&client_secret=" +
-    //       // process.env.GOOGLE_CLIENT_SECRET +
-    //       "&response_type=token&redirect_uri=http://localhost:8080/user/signup/google" +
-    //       "&scope=https://www.googleapis.com/auth/userinfo.email"
-    //   );
-    // } else {
-    //   console.log(res);
-    //   res.redirect("http://localhost:3000/");
-    // }
+    //const id = userInfoCall.data.html_url; id를 받아오는 코드(깃허브는 provider + username)
+    //console.log(id); //id 확인하기
+    {
+      /*let validation = await User.findOne({ where: { id } }); DB에 회원정보 저장하는 부분
+    if (validation) {
+      //만약에 회원가입하는데 아이디가 있다면 여기서 뭔가 딴 짓을 해야한다.
+    } else {
+      User.create(
+        {
+          id,
+          access_token,
+        },
+        { fields: ["id", "access_token"] }
+      );
+    }*/
+    }
 
-    // res
-    //   .status(200)
-    //   .cookie("access_token", access_token, {
-    //     maxAge: 300000, //300초 뒤에 쿠키 사라짐
-    //   })
-    //   //.redirect("http://cocodus.site/");
-    // .redirect("http://localhost:3000/");
+    res
+      .status(200)
+      .cookie("access_token", accessToken, {
+        maxAge: 360000, //360초 뒤에 쿠키 사라짐
+      })
+      .redirect("http://localhost:3000/");
   },
   github: async (req, res) => {
     const { code } = req.query;
@@ -62,15 +123,14 @@ module.exports = {
       },
     });
     // console.log(acctokenCall.data);
-    const { access_token } = acctokenCall.data;
-    if (!access_token)
-      return res.status(403).redirect("http://localhost:3000/");
+    const accessToken = acctokenCall.data.access_token;
+    if (!accessToken) return res.status(403).redirect("http://localhost:3000/");
     const userInfoCall = await axios({
       url: "https://api.github.com/user",
       method: "GET",
       headers: {
         accept: "application/json",
-        authorization: `token ${access_token}`,
+        authorization: `token ${accessToken}`,
       },
     });
 
@@ -93,7 +153,7 @@ module.exports = {
     res
       .status(200)
       .cookie("access_token", access_token, {
-        maxAge: 300000, //300초 뒤에 쿠키 사라짐
+        maxAge: 360000, //300초 뒤에 쿠키 사라짐
       })
       .cookie("cocodusId", id)
       //.redirect("http://cocodus.site/");

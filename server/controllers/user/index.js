@@ -5,5 +5,4 @@ module.exports = {
   logout: require("./logout"),
   info: require("./info"),
   note: require("./note"),
-  github: require("./github"),
 };
