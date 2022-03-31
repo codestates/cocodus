@@ -22,7 +22,7 @@ module.exports = {
     //     scope: "https://www.googleapis.com/auth/userinfo.email",
     //   },
     // });
-    console.log(req);
+    // console.log(req);
     res.redirect("http://localhost:3000");
 
     //   res.redirect(
@@ -74,7 +74,7 @@ module.exports = {
       },
     });
 
-    const id = userInfoCall.data.html_url;
+    const id = userInfoCall.data.html_url.split("//")[1];
     console.log(id); //https://github.com/happy5happy5
     let validation = await User.findOne({ where: { id } });
     if (validation) {
