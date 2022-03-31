@@ -9,7 +9,10 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import { AiOutlineDesktop } from "react-icons/ai";
-export default function NavBar({ isLogin, setIsLogin, setAccessToken }) {
+import { accessTokenStore } from "../../Store/accesstoken-zustand";
+
+export default function NavBar() {
+  const { isLogin, chgIsLogin, chgAccToken } = accessTokenStore();
   const [modalOpen, setModalOpen] = useState(false);
   let navigate = useNavigate();
 
@@ -19,8 +22,8 @@ export default function NavBar({ isLogin, setIsLogin, setAccessToken }) {
 
   const logoutHandle = () => {
     window.document.cookie = "access_token" + "=; Max-Age=-99999999;";
-    setIsLogin(false);
-    setAccessToken("");
+    chgIsLogin(false);
+    chgAccToken("");
   };
   const theme = {
     colors: {

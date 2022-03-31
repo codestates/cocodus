@@ -5,6 +5,9 @@ import { FlexBox, Div, InputBox } from "./UserInfo.styled";
 import { Section } from "../styles/Section.styled";
 import LangOptTag from "../LangOptTag";
 import { registerUserInfoStore } from "../../Store/RegisterUserInfo-zustand";
+import KakaoMap from "../KakaoMap";
+import KakaoSearchBox from "../KakaoSearchBox/KakaoSearchBox";
+
 function UserInfo(props) {
   const { nickName, chgInput, chgTag } = registerUserInfoStore();
 
@@ -23,23 +26,27 @@ function UserInfo(props) {
   };
 
   return (
-    <Section>
-      <FlexBox>
-        <Div>닉네임</Div>
-        <InputBox
-          name="nickName"
-          type="text"
-          placeholder="김코딩"
-          width="15%"
-          value={nickName}
-          onChange={onNickChange}
-        />
-      </FlexBox>
-      <FlexBox>
-        <Div>관심 기술 태그</Div>
-        <LangOptTag onChange={onTagChange} />
-      </FlexBox>
-    </Section>
+    <>
+      <Section>
+        <FlexBox>
+          <Div>닉네임</Div>
+          <InputBox
+            name="nickName"
+            type="text"
+            placeholder="김코딩"
+            width="15%"
+            value={nickName}
+            onChange={onNickChange}
+          />
+        </FlexBox>
+        <FlexBox>
+          <Div>관심 기술 태그</Div>
+          <LangOptTag onChange={onTagChange} />
+        </FlexBox>
+      </Section>
+      <KakaoSearchBox />
+      <KakaoMap />
+    </>
   );
 }
 
