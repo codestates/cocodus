@@ -7,11 +7,11 @@ module.exports = {
   },
   get: async (req, res) => {},
   kakao: async (req, res) => {
-    console.log(req.query);
+    // console.log(req.query);
     const code = req.query.code;
     const tokenCall = await axios({
       // token을 받아옵니다
-      url: "https://kauth.kakao.com/oauth2/token",
+      url: "https://kauth.kakao.com/oauth/token",
       method: "POST",
       headers: {
         accept: "application/json",
@@ -30,6 +30,8 @@ module.exports = {
     const accessToken = tokenCall.data.access_token;
     if (!accessToken) return res.status(403).redirect("http://localhost:3000/");
     //카카오에서 이메일 정보를 받아오기 위한 코드 작성 필요
+    //토큰 잘 들어오는 것 확인함
+    //access_token, token_type, refresh_token, id_token, expires_in, scope, refresh_token_expires_in
     {
       /*let validation = await User.findOne({ where: { id } }); DB에 회원정보 저장하는 부분 작성 필요
     if (validation) {
@@ -50,6 +52,14 @@ module.exports = {
         maxAge: 360000, //360초 뒤에 쿠키 사라짐
       })
       .redirect("http://localhost:3000/");
+  },
+  oauth: async (req, res) => {
+    res.redirect(
+      "https://kauth.kakao.com/oauth/authorize" +
+        "?client_id=7f6f770eb46de1c098398a5231a5909d" +
+        "&redirect_uri=http://localhost:8080/user/signup/kakao/oauth" +
+        "&response_type=code"
+    );
   },
   google: async (req, res) => {
     const code = req.query.code; // accounts.google 에서 우리 서버로 보내준 http 메시지 중에서 code를 빼내는 부분입니다

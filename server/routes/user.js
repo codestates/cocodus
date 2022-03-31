@@ -14,6 +14,8 @@ router.get("/signup/google", userController.signup.google);
 
 router.get("/signup/kakao", userController.signup.kakao);
 
+router.get("/signup/kakao/oauth", userController.signup.oauth);
+
 // * GET /user/signin
 router.get("/login", userController.login.get);
 

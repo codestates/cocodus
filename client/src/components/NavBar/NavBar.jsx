@@ -63,10 +63,19 @@ export default function NavBar({ isLogin, setIsLogin, setAccessToken }) {
                   src="Github.png"
                 />
               </a>
-              <img
-                style={{ width: "100px", marginLeft: "20px" }}
-                src="Kakaotalk.png"
-              />
+              <a
+                href={
+                  "https://kauth.kakao.com/oauth/authorize" +
+                  "?client_id=7f6f770eb46de1c098398a5231a5909d" +
+                  "&redirect_uri=http://localhost:8080/user/signup/kakao" +
+                  "&response_type=code"
+                }
+              >
+                <img
+                  style={{ width: "100px", marginLeft: "20px" }}
+                  src="Kakaotalk.png"
+                />
+              </a>
               <a
                 href={
                   "https://accounts.google.com/o/oauth2/v2/auth" +
