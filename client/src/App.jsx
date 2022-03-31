@@ -19,18 +19,22 @@ import {
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [accessToken, setAccessToken] = useState("");
-
+  const [cocodusId, setCocodusId] = useState("");
   useEffect(() => {
-    const re = /access_token/;
+    const re = [/access_token/, /cocodusId/];
     let acc_String = window.document.cookie
       .split(";")
-      .filter((x) => (x.match(re) ? true : false))[0];
-    if (acc_String) {
+      .filter((x) => (x.match(re[0]) ? true : false))[0];
+    let id_String = window.document.cookie
+      .split(";")
+      .filter((x) => (x.match(re[1]) ? true : false))[0];
+    if (id_String && acc_String) {
       setAccessToken(acc_String.split("=")[1]);
+      setCocodusId(id_String.split("=")[1]);
     }
   }, []);
   useEffect(() => {
-    if (accessToken) setIsLogin(true);
+    if (accessToken && cocodusId) setIsLogin(true);
     else setIsLogin(false);
   }, [accessToken, isLogin]);
   const theme = {
