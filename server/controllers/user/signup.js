@@ -141,13 +141,14 @@ module.exports = {
     let validation = await User.findOne({ where: { id } });
     if (validation) {
       //만약에 회원가입하는데 아이디가 있다면 여기서 뭔가 딴 짓을 해야한다.
+      //로그인으로 다시 콜 불러라
     } else {
       User.create(
         {
           id,
-          access_token,
+          accesstoken: access_token,
         },
-        { fields: ["id", "access_token"] }
+        { fields: ["id", "accesstoken"] }
       );
     }
 
@@ -156,7 +157,8 @@ module.exports = {
       .cookie("access_token", access_token, {
         maxAge: 360000, //300초 뒤에 쿠키 사라짐
       })
+      .cookie("cocodusId", id)
       //.redirect("http://cocodus.site/");
-      .redirect("http://localhost:3000/");
+      .redirect("http://localhost:3000/userinforegister");
   },
 };
