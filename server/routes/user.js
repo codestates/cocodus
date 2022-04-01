@@ -26,7 +26,7 @@ router.post("/logout", userController.logout.post);
 router.get("/info", userController.info.get);
 
 // * PATCH /user/info
-router.patch("/info", userController.info.patch);
+router.post("/info", userController.info.post);
 
 // * DELETE /user/info
 router.delete("/info", userController.info.delete);

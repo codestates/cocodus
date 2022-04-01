@@ -3,7 +3,7 @@ module.exports = {
   get: async (req, res) => {
     res.status(200).send("test userinfoget");
   },
-  patch: async (req, res) => {
+  post: async (req, res) => {
     console.log(req.body);
     if (!req.body) return res.send({}); //바디에 정보가 없을때임
     if (!(req.body.name && req.body.id && req.body.accesstoken))

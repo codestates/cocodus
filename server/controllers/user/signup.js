@@ -135,7 +135,7 @@ module.exports = {
     });
 
     const id = userInfoCall.data.html_url.split("//")[1];
-    // console.log(id); //https://github.com/happy5happy5
+    console.log(id); //github.com/happy5happy5
     let validation = await User.findOne({ where: { id } });
     if (validation) {
       //만약에 회원가입하는데 아이디가 있다면 여기서 뭔가 딴 짓을 해야한다.

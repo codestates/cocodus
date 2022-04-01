@@ -21,7 +21,7 @@ function UserInfo(props) {
   const onTagChange = (e) => {
     // console.log(e);
     const opts = e.map((el) => el.value);
-    console.log(opts);
+    // console.log(opts);
     chgTag(opts);
   };
 
