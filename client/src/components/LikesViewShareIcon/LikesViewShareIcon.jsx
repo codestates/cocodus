@@ -16,20 +16,32 @@ import {
   ModalFlexBox,
 } from "../DeleteRegisterSubModal/DeleteModal.styled";
 import { linkModalStore } from "../../Store/Modal-zustand";
+import axios from "axios";
+import { accessTokenStore } from "../../Store/accesstoken-zustand";
 
 function LikesViewShareIcon(props) {
   const { count, inc, dec } = likesCountStore();
+  const { cocodusId } = accessTokenStore();
   const [likeClick, setLikeClick] = useState(true);
-  const countClick = () => {
-    if (likeClick) {
-      console.log("좋아요 클릭");
-      setLikeClick(!likeClick);
-      inc();
-    } else {
-      console.log("좋아요 취소");
-      setLikeClick(!likeClick);
-      dec();
-    }
+
+  const countClick = async () => {
+    // if (likeClick) {
+    //   await axios ({
+    //     method: "PATCH",
+    //     url: 'http://localhost:8080/board/like',
+    //     data: {
+    //       user_id: cocodusId,
+    //       post_id: ,
+    //     }
+    //   })
+    //   console.log("좋아요 클릭");
+    //   setLikeClick(!likeClick);
+    //   inc();
+    // } else {
+    //   console.log("좋아요 취소");
+    //   setLikeClick(!likeClick);
+    //   dec();
+    // }
   };
 
   // 모달

@@ -1,4 +1,12 @@
-import { StyledHeader, Nav, Logo, Image } from "./NavBar.styled";
+import {
+  StyledHeader,
+  Nav,
+  Logo,
+  Block,
+  Name,
+  Icon,
+  Img,
+} from "./NavBar.styled";
 import { Container } from "../../components/styles/Container.styled";
 import { Button } from "../../components/styles/Button.styled";
 import React, { useState } from "react";
@@ -15,6 +23,7 @@ import DropDownBar from "../DropDown_Bar/DropDownBar";
 
 export default function NavBar() {
   const { isLogin } = accessTokenStore();
+
   // 계정을 클릭하면 나오는 view
   const [menuVisible, setMenuVisible] = useState(false);
   const onHandleMenu = () => {
@@ -35,32 +44,7 @@ export default function NavBar() {
       footer: "#00333",
     },
   };
-  const Block = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    width: 190px;
-    right: -8%;
-  `;
-  const Name = styled.div`
-    position: absolute;
-    left: 0;
-    & + & {
-      margin-left: 6rem;
-    }
-    z-index: 0;
-  `;
-  const Icon = styled.div`
-    cursor: pointer;
-    ${(props) =>
-      props.drop &&
-      css`
-        position: absolute;
-        right: 0;
-        /* color: rgba(196, 196, 196); */
-      `};
-  `;
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
@@ -77,7 +61,8 @@ export default function NavBar() {
                 {/* <img src="UserIcon.png" /> */}
                 {/* <Button onClick={logoutHandle}>로그아웃</Button> */}
                 <Block onClick={onHandleMenu}>
-                  <Name>김코딩님</Name>
+                  <Img src="UserIcon.png" />
+                  <Name>권순일님</Name>
                   <Icon>
                     <AiFillCaretDown />
                   </Icon>
