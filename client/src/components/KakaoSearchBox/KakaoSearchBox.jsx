@@ -15,7 +15,6 @@ function KakaoSearchBox() {
   return (
     <PlaceBox>
       <Div>위치</Div>
-      {console.log(markerNow)}
       <Div>
         <div>
           <PlaceInputBox

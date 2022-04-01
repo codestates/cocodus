@@ -12,7 +12,8 @@ router.get("/signup/github", userController.signup.github);
 
 router.get("/signup/google", userController.signup.google);
 
-router.get("/github", userController.github.get);
+router.get("/signup/kakao", userController.signup.kakao);
+
 // * GET /user/signin
 router.get("/login", userController.login.get);
 
@@ -24,8 +25,8 @@ router.post("/logout", userController.logout.post);
 // * GET /user/info
 router.get("/info", userController.info.get);
 
-// * PATCH /user/info
-router.patch("/info", userController.info.patch);
+// * POST /user/info
+router.post("/info", userController.info.post);
 
 // * DELETE /user/info
 router.delete("/info", userController.info.delete);

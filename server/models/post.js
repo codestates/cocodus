@@ -19,8 +19,8 @@ module.exports = (sequelize, DataTypes) => {
   Post.init(
     {
       id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
         comment: "고유번호 UUID",
       },

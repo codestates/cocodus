@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   User_view.init(
     {
       user_id: DataTypes.STRING,
-      post_id: DataTypes.UUID,
+      post_id: DataTypes.INTEGER,
     },
     {
       sequelize,

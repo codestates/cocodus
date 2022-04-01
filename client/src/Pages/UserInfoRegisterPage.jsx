@@ -13,7 +13,7 @@ import RegisterUserInfoModal from "../components/DeleteRegisterSubModal/Register
 function UserInfoRegisterPage(props) {
   return (
     <>
-      <BackIcon />
+      <BackIcon left="13rem" />
       <TitleContent text="내 정보 작성" />
       <ImgUpload />
       <UserInfo />

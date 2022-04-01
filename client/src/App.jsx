@@ -27,16 +27,17 @@ function App() {
     chgCocoId,
   } = accessTokenStore();
   useEffect(() => {
-    const re = [/access_token/, /cocodusId/];
+    const re = [/accessToken/, /cocodusId/];
     let acc_String = window.document.cookie
       .split(";")
       .filter((x) => (x.match(re[0]) ? true : false))[0];
+    // console.log(acc_String);
     let id_String = window.document.cookie
       .split(";")
       .filter((x) => (x.match(re[1]) ? true : false))[0];
     if (id_String && acc_String) {
       chgAccToken(acc_String.split("=")[1]);
-      chgCocoId(id_String.split("=")[1]);
+      chgCocoId(decodeURIComponent(id_String.split("=")[1]));
     }
   }, []);
   useEffect(() => {
