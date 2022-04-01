@@ -15,7 +15,7 @@ module.exports = {
         image: {
           type: Sequelize.STRING,
         },
-        accesstoken: {
+        accessToken: {
           type: Sequelize.STRING,
         },
         roadAddress: {
