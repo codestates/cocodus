@@ -9,8 +9,11 @@ import {
   ModalBtnBlock,
   ModalBtn,
 } from "./DeleteModal.styled";
+import axios from "axios";
+import { accessTokenStore } from "../../Store/accesstoken-zustand";
 
 function RegisterModal({ closeModal }) {
+  const { cocodusId } = accessTokenStore();
   const {
     inputs,
     tag,
@@ -23,16 +26,28 @@ function RegisterModal({ closeModal }) {
   const { title, date, online } = inputs;
 
   // 클릭하는 순간 글이 등록되게하는 함수
-  const onRegister = () => {
-    // title; // 글 제목
-    // tag; // 사용언어(기술 스택), 배열
-    // date; // 날짜
-    // online; // 온라인 가능 여부 (불린값)
-    // content; // 글 내용
-    // placeName; // 장소명
-    // roadAddress; // 도로명 주소
-    // latitudeY; // 위도
-    // longitudeX; // 경도
+  const onRegister = async () => {
+    let post = {
+      user_id: cocodusId,
+      title,
+      body: content,
+      tag,
+      date,
+      online,
+      meetingpoint: placeName,
+      roadAddress,
+      y: latitudeY,
+      x: longitudeX,
+      recruiting: true,
+      view_count: 0,
+    };
+    post = JSON.stringify(post);
+
+    const newPost = await axios({
+      method: "POST",
+      url: "http://localhost:8080/board/writing",
+      data: post,
+    });
     closeModal(); // 모달창 닫는 함수
   };
   return (
