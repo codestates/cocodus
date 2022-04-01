@@ -1,6 +1,7 @@
 // 모달창에서 글 등록 기능
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   ModalFlexBox,
   Logo,
@@ -14,6 +15,7 @@ import axios from "axios";
 
 function RegisterUserInfoModal({ closeModal }) {
   // 닉네임, 관심 기술 태그, 이미지(보류), 위치
+  let navigate = useNavigate();
   const {
     userImg,
     nickName,
@@ -29,7 +31,7 @@ function RegisterUserInfoModal({ closeModal }) {
     const userData = await axios({
       method: "POST",
       url: "http://localhost:8080/user/info",
-      data: {
+      data: JSON.stringify({
         accessToken,
         id: cocodusId,
         name: nickName,
@@ -37,10 +39,15 @@ function RegisterUserInfoModal({ closeModal }) {
         placeName,
         y: latitudeY,
         x: longitudeX,
-      },
+      }),
     });
-    // console.log(userData);
-    closeModal();
+    if (userData.status === 201) {
+      closeModal();
+      navigate("/");
+    } else {
+      alert("뭔가 잘못됬어요!!");
+      console.log(userData.status);
+    }
   };
   return (
     <>

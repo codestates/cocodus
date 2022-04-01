@@ -146,13 +146,13 @@ module.exports = {
           id,
           accessToken,
         },
-        { fields: ["id", "accesstoken"] }
+        { fields: ["id", "accessToken"] }
       );
     }
 
     res
       .status(200)
-      .cookie("access_token", accessToken, {
+      .cookie("accessToken", accessToken, {
         maxAge: 360000, //300초 뒤에 쿠키 사라짐
       })
       .cookie("cocodusId", id)
