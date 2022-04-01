@@ -26,10 +26,21 @@ function RegisterUserInfoModal({ closeModal }) {
   const { accessToken, cocodusId } = accessTokenStore();
   // 회원 정보 등록하는 함수
   const onRegister = async () => {
+    // console.log(
+    //   typeof JSON.stringify({
+    //     accessToken,
+    //     id: cocodusId,
+    //     name: nickName,
+    //     roadAddress,
+    //     placeName,
+    //     y: latitudeY,
+    //     x: longitudeX,
+    //   })
+    // );
     const userData = await axios({
       method: "POST",
       url: "http://localhost:8080/user/info",
-      data: {
+      data: JSON.stringify({
         accessToken,
         id: cocodusId,
         name: nickName,
@@ -37,7 +48,7 @@ function RegisterUserInfoModal({ closeModal }) {
         placeName,
         y: latitudeY,
         x: longitudeX,
-      },
+      }),
     });
     // console.log(userData);
     closeModal();
