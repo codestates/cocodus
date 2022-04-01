@@ -27,7 +27,7 @@ function RegisterUserInfoModal({ closeModal }) {
   // 회원 정보 등록하는 함수
   const onRegister = async () => {
     const userData = await axios({
-      method: "PATCH",
+      method: "POST",
       url: "http://localhost:8080/user/info",
       data: {
         accessToken,
@@ -39,7 +39,7 @@ function RegisterUserInfoModal({ closeModal }) {
         x: longitudeX,
       },
     });
-    console.log(userData);
+    // console.log(userData);
     closeModal();
   };
   return (
