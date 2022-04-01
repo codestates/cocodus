@@ -1,5 +1,6 @@
 const axios = require("axios");
 const { User } = require("../../models");
+const jwt = require("jsonwebtoken");
 
 module.exports = {
   post: async (req, res) => {
@@ -22,9 +23,12 @@ module.exports = {
         client_secret: process.env.KAKAO_CLIENT_SECRET,
       },
     });
+    // console.log(tokenCall);
     if (!tokenCall.data)
       return res.status(403).redirect("http://localhost:3000/");
     const accessToken = tokenCall.data.access_token;
+    // console.log("1");
+    // console.log(accessToken);
     if (!accessToken) return res.status(403).redirect("http://localhost:3000/");
     //카카오에서 이메일 정보를 받아오기 위한 코드 작성 필요
     //토큰 잘 들어오는 것 확인함
@@ -52,6 +56,7 @@ module.exports = {
   },
   google: async (req, res) => {
     const code = req.query.code; // accounts.google 에서 우리 서버로 보내준 http 메시지 중에서 code를 빼내는 부분입니다
+    // console.log(code);
     if (!code) return res.status(401).redirect("http://localhost:3000/");
     //만약 코드가 없으면 그냥 원래페이지로 리다이렉트
     const tokenCall = await axios({
@@ -69,35 +74,45 @@ module.exports = {
         grant_type: "authorization_code",
       },
     });
+
     if (!tokenCall.data)
       return res.status(403).redirect("http://localhost:3000/");
     const accessToken = tokenCall.data.access_token;
     if (!accessToken) return res.status(403).redirect("http://localhost:3000/");
-    //구글에서 이메일 정보를 받아오기 위한 코드
-    // const userInfoCall = await axios({
-    //   url: "https://api.github.com/user",
-    //   method: "GET",
-    //   headers: {
-    //     accept: "application/json",
-    //     authorization: `token ${access_token}`,
-    //   },
-    // });
+    let idToken = tokenCall.data.id_token;
 
-    //const id = userInfoCall.data.html_url; id를 받아오는 코드(깃허브는 provider + username)
-    //console.log(id); //id 확인하기
-    {
-      /*let validation = await User.findOne({ where: { id } }); DB에 회원정보 저장하는 부분
+    function parseJwt(token) {
+      let base64Url = token.split(".")[1];
+      let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      let jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split("")
+          .map(function (c) {
+            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+          })
+          .join("")
+      );
+
+      return JSON.parse(jsonPayload);
+    }
+
+    const data = parseJwt(idToken);
+
+    let id = data.email;
+    console.log(id);
+    console.log(accessToken);
+    let validation = await User.findOne({ where: { id } });
     if (validation) {
       //만약에 회원가입하는데 아이디가 있다면 여기서 뭔가 딴 짓을 해야한다.
+      //로그인으로 다시 콜 불러라
     } else {
       User.create(
         {
           id,
-          access_token,
+          accessToken: accessToken,
         },
-        { fields: ["id", "access_token"] }
+        { fields: ["id", "accessToken"] }
       );
-    }*/
     }
 
     res
@@ -105,7 +120,7 @@ module.exports = {
       .cookie("access_token", accessToken, {
         maxAge: 360000, //360초 뒤에 쿠키 사라짐
       })
-      .redirect("http://localhost:3000/");
+      .redirect("http://localhost:3000/userinforegister");
   },
   github: async (req, res) => {
     const { code } = req.query;
@@ -146,13 +161,13 @@ module.exports = {
           id,
           accessToken,
         },
-        { fields: ["id", "accesstoken"] }
+        { fields: ["id", "accessToken"] }
       );
     }
 
     res
       .status(200)
-      .cookie("access_token", accessToken, {
+      .cookie("accessToken", accessToken, {
         maxAge: 360000, //300초 뒤에 쿠키 사라짐
       })
       .cookie("cocodusId", id)
