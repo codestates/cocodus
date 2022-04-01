@@ -1,4 +1,12 @@
-import { StyledHeader, Nav, Logo, Image } from "./NavBar.styled";
+import {
+  StyledHeader,
+  Nav,
+  Logo,
+  Block,
+  Name,
+  Icon,
+  Img,
+} from "./NavBar.styled";
 import { Container } from "../../components/styles/Container.styled";
 import { Button } from "../../components/styles/Button.styled";
 import React, { useState } from "react";
@@ -6,13 +14,22 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyles from "../../components/styles/Global";
 import Modal from "../Modal/Modal";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import axios from "axios";
 import { AiOutlineDesktop } from "react-icons/ai";
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
+import { AiFillCaretDown } from "react-icons/ai";
+import DropDownBar from "../DropDown_Bar/DropDownBar";
 
 export default function NavBar() {
-  const { isLogin, chgIsLogin, chgAccToken } = accessTokenStore();
+  const { isLogin } = accessTokenStore();
+
+  // 계정을 클릭하면 나오는 view
+  const [menuVisible, setMenuVisible] = useState(false);
+  const onHandleMenu = () => {
+    setMenuVisible(!menuVisible);
+  };
+
   const [modalOpen, setModalOpen] = useState(false);
   let navigate = useNavigate();
 
@@ -20,11 +37,6 @@ export default function NavBar() {
     setModalOpen(!modalOpen);
   };
 
-  const logoutHandle = () => {
-    window.document.cookie = "access_token" + "=; Max-Age=-99999999;";
-    chgIsLogin(false);
-    chgAccToken("");
-  };
   const theme = {
     colors: {
       header: "#ebfbff",
@@ -32,6 +44,7 @@ export default function NavBar() {
       footer: "#00333",
     },
   };
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
@@ -44,8 +57,17 @@ export default function NavBar() {
                 <Button onClick={() => navigate("/register")}>
                   새 게시글 쓰기
                 </Button>
-                <Button>마이페이지</Button>
-                <Button onClick={logoutHandle}>로그아웃</Button>
+                {/* <Button>안녕하세요 김코딩님</Button> */}
+                {/* <img src="UserIcon.png" /> */}
+                {/* <Button onClick={logoutHandle}>로그아웃</Button> */}
+                <Block onClick={onHandleMenu}>
+                  <Img src="UserIcon.png" />
+                  <Name>권순일님</Name>
+                  <Icon>
+                    <AiFillCaretDown />
+                  </Icon>
+                  {menuVisible && <DropDownBar />}
+                </Block>
               </>
             ) : (
               <>

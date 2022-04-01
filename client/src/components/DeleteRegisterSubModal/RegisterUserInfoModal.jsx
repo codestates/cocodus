@@ -41,6 +41,7 @@ function RegisterUserInfoModal({ closeModal }) {
         x: longitudeX,
       }),
     });
+    console.log(userData.status);
     if (userData.status === 201) {
       closeModal();
       navigate("/");
