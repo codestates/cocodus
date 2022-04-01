@@ -47,9 +47,8 @@ module.exports = {
 
     let idToken = tokenCall.data.id_token;
     const data = parseJwt(idToken);
-    console.log(data);
     let id = "kakao.com/" + data.sub; //ID 토큰에 해당하는 사용자의 회원번호 : 카카오에서 제공하는 회원번호라서 유니크한 값이라고 판단했습니다
-    console.log(id);
+
     let validation = await User.findOne({ where: { id } });
     if (validation) {
       // 만약에 회원가입하는데 아이디가 있다면 여기서 뭔가 딴 짓을 해야한다.
@@ -75,6 +74,7 @@ module.exports = {
       .cookie("cocodusId", id)
       .redirect("http://localhost:3000/userinforegister");
   },
+
   google: async (req, res) => {
     const code = req.query.code;
     if (!code) return res.status(401).redirect("http://localhost:3000/");
@@ -144,10 +144,12 @@ module.exports = {
       .cookie("cocodusId", id)
       .redirect("http://localhost:3000/userinforegister");
   },
+
   github: async (req, res) => {
     const { code } = req.query;
     if (!code) return res.status(401).redirect("http://localhost:3000/");
-    const acctokenCall = await axios({
+
+    const tokenCall = await axios({
       url: "https://github.com/login/oauth/access_token",
       method: "GET",
       headers: {
@@ -159,9 +161,10 @@ module.exports = {
         code: code,
       },
     });
-    // console.log(acctokenCall.data);
-    const accessToken = acctokenCall.data.access_token;
+
+    const accessToken = tokenCall.data.access_token;
     if (!accessToken) return res.status(403).redirect("http://localhost:3000/");
+
     const userInfoCall = await axios({
       url: "https://api.github.com/user",
       method: "GET",
@@ -172,7 +175,7 @@ module.exports = {
     });
 
     const id = userInfoCall.data.html_url.split("//")[1];
-    console.log(id); //github.com/happy5happy5
+
     let validation = await User.findOne({ where: { id } });
     if (validation) {
       //만약에 회원가입하는데 아이디가 있다면 여기서 뭔가 딴 짓을 해야한다.
