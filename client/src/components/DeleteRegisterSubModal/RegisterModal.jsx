@@ -39,6 +39,7 @@ function RegisterModal({ closeModal }) {
       y: latitudeY,
       x: longitudeX,
       recruiting: true,
+      view_count: 0,
     };
     post = JSON.stringify(post);
 
