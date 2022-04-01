@@ -2,7 +2,7 @@ import React from "react";
 import { BsPencil } from "react-icons/bs";
 import { Section } from "../styles/Section.styled";
 import TitleContent from "../TitleContent";
-import { Block, IconAndText, Icon } from "./MyPostAndLikes.styled";
+import { Block, IconAndText, Icon, Title } from "./MyPostAndLikes.styled";
 
 function MyPost(props) {
   return (
@@ -12,7 +12,7 @@ function MyPost(props) {
           <Icon>
             <BsPencil size={30} />
           </Icon>
-          <TitleContent text="작성한 글" fontSize="1.5rem" width="100%" />
+          <Title>작성한 글</Title>
         </IconAndText>
       </Block>
     </Section>
