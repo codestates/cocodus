@@ -37,7 +37,7 @@ function App() {
       .filter((x) => (x.match(re[1]) ? true : false))[0];
     if (id_String && acc_String) {
       chgAccToken(acc_String.split("=")[1]);
-      chgCocoId(id_String.split("=")[1]);
+      chgCocoId(decodeURIComponent(id_String.split("=")[1]));
     }
   }, []);
   useEffect(() => {

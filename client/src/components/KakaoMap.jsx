@@ -36,8 +36,8 @@ export default function KakaoMap() {
   }
   return (
     <Div>
-      {markerNow ? console.log(markerNow) : null}
-      {markerNow.road_address_name}
+      {/* {markerNow ? console.log(markerNow) : null}
+      {markerNow.road_address_name} */}
       <Input
         onChange={(e) => chgPlace(e.target.value)}
         onKeyUp={(e) => {
