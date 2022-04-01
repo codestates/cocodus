@@ -39,7 +39,7 @@ function RegisterUserInfoModal({ closeModal }) {
         x: longitudeX,
       },
     });
-    console.log(userData);
+    // console.log(userData);
     closeModal();
   };
   return (
