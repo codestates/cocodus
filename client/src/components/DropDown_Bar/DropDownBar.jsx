@@ -14,7 +14,7 @@ const DropDownBar = () => {
   //   };
   const { isLogin, chgIsLogin, chgAccToken } = accessTokenStore();
   const logoutHandle = () => {
-    window.document.cookie = "access_token" + "=; Max-Age=-99999999;";
+    window.document.cookie = "accessToken" + "=; Max-Age=-99999999;";
     chgIsLogin(false);
     chgAccToken("");
   };

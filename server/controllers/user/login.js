@@ -1,6 +1,5 @@
 const models = require("../../models");
 const { User } = require("../../models");
-const { generateAccessToken, generateRefreshToken } = require("../token/index");
 module.exports = {
   get: (req, res) => {
     // console.log(req.query.email);
