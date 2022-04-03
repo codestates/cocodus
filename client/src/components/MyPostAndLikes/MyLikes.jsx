@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Section } from "../styles/Section.styled";
 import { AiOutlineRead, AiOutlineLike } from "react-icons/ai";
 import { Block, IconAndText, Icon, Title } from "./MyPostAndLikes.styled";
+import WriteIcon from "../WriteIcon/WriteIcon";
 
 function Mylikes(props) {
   const [visible, setVisible] = useState(false);
@@ -36,6 +37,7 @@ function Mylikes(props) {
           <Title>좋아요 목록</Title>
           {visible && <div>좋아요 목록입니다.</div>}
         </IconAndText>
+        <WriteIcon />
       </Block>
     </Section>
   );

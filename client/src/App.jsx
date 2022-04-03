@@ -14,9 +14,10 @@ import {
   UserInfoRegisterPage,
 } from "./Pages";
 import { accessTokenStore } from "./Store/accesstoken-zustand";
-// {markerNow ? console.log(markerNow) : null}
-// {markerNow.road_address_name}
-// <KakaoMap setMarkerNow={setMarkerNow}></KakaoMap>
+import { userinfoLoadingStore } from "./Store/loading-zustand";
+import LoadingPage from "./Pages/LoadingPage";
+import ErrorPage from "./Pages/ErrorPage";
+
 function App() {
   const {
     isLogin,
@@ -52,6 +53,10 @@ function App() {
     },
   };
 
+  const { loading, error } = userinfoLoadingStore();
+
+  if (loading) return <LoadingPage />;
+  if (error) return <ErrorPage />;
   return (
     <ThemeProvider theme={theme}>
       <div>

@@ -12,8 +12,12 @@ import {
 import { registerUserInfoStore } from "../../Store/RegisterUserInfo-zustand";
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
 import axios from "axios";
+import { userinfoLoadingStore } from "../../Store/loading-zustand";
 
 function RegisterUserInfoModal({ closeModal }) {
+  const { chgLoading, chgError } = userinfoLoadingStore();
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(null);
   // 닉네임, 관심 기술 태그, 이미지(보류), 위치
   let navigate = useNavigate();
   const {
@@ -28,27 +32,35 @@ function RegisterUserInfoModal({ closeModal }) {
   const { accessToken, cocodusId } = accessTokenStore();
   // 회원 정보 등록하는 함수
   const onRegister = async () => {
-    const userData = await axios({
-      method: "POST",
-      url: "http://localhost:8080/user/info",
-      data: JSON.stringify({
-        accessToken,
-        id: cocodusId,
-        name: nickName,
-        roadAddress,
-        placeName,
-        y: latitudeY,
-        x: longitudeX,
-      }),
-    });
-    if (userData.status === 201) {
-      closeModal();
-      navigate("/");
-    } else {
-      alert("뭔가 잘못됬어요!!");
-      console.log(userData.status);
+    try {
+      chgError(null);
+      chgLoading(true);
+      const userData = await axios({
+        method: "POST",
+        url: "http://localhost:8080/user/info",
+        data: JSON.stringify({
+          accessToken,
+          id: cocodusId,
+          name: nickName,
+          roadAddress,
+          placeName,
+          y: latitudeY,
+          x: longitudeX,
+        }),
+      });
+      if (userData.status === 201) {
+        closeModal();
+        navigate("/");
+      } else {
+        alert("뭔가 잘못됬어요!!");
+        console.log(userData.status);
+      }
+    } catch (e) {
+      chgError(e);
     }
+    chgLoading(false);
   };
+
   return (
     <>
       <ModalFlexBox>
