@@ -125,7 +125,7 @@ const ContainerForIcon = styled.div`
   max-width: 100%;
   height: auto;
   padding: 10px 20px;
-  margin: 10px 10px;
+  margin: 10px 20px;
 `;
 
 const Button = styled.button`

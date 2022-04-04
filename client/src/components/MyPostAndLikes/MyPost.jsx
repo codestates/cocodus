@@ -1,7 +1,7 @@
 import React from "react";
 import { BsPencil } from "react-icons/bs";
 import { Section } from "../styles/Section.styled";
-import TitleContent from "../TitleContent";
+import WriteIcon from "../WriteIcon/WriteIcon";
 import { Block, IconAndText, Icon, Title } from "./MyPostAndLikes.styled";
 
 function MyPost(props) {
@@ -15,6 +15,7 @@ function MyPost(props) {
           <Title>작성한 글</Title>
         </IconAndText>
       </Block>
+      <WriteIcon />
     </Section>
   );
 }

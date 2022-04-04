@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const StyledHeader = styled.header`
   background-color: ${({ theme }) => theme.colors.header};
@@ -12,6 +12,7 @@ export const Nav = styled.nav`
 `;
 
 export const Logo = styled.img`
+  cursor: pointer;
   display: flex;
   align-items: left;
   width: 200px;
@@ -33,10 +34,12 @@ export const Block = styled.div`
 `;
 export const Name = styled.div`
   position: absolute;
+  font-family: "Roboto", sans-serif;
+  color: #3c4146;
   left: 18%;
+  padding: 10px;
   margin-left: 1rem;
-  color: #333;
-  font-weight: 700;
+  /* color: #333; */
   &:hover {
     opacity: 0.75;
   }
@@ -52,6 +55,14 @@ export const Icon = styled.div`
   &:hover {
     opacity: 0.75;
   }
+  ${(props) =>
+    props.huge &&
+    css`
+      /* position: absolute; */
+      right: 0.5rem;
+      top: 0;
+      z-index: 6;
+    `};
 `;
 
 export const Img = styled.img`

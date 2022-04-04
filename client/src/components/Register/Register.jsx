@@ -7,6 +7,7 @@ import {
   Title,
   Div,
   FlexBox,
+  Img,
   InputBox,
   Label,
   CheckBox,
@@ -78,8 +79,17 @@ function Register() {
           value={title}
         />
         <FlexBox>
-          <Div>글쓴이</Div>
-          <InputBox type="text" defaultValue="김코딩" width="15%" readOnly />
+          <Img src="UserIcon.png" />
+          <InputBox
+            type="text"
+            defaultValue="김코딩"
+            width="15%"
+            backColor="#fff"
+            Border="none"
+            fontSize="20px"
+            focus
+            readOnly
+          />
         </FlexBox>
         <FlexBox>
           <Div>사용 언어</Div>

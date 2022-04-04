@@ -14,12 +14,10 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyles from "../../components/styles/Global";
 import Modal from "../Modal/Modal";
 import { useNavigate } from "react-router-dom";
-import styled, { css } from "styled-components";
-import axios from "axios";
-import { AiOutlineDesktop } from "react-icons/ai";
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
-import { AiFillCaretDown } from "react-icons/ai";
 import DropDownBar from "../DropDown_Bar/DropDownBar";
+import { CgMenu } from "react-icons/cg";
+import { AiFillCaretUp } from "react-icons/ai";
 
 export default function NavBar() {
   const { isLogin } = accessTokenStore();
@@ -54,19 +52,24 @@ export default function NavBar() {
             <Logo onClick={() => navigate("/")} src="logo2.png" alt="" />
             {isLogin ? (
               <>
-                <Button onClick={() => navigate("/register")}>
+                {/* <Button onClick={() => navigate("/register")}>
                   새 게시글 쓰기
-                </Button>
-                {/* <Button>안녕하세요 김코딩님</Button> */}
-                {/* <img src="UserIcon.png" /> */}
+                </Button> */}
                 {/* <Button onClick={logoutHandle}>로그아웃</Button> */}
                 <Block onClick={onHandleMenu}>
                   <Img src="UserIcon.png" />
                   <Name>권순일님</Name>
                   <Icon>
-                    <AiFillCaretDown />
+                    <CgMenu color="#3c4146" size={25} />
                   </Icon>
-                  {menuVisible && <DropDownBar />}
+                  {menuVisible && (
+                    <>
+                      <Icon huge>
+                        <AiFillCaretUp style={{ color: "#fff" }} size={50} />
+                      </Icon>
+                      <DropDownBar />
+                    </>
+                  )}
                 </Block>
               </>
             ) : (
