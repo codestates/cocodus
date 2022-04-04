@@ -8,8 +8,9 @@ import {
   BackgroundSqure,
   DivContainer,
   Align,
+  MapButton,
 } from "./styles/PriceCard.styled";
-import { Button } from "./styles/Button.styled";
+
 import { Container } from "./styles/Container.styled";
 import { Flex } from "./styles/Flex.styled";
 import Data from "../api/DummyData";
@@ -58,12 +59,11 @@ function CardSection(props) {
               <span>👀</span>
             </DivContainer>
             <DivContainer>
-              <PlanTitle></PlanTitle>
               일자: {props.data.date}
               <br></br>
               위치: {props.data.meetingpoint}
-              <Button>지도 크게 보기</Button>
             </DivContainer>
+            <MapButton>지도 크게 보기</MapButton>
           </ContentDiv>
         </Card>
       </Flex>
