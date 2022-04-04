@@ -5,5 +5,5 @@ module.exports = {
   recruiting: require("./recruiting"),
   cmt: require("./cmt"),
   writing: require("./writing"),
-  mypost: require("./writing"),
+  mypost: require("./mypost"),
 };
