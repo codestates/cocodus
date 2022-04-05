@@ -115,31 +115,30 @@ function Register() {
           </Label>
         </FlexBox>
         <TestEditorForm onChange={onMsgChange} />
-
-        <PlaceBox>
-          <Div>위치</Div>
-          {console.log(markerNow)}
-          <Div>
-            <div>
-              <PlaceInputBox
-                type="text"
-                value={placeName}
-                onChange={chgPlace}
-                placeholder="상호명이 표시됩니다"
-              />
-            </div>
-            <div>
-              <PlaceInputBox
-                type="text"
-                value={roadAddress}
-                onChange={chgMarker}
-                placeholder="도로명 주소가 표시됩니다"
-              />
-            </div>
-          </Div>
-          <KakaoMap />
-        </PlaceBox>
       </Section>
+      <PlaceBox>
+        <Div>위치</Div>
+        {console.log(markerNow)}
+        <Div>
+          <KakaoMap />
+
+          <PlaceInputBox
+            type="text"
+            value={placeName}
+            onChange={chgPlace}
+            placeholder="상호명이 표시됩니다"
+          />
+
+          <div>
+            <PlaceInputBox
+              type="text"
+              value={roadAddress}
+              onChange={chgMarker}
+              placeholder="도로명 주소가 표시됩니다"
+            />
+          </div>
+        </Div>
+      </PlaceBox>
     </>
   );
 }

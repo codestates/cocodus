@@ -12,6 +12,7 @@ function Mylikes(props) {
   const onViewList = () => {
     setVisible(false);
   };
+
   return (
     <Section>
       <Block>

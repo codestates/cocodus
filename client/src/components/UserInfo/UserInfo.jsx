@@ -45,7 +45,7 @@ function UserInfo(props) {
         </FlexBox>
       </Section>
       <KakaoSearchBox />
-      <KakaoMap />
+      <KakaoMap style={{ marginLeft: "10rem !important!" }} />
     </>
   );
 }
