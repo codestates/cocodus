@@ -103,3 +103,29 @@ export const registerEditModalStore = create((set) => ({
       modalOpen: false,
     })),
 }));
+
+// onlyUserBtn에서 마감 버튼을 눌렀을 때,
+export const closedPostModalStore = create((set) => ({
+  closedModalOpen: false,
+  openModal1: () =>
+    set((state) => ({
+      closedModalOpen: true,
+    })),
+  closeModal1: () =>
+    set((state) => ({
+      closedModalOpen: false,
+    })),
+}));
+
+// onlyUserBtn에서 삭제 버튼을 눌렀을 때,
+export const delPostModalStore = create((set) => ({
+  delModalOpen: false,
+  openModal2: () =>
+    set((state) => ({
+      delModalOpen: true,
+    })),
+  closeModal2: () =>
+    set((state) => ({
+      delModalOpen: false,
+    })),
+}));
