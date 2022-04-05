@@ -8,7 +8,6 @@ import {
   Text,
   TextArea,
 } from "./LikesViewShareIcon.styled";
-import { likesCountStore } from "../../Store/LikesCount-zustand";
 import Modal from "../Modal/Modal";
 import {
   Logo,
@@ -20,28 +19,36 @@ import axios from "axios";
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
 
 function LikesViewShareIcon(props) {
-  const { count, inc, dec } = likesCountStore();
-  const { cocodusId } = accessTokenStore();
+  const { accessToken, cocodusId } = accessTokenStore();
   const [likeClick, setLikeClick] = useState(true);
 
+  // 좋아요 버튼 클릭
   const countClick = async () => {
-    // if (likeClick) {
-    //   await axios ({
-    //     method: "PATCH",
-    //     url: 'http://localhost:8080/board/like',
-    //     data: {
-    //       user_id: cocodusId,
-    //       post_id: ,
-    //     }
-    //   })
-    //   console.log("좋아요 클릭");
-    //   setLikeClick(!likeClick);
-    //   inc();
-    // } else {
-    //   console.log("좋아요 취소");
-    //   setLikeClick(!likeClick);
-    //   dec();
-    // }
+    if (likeClick) {
+      await axios({
+        method: "PATCH",
+        url: "http://localhost:8080/board/like",
+        data: {
+          accessToken,
+          user_id: cocodusId,
+          // post_id,
+          inc: true,
+        },
+      });
+      setLikeClick(!likeClick);
+    } else {
+      await axios({
+        method: "PATCH",
+        url: "http://localhost:8080/board/like",
+        data: {
+          accessToken,
+          user_id: cocodusId,
+          // post_id,
+          inc: false,
+        },
+      });
+      setLikeClick(!likeClick);
+    }
   };
 
   // 모달
@@ -61,7 +68,7 @@ function LikesViewShareIcon(props) {
     <IconsBlock>
       <IconAndText>
         <AiOutlineLike className="likes" size={30} onClick={countClick} />
-        <Text>{count}</Text>
+        <Text>1</Text>
       </IconAndText>
       <IconAndText>
         <CgEye size={30} />

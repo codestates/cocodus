@@ -16,6 +16,7 @@ import { commentModalStore } from "../../Store/Modal-zustand";
 import { updateCommentStore } from "../../Store/UpdateComment-zustand";
 import DeleteModal from "../DeleteRegisterSubModal/DeleteModal";
 import Modal from "../Modal/Modal";
+import axios from "axios";
 
 function Comment({ comment }) {
   const { input, visible, visibleOpen, visibleClose, chgInput } =
@@ -33,15 +34,36 @@ function Comment({ comment }) {
   const onChange = (e) => {
     chgInput(e.target.value);
   };
+
+  const { accessToken, cocodusId } = accessTokenStore();
+  const commentInfo = {
+    accessToken,
+    cocodusId,
+    // postId,
+    input,
+  };
   // 엔터키를 입력시 수정 처리되는 함수
-  const handleKeydown = (e) => {
+  const handleKeydown = async (e) => {
     if (e.key === "Enter") {
-      updateMsg(input, comment.id);
+      const comment = await axios({
+        method: "PATCH",
+        url: "http://localhost:8080/board/cmt",
+        data: {
+          jsonFile: JSON.stringify(commentInfo),
+          accessToken,
+          user_id: cocodusId,
+          // post_id: postId,
+          // comment_id: commentId,
+        },
+      });
+
+      // updateMsg(input, comment.id);
       visibleClose();
       chgInput("");
       // 댓글 수정 axios.patch 요청 작성
     }
   };
+
   return (
     <Block>
       <FlexBox>

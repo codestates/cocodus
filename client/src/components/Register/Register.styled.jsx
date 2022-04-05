@@ -145,7 +145,7 @@ export const PlaceInputBox = styled.input`
   background: rgba(196, 196, 196, 0.26);
   font-size: 16px;
   font-family: initial;
-  width: 930px;
+  width: 100%;
   padding: 10px 8px;
   overflow: hidden;
   border: 1px solid #ced4da;

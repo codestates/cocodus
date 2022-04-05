@@ -61,9 +61,9 @@ function CardSection(props) {
             <DivContainer>
               일자: {props.data.date}
               <br></br>
-              위치: {props.data.meetingpoint}
+              위치: {props.data.placeName}
             </DivContainer>
-            <MapButton>지도 크게 보기</MapButton>
+            <MapButton>상세 보기</MapButton>
           </ContentDiv>
         </Card>
       </Flex>

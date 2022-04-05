@@ -11,9 +11,26 @@ import {
 import { commentStore } from "../../Store/Comment-zustand";
 
 function DeleteModal({ id, closeModal }) {
-  const { removeMsg } = commentStore();
-  const onRemove = (id) => {
-    removeMsg(id);
+  // const { removeMsg } = commentStore();
+  const { accessToken, cocodusId } = accessTokenStore();
+  const commentInfo = {
+    accessToken,
+    cocodusId,
+    postId,
+  };
+  const onRemove = async (id) => {
+    const comment = await axios({
+      method: "DELETE",
+      url: "http://localhost:8080/board/cmt",
+      data: {
+        jsonFile: JSON.stringify(commentInfo),
+        accessToken,
+        user_id: cocodusId,
+        post_id: postId,
+        comment_id: commentId,
+      },
+    });
+    // removeMsg(id);
     closeModal();
   };
   return (
