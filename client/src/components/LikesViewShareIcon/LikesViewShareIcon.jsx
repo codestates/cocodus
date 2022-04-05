@@ -21,68 +21,76 @@ import { accessTokenStore } from "../../Store/accesstoken-zustand";
 
 function LikesViewShareIcon(props) {
   const { count, inc, dec } = likesCountStore();
-  const { cocodusId } = accessTokenStore();
+  const { accessToken, cocodusId } = accessTokenStore();
   const [likeClick, setLikeClick] = useState(true);
 
   const countClick = async () => {
-    // if (likeClick) {
-    //   await axios ({
-    //     method: "PATCH",
-    //     url: 'http://localhost:8080/board/like',
-    //     data: {
-    //       user_id: cocodusId,
-    //       post_id: ,
-    //     }
-    //   })
-    //   console.log("좋아요 클릭");
-    //   setLikeClick(!likeClick);
-    //   inc();
-    // } else {
-    //   console.log("좋아요 취소");
-    //   setLikeClick(!likeClick);
-    //   dec();
-    // }
+    if (likeClick) {
+      await axios({
+        method: "PATCH",
+        url: "http://localhost:8080/board/like",
+        data: {
+          accessToken,
+          user_id: cocodusId,
+          post_id,
+          inc: true,
+        },
+      });
+      setLikeClick(!likeClick);
+    } else {
+      await axios({
+        method: "PATCH",
+        url: "http://localhost:8080/board/like",
+        data: {
+          accessToken,
+          user_id: cocodusId,
+          post_id,
+          inc: false,
+        },
+      });
+      setLikeClick(!likeClick);
+    }
+
+    // 모달
+    const { linkModal, openModal, closeModal } = linkModalStore();
+
+    const textInput = useRef();
+    // 링크 복사 함수
+    const copy = () => {
+      openModal();
+      const el = textInput.current;
+      el.select();
+      document.execCommand("copy");
+      console.log("링크 복사 완료");
+    };
+
+    return (
+      <IconsBlock>
+        <IconAndText>
+          <AiOutlineLike className="likes" size={30} onClick={countClick} />
+          <Text>{count}</Text>
+        </IconAndText>
+        <IconAndText>
+          <CgEye size={30} />
+          <Text>1</Text>
+        </IconAndText>
+        <IconAndText>
+          <AiOutlinePaperClip size={30} onClick={copy} />
+          <TextArea
+            value={window.location.href}
+            ref={textInput}
+            readOnly
+          ></TextArea>
+          <Modal open={linkModal} close={closeModal} header="알림">
+            <ModalFlexBox>
+              <Logo src="logo2.png" alt="" />
+              <Subject>링크 복사가 완료되었습니다</Subject>
+            </ModalFlexBox>
+          </Modal>
+        </IconAndText>
+      </IconsBlock>
+    );
   };
-
-  // 모달
-  const { linkModal, openModal, closeModal } = linkModalStore();
-
-  const textInput = useRef();
-  // 링크 복사 함수
-  const copy = () => {
-    openModal();
-    const el = textInput.current;
-    el.select();
-    document.execCommand("copy");
-    console.log("링크 복사 완료");
-  };
-
-  return (
-    <IconsBlock>
-      <IconAndText>
-        <AiOutlineLike className="likes" size={30} onClick={countClick} />
-        <Text>{count}</Text>
-      </IconAndText>
-      <IconAndText>
-        <CgEye size={30} />
-        <Text>1</Text>
-      </IconAndText>
-      <IconAndText>
-        <AiOutlinePaperClip size={30} onClick={copy} />
-        <TextArea
-          value={window.location.href}
-          ref={textInput}
-          readOnly
-        ></TextArea>
-        <Modal open={linkModal} close={closeModal} header="알림">
-          <ModalFlexBox>
-            <Logo src="logo2.png" alt="" />
-            <Subject>링크 복사가 완료되었습니다</Subject>
-          </ModalFlexBox>
-        </Modal>
-      </IconAndText>
-    </IconsBlock>
-  );
 }
 
 export default LikesViewShareIcon;

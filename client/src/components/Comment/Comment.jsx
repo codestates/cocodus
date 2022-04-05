@@ -13,13 +13,26 @@ function Comment() {
   const onChange = (e) => {
     chgMsg(e.target.value);
   };
+  const { accessToken, cocodusId } = accessTokenStore();
 
-  const { cocodusId } = accessTokenStore();
-  const onCreate = () => {
+  const onCreate = async () => {
+    const commentInfo = {
+      accessToken,
+      cocodusId,
+      postId,
+      comment,
+    };
     addMsg(inputs, nextId.current);
     nextId.current += 1;
-    // 댓글 등록 axios.post 요청
-    // inputs, 유저야이디, 포스트아이디
+    const comment = await axios({
+      method: "POST",
+      url: "http://localhost:8080/board/cmt",
+      data: {
+        jsonFile: JSON.stringify(commentInfo),
+        user_id: cocodusId,
+        post_id: postId,
+      },
+    });
   };
 
   return (
