@@ -1,7 +1,7 @@
 import React from "react";
 import { CgArrowLeft } from "react-icons/cg";
 import { Icon } from "./BackIcon.styled";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function BackIcon({ left }) {
   const navigate = useNavigate();
