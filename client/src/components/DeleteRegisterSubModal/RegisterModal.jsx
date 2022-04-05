@@ -50,13 +50,16 @@ function RegisterModal({ closeModal }) {
         method: "POST",
         url: "http://localhost:8080/board/writing",
         data: {
-          jsonFile: JSON.stringify(postData),
           accessToken,
-          user_id: cocodusId,
+          cocodusId,
+          tag,
+          online,
+          recruiting: true,
           lat: latitudeY,
           long: longitudeX,
-          recruiting: true,
+          jsonFile: JSON.stringify(postData),
         },
+        withCredentials: true,
       });
       console.log(newPost);
       closeModal(); // 모달창 닫는 함수
