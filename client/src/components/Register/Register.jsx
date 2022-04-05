@@ -17,24 +17,10 @@ import {
 import LangOptTag from "../LangOptTag";
 import KakaoMap from "../KakaoMap";
 import { registerStore } from "../../Store/Register-zustand";
+import KakaoSearchBox from "../KakaoSearchBox/KakaoSearchBox";
 
 function Register() {
-  // const [markerNow, setMarkerNow] = useState({});
-  // const [place, setPlace] = useState("");
-  const {
-    inputs,
-    tag,
-    place,
-    markerNow,
-    placeName,
-    roadAddress,
-    chgInput,
-    chgOnline,
-    chgTag,
-    chgMsg,
-    chgPlace,
-    chgMarker,
-  } = registerStore();
+  const { inputs, tag, chgInput, chgOnline, chgTag, chgMsg } = registerStore();
 
   const { title, date, online } = inputs;
   const onChange = (e) => {
@@ -115,30 +101,8 @@ function Register() {
           </Label>
         </FlexBox>
         <TestEditorForm onChange={onMsgChange} />
-
-        <PlaceBox>
-          <Div>위치</Div>
-          {console.log(markerNow)}
-          <Div>
-            <div>
-              <PlaceInputBox
-                type="text"
-                value={placeName}
-                onChange={chgPlace}
-                placeholder="상호명이 표시됩니다"
-              />
-            </div>
-            <div>
-              <PlaceInputBox
-                type="text"
-                value={roadAddress}
-                onChange={chgMarker}
-                placeholder="도로명 주소가 표시됩니다"
-              />
-            </div>
-          </Div>
-          <KakaoMap />
-        </PlaceBox>
+        <KakaoSearchBox store={registerStore} />
+        <KakaoMap store={registerStore} />
       </Section>
     </>
   );

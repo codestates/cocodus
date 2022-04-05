@@ -27,26 +27,29 @@ function RegisterModal({ closeModal }) {
 
   // 클릭하는 순간 글이 등록되게하는 함수
   const onRegister = async () => {
-    let post = {
-      user_id: cocodusId,
+    const postData = {
+      cocodusId,
       title,
-      body: content,
+      content,
       tag,
       date,
       online,
-      meetingpoint: placeName,
+      placeName,
       roadAddress,
-      y: latitudeY,
-      x: longitudeX,
-      recruiting: true,
-      view_count: 0,
+      latitudeY,
+      longitudeX,
     };
-    post = JSON.stringify(post);
 
     const newPost = await axios({
       method: "POST",
       url: "http://localhost:8080/board/writing",
-      data: post,
+      data: {
+        jsonFile: JSON.stringify(postData),
+        user_id: cocodusId,
+        lat: latitudeY,
+        long: longitudeX,
+        recruiting: true,
+      },
     });
     closeModal(); // 모달창 닫는 함수
   };

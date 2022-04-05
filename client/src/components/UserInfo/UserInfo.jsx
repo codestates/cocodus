@@ -39,13 +39,13 @@ function UserInfo(props) {
             onChange={onNickChange}
           />
         </FlexBox>
-        <FlexBox>
+        <FlexBox bottom="2rem">
           <Div>관심 기술 태그</Div>
           <LangOptTag onChange={onTagChange} />
         </FlexBox>
+        <KakaoSearchBox store={registerUserInfoStore} />
+        <KakaoMap store={registerUserInfoStore} />
       </Section>
-      <KakaoSearchBox />
-      <KakaoMap />
     </>
   );
 }

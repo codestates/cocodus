@@ -3,8 +3,7 @@ module.exports = {
   list: require("./list"),
   like: require("./like"),
   recruiting: require("./recruiting"),
-  sidechat: require("./sidechat"),
   cmt: require("./cmt"),
   writing: require("./writing"),
-  feedback: require("./feedback"),
+  mypost: require("./mypost"),
 };
