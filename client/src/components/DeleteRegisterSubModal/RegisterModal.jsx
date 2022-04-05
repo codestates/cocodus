@@ -46,7 +46,8 @@ function RegisterModal({ closeModal }) {
         longitudeX,
       };
 
-      const newPost = await axios({
+      // const newPost =
+      await axios({
         method: "POST",
         url: "http://localhost:8080/board/writing",
         data: {
@@ -57,11 +58,10 @@ function RegisterModal({ closeModal }) {
           recruiting: true,
           lat: latitudeY,
           long: longitudeX,
-          jsonFile: JSON.stringify(postData),
+          jsonfile: JSON.stringify(postData),
         },
-        withCredentials: true,
       });
-      console.log(newPost);
+      // console.log(newPost);
       closeModal(); // 모달창 닫는 함수
     } catch (e) {
       chgError(e);
