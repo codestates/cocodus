@@ -58,6 +58,7 @@ function Comment({ comment }) {
       updateMsg(input, comment.id);
       visibleClose();
       chgInput("");
+      // 댓글 수정 axios.patch 요청 작성
     }
   };
 

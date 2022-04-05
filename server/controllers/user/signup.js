@@ -1,7 +1,7 @@
 const axios = require("axios");
 const { User } = require("../../models");
 const jwt = require("jsonwebtoken");
-
+const { generateAccessToken, isAuthorized } = require("../token");
 module.exports = {
   post: async (req, res) => {
     res.status(200).send("test signuppost");
@@ -9,62 +9,34 @@ module.exports = {
   get: async (req, res) => {},
   kakao: async (req, res) => {
     const code = req.query.code;
-    const tokenCall = await axios({
-      url: "https://kauth.kakao.com/oauth/token",
-      method: "POST",
-      headers: {
-        accept: "application/json",
-      },
-      params: {
-        grant_type: "authorization_code",
-        client_id: process.env.KAKAO_CLIENT_ID,
-        redirect_uri: "http://localhost:8080/user/signup/kakao",
-        code: code,
-        client_secret: process.env.KAKAO_CLIENT_SECRET,
-      },
-    });
+    let accessToken = await generateAccessToken(code, "kakao");
+    console.log(accessToken);
+    let validation = await isAuthorized(accessToken, "kakao");
+    console.log(validation.data);
+    // {
+    //   id: 2188948465,
+    //   expiresInMillis: 21599911,
+    //   expires_in: 21599,
+    //   app_id: 724604,
+    //   appId: 724604
+    // }
+    let id = "kakao+" + validation.data.id; //ID 토큰에 해당하는 사용자의 회원번호 : 카카오에서 제공하는 회원번호라서 유니크한 값이라고 판단했습니다
+    // let validation = await User.findOne({ where: { id } });
+    // if (validation) {
+    //   // 만약에 회원가입하는데 아이디가 있다면 여기서 뭔가 딴 짓을 해야한다.
+    //   // 로그인으로 다시 콜 불러라
+    // } else {
+    //   User.create(
+    //     {
+    //       id,
+    //       accessToken,
+    //     },
+    //     { fields: ["id", "accessToken"] }
+    //   );
+    // }
 
-    if (!tokenCall.data)
-      return res.status(403).redirect("http://localhost:3000/");
-
-    const accessToken = tokenCall.data.access_token;
-    if (!accessToken) return res.status(403).redirect("http://localhost:3000/");
-
-    function parseJwt(token) {
-      let base64Url = token.split(".")[1];
-      let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-      let jsonPayload = decodeURIComponent(
-        atob(base64)
-          .split("")
-          .map(function (c) {
-            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-          })
-          .join("")
-      );
-
-      return JSON.parse(jsonPayload);
-    }
-
-    let idToken = tokenCall.data.id_token;
-    const data = parseJwt(idToken);
-    let id = "kakao.com/" + data.sub; //ID 토큰에 해당하는 사용자의 회원번호 : 카카오에서 제공하는 회원번호라서 유니크한 값이라고 판단했습니다
-
-    let validation = await User.findOne({ where: { id } });
-    if (validation) {
-      // 만약에 회원가입하는데 아이디가 있다면 여기서 뭔가 딴 짓을 해야한다.
-      // 로그인으로 다시 콜 불러라
-    } else {
-      User.create(
-        {
-          id,
-          accessToken,
-        },
-        { fields: ["id", "accessToken"] }
-      );
-    }
-
-    delete idToken;
-    delete data;
+    // delete idToken;
+    // delete data;
 
     res
       .status(200)
@@ -78,63 +50,34 @@ module.exports = {
   google: async (req, res) => {
     const code = req.query.code;
     if (!code) return res.status(401).redirect("http://localhost:3000/");
-
-    const tokenCall = await axios({
-      url: "https://www.googleapis.com/oauth2/v4/token",
-      method: "POST",
-      headers: {
-        accept: "application/json",
-      },
-      params: {
-        code,
-        client_id: process.env.GOOGLE_CLIENT_ID,
-        client_secret: process.env.GOOGLE_CLIENT_SECRET,
-        redirect_uri: "http://localhost:8080/user/signup/google",
-        grant_type: "authorization_code",
-      },
-    });
-    if (!tokenCall.data)
-      return res.status(403).redirect("http://localhost:3000/");
-
-    const accessToken = tokenCall.data.access_token;
-    if (!accessToken) return res.status(403).redirect("http://localhost:3000/");
-
-    function parseJwt(token) {
-      let base64Url = token.split(".")[1];
-      let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-      let jsonPayload = decodeURIComponent(
-        atob(base64)
-          .split("")
-          .map(function (c) {
-            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-          })
-          .join("")
-      );
-
-      return JSON.parse(jsonPayload);
-    }
-
-    let idToken = tokenCall.data.id_token;
-    const data = parseJwt(idToken);
-
-    let id = data.email;
-
-    let validation = await User.findOne({ where: { id } });
-    if (validation) {
-      //만약에 회원가입하는데 아이디가 있다면 여기서 뭔가 딴 짓을 해야한다.
-      //로그인으로 다시 콜 불러라
-    } else {
-      User.create(
-        {
-          id,
-          accessToken,
-        },
-        { fields: ["id", "accessToken"] }
-      );
-    }
-
-    delete idToken;
-    delete data;
+    let accessToken = await generateAccessToken(code, "google");
+    console.log(accessToken);
+    let validation = await isAuthorized(accessToken, "google");
+    console.log(validation.data);
+    let id = validation.data.email;
+    // {
+    //   issued_to: '286406699597-7mlmmmhid7n5dph3g3ce3s90do65bk4i.apps.googleusercontent.com',
+    //   audience: '286406699597-7mlmmmhid7n5dph3g3ce3s90do65bk4i.apps.googleusercontent.com',
+    //   user_id: '103390389205913746742',
+    //   scope: 'https://www.googleapis.com/auth/userinfo.email openid',
+    //   expires_in: 3598,
+    //   email: 'zombil8731@gmail.com',
+    //   verified_email: true,
+    //   access_type: 'online'
+    // }
+    // let validation = await User.findOne({ where: { id } });
+    // if (validation) {
+    //   //만약에 회원가입하는데 아이디가 있다면 여기서 뭔가 딴 짓을 해야한다.
+    //   //로그인으로 다시 콜 불러라
+    // } else {
+    //   User.create(
+    //     {
+    //       id,
+    //       accessToken,
+    //     },
+    //     { fields: ["id", "accessToken"] }
+    //   );
+    // }
 
     res
       .status(200)
@@ -148,47 +91,11 @@ module.exports = {
   github: async (req, res) => {
     const { code } = req.query;
     if (!code) return res.status(401).redirect("http://localhost:3000/");
-
-    const tokenCall = await axios({
-      url: "https://github.com/login/oauth/access_token",
-      method: "GET",
-      headers: {
-        accept: "application/json",
-      },
-      params: {
-        client_id: process.env.GITHUB_CLIENT_ID,
-        client_secret: process.env.GITHUB_CLIENT_SECRET,
-        code: code,
-      },
-    });
-
-    const accessToken = tokenCall.data.access_token;
-    if (!accessToken) return res.status(403).redirect("http://localhost:3000/");
-
-    const userInfoCall = await axios({
-      url: "https://api.github.com/user",
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        authorization: `token ${accessToken}`,
-      },
-    });
-
-    const id = userInfoCall.data.html_url.split("//")[1];
-
-    let validation = await User.findOne({ where: { id } });
-    if (validation) {
-      //만약에 회원가입하는데 아이디가 있다면 여기서 뭔가 딴 짓을 해야한다.
-      //로그인으로 다시 콜 불러라
-    } else {
-      User.create(
-        {
-          id,
-          accessToken,
-        },
-        { fields: ["id", "accessToken"] }
-      );
-    }
+    let accessToken = await generateAccessToken(code, "github");
+    // console.log(accessToken);
+    let validation = await isAuthorized(accessToken, "github");
+    // console.log(validation.data);
+    let id = "github+" + validation.data.login;
 
     res
       .status(200)

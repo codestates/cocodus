@@ -21,13 +21,13 @@ module.exports = {
         roadAddress: {
           type: Sequelize.STRING,
         },
-        placeName: {
+        location: {
           type: Sequelize.STRING,
         },
-        x: {
+        long: {
           type: Sequelize.STRING,
         },
-        y: {
+        lat: {
           type: Sequelize.STRING,
         },
         createdAt: {

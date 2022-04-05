@@ -9,6 +9,7 @@ import { EditorState } from "draft-js";
 const MyBlock = styled.div`
   .wrapper-class {
     border: 1px solid #ced4da !important;
+    margin-bottom: ${(props) => props.bottom};
   }
   .toolbar-class {
     border-bottom: 1px solid #ced4da !important;
@@ -38,7 +39,7 @@ const TestEditorForm = ({ onChange }) => {
 
   return (
     <>
-      <MyBlock>
+      <MyBlock bottom="2rem">
         <Editor
           editiorState={editorState}
           // 에디터와 툴바 모두에 적용되는 클래스

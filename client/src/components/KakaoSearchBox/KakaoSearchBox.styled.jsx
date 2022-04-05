@@ -4,7 +4,7 @@ export const PlaceBox = styled.div`
   flex-direction: column;
   align-items: flex-start;
   position: relative;
-  width: 70%;
+  width: 100%;
   margin: 0 auto;
 `;
 export const PlaceInputBox = styled.input`
@@ -32,6 +32,7 @@ export const PlaceInputBox = styled.input`
 export const Div = styled.div`
   font-weight: 500;
   font-size: 18px;
+  margin-bottom: ${(props) => props.bottom};
   margin-right: 1rem;
   ${(props) =>
     props.huge &&

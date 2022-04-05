@@ -6,8 +6,8 @@ let map;
 let ps;
 let infowindow;
 
-export default function KakaoMap() {
-  const { place, chgPlace, chgMarker, markerNow } = registerUserInfoStore();
+export default function KakaoMap({ store }) {
+  const { place, chgPlace, chgMarker } = store();
   // const [place, setPlace] = useState("");
   // const [markerNow, setMarkerNow] = useState({});
   useEffect(() => {
@@ -76,5 +76,7 @@ export const Input = styled.input`
 `;
 
 export const Div = styled.div`
+  position: relative;
   width: 100%;
+  margin: 0 auto;
 `;

@@ -5,6 +5,7 @@ import CommentList from "../CommentList/CommentList";
 import { Section, Btn } from "../Register/Register.styled";
 import { Text, DivBlock } from "./Comment.styled";
 import { commentStore } from "../../Store/Comment-zustand";
+import { accessTokenStore } from "../../Store/accesstoken-zustand";
 
 function Comment() {
   const nextId = useRef(1);

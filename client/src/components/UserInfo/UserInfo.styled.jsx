@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const FlexBox = styled.div`
   margin-top: 5rem;
+  margin-bottom: ${(props) => props.bottom};
   & + & {
     margin-top: 2rem;
   }
