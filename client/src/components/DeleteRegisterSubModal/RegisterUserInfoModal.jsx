@@ -35,20 +35,29 @@ function RegisterUserInfoModal({ closeModal }) {
     try {
       chgError(null);
       chgLoading(true);
+      const userInfo = {
+        accessToken,
+        cocodusId,
+        nickName,
+        roadAddress,
+        placeName,
+        latitudeY,
+        longitudeX,
+      };
       const userData = await axios({
         method: "POST",
         url: "http://localhost:8080/user/info",
-        data: JSON.stringify({
-          accessToken,
-          id: cocodusId,
-          name: nickName,
-          roadAddress,
-          placeName,
-          y: latitudeY,
-          x: longitudeX,
-        }),
+        data: {
+          jsonFile: JSON.stringify({
+            userInfo,
+          }),
+          user_id: cocodusId,
+          lat: latitudeY,
+          long: longitudeX,
+        },
       });
       if (userData.status === 201) {
+        console.log(userData);
         closeModal();
         navigate("/");
       } else {

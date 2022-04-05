@@ -9,8 +9,52 @@ import {
   registerEditModalStore,
 } from "../Store/Modal-zustand";
 import RegisterDelModal from "../components/DeleteRegisterSubModal/RegisterDelModal";
+import axios from "axios";
+import { accessTokenStore } from "../Store/accesstoken-zustand";
+import { registerStore } from "../Store/Register-zustand";
 
 function RegisterEditPage(props) {
+  const { openModal } = registerEditModalStore();
+  const { accessToken, cocodusId } = accessTokenStore();
+  const {
+    inputs,
+    tag,
+    content,
+    placeName,
+    roadAddress,
+    latitudeY,
+    longitudeX,
+  } = registerStore();
+  const { title, date, online } = inputs;
+
+  // 글 수정 axios call
+  const onEditHandler = async () => {
+    const editData = {
+      cocodusId,
+      title,
+      content,
+      tag,
+      date,
+      online,
+      placeName,
+      roadAddress,
+      latitudeY,
+      longitudeX,
+    };
+    const editPost = await axios({
+      method: "PATCH",
+      url: "http://localhost:8080/board/list",
+      data: {
+        jsonFile: JSON.stringify(editData),
+        user_id: cocodusId,
+        lat: latitudeY,
+        long: longitudeX,
+        recruiting: true,
+      },
+    });
+    console.log(editPost);
+    openModal();
+  };
   return (
     <>
       <Register />
@@ -19,6 +63,7 @@ function RegisterEditPage(props) {
         click2="삭제하기"
         Modal={Modal}
         store1={registerEditModalStore}
+        openModal={onEditHandler}
         store2={registerDelModalStore}
         text="변경이"
         Tag={RegisterDelModal}
