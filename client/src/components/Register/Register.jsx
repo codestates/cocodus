@@ -101,11 +101,8 @@ function Register() {
           </Label>
         </FlexBox>
         <TestEditorForm onChange={onMsgChange} />
-<<<<<<< HEAD
-=======
         <KakaoSearchBox store={registerStore} />
         <KakaoMap store={registerStore} />
->>>>>>> 2e5a17a07baf7ff5f8a5646d0748db5675c6ae69
       </Section>
       <PlaceBox>
         <Div>위치</Div>
