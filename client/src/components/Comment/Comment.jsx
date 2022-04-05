@@ -5,6 +5,7 @@ import CommentList from "../CommentList/CommentList";
 import { Section, Btn } from "../Register/Register.styled";
 import { Text, DivBlock } from "./Comment.styled";
 import { commentStore } from "../../Store/Comment-zustand";
+import { accessTokenStore } from "../../Store/accesstoken-zustand";
 
 function Comment() {
   const nextId = useRef(1);
@@ -13,9 +14,12 @@ function Comment() {
     chgMsg(e.target.value);
   };
 
+  const { cocodusId } = accessTokenStore();
   const onCreate = () => {
     addMsg(inputs, nextId.current);
     nextId.current += 1;
+    // 댓글 등록 axios.post 요청
+    // inputs, 유저야이디, 포스트아이디
   };
 
   return (
