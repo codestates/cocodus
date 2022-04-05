@@ -11,9 +11,11 @@ import {
 } from "./DeleteModal.styled";
 import axios from "axios";
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
+import { boardPostLoadingStore } from "../../Store/loading-zustand";
 
 function RegisterModal({ closeModal }) {
-  const { cocodusId } = accessTokenStore();
+  const { chgLoading, chgError } = boardPostLoadingStore();
+  const { accessToken, cocodusId } = accessTokenStore();
   const {
     inputs,
     tag,
@@ -27,44 +29,54 @@ function RegisterModal({ closeModal }) {
 
   // 클릭하는 순간 글이 등록되게하는 함수
   const onRegister = async () => {
-    const postData = {
-      cocodusId,
-      title,
-      content,
-      tag,
-      date,
-      online,
-      placeName,
-      roadAddress,
-      latitudeY,
-      longitudeX,
-    };
+    try {
+      chgError(null);
+      chgLoading(true);
+      const postData = {
+        accessToken,
+        cocodusId,
+        title,
+        content,
+        tag,
+        date,
+        online,
+        placeName,
+        roadAddress,
+        latitudeY,
+        longitudeX,
+      };
 
-    const newPost = await axios({
-      method: "POST",
-      url: "http://localhost:8080/board/writing",
-      data: {
-        jsonFile: JSON.stringify(postData),
-        user_id: cocodusId,
-        lat: latitudeY,
-        long: longitudeX,
-        recruiting: true,
-      },
-    });
-    closeModal(); // 모달창 닫는 함수
+      const newPost = await axios({
+        method: "POST",
+        url: "http://localhost:8080/board/writing",
+        data: {
+          jsonFile: JSON.stringify(postData),
+          accessToken,
+          user_id: cocodusId,
+          lat: latitudeY,
+          long: longitudeX,
+          recruiting: true,
+        },
+      });
+      console.log(newPost);
+      closeModal(); // 모달창 닫는 함수
+    } catch (e) {
+      chgError(e);
+    }
+    chgLoading(false);
   };
+
   return (
     <>
       <ModalFlexBox>
         <Logo src="logo2.png" alt="" />
         <Subject>게시물을 등록하시겠습니까?</Subject>
       </ModalFlexBox>
-
       <ModalBtnBlock>
         <ModalBtn onClick={closeModal} color="#2E9AFE" font="#ffff">
           취소하기
         </ModalBtn>
-        <ModalBtn onClick={() => onRegister()}>등록하기</ModalBtn>
+        <ModalBtn onClick={onRegister}>등록하기</ModalBtn>
       </ModalBtnBlock>
     </>
   );
