@@ -6,7 +6,7 @@ const useScrollToggle = () => {
 
   const handleFollow = () => {
     setScrollY(window.pageYOffset);
-    if (ScrollY > 100) {
+    if (ScrollY > 500) {
       // 100 이상이면 버튼이 보이게
       setBtnStatus(true);
     } else {

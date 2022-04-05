@@ -5,6 +5,7 @@ import CommentList from "../CommentList/CommentList";
 import { Section, Btn } from "../Register/Register.styled";
 import { Text, DivBlock } from "./Comment.styled";
 import { commentStore } from "../../Store/Comment-zustand";
+import { accessTokenStore } from "../../Store/accesstoken-zustand";
 
 function Comment() {
   const nextId = useRef(1);
@@ -12,10 +13,26 @@ function Comment() {
   const onChange = (e) => {
     chgMsg(e.target.value);
   };
+  const { accessToken, cocodusId } = accessTokenStore();
 
-  const onCreate = () => {
+  const onCreate = async () => {
+    const commentInfo = {
+      accessToken,
+      cocodusId,
+      postId,
+      comment,
+    };
     addMsg(inputs, nextId.current);
     nextId.current += 1;
+    const comment = await axios({
+      method: "POST",
+      url: "http://localhost:8080/board/cmt",
+      data: {
+        jsonFile: JSON.stringify(commentInfo),
+        user_id: cocodusId,
+        post_id: postId,
+      },
+    });
   };
 
   return (

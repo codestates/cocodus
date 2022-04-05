@@ -38,8 +38,8 @@ module.exports = {
      
       본문은(외부에 공개되도 상관 없는 내용들) Payload json
       {
-        postId: 원래 글 번호
-        commentId : 댓글 번호
+        postId: 원래 글 번호  
+        commentId : 
         comment : 댓글 내용
       }
     */

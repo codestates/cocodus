@@ -8,12 +8,50 @@ import ImgUpload from "../components/ImgUpload/ImgUpload";
 import Modal from "../components/Modal/Modal";
 import TitleContent from "../components/TitleContent";
 import UserInfo from "../components/UserInfo/UserInfo";
+import { accessTokenStore } from "../Store/accesstoken-zustand";
 import {
   withdrawalModalStore,
   userInfoEditModalStore,
 } from "../Store/Modal-zustand";
+import { registerUserInfoStore } from "../Store/RegisterUserInfo-zustand";
 
 function UserInfoEditPage(props) {
+  const { accessToken, cocodusId } = accessTokenStore();
+  const {
+    userImg,
+    nickName,
+    tag,
+    placeName,
+    roadAddress,
+    latitudeY,
+    longitudeX,
+  } = registerUserInfoStore();
+
+  const onEditHandler = async () => {
+    const editData = {
+      accessToken,
+      cocodusId,
+      nickName,
+      tag,
+      roadAddress,
+      placeName,
+      latitudeY,
+      longitudeX,
+    };
+    const editPost = await axios({
+      method: "PATCH",
+      url: "http://localhost:8080/user/info",
+      data: {
+        jsonFile: JSON.stringify(editData),
+        user_id: cocodusId,
+        lat: latitudeY,
+        long: longitudeX,
+      },
+    });
+    console.log(editPost);
+    openModal();
+  };
+
   return (
     <>
       <BackIcon />
@@ -25,6 +63,7 @@ function UserInfoEditPage(props) {
         click2="탈퇴하기"
         Modal={Modal}
         store1={userInfoEditModalStore}
+        openModal={onEditHandler}
         store2={withdrawalModalStore}
         text="변경이"
         Tag={DeleteUserModal}

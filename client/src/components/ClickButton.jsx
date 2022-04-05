@@ -6,13 +6,22 @@ import {
   ModalFlexBox,
 } from "./DeleteRegisterSubModal/DeleteModal.styled";
 
-function ClickButton({ click1, click2, Modal, store1, store2, text, Tag }) {
+function ClickButton({
+  click1,
+  click2,
+  Modal,
+  store1,
+  openModal,
+  store2,
+  text,
+  Tag,
+}) {
   return (
     <>
       {/* 버튼 두개가 모두 모달이 필요할 때 */}
       {store1 ? (
         <BtnGroup>
-          <Btn onClick={store1().openModal}>{click1}</Btn>
+          <Btn onClick={openModal}>{click1}</Btn>
           <Modal
             open={store1().modalOpen}
             close={store1().closeModal}

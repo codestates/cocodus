@@ -1,10 +1,13 @@
 export default [
   {
-    id: 0,
     title: "리액트 모각코 하실 분",
-    content: "모각코 구함요",
-    icon: "React",
-    meetingpoint: "서울 서대문구 오량길 선선카페",
+    content: "모각코 구함요(길게)",
+    online: true,
+    tag: "React",
+    roadAddress: "서울 서대문구 오량길",
+    placeName: "선선카페",
+    lat: " ",
+    long: "",
     date: "2022년 3월 18일 오후 6시",
   },
   {
