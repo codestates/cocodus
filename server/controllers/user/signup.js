@@ -1,6 +1,4 @@
-const axios = require("axios");
 const { User } = require("../../models");
-const jwt = require("jsonwebtoken");
 const { generateAccessToken, isAuthorized } = require("../token");
 module.exports = {
   post: async (req, res) => {
@@ -10,9 +8,8 @@ module.exports = {
   kakao: async (req, res) => {
     const code = req.query.code;
     let accessToken = await generateAccessToken(code, "kakao");
-    console.log(accessToken);
     let validation = await isAuthorized(accessToken, "kakao");
-    console.log(validation.data);
+    console.log(validation);
     // {
     //   id: 2188948465,
     //   expiresInMillis: 21599911,
@@ -20,23 +17,9 @@ module.exports = {
     //   app_id: 724604,
     //   appId: 724604
     // }
-    let id = "kakao+" + validation.data.id; //ID 토큰에 해당하는 사용자의 회원번호 : 카카오에서 제공하는 회원번호라서 유니크한 값이라고 판단했습니다
-    // let validation = await User.findOne({ where: { id } });
-    // if (validation) {
-    //   // 만약에 회원가입하는데 아이디가 있다면 여기서 뭔가 딴 짓을 해야한다.
-    //   // 로그인으로 다시 콜 불러라
-    // } else {
-    //   User.create(
-    //     {
-    //       id,
-    //       accessToken,
-    //     },
-    //     { fields: ["id", "accessToken"] }
-    //   );
-    // }
 
-    // delete idToken;
-    // delete data;
+    let id = "kakao+" + validation.id; //ID 토큰에 해당하는 사용자의 회원번호 : 카카오에서 제공하는 회원번호라서 유니크한 값이라고 판단했습니다
+    let isMember = await User.findOne({ where: { id } });
 
     res
       .status(200)
@@ -44,17 +27,20 @@ module.exports = {
         maxAge: 360000, //300초 뒤에 쿠키 사라짐
       })
       .cookie("cocodusId", id)
-      .redirect("http://localhost:3000/userinforegister");
+      .redirect(
+        "http://localhost:3000" + !!isMember ? null : "/userinforegister"
+      );
   },
 
   google: async (req, res) => {
     const code = req.query.code;
     if (!code) return res.status(401).redirect("http://localhost:3000/");
     let accessToken = await generateAccessToken(code, "google");
-    console.log(accessToken);
     let validation = await isAuthorized(accessToken, "google");
-    console.log(validation.data);
-    let id = validation.data.email;
+    let id;
+    // console.log(validation);
+    if (validation) id = "google+" + validation.email.split("@")[0];
+    else id = null;
     // {
     //   issued_to: '286406699597-7mlmmmhid7n5dph3g3ce3s90do65bk4i.apps.googleusercontent.com',
     //   audience: '286406699597-7mlmmmhid7n5dph3g3ce3s90do65bk4i.apps.googleusercontent.com',
@@ -65,18 +51,9 @@ module.exports = {
     //   verified_email: true,
     //   access_type: 'online'
     // }
-    // let validation = await User.findOne({ where: { id } });
-    // if (validation) {
-    //   //만약에 회원가입하는데 아이디가 있다면 여기서 뭔가 딴 짓을 해야한다.
-    //   //로그인으로 다시 콜 불러라
-    // } else {
-    //   User.create(
-    //     {
-    //       id,
-    //       accessToken,
-    //     },
-    //     { fields: ["id", "accessToken"] }
-    //   );
+    // {
+    //   "error": "invalid_token",
+    //   "error_description": "Invalid Value"
     // }
 
     res
@@ -92,10 +69,10 @@ module.exports = {
     const { code } = req.query;
     if (!code) return res.status(401).redirect("http://localhost:3000/");
     let accessToken = await generateAccessToken(code, "github");
-    // console.log(accessToken);
     let validation = await isAuthorized(accessToken, "github");
-    // console.log(validation.data);
-    let id = "github+" + validation.data.login;
+    let id;
+    if (validation) id = "github+" + validation.login;
+    else id = null;
 
     res
       .status(200)
