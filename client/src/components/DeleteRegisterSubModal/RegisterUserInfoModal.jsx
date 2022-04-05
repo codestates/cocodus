@@ -44,25 +44,29 @@ function RegisterUserInfoModal({ closeModal }) {
         latitudeY,
         longitudeX,
       };
-      const userData = await axios({
+      const userDataSave = await axios({
         method: "POST",
         url: "http://localhost:8080/user/info",
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
         data: {
-          jsonFile: JSON.stringify({
-            userInfo,
-          }),
-          user_id: cocodusId,
+          id: cocodusId,
+          name: nickName,
+          accessToken,
+          roadAddress,
+          location: placeName,
           lat: latitudeY,
           long: longitudeX,
         },
       });
-      if (userData.status === 201) {
-        console.log(userData);
+      if (userDataSave.status === 201) {
         closeModal();
         navigate("/");
       } else {
-        alert("뭔가 잘못됬어요!!");
-        console.log(userData.status);
+        alert("RegisterUserInfoModal.jsx 이 파일에서 뭔가 잘못됐어요!!");
+        closeModal();
+        console.log(userDataSave.status);
       }
     } catch (e) {
       chgError(e);
