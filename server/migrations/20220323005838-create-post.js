@@ -18,13 +18,13 @@ module.exports = {
             key: "id",
           },
         },
-        title: {
-          type: Sequelize.STRING,
-        },
-        body: {
+        jsonfile: {
           type: Sequelize.STRING,
         },
         recruiting: {
+          type: Sequelize.BOOLEAN,
+        },
+        online: {
           type: Sequelize.BOOLEAN,
         },
         veiw_count: {
@@ -36,8 +36,11 @@ module.exports = {
         total_comment: {
           type: Sequelize.INTEGER,
         },
-        location: {
-          type: Sequelize.STRING,
+        lat: {
+          type: Sequelize.INTEGER,
+        },
+        long: {
+          type: Sequelize.INTEGER,
         },
         createdAt: {
           allowNull: false,

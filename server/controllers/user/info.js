@@ -22,13 +22,13 @@ module.exports = {
           name,
           roadAddress,
           accessToken,
-          placeName,
-          x,
-          y,
+          location,
+          long,
+          lat,
         },
         {
           where: { id, accessToken },
-          fields: ["name", "roadAddress", "placeName", "x", "y"],
+          fields: ["name", "roadAddress", "placeName", "long", "lat"],
         }
       );
 
