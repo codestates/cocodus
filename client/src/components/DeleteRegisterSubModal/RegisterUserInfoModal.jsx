@@ -12,12 +12,11 @@ import {
 import { registerUserInfoStore } from "../../Store/RegisterUserInfo-zustand";
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
 import axios from "axios";
-import { userinfoLoadingStore } from "../../Store/loading-zustand";
+import { userinfoPostLoadingStore } from "../../Store/loading-zustand";
 
 function RegisterUserInfoModal({ closeModal }) {
-  const { chgLoading, chgError } = userinfoLoadingStore();
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(null);
+  const { chgLoading, chgError } = userinfoPostLoadingStore();
+
   // 닉네임, 관심 기술 태그, 이미지(보류), 위치
   let navigate = useNavigate();
   const {
@@ -51,6 +50,7 @@ function RegisterUserInfoModal({ closeModal }) {
           jsonFile: JSON.stringify({
             userInfo,
           }),
+          accessToken,
           user_id: cocodusId,
           lat: latitudeY,
           long: longitudeX,

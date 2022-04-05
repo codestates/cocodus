@@ -12,8 +12,10 @@ import RegisterDelModal from "../components/DeleteRegisterSubModal/RegisterDelMo
 import axios from "axios";
 import { accessTokenStore } from "../Store/accesstoken-zustand";
 import { registerStore } from "../Store/Register-zustand";
+import { boardPatchLoadingStore } from "../Store/loading-zustand";
 
 function RegisterEditPage(props) {
+  const { chgLoading, chgError } = boardPatchLoadingStore();
   const { openModal } = registerEditModalStore();
   const { accessToken, cocodusId } = accessTokenStore();
   const {
@@ -29,31 +31,39 @@ function RegisterEditPage(props) {
 
   // 글 수정 axios call
   const onEditHandler = async () => {
-    const editData = {
-      cocodusId,
-      title,
-      content,
-      tag,
-      date,
-      online,
-      placeName,
-      roadAddress,
-      latitudeY,
-      longitudeX,
-    };
-    const editPost = await axios({
-      method: "PATCH",
-      url: "http://localhost:8080/board/list",
-      data: {
-        jsonFile: JSON.stringify(editData),
-        user_id: cocodusId,
-        lat: latitudeY,
-        long: longitudeX,
-        recruiting: true,
-      },
-    });
-    console.log(editPost);
-    openModal();
+    try {
+      chgError(null);
+      chgLoading(true);
+      const editData = {
+        cocodusId,
+        title,
+        content,
+        tag,
+        date,
+        online,
+        placeName,
+        roadAddress,
+        latitudeY,
+        longitudeX,
+      };
+      const editPost = await axios({
+        method: "PATCH",
+        url: "http://localhost:8080/board/list",
+        data: {
+          jsonFile: JSON.stringify(editData),
+          accessToken,
+          user_id: cocodusId,
+          lat: latitudeY,
+          long: longitudeX,
+          recruiting: true,
+        },
+      });
+      console.log(editPost);
+      openModal();
+    } catch (e) {
+      chgError(e);
+    }
+    chgLoading(false);
   };
   return (
     <>
