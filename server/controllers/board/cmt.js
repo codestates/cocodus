@@ -25,7 +25,7 @@ module.exports = {
 
     //정보가 다 잘 들어갔으면
     //db에서 방금 작성한 글의 id를 조회해야 함
-    res.status(200);
+    res.status(201);
     //글 작성이 완료되면 페이지 이동은 없고 댓글이 바로 보여야함
   },
   patch: async (req, res) => {
