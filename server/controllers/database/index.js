@@ -58,4 +58,8 @@ module.exports = {
       return "create";
     }
   },
+  findUserInfo: async (id) => {
+    let isMember = await User.findOne({ where: { id } });
+    return isMember;
+  },
 };
