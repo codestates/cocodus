@@ -8,10 +8,13 @@ import {
   ModalBtnBlock,
   ModalBtn,
 } from "./DeleteModal.styled";
+import { useNavigate } from "react-router-dom";
 
 function DeleteUserModal({ closeModal }) {
+  let navigate = useNavigate();
   const onRemove = () => {
     closeModal();
+    navigate("/");
   };
   return (
     <>
