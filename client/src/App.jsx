@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { NavBar } from "../src/components";
@@ -91,22 +91,46 @@ function App() {
 
           <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route exact path="/register" element={<RegisterPage />} />
-            <Route exact path="/registeredit" element={<RegisterEditPage />} />
+            <Route
+              exact
+              path="/register"
+              element={isLogin ? <RegisterPage /> : <Home />}
+            />
+            <Route
+              exact
+              path="/registeredit"
+              element={isLogin ? <RegisterEditPage /> : <Home />}
+            />
             <Route
               exact
               path="/RegisterContentViewPage"
               element={<RegisterContentViewPage />}
             />
-            <Route exact path="/mylikes" element={<MyLikesPage />} />
-            <Route exact path="/mypost" element={<MyPostPage />} />
-            <Route exact path="/userinfoedit" element={<UserInfoEditPage />} />
+            <Route
+              exact
+              path="/mylikes"
+              element={isLogin ? <MyLikesPage /> : <Home />}
+            />
+            <Route
+              exact
+              path="/mypost"
+              element={isLogin ? <MyPostPage /> : <Home />}
+            />
+            <Route
+              exact
+              path="/userinfoedit"
+              element={isLogin ? <UserInfoEditPage /> : <Home />}
+            />
             <Route
               exact
               path="/userinforegister"
-              element={<UserInfoRegisterPage />}
+              element={isLogin ? <UserInfoRegisterPage /> : <Home />}
             />
-            <Route exact path="/error" element={<Error />} />
+            <Route
+              exact
+              path="/error"
+              element={isLogin ? <Error /> : <Home />}
+            />
           </Routes>
         </Router>
       </div>
