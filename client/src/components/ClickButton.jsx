@@ -37,8 +37,8 @@ function ClickButton({
             <Tag closeModal={store2().closeModal2} />
           </Modal>
         </BtnGroup>
-      ) : (
-        /* 버튼 1개가 모달이 필요할 때 */
+      ) : /* 버튼 1개가 모달이 필요할 때 */
+      click1 ? (
         <BtnGroup>
           <Btn>{click1}</Btn>
           <Btn onClick={store2().openModal2}>{click2}</Btn>
@@ -46,12 +46,15 @@ function ClickButton({
             <Tag closeModal={store2().closeModal2} />
           </Modal>
         </BtnGroup>
+      ) : (
+        <BtnGroup>
+          <Btn onClick={store2().openModal2}>{click2}</Btn>
+          <Modal open={store2().modalOpen2} header="알림">
+            <Tag closeModal={store2().closeModal2} />
+          </Modal>
+        </BtnGroup>
       )}
     </>
-    //   <BtnGroup>
-    //   <Btn>{click1}</Btn>
-    //   <Btn>{click2}</Btn>
-    // </BtnGroup>
   );
 }
 
