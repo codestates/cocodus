@@ -40,12 +40,23 @@ export const FeatureListItem = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 0.325rem;
+  flex-direction: row;
+  justify-content: flex-start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 라인수 */
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  line-height: 1.2em;
+  height: 2.4em;
+  width: 25em;
 `;
 
 export const ActionButton = styled.div`
   flex: 0 0 auto;
   height: 40px;
-  padding: 0 2rem;
+  padding: 0 1rem;
   border: 0;
   border-radius: 20px;
   color: rgba(0, 0, 0, 0.05);
@@ -61,7 +72,7 @@ export const Icon = styled.img`
   height: 80px;
   flex: 0 0 auto;
   margin-bottom: 2rem;
-  border-radius: 50%;
+
   margin-right: 10px;
 `;
 
@@ -78,4 +89,23 @@ export const BackgroundSqure = styled.div`
 export const Align = styled.div`
   display: flex;
   align-items: center;
+`;
+
+export const MapButton = styled.button`
+  border-radius: 50px;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 15px 5px;
+  background-color: ${({ bg }) => bg || "#fff"};
+  color: ${({ color }) => color || "#333"};
+  margin-right: 20px;
+  margin-left: 10px;
+
+  &:hover {
+    opacity: 0.9;
+    transform: scale(0.9);
+  }
 `;

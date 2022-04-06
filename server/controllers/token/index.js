@@ -1,46 +1,86 @@
 require("dotenv").config();
-const { sign, verify } = require("jsonwebtoken");
-
+const axios = require("axios");
 module.exports = {
-  generateAccessToken: (data) => {
-    return sign(data, process.env.ACCESS_SECRET, { expiresIn: "1d" });
+  generateAccessToken: async (code, provider) => {
+    const config = {
+      github: {
+        url: "https://github.com/login/oauth/access_token",
+        method: "GET",
+        headers: {
+          accept: "application/json",
+        },
+        params: {
+          client_id: process.env.GITHUB_CLIENT_ID,
+          client_secret: process.env.GITHUB_CLIENT_SECRET,
+          code: code,
+        },
+      },
+      kakao: {
+        url: "https://kauth.kakao.com/oauth/token",
+        method: "POST",
+        headers: {
+          accept: "application/json",
+        },
+        params: {
+          grant_type: "authorization_code",
+          client_id: process.env.KAKAO_CLIENT_ID,
+          redirect_uri: "http://localhost:8080/user/signup/kakao",
+          code: code,
+          client_secret: process.env.KAKAO_CLIENT_SECRET,
+        },
+      },
+      google: {
+        url: "https://www.googleapis.com/oauth2/v4/token",
+        method: "POST",
+        headers: {
+          accept: "application/json",
+        },
+        params: {
+          code,
+          client_id: process.env.GOOGLE_CLIENT_ID,
+          client_secret: process.env.GOOGLE_CLIENT_SECRET,
+          redirect_uri: "http://localhost:8080/user/signup/google",
+          grant_type: "authorization_code",
+        },
+      },
+    };
+    const tokenCall = await axios(config[provider]).catch((err) =>
+      console.log(err)
+    );
+    const accessToken = tokenCall.data.access_token;
+    return accessToken;
   },
-  generateRefreshToken: (data) => {
-    return sign(data, process.env.REFRESH_SECRET, { expiresIn: "10d" });
-  },
-  sendRefreshToken: (res, refreshToken) => {
-    res.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
-    });
-  },
-  sendAccessToken: (res, payload) => {
-    res.json({ data: payload, message: "sent AccessToken successfully" });
-  },
-  resendAccessToken: (res, accessToken, data) => {
-    res.json({
-      data: { accessToken, userInfo: data },
-      message: "resent AccessToken successfully",
-    });
-  },
-  isAuthorized: (req) => {
-    const authorization = req.headers["authorization"];
-    if (!authorization) {
-      return null;
-    }
-    const token = authorization.split(" ")[1];
-    try {
-      return verify(token, process.env.ACCESS_SECRET);
-    } catch (err) {
-      // return null if invalid token
-      return null;
-    }
-  },
-  checkRefeshToken: (refreshToken) => {
-    try {
-      return verify(refreshToken, process.env.REFRESH_SECRET);
-    } catch (err) {
-      // return null if refresh token is not valid
-      return null;
-    }
+
+  isAuthorized: async (accessToken, provider) => {
+    const config = {
+      github: {
+        url: "https://api.github.com/user",
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          authorization: `token ${accessToken}`,
+        },
+      },
+      kakao: {
+        url: "https://kapi.kakao.com/v1/user/access_token_info",
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          authorization: `Bearer ${accessToken}`,
+        },
+      },
+      google: {
+        url: "https://www.googleapis.com/oauth2/v1/tokeninfo",
+        method: "GET",
+        params: { access_token: accessToken },
+        headers: {
+          accept: "application/json",
+        },
+      },
+    };
+    const userInfoCall = await axios(config[provider]).catch((err) =>
+      console.log(err)
+    );
+    return userInfoCall.data;
   },
 };

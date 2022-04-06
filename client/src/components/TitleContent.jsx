@@ -6,9 +6,8 @@ import { Section } from "./styles/Section.styled";
 
 // 글 제목
 export const Title = styled.div`
-  /* position: relative;
-  margin: 0 auto; */
   width: 20%;
+  margin-top: ${(props) => props.top};
   margin-bottom: 2rem;
   padding: 30px 0;
   font-size: 2rem;
@@ -16,10 +15,10 @@ export const Title = styled.div`
   border: none;
 `;
 
-function TitleContent({ text }) {
+function TitleContent({ text, top }) {
   return (
-    <Section>
-      <Title>{text}</Title>
+    <Section width="60%">
+      <Title top={top}>{text}</Title>
     </Section>
   );
 }

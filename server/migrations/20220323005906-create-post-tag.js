@@ -7,28 +7,29 @@ module.exports = {
         id: {
           allowNull: false,
           primaryKey: true,
-          type: Sequelize.UUID,
+          type: Sequelize.INTEGER,
+          autoIncrement: true,
           unique: true,
         },
         post_id: {
-          type: Sequelize.UUID,
+          type: Sequelize.INTEGER,
           references: {
             model: "Posts",
             key: "id",
           },
         },
         tag_id: {
-          type: Sequelize.UUID,
-          references: {
-            model: "Tags",
-            key: "id",
-          },
+          type: Sequelize.STRING,
+          // references: {
+          //   model: "Tags",
+          //   key: "id",
+          // },
         },
       },
       {
         // 테이블 옵션
         timestamps: false,
-        underscored: true,
+        underscored: false,
       }
     );
   },

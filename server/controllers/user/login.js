@@ -1,12 +1,8 @@
 const models = require("../../models");
 const { User } = require("../../models");
-const { generateAccessToken, generateRefreshToken } = require("../token/index");
+const axios = require("axios");
 module.exports = {
-  get: (req, res) => {
-    // console.log(req.query.email);
-    // console.log(req.query.accessToken);
-    res.status(200).send("test getlogin");
-  },
+  get: async (req, res) => {},
   post: async (req, res) => {
     console.log(req.headers.oauth_source); //Naver,Google,Kakaotalk
     console.log(models.User === User);

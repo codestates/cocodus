@@ -1,20 +1,43 @@
 // 게시글 조회 폼
 
-import React from "react";
-import {
-  Section,
-  Title,
-  Div,
-  FlexBox,
-  InputBox,
-  Label,
-  CheckBox,
-} from "../Register/Register.styled";
-import { ContentBlock } from "./RegisterContentView.styled";
+import React, { useState, useEffect } from "react";
+import { Section, Title, Div, FlexBox, Img } from "../Register/Register.styled";
+import { ContentBlock, Language } from "./RegisterContentView.styled";
 import Comment from "../Comment/Comment";
 import LikesViewShareIcon from "../LikesViewShareIcon/LikesViewShareIcon";
+import { accessTokenStore } from "../../Store/accesstoken-zustand";
+import axios from "axios";
+import { boardGetLoadingStore } from "../../Store/loading-zustand";
 
 function DetailContent(props) {
+  const { accessToken, cocodusId } = accessTokenStore();
+  const { chgLoading, chgError } = boardGetLoadingStore();
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        // 요청이 시작 할 때에는 error 초기화하고
+        chgError(null);
+        // loading 상태를 true 로 바꿉니다.
+        chgLoading(true);
+        const response = await axios({
+          method: "GET",
+          url: "http://localhost:8080/board/list",
+          data: {
+            accessToken,
+            user_id: cocodusId,
+            // post_id: postId,
+          },
+        });
+      } catch (e) {
+        chgError(e);
+      }
+      chgLoading(false);
+    };
+
+    fetchPosts();
+  }, []);
+
   return (
     <Section>
       <Title
@@ -22,31 +45,30 @@ function DetailContent(props) {
         textShadow="0 0 0 black"
         borderBottom="none"
         top="1rem"
+        backGround="#fff"
         defaultValue="React 스터디 모집합니다."
         readOnly
       />
       <FlexBox>
-        <Div>글쓴이</Div>
-        <InputBox type="text" value="김코딩" width="15%" focus readOnly />
+        <Img src="UserIcon.png" />
+        <Div>김코딩</Div>
         <Div huge>2022-03-23</Div>
       </FlexBox>
       <FlexBox>
         <Div>사용 언어</Div>
-        <InputBox
-          type="text"
-          ri="1rem"
-          defaultValue="react.js"
-          readOnly
-          focus
-        />
-        <Label>
-          <CheckBox type="checkbox" id="online" disabled />
+        <Language>React.js</Language>
+        <Language>Node.js</Language>
+        <Div
+          backColor="rgba(196, 196, 196, 0.26)"
+          fontSize="16px"
+          marginLeft="10rem"
+        >
           온라인 가능
-        </Label>
+        </Div>
       </FlexBox>
       <FlexBox>
         <Div>일시</Div>
-        <InputBox type="datetime-local" readOnly focus></InputBox>
+        <Div backColor="rgba(196, 196, 196, 0.26)">04월 12일 오후 2시</Div>
       </FlexBox>
       <ContentBlock>
         안녕하세요. 리액트 스터디 모집합니다. 부지런하신분들 연락주세요
@@ -80,12 +102,9 @@ function DetailContent(props) {
       </ContentBlock>
       <FlexBox top="2rem">
         <Div>위치</Div>
-        <InputBox
-          type="text"
-          defaultValue="서울 서대문구 연희로 32 만동제과"
-          readOnly
-          focus
-        />
+        <Div backColor="rgba(196, 196, 196, 0.26)">
+          서울 서대문구 연희로 32 만동제과
+        </Div>
       </FlexBox>
       <LikesViewShareIcon />
       <Comment />
