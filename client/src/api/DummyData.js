@@ -1,5 +1,6 @@
 export default [
   {
+    id: 0,
     nickName: "우움뭐허허",
     title: "리액트 모각코 하실 분",
     content:
@@ -7,12 +8,13 @@ export default [
     online: true,
     tag: "React",
     roadAddress: "서울 서대문구 오량길",
-    placeName: "선선카페", //location 으로 바꾸기
+    placeName: "선선카페",
     lat: "37.5824163",
     long: "126.9996541",
     date: "2022년 3월 18일 오후 6시",
   },
   {
+    id: 1,
     nickName: "우움뭐허허",
     title: "리액트 하실 분",
     content:
@@ -26,6 +28,7 @@ export default [
     date: "2022년 3월 20일 오후 9시",
   },
   {
+    id: 2,
     nickName: "우움뭐허허",
     title: "자바스크립트 하실 분",
     content:
@@ -39,6 +42,7 @@ export default [
     date: "2022년 3월 21일 오후 8시",
   },
   {
+    id: 3,
     nickName: "우움뭐허허",
     title: "자바스크립트로 창업하실 분 모십니다",
     content:
@@ -52,6 +56,7 @@ export default [
     date: "2022년 3월 18일 오후 8시",
   },
   {
+    id: 4,
     nickName: "우움뭐허허",
     title: "타입스크립트 스터디원",
     content:
@@ -65,6 +70,7 @@ export default [
     date: "2022년 3월 20일 오후 8시",
   },
   {
+    id: 5,
     nickName: "우움뭐허허",
     title: "타입스크립트 공부모임",
     content:
@@ -78,6 +84,7 @@ export default [
     date: "2022년 3월 20일 오후 8시",
   },
   {
+    id: 6,
     nickName: "우움뭐허허",
     title: "자바 공부하실분",
     content:
@@ -91,6 +98,7 @@ export default [
     date: "2022년 3월 21일 오후 8시",
   },
   {
+    id: 7,
     nickName: "우움뭐허허",
     title: "GO 공부하실분",
     content:
@@ -104,6 +112,7 @@ export default [
     date: "2022년 4월 5일 오후 8시",
   },
   {
+    id: 8,
     nickName: "우움뭐허허",
     title: "코틀린 공부하실분",
     content:
@@ -117,6 +126,7 @@ export default [
     date: "2022년 4월 7일 오후 8시",
   },
   {
+    id: 9,
     nickName: "우움뭐허허",
     title: "뷰 공부하는 사람들 모여주세요",
     content:
@@ -130,6 +140,7 @@ export default [
     date: "2022년 4월 8일 오후 5시",
   },
   {
+    id: 10,
     nickName: "우움뭐허허",
     title: "뷰로 취뽀 하고 싶으신 분",
     content:
@@ -143,6 +154,7 @@ export default [
     date: "2022년 4월 10일 오후 2시",
   },
   {
+    id: 11,
     nickName: "우움뭐허허",
     title: "노드로 공부하고 싶으신 분",
     content:
@@ -156,6 +168,7 @@ export default [
     date: "2022년 4월 12일 오후 8시",
   },
   {
+    id: 12,
     nickName: "우움뭐허허",
     title: "공대 공학 C로 공부하고 싶으신 분",
     content:
@@ -169,6 +182,7 @@ export default [
     date: "2022년 4월 15일 오후 8시",
   },
   {
+    id: 13,
     nickName: "우움뭐허허",
     title: "C로 취업하고 싶으신 분",
     content:
@@ -182,6 +196,7 @@ export default [
     date: "2022년 4월 16일 오후 6시",
   },
   {
+    id: 14,
     nickName: "우움뭐허허",
     title: "파이썬 모각코 모임 ",
     content:
@@ -195,6 +210,7 @@ export default [
     date: "2022년 4월 16일 오후 8시",
   },
   {
+    id: 15,
     nickName: "우움뭐허허",
     title: "파이썬 토이프로젝트 ",
     content:
