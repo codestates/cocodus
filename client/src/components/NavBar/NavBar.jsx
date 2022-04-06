@@ -18,9 +18,11 @@ import DropDownBar from "../DropDown_Bar/DropDownBar";
 import { CgMenu } from "react-icons/cg";
 import { AiFillCaretUp } from "react-icons/ai";
 import LoginModal from "../LoginModal/LoginModal";
+import { registerUserInfoStore } from "../../Store/RegisterUserInfo-zustand";
 
 export default function NavBar() {
   const { isLogin } = accessTokenStore();
+  const { nickName } = registerUserInfoStore();
 
   // 계정을 클릭하면 나오는 view
   const [menuVisible, setMenuVisible] = useState(false);
@@ -58,7 +60,7 @@ export default function NavBar() {
                 {/* <Button onClick={logoutHandle}>로그아웃</Button> */}
                 <Block onClick={onHandleMenu}>
                   <Img src="UserIcon.png" />
-                  <Name>권순일님</Name>
+                  <Name>{nickName}님</Name>
                   <Icon>
                     <CgMenu color="#3c4146" size={25} />
                   </Icon>

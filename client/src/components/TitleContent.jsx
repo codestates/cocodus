@@ -17,7 +17,7 @@ export const Title = styled.div`
 
 function TitleContent({ text, top }) {
   return (
-    <Section>
+    <Section width="60%">
       <Title top={top}>{text}</Title>
     </Section>
   );
