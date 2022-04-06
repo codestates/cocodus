@@ -1,7 +1,7 @@
 export default [
   {
     id: 0,
-    nickName: "우움뭐허허",
+    nickName: "윤종복",
     title: "리액트 모각코 하실 분",
     content:
       "모각코 구함요(<br>Lorem Ipsum is simply dummy text of the prin ting and typesetting industryLorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -15,7 +15,7 @@ export default [
   },
   {
     id: 1,
-    nickName: "우움뭐허허",
+    nickName: "윤종복",
     title: "리액트 하실 분",
     content:
       "리액트로 함께할 멤버를 구합니다. Lorem Ipsum is simply dummy text of the prin ting and typesetting iLorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -29,7 +29,7 @@ export default [
   },
   {
     id: 2,
-    nickName: "우움뭐허허",
+    nickName: "윤종복",
     title: "자바스크립트 하실 분",
     content:
       "자바스크립트로 토이 공부 하실분 모십니다. Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -43,7 +43,7 @@ export default [
   },
   {
     id: 3,
-    nickName: "우움뭐허허",
+    nickName: "윤종복",
     title: "자바스크립트로 창업하실 분 모십니다",
     content:
       "자바스크립트로 창업 하실분??. Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -57,7 +57,7 @@ export default [
   },
   {
     id: 4,
-    nickName: "우움뭐허허",
+    nickName: "윤종복",
     title: "타입스크립트 스터디원",
     content:
       "타입스크립트 스터디 모임 만들고 있습니다. Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -71,7 +71,7 @@ export default [
   },
   {
     id: 5,
-    nickName: "우움뭐허허",
+    nickName: "윤종복",
     title: "타입스크립트 공부모임",
     content:
       "타입스크립트로 공부하실 분들을 찾고 있습니다. Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -85,7 +85,7 @@ export default [
   },
   {
     id: 6,
-    nickName: "우움뭐허허",
+    nickName: "윤종복",
     title: "자바 공부하실분",
     content:
       "자바로 공부하실 분들을 모십니다. Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -99,7 +99,7 @@ export default [
   },
   {
     id: 7,
-    nickName: "우움뭐허허",
+    nickName: "윤종복",
     title: "GO 공부하실분",
     content:
       "GO 공부하실 분들을 모십니다. Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -113,7 +113,7 @@ export default [
   },
   {
     id: 8,
-    nickName: "우움뭐허허",
+    nickName: "윤종복",
     title: "코틀린 공부하실분",
     content:
       "코틀린 공부하실 분들을 모십니다. Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -127,7 +127,7 @@ export default [
   },
   {
     id: 9,
-    nickName: "우움뭐허허",
+    nickName: "윤종복",
     title: "뷰 공부하는 사람들 모여주세요",
     content:
       "뷰 공부하실 분들을 모십니다. Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -141,7 +141,7 @@ export default [
   },
   {
     id: 10,
-    nickName: "우움뭐허허",
+    nickName: "윤종복",
     title: "뷰로 취뽀 하고 싶으신 분",
     content:
       "뷰를 공부해서 취뽀 하고 싶은 분들을 모십니다 Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -155,7 +155,7 @@ export default [
   },
   {
     id: 11,
-    nickName: "우움뭐허허",
+    nickName: "윤종복",
     title: "노드로 공부하고 싶으신 분",
     content:
       "노드짱노드짱짱맨 Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -169,7 +169,7 @@ export default [
   },
   {
     id: 12,
-    nickName: "우움뭐허허",
+    nickName: "윤종복",
     title: "공대 공학 C로 공부하고 싶으신 분",
     content:
       "최강공대 공대공학 C Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -183,7 +183,7 @@ export default [
   },
   {
     id: 13,
-    nickName: "우움뭐허허",
+    nickName: "윤종복",
     title: "C로 취업하고 싶으신 분",
     content:
       "취뽀취뽀 C Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -197,7 +197,7 @@ export default [
   },
   {
     id: 14,
-    nickName: "우움뭐허허",
+    nickName: "윤종복",
     title: "파이썬 모각코 모임 ",
     content:
       "파이썬이 취업 제일 잘 됨. 그러니 ㄱㄱC Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -211,7 +211,7 @@ export default [
   },
   {
     id: 15,
-    nickName: "우움뭐허허",
+    nickName: "윤종복",
     title: "파이썬 토이프로젝트 ",
     content:
       "파이썬이 토이프로젝트 할거임C Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
