@@ -59,9 +59,10 @@ function CardSection(props) {
               <span>👀</span>
             </DivContainer>
             <DivContainer>
-              일자: {props.data.date}
+              {props.data.date}
               <br></br>
-              위치: {props.data.placeName}
+              {props.data.roadAddress}
+              {/*//도로명으로 바꾸고, 도로명 주소를 길게 보게 하고 버튼 여백 줄이기 */}
             </DivContainer>
             <MapButton>상세 보기</MapButton>
           </ContentDiv>

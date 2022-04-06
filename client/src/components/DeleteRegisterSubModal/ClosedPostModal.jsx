@@ -1,6 +1,6 @@
 // onlyUserBtn 에서 모달안에서 마감 버튼을 클릭했을 경우,
 
-import React from "react";
+import React, { useState } from "react";
 import {
   ModalFlexBox,
   Logo,
@@ -10,9 +10,16 @@ import {
 } from "./DeleteModal.styled";
 import { myPostClosedLoadingStore } from "../../Store/loading-zustand";
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
+import Modal from "../Modal/Modal";
 
-function closedPostModal({ id, closeModal }) {
-  // const { removeMsg } = commentStore();
+function closedPostModal({ closeModal }) {
+  const { modalOpen2, setModalOpen } = useState(false);
+  const openModal2 = () => {
+    setModalOpen(true);
+  };
+  const closeModal2 = () => {
+    setModalOpen(false);
+  };
   const { chgLoading, chgError } = myPostClosedLoadingStore();
   const { accessToken, cocodusId } = accessTokenStore();
 
@@ -45,6 +52,7 @@ function closedPostModal({ id, closeModal }) {
         console.log(userData.status);
       }
       closeModal();
+      openModal2();
     } catch (e) {
       chgError(e);
     }
@@ -63,6 +71,12 @@ function closedPostModal({ id, closeModal }) {
           아니요
         </ModalBtn>
         <ModalBtn onClick={onRecruit}>네 마감할래요</ModalBtn>
+        <Modal open={modalOpen2} close={closeModal2} header="알림">
+          <ModalFlexBox>
+            <Logo src="logo2.png" alt="" />
+            <Subject>마감 처리되었습니다</Subject>
+          </ModalFlexBox>
+        </Modal>
       </ModalBtnBlock>
     </>
   );
