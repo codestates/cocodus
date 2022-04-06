@@ -1,41 +1,62 @@
+const { json } = require("stream/consumers");
+const { User, Post, Post_tag } = require("../../models");
+
 module.exports = {
   post: async (req, res) => {
-    {
-      /*
-     보낼 때 : 쿠키에 담겨서 accessToken하고 cocodusid
-     cookie에서
-      {accessToken: accessToken,
-      cocodusid: cocodusid}
-     
-      본문은(외부에 공개되도 상관 없는 내용들) Payload json
-      {
-        title : 모임 제목
-        tag: {
-          사용 언어 최소 하나 이상(등록창에 경고창 만들 예정, 이것도 포함해주세요)
-        }
-        meetingdate: 일시(모임시간)
-        online: 온라인 가능여부(새로운 변수), 불리언 기본값 false
-        recruiting : 모집중
-        body : 본문
-        location: 상호명으로 바로 볼 수 있는 모임(위치)
-        roadAddress: 도로명주소 (클라는 카멜로 보내주세요 db가 알아서 받겠습니다)
-        lat: latitude Y
-        long : longitude X
-     }
-    */
+    let {
+      accessToken,
+      cocodusId,
+      tag,
+      online,
+      recruiting,
+      lat,
+      long,
+      jsonfile,
+    } = req.body;
+
+    //여기에 accessToken 확인하는 과정 추가할 예정입니다
+
+    cocodusId = "github+happy5happy5"; //임시로 만들었고 req.body에서 받아오는 변수는 const로 받아야 함
+
+    const cocodusMember = await User.findOne({
+      where: { id: cocodusId },
+    });
+
+    if (!cocodusMember) {
+      res.status(403).send("not Authorized"); //id가 일치하지 않으므로 더이상 진행할 필요가 없습니다
     }
 
-    const 어떤변수 = req.headers.data;
-    const 변수2 = req.body.data;
+    const newPost = await Post.create({
+      user_id: cocodusId,
+      jsonfile: jsonfile,
+      recruiting: recruiting,
+      online: online,
+      veiw_count: 0,
+      total_like: 0,
+      total_comment: 0,
+      lat,
+      long,
+    });
+    //숫자를 반올림을 해서 넣어주네...? 이거 해결해야 합니다
 
-    //postMessage.어쩌구 시퀄라이저로 db에 응답하겠습니다
-    //조회수는 기본값 0으로 자동 생성
-    // 만약에 클라에서 보낸 메시지가 잘못됐다면 정보가 부족한 것이므로
-    //403 앤딩
+    let postId = newPost.dataValues.id;
+    console.log(lat);
+    console.log(long);
+    console.log(tag);
+    console.log(postId); //여기까지 작동 확인
 
-    //정보가 다 잘 들어갔으면
-    //db에서 방금 작성한 글의 id를 조회해야 함
-    res.status(200);
-    //글 작성이 완료되면 페이지 이동은 클라에서 메인으로
+    // tag.forEach((element) => {
+    //   //여기는 더 효율적으로 만들고 싶은데 어떻게 해야할지 몰라서 일단 이렇게 구현했습니다.
+    //   Post_tag.create({
+    //     post_id: postId,
+    //     tag_id: element,
+    //   });
+    // });
+
+    //우리가 작성할 때는 post하고 post_tag에 입력을 하고
+    //우리가 조회할 때는 post하고 tag를 조회하고 둘의 관계를 post_tag를 통해 유추합니다
+
+    res.status(201).end();
+    // res.status(201).json({ postId: postId });
   },
 };

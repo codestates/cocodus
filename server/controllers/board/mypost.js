@@ -15,6 +15,7 @@ module.exports = {
         postId : 모임 정보 번호          
         tag: [공부할 언어],
         title: 모임 정보 제목
+        meetingdate: 일시(모임시간)
         totalLike : 좋아요 수
         totalView: 조회수
         location: 상호명으로 바로 볼 수 있는 모임(위치)
