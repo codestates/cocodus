@@ -9,7 +9,13 @@ export const registerStore = create((set) => ({
     title: "",
     date: "",
     online: false,
+    recuiting: true,
   },
+  //모집중 onChange 함수
+  chgrecruiting: (value) =>
+    set((state) => ({
+      recruiting: value,
+    })),
 
   // 제목, 날짜, onChange 함수
   chgInput: (name, value) =>
