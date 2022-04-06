@@ -12,12 +12,12 @@ import { Button } from "../../components/styles/Button.styled";
 import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import GlobalStyles from "../../components/styles/Global";
-import Modal from "../Modal/Modal";
 import { useNavigate } from "react-router-dom";
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
 import DropDownBar from "../DropDown_Bar/DropDownBar";
 import { CgMenu } from "react-icons/cg";
 import { AiFillCaretUp } from "react-icons/ai";
+import LoginModal from "../LoginModal/LoginModal";
 
 export default function NavBar() {
   const { isLogin } = accessTokenStore();
@@ -77,47 +77,11 @@ export default function NavBar() {
                 <Button onClick={modalHandle}>로그인</Button>
               </>
             )}
-            <Modal open={modalOpen} close={modalHandle} header="소셜 로그인">
-              <a
-                href={
-                  "https://github.com/login/oauth/authorize" +
-                  "?client_id=a3992310760bdbc99e31" +
-                  "&redirect_uri=http://localhost:8080/user/signup/github" +
-                  "&scope=user:email"
-                }
-              >
-                <img
-                  style={{ width: "100px", marginLeft: "20px" }}
-                  src="Github.png"
-                />
-              </a>
-              <a
-                href={
-                  "https://kauth.kakao.com/oauth/authorize" +
-                  "?client_id=7f6f770eb46de1c098398a5231a5909d" +
-                  "&redirect_uri=http://localhost:8080/user/signup/kakao" +
-                  "&response_type=code"
-                }
-              >
-                <img
-                  style={{ width: "100px", marginLeft: "20px" }}
-                  src="Kakaotalk.png"
-                />
-              </a>
-              <a
-                href={
-                  "https://accounts.google.com/o/oauth2/v2/auth" +
-                  "?client_id=286406699597-7mlmmmhid7n5dph3g3ce3s90do65bk4i.apps.googleusercontent.com" +
-                  "&response_type=code&redirect_uri=http://localhost:8080/user/signup/google" +
-                  "&scope=https://www.googleapis.com/auth/userinfo.email"
-                }
-              >
-                <img
-                  style={{ width: "100px", marginLeft: "20px" }}
-                  src="Google.png"
-                />
-              </a>
-            </Modal>
+            <LoginModal
+              open={modalOpen}
+              close={modalHandle}
+              header="소셜 로그인"
+            />
           </Nav>
         </Container>
       </StyledHeader>

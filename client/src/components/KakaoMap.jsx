@@ -46,7 +46,7 @@ export default function KakaoMap({ store }) {
         placeholder="미팅장소를 입력하고 엔터를 눌러 주세요"
       ></Input>
 
-      <div id="map" style={{ width: "78rem", height: "400px" }}></div>
+      <div id="map" style={{ width: "100%", height: "400px" }}></div>
     </Div>
   );
 }
@@ -58,7 +58,7 @@ export const Input = styled.input`
   font-size: 16px;
 
   font-family: initial;
-  width: 78rem;
+  width: 100%;
   padding: 10px 8px;
   overflow: hidden;
   border: 1px solid #ced4da;

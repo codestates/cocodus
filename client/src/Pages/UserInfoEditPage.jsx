@@ -1,5 +1,6 @@
 // 사용자 정보 수정 페이지
 
+import axios from "axios";
 import React from "react";
 import BackIcon from "../components/BackIcon/BackIcon";
 import ClickButton from "../components/ClickButton";
@@ -26,8 +27,10 @@ function UserInfoEditPage(props) {
     latitudeY,
     longitudeX,
   } = registerUserInfoStore();
+  const { openModal } = userInfoEditModalStore();
 
   const onEditHandler = async () => {
+    openModal();
     const editData = {
       accessToken,
       cocodusId,
@@ -49,7 +52,6 @@ function UserInfoEditPage(props) {
       },
     });
     console.log(editPost);
-    openModal();
   };
 
   return (

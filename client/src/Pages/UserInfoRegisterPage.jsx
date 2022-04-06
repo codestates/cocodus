@@ -13,12 +13,10 @@ import RegisterUserInfoModal from "../components/DeleteRegisterSubModal/Register
 function UserInfoRegisterPage(props) {
   return (
     <>
-      <BackIcon left="13rem" />
-      <TitleContent text="내 정보 작성" />
+      <TitleContent text="내 정보 작성" top="2rem" />
       <ImgUpload />
       <UserInfo />
       <ClickButton
-        click1="취소하기"
         click2="등록하기"
         Modal={Modal}
         store2={userInfoRegisterModalStore}

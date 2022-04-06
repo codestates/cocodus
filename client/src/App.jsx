@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { NavBar } from "../src/components";
@@ -14,7 +14,16 @@ import {
   UserInfoRegisterPage,
 } from "./Pages";
 import { accessTokenStore } from "./Store/accesstoken-zustand";
-import { userinfoLoadingStore } from "./Store/loading-zustand";
+import {
+  boardPostLoadingStore,
+  userinfoPostLoadingStore,
+  boardPatchLoadingStore,
+  boardDeleteLoadingStore,
+  likeGetLoadingStore,
+  myPostGetLoadingStore,
+  boardGetLoadingStore,
+  myPostClosedLoadingStore,
+} from "./Store/loading-zustand";
 import LoadingPage from "./Pages/LoadingPage";
 import ErrorPage from "./Pages/ErrorPage";
 
@@ -53,10 +62,27 @@ function App() {
     },
   };
 
-  const { loading, error } = userinfoLoadingStore();
-
-  if (loading) return <LoadingPage />;
-  if (error) return <ErrorPage />;
+  // const { loading1, error1 } = userinfoPostLoadingStore();
+  // const { loading2, error2 } = boardPostLoadingStore();
+  // const { loading3, error3 } = boardPatchLoadingStore();
+  // const { loading4, error4 } = boardDeleteLoadingStore();
+  // const { loading5, error5 } = likeGetLoadingStore();
+  // const { loading6, error6 } = boardGetLoadingStore();
+  // const { loading7, error7 } = myPostGetLoadingStore();
+  // const { loading8, error8 } = myPostClosedLoadingStore();
+  // if (
+  //   loading1 ||
+  //   loading2 ||
+  //   loading3 ||
+  //   loading4 ||
+  //   loading5 ||
+  //   loading6 ||
+  //   loading7 ||
+  //   loading8
+  // )
+  //   return <LoadingPage />;
+  // if (error1 || error2 || error3 || error4 || error5 || error6 || error7 || error8)
+  //   return <ErrorPage />;
   return (
     <ThemeProvider theme={theme}>
       <div>
@@ -65,22 +91,46 @@ function App() {
 
           <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route exact path="/register" element={<RegisterPage />} />
-            <Route exact path="/registeredit" element={<RegisterEditPage />} />
+            <Route
+              exact
+              path="/register"
+              element={isLogin ? <RegisterPage /> : <Home />}
+            />
+            <Route
+              exact
+              path="/registeredit"
+              element={isLogin ? <RegisterEditPage /> : <Home />}
+            />
             <Route
               exact
               path="/RegisterContentViewPage"
               element={<RegisterContentViewPage />}
             />
-            <Route exact path="/mylikes" element={<MyLikesPage />} />
-            <Route exact path="/mypost" element={<MyPostPage />} />
-            <Route exact path="/userinfoedit" element={<UserInfoEditPage />} />
+            <Route
+              exact
+              path="/mylikes"
+              element={isLogin ? <MyLikesPage /> : <Home />}
+            />
+            <Route
+              exact
+              path="/mypost"
+              element={isLogin ? <MyPostPage /> : <Home />}
+            />
+            <Route
+              exact
+              path="/userinfoedit"
+              element={isLogin ? <UserInfoEditPage /> : <Home />}
+            />
             <Route
               exact
               path="/userinforegister"
-              element={<UserInfoRegisterPage />}
+              element={isLogin ? <UserInfoRegisterPage /> : <Home />}
             />
-            <Route exact path="/error" element={<Error />} />
+            <Route
+              exact
+              path="/error"
+              element={isLogin ? <Error /> : <Home />}
+            />
           </Routes>
         </Router>
       </div>
