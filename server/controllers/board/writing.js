@@ -26,7 +26,7 @@ module.exports = {
       res.status(403).send("not Authorized"); //id가 일치하지 않으므로 더이상 진행할 필요가 없습니다
     }
 
-    Post.create({
+    const newPost = await Post.create({
       user_id: cocodusId,
       jsonfile: jsonfile,
       recruiting: recruiting,
@@ -39,20 +39,22 @@ module.exports = {
     });
     //숫자를 반올림을 해서 넣어주네...? 이거 해결해야 합니다
 
-    let postId = 0; //위에서 입력한 post_id를 받아와야 하는데 어떻게 받아오면 좋을까요? > id로 조회하되 제일 최근에 쓴
-    let newPost = await Post.findAll({
-      where: { jsonfile: jsonfile },
-    });
-
-    // console.log(newPost);
+    let postId = newPost.dataValues.id;
+    console.log(lat);
+    console.log(long);
+    console.log(tag);
+    console.log(postId); //여기까지 작동 확인
 
     // tag.forEach((element) => {
-    //   //tag 배열이 최소 하나의 언어를 반드시 가진 상태로 클라이언트에서 전송되므로 실행이 확실합니다.
+    //   //여기는 더 효율적으로 만들고 싶은데 어떻게 해야할지 몰라서 일단 이렇게 구현했습니다.
     //   Post_tag.create({
     //     post_id: postId,
     //     tag_id: element,
     //   });
     // });
+
+    //우리가 작성할 때는 post하고 post_tag에 입력을 하고
+    //우리가 조회할 때는 post하고 tag를 조회하고 둘의 관계를 post_tag를 통해 유추합니다
 
     res.status(201).end();
     // res.status(201).json({ postId: postId });

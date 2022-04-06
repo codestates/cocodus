@@ -31,8 +31,8 @@ module.exports = (sequelize, DataTypes) => {
       veiw_count: DataTypes.INTEGER,
       total_like: DataTypes.INTEGER,
       total_comment: DataTypes.INTEGER,
-      lat: DataTypes.INTEGER,
-      long: DataTypes.INTEGER,
+      lat: DataTypes.STRING,
+      long: DataTypes.STRING,
     },
     {
       sequelize,

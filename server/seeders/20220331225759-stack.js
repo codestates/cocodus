@@ -6,46 +6,58 @@ module.exports = {
       "Tags",
       [
         {
-          stack: "JS",
+          stack: "c",
         },
         {
-          stack: "TS",
+          stack: "c++",
         },
         {
-          stack: "React",
+          stack: "c#",
         },
         {
-          stack: "View",
+          stack: "spring",
         },
         {
-          stack: "Node",
+          stack: "javascript",
         },
         {
-          stack: "Java",
+          stack: "typescript",
         },
         {
-          stack: "Spring",
+          stack: "react",
         },
         {
-          stack: "Kotlin",
+          stack: "vue",
         },
         {
-          stack: "C",
+          stack: "node.js",
         },
         {
-          stack: "Go",
+          stack: "python",
         },
         {
-          stack: "Python",
+          stack: "django",
         },
         {
-          stack: "Django",
+          stack: "go",
         },
         {
-          stack: "Flutter",
+          stack: "swift",
         },
         {
-          stack: "Swift",
+          stack: "kotlin",
+        },
+        {
+          stack: "angular",
+        },
+        {
+          stack: "ruby",
+        },
+        {
+          stack: "java",
+        },
+        {
+          stack: "flutter",
         },
       ],
       {}

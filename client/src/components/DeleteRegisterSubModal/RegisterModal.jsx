@@ -46,7 +46,6 @@ function RegisterModal({ closeModal }) {
         longitudeX,
       };
 
-      // const newPost =
       await axios({
         method: "POST",
         url: "http://localhost:8080/board/writing",
