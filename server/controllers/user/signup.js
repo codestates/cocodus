@@ -16,17 +16,16 @@ module.exports = {
     } else id = null;
     let temp = await findUserInfo(id);
     console.log(temp);
-    // let isMember = await User.findOne({ where: { id } });
+    let isMember = await User.findOne({ where: { id } });
 
     res
       .status(200)
       .cookie("accessToken", accessToken, {
         maxAge: 360000, //300초 뒤에 쿠키 사라짐
       })
-      .cookie("cocodusId", id)
-      .redirect(
-        "http://localhost:3000" + !!isMember ? null : "/userinforegister"
-      );
+      .cookie("cocodusId", id);
+    if (isMember) res.redirect("http://localhost:3000");
+    else res.redirect("http://localhost:3000/userinforegister");
   },
 
   google: async (req, res) => {
@@ -44,8 +43,9 @@ module.exports = {
       .cookie("accessToken", accessToken, {
         maxAge: 360000, //360초 뒤에 쿠키 사라짐
       })
-      .cookie("cocodusId", id)
-      .redirect("http://localhost:3000/userinforegister");
+      .cookie("cocodusId", id);
+    if (isMember) res.redirect("http://localhost:3000");
+    else res.redirect("http://localhost:3000/userinforegister");
   },
 
   github: async (req, res) => {
@@ -56,13 +56,15 @@ module.exports = {
     let id;
     if (validation) id = "github+" + validation.login;
     else id = null;
+    let isMember = await User.findOne({ where: { id } });
 
     res
       .status(200)
       .cookie("accessToken", accessToken, {
         maxAge: 360000, //300초 뒤에 쿠키 사라짐
       })
-      .cookie("cocodusId", id)
-      .redirect("http://localhost:3000/userinforegister");
+      .cookie("cocodusId", id);
+    if (isMember) res.redirect("http://localhost:3000");
+    else res.redirect("http://localhost:3000/userinforegister");
   },
 };
