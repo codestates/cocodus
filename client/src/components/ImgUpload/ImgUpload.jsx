@@ -26,7 +26,7 @@ function ImgUpload() {
   };
 
   return (
-    <Section>
+    <Section width="60%">
       <ImgBlock>
         <ImgInput
           ref={logoImgInput}
