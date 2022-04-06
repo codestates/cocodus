@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Post_tag.init(
     {
       post_id: DataTypes.INTEGER,
-      tag_id: DataTypes.STRING,
+      tag_id: DataTypes.INTEGER,
     },
     {
       sequelize,
