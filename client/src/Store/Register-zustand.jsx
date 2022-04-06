@@ -7,10 +7,10 @@ export const registerStore = create((set) => ({
   // 제목, 날짜, 온라인 여부 담는 객체
   inputs: {
     title: "",
-    date: "",
     online: false,
-    recuiting: true,
   },
+
+  recuiting: true,
   //모집중 onChange 함수
   chgrecruiting: (value) =>
     set((state) => ({
@@ -27,6 +27,29 @@ export const registerStore = create((set) => ({
   chgOnline: (name, checked) =>
     set((state) => ({
       inputs: { ...state.inputs, [name]: checked },
+    })),
+
+  // 날짜, 시간, 분
+  year: "",
+  hour: "00",
+  minute: "00",
+
+  // 날짜 onChange 함수
+  chgYear: (value) =>
+    set((state) => ({
+      year: value,
+    })),
+
+  // 시간 onChange 함수
+  chgHour: (value) =>
+    set((state) => ({
+      hour: value,
+    })),
+
+  // 분 onChange 함수
+  chgMin: (value) =>
+    set((state) => ({
+      minute: value,
     })),
 
   // 기술 스택 태그 담는 배열

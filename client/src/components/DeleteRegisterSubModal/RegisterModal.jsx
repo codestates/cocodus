@@ -26,8 +26,11 @@ function RegisterModal({ closeModal }) {
     roadAddress,
     latitudeY,
     longitudeX,
+    year,
+    hour,
+    minute,
   } = registerStore();
-  const { title, date, online } = inputs;
+  const { title, online } = inputs;
 
   // 클릭하는 순간 글이 등록되게하는 함수
   const onRegister = async () => {
@@ -41,7 +44,7 @@ function RegisterModal({ closeModal }) {
         title,
         content,
         tag,
-        date,
+        date: `${year} ${hour}시 ${minute}분`,
         online,
         placeName,
         roadAddress,
