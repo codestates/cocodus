@@ -62,4 +62,5 @@ module.exports = {
     let isMember = await User.findOne({ where: { id } });
     return isMember;
   },
+  sortDist: (lats, longs, idx) => {},
 };
