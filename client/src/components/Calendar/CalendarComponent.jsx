@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Select from "react-select";
 import styled from "styled-components";
+import { registerStore } from "../../Store/Register-zustand";
 
 export const FlexBox = styled.div`
   display: flex;
@@ -19,6 +20,7 @@ export const SelectTag = styled(Select)`
 `;
 
 function CalendarComponent(props) {
+  const { year, hour, minute, chgYear, chgHour, chgMin } = registerStore();
   // 당일로부터 14일 이후까지만의 날짜를 Select의 값으로 전해주기위함
   let dateOptions = [];
   for (let i = 0; i < 14; i++) {
@@ -73,19 +75,15 @@ function CalendarComponent(props) {
     }),
   });
 
-  const [year, setYear] = useState("");
-  const [hour, setHour] = useState("00");
-  const [minute, setMinute] = useState("00");
-
   const yearChange = (value) => {
-    setYear(value.value);
+    chgYear(value.value);
     console.log(year);
   };
   const hourChange = (value) => {
-    setHour(value.value);
+    chgHour(value.value);
   };
   const minuteChange = (value) => {
-    setMinute(value.value);
+    chgMin(value.value);
   };
   return (
     <FlexBox>
