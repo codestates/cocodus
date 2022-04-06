@@ -1,7 +1,5 @@
 module.exports = {
-  get: async (req, res) => {
-    res.status(200).send("test signin");
-  },
+  get: async (req, res) => {},
   github: async (req, res) => {
     console.log(res);
     const token = res.body.token;

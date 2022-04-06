@@ -8,6 +8,8 @@ router.post("/signup", userController.signup.post);
 
 router.get("/signup", userController.signup.get);
 
+router.get("/signin", userController.signin.get);
+
 router.get("/signup/github", userController.signup.github);
 
 router.get("/signup/google", userController.signup.google);

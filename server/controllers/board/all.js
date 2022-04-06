@@ -1,52 +1,32 @@
+const { sortDist } = require("../database");
+const { User, Post } = require("../../models");
 module.exports = {
   get: async (req, res) => {
-    // 서버에 위치를 어떻게 보내줄 것인가
-    // 조회를 계속 할 것인가?
-    // 다 받아와서 서버에서 자를 것인가?
-    //아니면 다 받아서 다 클라에 보내주고 클라에서 정리할 것인가?
-    // 만약 클라에서 한다면 도로명 주소나 위도경도를 이용해야 할 것
-    //다익스트라 알고리즘 > 네비에서 최단경로 구할때 쓰는 알고리즘
-    //이걸 응용해서, 각 모임 정보 장소의 최단 거리를 구하기만 하고, 비교를 해서 정렬하면 될 것 같습니다
-    //범위는 대신 우리가 정해야 합니다
-    //현덕 제안 : 기본 범위 10km
-    //지하철역 사이를 평균 1.5km로 놓고, 7정거장 + 지하철역을 가는 데 필요한 거리 1km를 합산해서 10km로 제안
-    //프론트엔드 의견 : 10km도 좋은데 조금 여유있게 15km정도 해도 괜찮을 것 같다
-    //일단 대도시 기준으로 생각합시다...
-
-    //클라에서 보내줘야 하는 정보는 없음(회원가입 안해도 볼 수 있어야 함)
-    //서버에서는 다음 정보를 배열로 묶어서 보내줘야함
-    //위치정보 표시는 안되더라도 보내줘야 합니다 그래야 클라에서 정렬할 때 필요한 로직 구현할 수 있어요!
-    //만약 로그인을 안했다면 카카오맵에서 기본적으로 설정하는 기준점을 중심으로 구분하면 될 것 같습니다
-    // 응답에 담겨야 할 정보는 모임 정보'들'
-
-    //1. 서버에서 정렬할지 아니면 클라에서 정렬할지
-    //2. 왜 그래야하는지
-    //3. 정보를 저장하는 방법은 정했는데, 이걸 어떻게 가공할지
-    //4. 단순하게 1:!로 비교하면 알고리즘이 bigO(N)방식으로 되서 시간이 무한대로 늘어나는데 이런 방식으로 정렬을 할 순 없음
-    //4-1. 서버에 저장된 모임 정보가 1만건인데 단순하게 위치를 다 비교하면
-    // 1만건을 전부 위치를 구해서 일직선 거리를 구하는 과정을 한번 해야 하고
-    // 4-2. 추가로 그걸 정리하는 과정이 필요합니다
-    // 매우 비효율적
-    // 위도경도 ok인데 기준점을 옮겨야됩니다
-
-    {
-      /*
-      [
-        ...{
-          tag: [공부할 언어],
-          title: 모임 정보 제목
-          totalLike : 좋아요 수
-          totalView: 조회수
-          location: 상호명으로 바로 볼 수 있는 모임(위치)
-          roadAddress: 도로명주소 (클라는 카멜로 보내주세요 db가 알아서 받겠습니다)
-          lat: latitude Y
-          long : longitude X
-        }
-      ]
-    */
+    const id = "github+happy5happy5";
+    const name = "윤종복";
+    let userLoc = await User.findOne({
+      where: { id },
+      attributes: ["lat", "long"],
+    });
+    let postLoc = await sortDist(userLoc.dataValues);
+    let result = [];
+    for (let i = 0; i < postLoc.length; i++) {
+      let temp = Post.findOne({
+        where: { id: postLoc[i] },
+        attributes: [
+          "id",
+          "user_id",
+          "jsonfile",
+          "recruiting",
+          "online",
+          "veiw_count",
+          "total_like",
+        ],
+      });
+      result.push(temp);
     }
-    //위의 정보를 시퀄라이즈로 조회해서 '모임정보모아두는변수' = [] 에다가 하나씩 요소로 추가
-    //그다음 담아서 응답
-    res.status(200).send("모임정보담아두는변수");
+    let cal = await Promise.all(result);
+
+    res.status(200).send(cal.map((x) => x.dataValues));
   },
 };
