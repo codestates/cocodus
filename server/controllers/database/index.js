@@ -1,4 +1,4 @@
-const { User } = require("../../models");
+const { User, Post } = require("../../models");
 const { isAuthorized } = require("../token");
 module.exports = {
   saveUserInfo: async (data) => {
@@ -62,4 +62,5 @@ module.exports = {
     let isMember = await User.findOne({ where: { id } });
     return isMember;
   },
+  sortDist: (lats, longs, idx) => {},
 };
