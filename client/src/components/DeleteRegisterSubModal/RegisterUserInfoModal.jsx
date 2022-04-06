@@ -60,6 +60,7 @@ function RegisterUserInfoModal({ closeModal }) {
         },
       });
       if (userDataSave.status === 201) {
+        console.log(userDataSave);
         closeModal();
         navigate("/");
       } else {

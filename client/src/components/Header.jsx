@@ -1,9 +1,8 @@
-import { StyledHeader, Nav, Logo, Image } from "./styles/Header.styled";
+import { StyledHeader, Image } from "./styles/Header.styled";
 import { Container } from "./styles/Container.styled";
 import { Button } from "./styles/Button.styled";
 import { Flex } from "./styles/Flex.styled";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { accessTokenStore } from "../Store/accesstoken-zustand";
 import LoginModal from "./LoginModal/LoginModal";
 import { useNavigate } from "react-router-dom";

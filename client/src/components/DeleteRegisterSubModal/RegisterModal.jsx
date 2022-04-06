@@ -12,10 +12,12 @@ import {
 import axios from "axios";
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
 import { boardPostLoadingStore } from "../../Store/loading-zustand";
+import { registerUserInfoStore } from "../../Store/RegisterUserInfo-zustand";
 
 function RegisterModal({ closeModal }) {
   const { chgLoading, chgError } = boardPostLoadingStore();
   const { accessToken, cocodusId } = accessTokenStore();
+  const { nickName } = registerUserInfoStore();
   const {
     inputs,
     tag,
@@ -35,6 +37,7 @@ function RegisterModal({ closeModal }) {
       const postData = {
         accessToken,
         cocodusId,
+        nickName,
         title,
         content,
         tag,
