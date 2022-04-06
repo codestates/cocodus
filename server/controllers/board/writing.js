@@ -37,13 +37,13 @@ module.exports = {
     let postId = newPost.dataValues.id;
     console.log(postId);
     // Post_tags에 created_at 컬럼이 없는데 자꾸 넣으라고 함 수정 필요
-    // tag.forEach((element) => {
-    //   Post_tag.create({
-    //     post_id: postId,
-    //     tag_id: num,
-    //   });
-    // });
+    await tag.map((element) => {
+      Post_tag.create({
+        post_id: postId,
+        tag_id: element,
+      });
+    });
 
-    res.status(201).json({ postId: postId });
+    res.status(201).end();
   },
 };

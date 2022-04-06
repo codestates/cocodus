@@ -19,17 +19,17 @@ module.exports = {
           },
         },
         tag_id: {
-          type: Sequelize.INTEGER,
-          references: {
-            model: "Tags",
-            key: "id",
-          },
+          type: Sequelize.STRING,
+          // references: {
+          //   model: "Tags",
+          //   key: "id",
+          // },
         },
       },
       {
         // 테이블 옵션
         timestamps: false,
-        underscored: true,
+        underscored: false,
       }
     );
   },
