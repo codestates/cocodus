@@ -24,7 +24,7 @@ function Register() {
   const { title, online } = inputs;
   const onChange = (e) => {
     const { name, value } = e.target;
-    console.log(value);
+    // console.log(value);
     chgInput(name, value);
   };
 
@@ -33,14 +33,14 @@ function Register() {
     // console.log(e);
     const opts = e.map((el) => el.value);
     // console.log(opts);
-    console.log(tag);
+    // console.log(tag);
     chgTag(opts);
   };
 
   // 온라인 가능 여부
   const onCheckChange = (e) => {
     const { name, checked } = e.target;
-    console.log(online);
+    // console.log(online);
     chgOnline(name, checked);
   };
 
@@ -48,7 +48,7 @@ function Register() {
   const onMsgChange = (e) => {
     // console.log(e.blocks);
     let text = e.blocks.map((el) => el.text);
-    console.log(text.join(" "));
+    // console.log(text.join(" "));
     text = text.join(" ");
     chgMsg(text);
   };
