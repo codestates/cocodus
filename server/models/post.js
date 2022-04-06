@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         comment: "고유번호 UUID",
       },
       user_id: DataTypes.STRING,
-      jsonfile: DataTypes.STRING,
+      jsonfile: DataTypes.JSON,
       recruiting: DataTypes.BOOLEAN,
       online: DataTypes.BOOLEAN,
       veiw_count: DataTypes.INTEGER,

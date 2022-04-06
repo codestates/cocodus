@@ -19,7 +19,7 @@ module.exports = {
           },
         },
         jsonfile: {
-          type: Sequelize.STRING,
+          type: Sequelize.JSON,
         },
         recruiting: {
           type: Sequelize.BOOLEAN,
