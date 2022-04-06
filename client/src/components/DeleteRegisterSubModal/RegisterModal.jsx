@@ -46,20 +46,21 @@ function RegisterModal({ closeModal }) {
         longitudeX,
       };
 
-      const newPost = await axios({
+      await axios({
         method: "POST",
         url: "http://localhost:8080/board/writing",
         data: {
           jsonfile: JSON.stringify(postData),
           accessToken,
-          user_id: cocodusId,
+          cocodusId,
+          tag,
+          online,
           lat: latitudeY,
           long: longitudeX,
           recruiting: true,
-          online: online,
         },
       });
-      console.log(newPost);
+      // console.log(newPost);
       closeModal(); // 모달창 닫는 함수
     } catch (e) {
       chgError(e);
