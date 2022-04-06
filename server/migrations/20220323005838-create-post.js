@@ -19,7 +19,7 @@ module.exports = {
           },
         },
         jsonfile: {
-          type: Sequelize.STRING,
+          type: Sequelize.JSON,
         },
         recruiting: {
           type: Sequelize.BOOLEAN,
@@ -37,10 +37,10 @@ module.exports = {
           type: Sequelize.INTEGER,
         },
         lat: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.STRING,
         },
         long: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.STRING,
         },
         createdAt: {
           allowNull: false,

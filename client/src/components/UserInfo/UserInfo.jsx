@@ -27,7 +27,7 @@ function UserInfo(props) {
 
   return (
     <>
-      <Section>
+      <Section width="60%">
         <FlexBox>
           <Div>닉네임</Div>
           <InputBox

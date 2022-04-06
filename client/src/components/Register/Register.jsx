@@ -18,6 +18,7 @@ import LangOptTag from "../LangOptTag";
 import KakaoMap from "../KakaoMap";
 import { registerStore } from "../../Store/Register-zustand";
 import KakaoSearchBox from "../KakaoSearchBox/KakaoSearchBox";
+import CalendarComponent from "../Calendar/CalendarComponent";
 
 function Register() {
   const { inputs, tag, chgInput, chgOnline, chgTag, chgMsg } = registerStore();
@@ -82,13 +83,14 @@ function Register() {
           <LangOptTag onChange={onTagChange} />
         </FlexBox>
         <FlexBox>
-          <Div>일시</Div>
-          <InputBox
+          {/* <Div>일시</Div> */}
+          {/* <InputBox
             name="date"
             type="datetime-local"
             value={date}
             onChange={onChange}
-          />
+          /> */}
+          <CalendarComponent />
           <Label>
             <CheckBox
               name="online"
