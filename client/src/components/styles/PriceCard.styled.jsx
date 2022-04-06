@@ -42,6 +42,15 @@ export const FeatureListItem = styled.div`
   margin-bottom: 0.325rem;
   flex-direction: row;
   justify-content: flex-start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 라인수 */
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  line-height: 1.2em;
+  height: 2.4em;
+  width: 25em;
 `;
 
 export const ActionButton = styled.div`
@@ -89,11 +98,11 @@ export const MapButton = styled.button`
   cursor: pointer;
   font-size: 16px;
   font-weight: 700;
-  padding: 15px 40px;
+  padding: 15px 5px;
   background-color: ${({ bg }) => bg || "#fff"};
   color: ${({ color }) => color || "#333"};
-  margin-right: 50px;
-  margin-left: 20px;
+  margin-right: 20px;
+  margin-left: 10px;
 
   &:hover {
     opacity: 0.9;

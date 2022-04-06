@@ -50,14 +50,14 @@ function RegisterModal({ closeModal }) {
         method: "POST",
         url: "http://localhost:8080/board/writing",
         data: {
+          jsonfile: JSON.stringify(postData),
           accessToken,
           cocodusId,
           tag,
           online,
-          recruiting: true,
           lat: latitudeY,
           long: longitudeX,
-          jsonfile: JSON.stringify(postData),
+          recruiting: true,
         },
       });
       // console.log(newPost);
