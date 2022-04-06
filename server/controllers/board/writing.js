@@ -14,6 +14,7 @@ module.exports = {
       jsonfile,
     } = req.body;
     //여기에 accessToken 확인하는 과정 추가할 예정입니다
+
     const cocodusMember = await User.findOne({
       where: { id: user_id },
     });
@@ -49,28 +50,20 @@ module.exports = {
 
     const tagId = getTagId.map((el) => el.dataValues.id);
 
-    let result;
-
-    // for (el of tagId) {
-    // result = await Post_tag.create(
-    //   {
-    //     post_id: postId,
-    //     tag_id: el,
-    //   },
-    //   {
-    //     silent: false,
-    //   }
-    // );
-    // Post_tag.create(
-    //   {
-    //     post_id: 1,
-    //     tag_id: 3,
-    //   },
-    //   {
-    //     fields: ["post_id", "tag_id"],
-    //   }
-    // );
-    // }
+    let result = [];
+    for (el of tagId) {
+      let temp = await Post_tag.create(
+        {
+          post_id: postId,
+          tag_id: el,
+        },
+        {
+          fields: ["post_id", "tag_id"],
+        }
+      );
+      result.push(temp);
+    }
+    // console.log(result);
 
     res.status(201).end();
   },

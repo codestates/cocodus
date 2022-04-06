@@ -1,5 +1,5 @@
 const { sortDist } = require("../database");
-const { User, Post } = require("../../models");
+const { User, Post, Post_tag } = require("../../models");
 module.exports = {
   get: async (req, res) => {
     const id = "github+happy5happy5";
