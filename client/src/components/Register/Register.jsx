@@ -1,6 +1,6 @@
 // 글 등록, 수정하기 폼
 
-import React, { useState } from "react";
+import React from "react";
 import TestEditorForm from "../TestEditorForm";
 import {
   Section,
@@ -11,18 +11,17 @@ import {
   InputBox,
   Label,
   CheckBox,
-  PlaceBox,
-  PlaceInputBox,
 } from "./Register.styled";
 import LangOptTag from "../LangOptTag";
 import KakaoMap from "../KakaoMap";
 import { registerStore } from "../../Store/Register-zustand";
 import KakaoSearchBox from "../KakaoSearchBox/KakaoSearchBox";
+import CalendarComponent from "../Calendar/CalendarComponent";
 
 function Register() {
   const { inputs, tag, chgInput, chgOnline, chgTag, chgMsg } = registerStore();
 
-  const { title, date, online } = inputs;
+  const { title, online } = inputs;
   const onChange = (e) => {
     const { name, value } = e.target;
     console.log(value);
@@ -82,13 +81,7 @@ function Register() {
           <LangOptTag onChange={onTagChange} />
         </FlexBox>
         <FlexBox>
-          <Div>일시</Div>
-          <InputBox
-            name="date"
-            type="datetime-local"
-            value={date}
-            onChange={onChange}
-          />
+          <CalendarComponent />
           <Label>
             <CheckBox
               name="online"

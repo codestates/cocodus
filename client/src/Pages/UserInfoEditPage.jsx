@@ -56,7 +56,7 @@ function UserInfoEditPage(props) {
 
   return (
     <>
-      <BackIcon />
+      <BackIcon left="18rem" />
       <TitleContent text="내 정보 수정" />
       <ImgUpload />
       <UserInfo />
