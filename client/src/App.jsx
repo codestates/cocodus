@@ -26,8 +26,10 @@ import {
 } from "./Store/loading-zustand";
 import LoadingPage from "./Pages/LoadingPage";
 import ErrorPage from "./Pages/ErrorPage";
+import { registerUserInfoStore } from "./Store/RegisterUserInfo-zustand";
 
 function App() {
+  const { nickName, chgInput } = registerUserInfoStore();
   const {
     isLogin,
     accessToken,
