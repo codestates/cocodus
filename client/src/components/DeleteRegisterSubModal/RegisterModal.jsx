@@ -57,7 +57,6 @@ function RegisterModal({ closeModal }) {
           long: longitudeX,
           recruiting: true,
           online: online,
-          tag,
         },
       });
       console.log(newPost);
