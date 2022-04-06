@@ -8,17 +8,19 @@ module.exports = {
         {
           user_id: "github+happy5happy5",
           jsonfile: JSON.stringify({
-            id: 1,
+            id: 0,
             nickName: "윤종복",
             title: "리액트 모각코 하실 분",
             content:
               "모각코 구함요(<br>Lorem Ipsum is simply dummy text of the prin ting and typesetting industryLorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
             online: true,
             tag: "React",
-            roadAddress: "서울 서대문구 오량길",
-            placeName: "선선카페",
-            lat: "37.5824163",
-            long: "126.9996541",
+            roadAddress: "서울 종로구 대학로11길 40",
+
+            location: "카페선선혜화", //location 으로 바꾸기
+
+            lat: "37.5824487",
+            long: "126.9996739",
             date: "2022년 3월 18일 오후 6시",
           }),
           recruiting: 0,
