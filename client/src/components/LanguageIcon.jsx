@@ -50,7 +50,7 @@ export default function LanguageIcon({ stackHandler }) {
         </Button>
         <Button>
           <img
-            id={"Node"}
+            id={"Java"}
             onClick={(e) => stackHandler(e.target.id)}
             src="Java.png"
           />
@@ -77,7 +77,20 @@ export default function LanguageIcon({ stackHandler }) {
           />
         </Button>
         <Button>
-          {" "}
+          <img
+            id={"C++"}
+            onClick={(e) => stackHandler(e.target.id)}
+            src="C++.png"
+          />
+        </Button>
+        <Button>
+          <img
+            id={"Csharp"}
+            onClick={(e) => stackHandler(e.target.id)}
+            src="CSharp.png"
+          />
+        </Button>
+        <Button>
           <img
             id={"Go"}
             onClick={(e) => stackHandler(e.target.id)}
@@ -96,6 +109,20 @@ export default function LanguageIcon({ stackHandler }) {
             id={"Django"}
             onClick={(e) => stackHandler(e.target.id)}
             src="Django.png"
+          />
+        </Button>
+        <Button>
+          <img
+            id={"Angular"}
+            onClick={(e) => stackHandler(e.target.id)}
+            src="Angular.png"
+          />
+        </Button>
+        <Button>
+          <img
+            id={"Ruby"}
+            onClick={(e) => stackHandler(e.target.id)}
+            src="Ruby.png"
           />
         </Button>
         <Button>

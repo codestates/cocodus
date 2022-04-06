@@ -5,7 +5,6 @@ function KakaoSearchBox({ store }) {
   const { placeName, roadAddress, chgPlace, chgMarker } = store();
   return (
     <PlaceBox>
-      {console.log(placeName)}
       <Div bottom="1rem">위치</Div>
       <Div>
         <div>
