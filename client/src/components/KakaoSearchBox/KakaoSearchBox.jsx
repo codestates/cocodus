@@ -14,6 +14,7 @@ function KakaoSearchBox({ store }) {
             value={placeName}
             onChange={chgPlace}
             placeholder="상호명이 표시됩니다"
+            readOnly
           />
         </div>
         <div>
@@ -22,6 +23,7 @@ function KakaoSearchBox({ store }) {
             value={roadAddress}
             onChange={chgMarker}
             placeholder="도로명 주소가 표시됩니다"
+            readOnly
           />
         </div>
       </Div>
