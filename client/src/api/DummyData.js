@@ -2,11 +2,11 @@ export default [
   {
     title: "리액트 모각코 하실 분",
     content:
-      "모각코 구함요(길게)Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
+      "모각코 구함요(<br>Lorem Ipsum is simply dummy text of the prin ting and typesetting industryLorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
     online: true,
     tag: "React",
     roadAddress: "서울 서대문구 오량길",
-    placeName: "선선카페",
+    placeName: "선선카페", //location 으로 바꾸기
     lat: "37.5824163",
     long: "126.9996541",
     date: "2022년 3월 18일 오후 6시",
@@ -14,7 +14,7 @@ export default [
   {
     title: "리액트 하실 분",
     content:
-      "리액트로 함께할 멤버를 구합니다. Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
+      "리액트로 함께할 멤버를 구합니다. Lorem Ipsum is simply dummy text of the prin ting and typesetting iLorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
     online: true,
     tag: "React",
     roadAddress: "서울 종로구 창경궁로 26길",
