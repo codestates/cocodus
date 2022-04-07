@@ -7,8 +7,6 @@ import {
   Icon,
   BackgroundSqure,
   DivContainer,
-  Align,
-  MapButton,
 } from "./styles/PriceCard.styled";
 
 import { Container } from "./styles/Container.styled";
@@ -40,6 +38,8 @@ function CardSection(props) {
         <Card>
           <BackgroundSqure />
           <ContentDiv>
+            {" "}
+            {/*여기에 onclick 넣으면 됨 */}
             <DivContainer>
               <Icon src="React-icon.svg.png" />
             </DivContainer>
