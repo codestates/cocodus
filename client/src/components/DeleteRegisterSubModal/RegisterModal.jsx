@@ -72,8 +72,8 @@ function RegisterModal({ closeModal }) {
       });
       console.log(newPost);
       closeModal(); // 모달창 닫는 함수
-      navigate("/");
       openModal2();
+      navigate("/");
     } catch (e) {
       chgError(e);
     }

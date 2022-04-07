@@ -7,6 +7,8 @@ import {
   Icon,
   BackgroundSqure,
   DivContainer,
+  Align,
+  MapButton,
 } from "./styles/PriceCard.styled";
 
 import { Container } from "./styles/Container.styled";
@@ -47,10 +49,20 @@ function PriceCard({ stack }) {
         ? data
             .filter((x) => stack.indexOf(x.icon) > -1)
             .map((x, i, a) => {
-              return <CardSection data={x} key={"CardSection" + i} />;
+              return (
+                <CardSection
+                  data={typeof x === "string" ? JSON.parse(x) : x}
+                  key={"CardSection" + i}
+                />
+              );
             })
         : data.map((x, i) => {
-            return <CardSection data={x} key={"CardSection" + i} />;
+            return (
+              <CardSection
+                data={typeof x === "string" ? JSON.parse(x) : x}
+                key={"CardSection" + i}
+              />
+            );
           })}
     </div>
   );
@@ -64,8 +76,6 @@ function CardSection(props) {
         <Card>
           <BackgroundSqure />
           <ContentDiv>
-            {" "}
-            {/*여기에 onclick 넣으면 됨 */}
             <DivContainer>
               <Icon src="React-icon.svg.png" />
             </DivContainer>
@@ -88,7 +98,7 @@ function CardSection(props) {
               {props.data.date}
               <br></br>
               {props.data.roadAddress}
-              {/*//도로명으로 바꾸고, 도로명 주소를 길게 보게 하고 버튼 여백 줄이기 */}
+              {/*//도로명으로 바꾸고, 도로명 주소를 길게 보게 하고 버튼 여백 줄이기 cd */}
             </DivContainer>
           </ContentDiv>
         </Card>
