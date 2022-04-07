@@ -65,7 +65,7 @@ function App() {
         x.status === 200 ? [chgInput(x.data), chgIsLogin(true)] : null
       );
     } else chgIsLogin(false);
-  }, [accessToken, cocodusId, isLogin]);
+  }, [accessToken, cocodusId]);
   const theme = {
     colors: {
       header: "#ebfbff",
