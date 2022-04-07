@@ -29,19 +29,22 @@ module.exports = {
         result.push(temp);
       }
       let cal = await Promise.all(result);
-      return res
-        .status(200)
-        .send(
-          cal
-            .filter((x, i) =>
-              i >= howMany[0] && i < howMany[0] + howMany[1] ? true : false
-            )
-            .map((x, i) => x.dataValues)
-        );
+      return res.status(200).send(
+        cal
+          .filter((x, i) =>
+            i >= howMany[0] && i < howMany[0] + howMany[1] ? true : false
+          )
+          .map((x, i) => {
+            return {
+              jsonfile: x.dataValues.jsonfile,
+              id: postLoc[i],
+            };
+          })
+      );
     }
     if (isLogin === "false" && !accessToken && !nickName) {
       let temp = await Post.findAll({
-        attributes: ["jsonfile"],
+        attributes: ["id", "jsonfile"],
         offset: Number(howMany[0]) || 0,
         limit: Number(howMany[1]),
         subQuery: false,

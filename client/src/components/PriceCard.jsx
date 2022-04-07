@@ -21,7 +21,7 @@ import { postData } from "../Store/postData-zustand";
 function PriceCard({ stack = [] }) {
   const [howMany, setHowMany] = useState([0, 3]); //첫번째가 시작인덱스 2번째가 몇개 받아올지 개수
   const [km, setKm] = useState(30);
-  const { data, chgData } = postData();
+  const { jsonData, chgJsonData } = postData();
   const { isLogin, accessToken, cocodusId } = accessTokenStore();
   const { nickName, chgInput } = registerUserInfoStore();
   // console.log({ isLogin, accessToken, cocodusId, nickName });
@@ -37,12 +37,8 @@ function PriceCard({ stack = [] }) {
         km,
       },
     });
-    if (temp.data) {
-      chgData(
-        temp.data.map((x) =>
-          typeof x.jsonfile === "string" ? JSON.parse(x.jsonfile) : x.jsonfile
-        )
-      );
+    if (temp.data.length) {
+      chgJsonData(temp.data);
     }
   }, [isLogin, nickName, howMany, km]);
 
@@ -65,11 +61,18 @@ function PriceCard({ stack = [] }) {
       <button onClick={() => setKm(km + 1)}>km증가</button>
       <button onClick={() => setKm(km - 1)}>km감소</button>
 
-      {stack.length
-        ? data
-            .filter((x) => stack.indexOf(x.tag) > -1)
-            .map((x, i) => <CardSection data={x} key={"CardSection" + i} />)
-        : data.map((x, i) => <CardSection data={x} key={"CardSection" + i} />)}
+      {jsonData
+        .map((x) =>
+          typeof x.jsonfile === "string"
+            ? { jsonfile: JSON.parse(x.jsonfile), id: x.id }
+            : x
+        )
+        .filter((x) =>
+          stack.length ? stack.indexOf(x.jsonfile.tag) > -1 : true
+        )
+        .map((x, i) => (
+          <CardSection data={x.jsonfile} key={x.id}></CardSection>
+        ))}
     </div>
   );
 }
