@@ -78,9 +78,9 @@ export default function LanguageIcon({ stackHandler }) {
         </Button>
         <Button>
           <img
-            id={"CPlus"}
+            id={"C++"}
             onClick={(e) => stackHandler(e.target.id)}
-            src="CPlus.png"
+            src="C++.png"
           />
         </Button>
         <Button>
