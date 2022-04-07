@@ -8,6 +8,9 @@ module.exports = {
         where: { id: cocodusId },
         attributes: ["lat", "long"],
       });
+      if (!userLoc) {
+        return res.status(404).send("no userInfo in DB");
+      }
       let postLoc = await sortDist(userLoc.dataValues, km);
       let result = [];
       for (let i = 0; i < postLoc.length; i++) {
