@@ -52,9 +52,9 @@ export const Name = styled.div`
 `;
 
 export const Icon = styled.div`
-  position: absolute;
-  right: 10%;
   height: 50px;
+  right: 10%;
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -72,11 +72,13 @@ export const Icon = styled.div`
 `;
 
 export const Img = styled.img`
+  /* background: rgba(223, 175, 0);
+  opacity: 0.8; */
   position: absolute;
   left: 0;
   width: 2.5rem;
   height: 2.5rem;
-  border: 1px solid rgba(196, 196, 196, 0.26);
+  border: 1px solid #fff;
   border-radius: 50%;
   margin-right: 0.5rem;
   &:hover {

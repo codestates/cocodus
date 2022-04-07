@@ -7,6 +7,8 @@ import {
   Icon,
   BackgroundSqure,
   DivContainer,
+  Align,
+  MapButton,
 } from "./styles/PriceCard.styled";
 
 import { Container } from "./styles/Container.styled";
@@ -16,7 +18,8 @@ import axios from "axios";
 import { accessTokenStore } from "../Store/accesstoken-zustand";
 import { registerUserInfoStore } from "../Store/RegisterUserInfo-zustand";
 import { postData } from "../Store/postData-zustand";
-function PriceCard({ stack }) {
+function PriceCard({ stack = [] }) {
+  const [howMany, setHowMany] = useState([0, 3]); //첫번째가 시작인덱스 2번째가 몇개 받아올지 개수
   const { data, chgData } = postData();
   const { isLogin, accessToken, cocodusId } = accessTokenStore();
   const { nickName, chgInput } = registerUserInfoStore();
@@ -29,29 +32,38 @@ function PriceCard({ stack }) {
         accessToken,
         cocodusId,
         nickName,
+        howMany,
       },
     });
-
     if (temp.data) {
-      console.log("목록=", temp.data);
-      chgData(temp.data.map((x) => x.jsonfile));
+      chgData(
+        temp.data.map((x) =>
+          typeof x.jsonfile === "string" ? JSON.parse(x.jsonfile) : x.jsonfile
+        )
+      );
     }
-  }, [isLogin, nickName]);
+  }, [isLogin, nickName, howMany]);
 
   return (
     <div>
-      {/* {data.map((x, i) => (
-        <CardSection data={x} key={"CardSection" + i} />
-      ))} */}
+      <button onClick={() => setHowMany([howMany[0] + 1, howMany[1]])}>
+        시작인덱스 증가
+      </button>
+      <button onClick={() => setHowMany([howMany[0] - 1, howMany[1]])}>
+        시작인덱스 감소
+      </button>
+      <button onClick={() => setHowMany([howMany[0], howMany[1] + 1])}>
+        총개수 증가
+      </button>
+      <button onClick={() => setHowMany([howMany[0], howMany[1] - 1])}>
+        총개수 감소
+      </button>
+
       {stack.length
         ? data
-            .filter((x) => stack.indexOf(x.icon) > -1)
-            .map((x, i, a) => {
-              return <CardSection data={x} key={"CardSection" + i} />;
-            })
-        : data.map((x, i) => {
-            return <CardSection data={x} key={"CardSection" + i} />;
-          })}
+            .filter((x) => stack.indexOf(x.tag) > -1)
+            .map((x, i) => <CardSection data={x} key={"CardSection" + i} />)
+        : data.map((x, i) => <CardSection data={x} key={"CardSection" + i} />)}
     </div>
   );
 }
@@ -64,8 +76,6 @@ function CardSection(props) {
         <Card>
           <BackgroundSqure />
           <ContentDiv>
-            {" "}
-            {/*여기에 onclick 넣으면 됨 */}
             <DivContainer>
               <Icon src="React-icon.svg.png" />
             </DivContainer>
@@ -88,7 +98,7 @@ function CardSection(props) {
               {props.data.date}
               <br></br>
               {props.data.roadAddress}
-              {/*//도로명으로 바꾸고, 도로명 주소를 길게 보게 하고 버튼 여백 줄이기 */}
+              {/*//도로명으로 바꾸고, 도로명 주소를 길게 보게 하고 버튼 여백 줄이기 cd */}
             </DivContainer>
           </ContentDiv>
         </Card>
