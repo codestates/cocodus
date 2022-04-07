@@ -18,7 +18,7 @@ body {
 }
 
 p {
-    opacity: 1;
+    opacity: 0.6;
     line-height: 1.5;
 }
 img {
