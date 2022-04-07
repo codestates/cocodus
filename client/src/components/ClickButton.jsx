@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { BtnGroup, Btn } from "./Register/Register.styled";
 import {
   Logo,
@@ -16,6 +17,10 @@ function ClickButton({
   text,
   Tag,
 }) {
+  const navigate = useNavigate();
+  const goBack = () => {
+    navigate(-1);
+  };
   return (
     <>
       {/* 버튼 두개가 모두 모달이 필요할 때 */}
@@ -40,7 +45,7 @@ function ClickButton({
       ) : /* 버튼 1개가 모달이 필요할 때 */
       click1 ? (
         <BtnGroup>
-          <Btn>{click1}</Btn>
+          <Btn onClick={goBack}>{click1}</Btn>
           <Btn onClick={store2().openModal2}>{click2}</Btn>
           <Modal open={store2().modalOpen2} header="알림">
             <Tag closeModal={store2().closeModal2} />
