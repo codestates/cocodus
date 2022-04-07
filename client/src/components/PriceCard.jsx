@@ -49,10 +49,20 @@ function PriceCard({ stack }) {
         ? data
             .filter((x) => stack.indexOf(x.icon) > -1)
             .map((x, i, a) => {
-              return <CardSection data={x} key={"CardSection" + i} />;
+              return (
+                <CardSection
+                  data={typeof x === "string" ? JSON.parse(x) : x}
+                  key={"CardSection" + i}
+                />
+              );
             })
         : data.map((x, i) => {
-            return <CardSection data={x} key={"CardSection" + i} />;
+            return (
+              <CardSection
+                data={typeof x === "string" ? JSON.parse(x) : x}
+                key={"CardSection" + i}
+              />
+            );
           })}
     </div>
   );
