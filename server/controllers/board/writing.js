@@ -1,5 +1,5 @@
 const { json } = require("stream/consumers");
-const { User, Post, Post_tag } = require("../../models");
+const { User, Post, Post_tag, Tag } = require("../../models");
 
 module.exports = {
   post: async (req, res) => {
@@ -14,12 +14,13 @@ module.exports = {
       jsonfile,
     } = req.body;
     //여기에 accessToken 확인하는 과정 추가할 예정입니다
+
     const cocodusMember = await User.findOne({
       where: { id: user_id },
     });
 
     if (!cocodusMember) {
-      res.status(403).send("not Authorized"); //id가 일치하지 않으므로 더이상 진행할 필요가 없습니다
+      return res.status(403).send("not Authorized"); //id가 일치하지 않으므로 더이상 진행할 필요가 없습니다
     }
 
     const newPost = await Post.create({
@@ -35,15 +36,35 @@ module.exports = {
     });
 
     let postId = newPost.dataValues.id;
-    console.log(postId);
-    // Post_tags에 created_at 컬럼이 없는데 자꾸 넣으라고 함 수정 필요
-    // tag.forEach((element) => {
-    //   Post_tag.create({
-    //     post_id: postId,
-    //     tag_id: num,
-    //   });
-    // });
 
-    res.status(201).json({ postId: postId });
+    const tagArray = [];
+
+    for (el of tag) {
+      let temp = Tag.findOne({
+        where: { stack: el },
+        attributes: ["id", "stack"],
+      });
+      tagArray.push(temp);
+    }
+    let getTagId = await Promise.all(tagArray);
+
+    const tagId = getTagId.map((el) => el.dataValues.id);
+
+    let result = [];
+    for (el of tagId) {
+      let temp = await Post_tag.create(
+        {
+          post_id: postId,
+          tag_id: el,
+        },
+        {
+          fields: ["post_id", "tag_id"],
+        }
+      );
+      result.push(temp);
+    }
+    // console.log(result);
+
+    res.status(201).end();
   },
 };

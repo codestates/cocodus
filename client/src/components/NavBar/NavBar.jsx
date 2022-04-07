@@ -48,18 +48,14 @@ export default function NavBar() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <StyledHeader>
+      <StyledHeader style={{ opacity: 1 }}>
         <Container>
           <Nav>
             <Logo onClick={() => navigate("/")} src="logo2.png" alt="" />
             {isLogin ? (
               <>
-                {/* <Button onClick={() => navigate("/register")}>
-                  새 게시글 쓰기
-                </Button> */}
-                {/* <Button onClick={logoutHandle}>로그아웃</Button> */}
                 <Block onClick={onHandleMenu}>
-                  <Img src="UserIcon.png" />
+                  <Img src="UserIcon7.png" alt="" />
                   <Name>{nickName}님</Name>
                   <Icon>
                     <CgMenu color="#3c4146" size={25} />

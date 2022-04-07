@@ -78,9 +78,9 @@ export default function LanguageIcon({ stackHandler }) {
         </Button>
         <Button>
           <img
-            id={"C++"}
+            id={"CPlus"}
             onClick={(e) => stackHandler(e.target.id)}
-            src="C++.png"
+            src="CPlus.png"
           />
         </Button>
         <Button>
@@ -159,6 +159,8 @@ const Button = styled.button`
   border: none;
   background: white;
   opacity: 0.6;
+  min-width: 50px;
+
   &:focus {
     opacity: 1;
   }

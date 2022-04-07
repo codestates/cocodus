@@ -5,6 +5,7 @@ export const ModalFlexBox = styled.div`
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
+  height: 80px;
 `;
 
 export const Logo = styled.img`

@@ -78,6 +78,19 @@ export const registerModalStore = create((set) => ({
     })),
 }));
 
+// 글 등록 모달에서 등록하기 버튼을 클릭 후, 나오는 확인 모달
+export const registerNotiModalStore = create((set) => ({
+  modalOpen2: false,
+  openModal2: () =>
+    set((state) => ({
+      modalOpen2: true,
+    })),
+  closeModal2: () =>
+    set((state) => ({
+      modalOpen2: false,
+    })),
+}));
+
 // 글 수정페이지에서 삭제 버튼을 클릭했을 떄,
 export const registerDelModalStore = create((set) => ({
   modalOpen2: false,

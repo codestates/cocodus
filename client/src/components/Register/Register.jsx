@@ -17,14 +17,15 @@ import KakaoMap from "../KakaoMap";
 import { registerStore } from "../../Store/Register-zustand";
 import KakaoSearchBox from "../KakaoSearchBox/KakaoSearchBox";
 import CalendarComponent from "../Calendar/CalendarComponent";
+import { registerUserInfoStore } from "../../Store/RegisterUserInfo-zustand";
 
 function Register() {
   const { inputs, tag, chgInput, chgOnline, chgTag, chgMsg } = registerStore();
-
+  const { nickName } = registerUserInfoStore();
   const { title, online } = inputs;
   const onChange = (e) => {
     const { name, value } = e.target;
-    console.log(value);
+    // console.log(value);
     chgInput(name, value);
   };
 
@@ -33,14 +34,14 @@ function Register() {
     // console.log(e);
     const opts = e.map((el) => el.value);
     // console.log(opts);
-    console.log(tag);
+    // console.log(tag);
     chgTag(opts);
   };
 
   // 온라인 가능 여부
   const onCheckChange = (e) => {
     const { name, checked } = e.target;
-    console.log(online);
+    // console.log(online);
     chgOnline(name, checked);
   };
 
@@ -48,7 +49,7 @@ function Register() {
   const onMsgChange = (e) => {
     // console.log(e.blocks);
     let text = e.blocks.map((el) => el.text);
-    console.log(text.join(" "));
+    // console.log(text.join(" "));
     text = text.join(" ");
     chgMsg(text);
   };
@@ -64,10 +65,10 @@ function Register() {
           value={title}
         />
         <FlexBox>
-          <Img src="UserIcon.png" />
+          <Img src="UserIcon7.png" />
           <InputBox
             type="text"
-            defaultValue="김코딩"
+            value={nickName}
             width="15%"
             backColor="#fff"
             Border="none"

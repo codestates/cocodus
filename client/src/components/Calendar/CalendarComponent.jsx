@@ -3,22 +3,6 @@ import Select from "react-select";
 import styled from "styled-components";
 import { registerStore } from "../../Store/Register-zustand";
 
-export const FlexBox = styled.div`
-  display: flex;
-`;
-
-export const Div = styled.div`
-  margin-right: ${(props) => props.right};
-  margin-left: ${(props) => props.left};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const SelectTag = styled(Select)`
-  margin-right: ${(props) => props.right};
-`;
-
 function CalendarComponent(props) {
   const { year, hour, minute, chgYear, chgHour, chgMin } = registerStore();
   // 당일로부터 14일 이후까지만의 날짜를 Select의 값으로 전해주기위함
@@ -36,7 +20,7 @@ function CalendarComponent(props) {
     if (date < 10) {
       date = `0${date}`;
     }
-    let fulldate = `${year}-${month}-${date}`;
+    let fulldate = `${year}년 ${month}월 ${date}일`;
     obj.value = fulldate;
     obj.label = fulldate;
     dateOptions.push(obj);
@@ -72,6 +56,8 @@ function CalendarComponent(props) {
       ...provided,
       alignItems: "baseline",
       backgroundColor: value ? "gray" : "white",
+      border: "1px solid #ced4da",
+      borderRadius: "10px",
     }),
   });
 
@@ -110,7 +96,7 @@ function CalendarComponent(props) {
         placeholder="00"
         styles={customStyles}
       />
-      <Div left="1rem" right="1rem">
+      <Div left="0.25rem" right="0.75rem">
         시
       </Div>
       <Select
@@ -123,9 +109,28 @@ function CalendarComponent(props) {
         placeholder="00"
         styles={customStyles}
       />
-      <Div left="1rem">분</Div>
+      <Div left="0.25rem">분</Div>
     </FlexBox>
   );
 }
+
+export const FlexBox = styled.div`
+  display: flex;
+`;
+
+export const Div = styled.div`
+  margin-right: ${(props) => props.right};
+  margin-left: ${(props) => props.left};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 18px;
+  padding: 0.25rem;
+`;
+
+export const SelectTag = styled(Select)`
+  margin-right: ${(props) => props.right};
+`;
 
 export default CalendarComponent;

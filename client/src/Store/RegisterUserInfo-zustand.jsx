@@ -3,7 +3,7 @@ import { persist } from "zustand/middleware";
 
 export const registerUserInfoStore = create(
   persist((set) => ({
-    userImg: "UserIcon.png",
+    userImg: "UserIcon7.png",
     // 유정 정보 등록에 들어가는 닉네임
     nickName: "",
     // 기술 스택을 담은 배열
@@ -18,7 +18,7 @@ export const registerUserInfoStore = create(
     // 유저 이미지 제거 함수
     delImg: () =>
       set((state) => ({
-        userImg: "UserIcon.png",
+        userImg: "UserIcon7.png",
       })),
 
     // 닉네임 onChange 함수

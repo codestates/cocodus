@@ -29,6 +29,10 @@ export const ContentDiv = styled.div`
 
 export const DivContainer = styled.div`
   padding: 10px;
+  padding-right: 30px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const PlanTitle = styled.div`

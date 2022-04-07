@@ -1,8 +1,13 @@
 import styled, { css } from "styled-components";
 
 export const StyledHeader = styled.header`
-  background-color: ${({ theme }) => theme.colors.header};
+  background-color: #ebfbfe;
+  opacity: 1;
   padding: 0px 0;
+  position: sticky;
+  top: 0;
+  z-index: 999999;
+  height: 120px;
 `;
 
 export const Nav = styled.nav`
@@ -15,7 +20,8 @@ export const Logo = styled.img`
   cursor: pointer;
   display: flex;
   align-items: left;
-  width: 200px;
+  width: 150px;
+  margin-top: 20px;
 `;
 
 export const Image = styled.img`
@@ -46,7 +52,7 @@ export const Name = styled.div`
 `;
 
 export const Icon = styled.div`
-  position: absolute;
+  height: 50px;
   right: 10%;
   position: absolute;
   display: flex;
@@ -66,11 +72,13 @@ export const Icon = styled.div`
 `;
 
 export const Img = styled.img`
+  /* background: rgba(223, 175, 0);
+  opacity: 0.8; */
   position: absolute;
   left: 0;
   width: 2.5rem;
   height: 2.5rem;
-  border: 1px solid rgba(196, 196, 196, 0.26);
+  border: 1px solid #fff;
   border-radius: 50%;
   margin-right: 0.5rem;
   &:hover {

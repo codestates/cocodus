@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   Card,
   ContentDiv,
@@ -14,19 +14,55 @@ import {
 import { Container } from "./styles/Container.styled";
 import { Flex } from "./styles/Flex.styled";
 import Data from "../api/DummyData";
-
+import axios from "axios";
+import { accessTokenStore } from "../Store/accesstoken-zustand";
+import { registerUserInfoStore } from "../Store/RegisterUserInfo-zustand";
+import { postData } from "../Store/postData-zustand";
 function PriceCard({ stack }) {
-  const [data, data변경] = useState(Data);
+  const { data, chgData } = postData();
+  const { isLogin, accessToken, cocodusId } = accessTokenStore();
+  const { nickName, chgInput } = registerUserInfoStore();
+  // console.log({ isLogin, accessToken, cocodusId, nickName });
+  useEffect(async () => {
+    let temp = await axios({
+      url: "http://localhost:8080/board/all",
+      params: {
+        isLogin: isLogin,
+        accessToken,
+        cocodusId,
+        nickName,
+      },
+    });
+
+    if (temp.data) {
+      console.log("목록=", temp.data);
+      chgData(temp.data.map((x) => x.jsonfile));
+    }
+  }, [isLogin, nickName]);
+
   return (
     <div>
+      {/* {data.map((x, i) => (
+        <CardSection data={x} key={"CardSection" + i} />
+      ))} */}
       {stack.length
         ? data
             .filter((x) => stack.indexOf(x.icon) > -1)
             .map((x, i, a) => {
-              return <CardSection data={x} key={"CardSection" + i} />;
+              return (
+                <CardSection
+                  data={typeof x === "string" ? JSON.parse(x) : x}
+                  key={"CardSection" + i}
+                />
+              );
             })
         : data.map((x, i) => {
-            return <CardSection data={x} key={"CardSection" + i} />;
+            return (
+              <CardSection
+                data={typeof x === "string" ? JSON.parse(x) : x}
+                key={"CardSection" + i}
+              />
+            );
           })}
     </div>
   );
@@ -62,9 +98,8 @@ function CardSection(props) {
               {props.data.date}
               <br></br>
               {props.data.roadAddress}
-              {/*//도로명으로 바꾸고, 도로명 주소를 길게 보게 하고 버튼 여백 줄이기 */}
+              {/*//도로명으로 바꾸고, 도로명 주소를 길게 보게 하고 버튼 여백 줄이기 cd */}
             </DivContainer>
-            <MapButton>상세 보기</MapButton>
           </ContentDiv>
         </Card>
       </Flex>
