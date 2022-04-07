@@ -20,6 +20,7 @@ import { registerUserInfoStore } from "../Store/RegisterUserInfo-zustand";
 import { postData } from "../Store/postData-zustand";
 function PriceCard({ stack = [] }) {
   const [howMany, setHowMany] = useState([0, 3]); //첫번째가 시작인덱스 2번째가 몇개 받아올지 개수
+  const [km, setKm] = useState(30);
   const { data, chgData } = postData();
   const { isLogin, accessToken, cocodusId } = accessTokenStore();
   const { nickName, chgInput } = registerUserInfoStore();
@@ -33,6 +34,7 @@ function PriceCard({ stack = [] }) {
         cocodusId,
         nickName,
         howMany,
+        km,
       },
     });
     if (temp.data) {
@@ -42,10 +44,11 @@ function PriceCard({ stack = [] }) {
         )
       );
     }
-  }, [isLogin, nickName, howMany]);
+  }, [isLogin, nickName, howMany, km]);
 
   return (
     <div>
+      {"시작인덱스=" + `${howMany[0]}` + "  총게시물=" + `${howMany[1]}`}
       <button onClick={() => setHowMany([howMany[0] + 1, howMany[1]])}>
         시작인덱스 증가
       </button>
@@ -58,6 +61,9 @@ function PriceCard({ stack = [] }) {
       <button onClick={() => setHowMany([howMany[0], howMany[1] - 1])}>
         총개수 감소
       </button>
+      {km}
+      <button onClick={() => setKm(km + 1)}>km증가</button>
+      <button onClick={() => setKm(km - 1)}>km감소</button>
 
       {stack.length
         ? data
