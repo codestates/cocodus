@@ -1,4 +1,4 @@
-const { User, Post, Post_tag, User_like } = require("../../models");
+const { User, Post, User_like } = require("../../models");
 
 module.exports = {
   get: async (req, res) => {
@@ -33,14 +33,14 @@ module.exports = {
         });
         return res.send("-1");
       } else {
-        // await Post.update(
-        //   {
-        //     total_like: temp2.total_like + 1,
-        //   },
-        //   {
-        //     where: { id: post_id },
-        //   }
-        // );
+        await Post.update(
+          {
+            total_like: temp2.total_like + 1,
+          },
+          {
+            where: { id: post_id },
+          }
+        );
         await User_like.create(
           {
             user_id: cocodusId,
