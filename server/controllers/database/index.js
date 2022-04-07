@@ -62,6 +62,27 @@ module.exports = {
     let isMember = await User.findOne({ where: { id } });
     return isMember;
   },
+  deleteUserInfo: async (id) => {
+    let isMember = await User.findOne({ where: { id } });
+    if (isMember) {
+      let temp = await User.update(
+        {
+          name: null,
+          image: null,
+          accessToken: null,
+          roadAddress: null,
+          location: null,
+          long: null,
+          lat: null,
+        },
+        {
+          where: { id },
+        }
+      );
+      if (temp) return true;
+      else false;
+    } else false;
+  },
   sortDist: async (myDist, km = 30) => {
     Array.prototype.mergeSort = function (cal = (a, b) => a - b, arr = this) {
       const downtier = (arr) =>

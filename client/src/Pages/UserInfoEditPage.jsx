@@ -31,6 +31,7 @@ function UserInfoEditPage(props) {
 
   const onEditHandler = async () => {
     openModal();
+
     const editData = {
       accessToken,
       cocodusId,
