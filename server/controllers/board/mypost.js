@@ -4,7 +4,6 @@ module.exports = {
   // 내 정보에서 내가 쓴 모임 정보 모아보기로 조회하는 메시지
   get: async (req, res) => {
     const { accessToken, user_id } = req.body;
-    console.log(req.body);
 
     const cocodusMember = await User.findOne({
       where: { id: user_id },
@@ -16,10 +15,8 @@ module.exports = {
     const dataArray = await sequelize.query(
       `select id, jsonfile, recruiting, online, veiw_count, total_comment FROM Posts WHERE user_id = '${user_id}';`
     );
-    console.log(dataArray);
-    const allPost = dataArray[0].map(el => )
 
-    // res.status(200).json(myPost[0]);
-    res.status(200).send("내가 작성한 모든 모임정보");
+    const allPost = [...dataArray[0]];
+    res.status(200).json(allPost);
   },
 };
