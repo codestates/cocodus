@@ -48,6 +48,7 @@ function PriceCard({ stack = [] }) {
 
   return (
     <div>
+      {"시작인덱스=" + `${howMany[0]}` + "  총게시물=" + `${howMany[1]}`}
       <button onClick={() => setHowMany([howMany[0] + 1, howMany[1]])}>
         시작인덱스 증가
       </button>
