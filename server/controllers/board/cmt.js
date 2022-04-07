@@ -1,85 +1,106 @@
+const { User, Post, Post_comment, Tag, sequelize } = require("../../models");
+
 module.exports = {
   post: async (req, res) => {
-    {
-      /*
-     보낼 때 : 쿠키에 담겨서 accessToken하고 cocodusid
-     cookie에서
-      {accessToken: accessToken,
-      cocodusid: cocodusid}
-     
-      본문은(외부에 공개되도 상관 없는 내용들) Payload json
-      {
-        postId: 원래 글 번호
-        comment : 댓글 내용
-      }
-    */
+    const { accessToken, user_id, postId, comment } = req.body;
+    //여기에 accessToken 확인하는 과정 추가할 예정입니다
+
+    const cocodusMember = await User.findOne({
+      where: { id: user_id },
+    });
+    if (!cocodusMember) {
+      return res.status(403).send("not Authorized"); //id가 일치하지 않으므로 더이상 진행할 필요가 없습니다
     }
 
-    const 토큰하고아이디받는변수 = req.headers.data;
-    const 댓글내용받는변수 = req.body.data;
+    if (isNaN(Number(postId))) {
+      console.log("post 번호가 Number type이 아님"); //만약 postId가 숫자가 아닐 경우
+      return res.status(400).send("Not found post id");
+    }
 
-    //시퀄라이즈 db에 생성
-    //생성할 때 코멘트 아이디 넣어야 합니다(코멘트만 조회하거나 삭제할 때 필요)
-    // 만약에 클라에서 정보가 부족하게 왔으면
-    //403 응답
+    //const newComment =
+    await Post_comment.create({
+      user_id: user_id,
+      post_id: postId,
+      comment: comment,
+    });
 
-    //정보가 다 잘 들어갔으면
-    //db에서 방금 작성한 글의 id를 조회해야 함
-    res.status(201);
-    //글 작성이 완료되면 페이지 이동은 없고 댓글이 바로 보여야함
+    res.status(201).end();
+  },
+  get: async (req, res) => {
+    let postId = Number(req.body.postId);
+    if (isNaN(Number(postId))) {
+      console.log("post 번호가 Number type이 아님"); //만약 postId가 숫자가 아닐 경우
+      return res.status(400).send("Not found post id");
+    }
+
+    const comment = await sequelize.query(
+      `select Post_comments.id, Users.name, Post_comments.comment FROM Post_comments
+    INNER JOIN Users ON Post_comments.user_id = Users.id
+    WHERE Post_id = ${postId};`
+    );
+    // await Post_comment.findAll({
+    //   include: [
+    //     {
+    //       model: User,
+    //       attributes: ["name"],
+    //     },
+    //   ],
+    //   where: { post_id: postId },
+    //   attributes: ["id", "comment"],
+    // });
+
+    if (comment[0].length === 0) {
+      console.log("댓글이 없습니다");
+      return res.status(200).send("댓글이 없습니다");
+    }
+
+    return res.status(200).json(comment[0]);
+    // res.status(200).end();
   },
   patch: async (req, res) => {
-    {
-      /*
-     보낼 때 : 쿠키에 담겨서 accessToken하고 cocodusid
-     cookie에서
-      {accessToken: accessToken,
-      cocodusid: cocodusid}
-     
-      본문은(외부에 공개되도 상관 없는 내용들) Payload json
-      {
-        postId: 원래 글 번호  
-        commentId : 
-        comment : 댓글 내용
-      }
-    */
+    const { accessToken, user_id, comment_id, comment } = req.body;
+    //여기에 accessToken 확인하는 과정 추가할 예정입니다
+
+    const cocodusMember = await User.findOne({
+      where: { id: user_id },
+    });
+    if (!cocodusMember) {
+      return res.status(403).send("not Authorized"); //id가 일치하지 않으므로 더이상 진행할 필요가 없습니다
     }
 
-    const 토큰하고아이디받는변수 = req.headers.data;
-    const 댓글내용받는변수 = req.body.data;
+    if (isNaN(Number(comment_id))) {
+      console.log("post 번호가 Number type이 아님"); //만약 postId가 숫자가 아닐 경우
+      return res.status(400).send("Not found post id");
+    }
 
-    //정보가 맞으면 시퀄라이즈로 db에 해당 내용을 수정
-    //만약에 클라에서 정보가 부족하게 왔으면
-    //403 응답
+    // const newComment =
+    await Post_comment.update(
+      {
+        comment: comment,
+      },
+      {
+        where: { id: comment_id },
+      }
+    );
 
-    //잘 수정됐으면
-    res.status(200);
-    //글 작성이 완료되면 페이지 이동은 없고 댓글이 바로 보여야함
+    res.status(201).end();
   },
   delete: async (req, res) => {
-    {
-      /*
-     보낼 때 : 쿠키에 담겨서 accessToken하고 cocodusid
-     cookie에서
-      {accessToken: accessToken,
-      cocodusid: cocodusid}
-     
-      본문은(외부에 공개되도 상관 없는 내용들) Payload json
-      {
-        postId: 원래 글 번호
-        commentId : 댓글 번호
-      }
-    */
+    const { accessToken, user_id, comment_id, postId } = req.body;
+    //여기에 accessToken 확인하는 과정 추가할 예정입니다
+
+    const cocodusMember = await User.findOne({
+      where: { id: user_id },
+    });
+
+    if (!cocodusMember) {
+      return res.status(403).send("not Authorized"); //id가 일치하지 않으므로 더이상 진행할 필요가 없습니다
     }
+    // const deleteComment =
+    await Post_comment.destroy({
+      where: { id: comment_id, user_id, post_id: postId },
+    });
 
-    const 토큰하고아이디받는변수 = req.headers.data;
-
-    //정보가 맞으면 시퀄라이즈로 db에 해당 댓글을 삭제
-    //만약에 클라에서 정보가 부족하게 왔으면
-    //403 응답
-
-    //잘 삭제됐으면
-    res.status(200).send("board yes cmt delete");
-    //글 작성이 완료되면 페이지 이동은 없고 댓글이 바로 보여야함
+    res.status(200).end();
   },
 };
