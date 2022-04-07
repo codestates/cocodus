@@ -65,7 +65,7 @@ function Register() {
           value={title}
         />
         <FlexBox>
-          <Img src="UserIcon2.png" />
+          <Img src="UserIcon7.png" />
           <InputBox
             type="text"
             value={nickName}

@@ -13,8 +13,13 @@ import axios from "axios";
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
 import { boardPostLoadingStore } from "../../Store/loading-zustand";
 import { registerUserInfoStore } from "../../Store/RegisterUserInfo-zustand";
+import { useNavigate } from "react-router-dom";
+import { registerNotiModalStore } from "../../Store/Modal-zustand";
+import Modal from "../Modal/Modal";
 
 function RegisterModal({ closeModal }) {
+  let navigate = useNavigate();
+  const { modalOpen2, openModal2, closeModal2 } = registerNotiModalStore();
   const { chgLoading, chgError } = boardPostLoadingStore();
   const { accessToken, cocodusId } = accessTokenStore();
   const { nickName } = registerUserInfoStore();
@@ -38,14 +43,12 @@ function RegisterModal({ closeModal }) {
       chgError(null);
       chgLoading(true);
       const postData = {
-        accessToken,
         cocodusId,
         nickName,
         title,
         content,
         tag,
-        year,
-        time: `${hour}시 ${minute}분`,
+        date: `${year} ${hour}시 ${minute}분`,
         online,
         placeName,
         roadAddress,
@@ -69,6 +72,8 @@ function RegisterModal({ closeModal }) {
       });
       console.log(newPost);
       closeModal(); // 모달창 닫는 함수
+      navigate("/");
+      openModal2();
     } catch (e) {
       chgError(e);
     }
@@ -86,6 +91,10 @@ function RegisterModal({ closeModal }) {
           취소하기
         </ModalBtn>
         <ModalBtn onClick={onRegister}>등록하기</ModalBtn>
+        <Modal open={modalOpen2} close={closeModal2} header="알림">
+          <Logo src="logo2.png" alt="" />
+          <Subject>게시물이 등록되었습니다.</Subject>
+        </Modal>
       </ModalBtnBlock>
     </>
   );

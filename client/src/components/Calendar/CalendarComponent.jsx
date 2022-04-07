@@ -20,7 +20,7 @@ function CalendarComponent(props) {
     if (date < 10) {
       date = `0${date}`;
     }
-    let fulldate = `${year}-${month}-${date}`;
+    let fulldate = `${year}년 ${month}월 ${date}일`;
     obj.value = fulldate;
     obj.label = fulldate;
     dateOptions.push(obj);

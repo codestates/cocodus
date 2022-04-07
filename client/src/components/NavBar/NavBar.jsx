@@ -55,7 +55,7 @@ export default function NavBar() {
             {isLogin ? (
               <>
                 <Block onClick={onHandleMenu}>
-                  <Img src="UserIcon2.png" alt="" />
+                  <Img src="UserIcon7.png" alt="" />
                   <Name>{nickName}님</Name>
                   <Icon>
                     <CgMenu color="#3c4146" size={25} />
