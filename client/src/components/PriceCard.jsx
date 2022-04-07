@@ -7,8 +7,6 @@ import {
   Icon,
   BackgroundSqure,
   DivContainer,
-  Align,
-  MapButton,
 } from "./styles/PriceCard.styled";
 
 import { Container } from "./styles/Container.styled";
@@ -66,6 +64,8 @@ function CardSection(props) {
         <Card>
           <BackgroundSqure />
           <ContentDiv>
+            {" "}
+            {/*여기에 onclick 넣으면 됨 */}
             <DivContainer>
               <Icon src="React-icon.svg.png" />
             </DivContainer>
@@ -90,7 +90,6 @@ function CardSection(props) {
               {props.data.roadAddress}
               {/*//도로명으로 바꾸고, 도로명 주소를 길게 보게 하고 버튼 여백 줄이기 */}
             </DivContainer>
-            <MapButton>상세 보기</MapButton>
           </ContentDiv>
         </Card>
       </Flex>
