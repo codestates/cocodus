@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   Card,
   ContentDiv,
@@ -14,11 +14,37 @@ import {
 import { Container } from "./styles/Container.styled";
 import { Flex } from "./styles/Flex.styled";
 import Data from "../api/DummyData";
-
+import axios from "axios";
+import { accessTokenStore } from "../Store/accesstoken-zustand";
+import { registerUserInfoStore } from "../Store/RegisterUserInfo-zustand";
+import { postData } from "../Store/postData-zustand";
 function PriceCard({ stack }) {
-  const [data, data변경] = useState(Data);
+  const { data, chgData } = postData();
+  const { isLogin, accessToken, cocodusId } = accessTokenStore();
+  const { nickName, chgInput } = registerUserInfoStore();
+  // console.log({ isLogin, accessToken, cocodusId, nickName });
+  useEffect(async () => {
+    let temp = await axios({
+      url: "http://localhost:8080/board/all",
+      params: {
+        isLogin: isLogin,
+        accessToken,
+        cocodusId,
+        nickName,
+      },
+    });
+
+    if (temp.data) {
+      console.log("목록=", temp.data);
+      chgData(temp.data.map((x) => x.jsonfile));
+    }
+  }, [isLogin, nickName]);
+
   return (
     <div>
+      {/* {data.map((x, i) => (
+        <CardSection data={x} key={"CardSection" + i} />
+      ))} */}
       {stack.length
         ? data
             .filter((x) => stack.indexOf(x.icon) > -1)

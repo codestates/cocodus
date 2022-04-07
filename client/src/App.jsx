@@ -27,7 +27,7 @@ import {
 import LoadingPage from "./Pages/LoadingPage";
 import ErrorPage from "./Pages/ErrorPage";
 import { registerUserInfoStore } from "./Store/RegisterUserInfo-zustand";
-
+import axios from "axios";
 function App() {
   const { nickName, chgInput } = registerUserInfoStore();
   const {
@@ -43,7 +43,6 @@ function App() {
     let acc_String = window.document.cookie
       .split(";")
       .filter((x) => (x.match(re[0]) ? true : false))[0];
-    // console.log(acc_String);
     let id_String = window.document.cookie
       .split(";")
       .filter((x) => (x.match(re[1]) ? true : false))[0];
@@ -51,11 +50,30 @@ function App() {
       chgAccToken(acc_String.split("=")[1]);
       chgCocoId(decodeURIComponent(id_String.split("=")[1]));
     }
+    if (accessToken && cocodusId && nickName) chgIsLogin(true);
   }, []);
-  useEffect(() => {
-    if (accessToken && cocodusId) chgIsLogin(true);
-    else chgIsLogin(false);
-  }, [accessToken, isLogin]);
+  useEffect(async () => {
+    if (accessToken && cocodusId) {
+      let temp = await axios({
+        url: "http://localhost:8080/user/info",
+        method: "GET",
+        params: {
+          accessToken,
+          cocodusId,
+        },
+      });
+      // .then((x) =>
+      //   x.status === 200 ? [chgInput(x.data), chgIsLogin(true)] : null
+      // );
+      if (temp.status === 200) {
+        chgInput(temp.data);
+        chgIsLogin(true);
+      }
+    } else {
+      chgInput("");
+      chgIsLogin(false);
+    }
+  }, [accessToken, cocodusId]);
   const theme = {
     colors: {
       header: "#ebfbff",
