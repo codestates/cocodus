@@ -14,12 +14,18 @@ import {
 import { Container } from "./styles/Container.styled";
 import { Flex } from "./styles/Flex.styled";
 import Data from "../api/DummyData";
-
+import axios from "axios";
+import { accessTokenStore } from "../Store/accesstoken-zustand";
+import { registerUserInfoStore } from "../Store/RegisterUserInfo-zustand";
 function PriceCard({ stack }) {
   const [data, data변경] = useState(Data);
+  const { isLogin, accessToken, cocodusId } = accessTokenStore();
+  const { nickName, chgInput } = registerUserInfoStore();
+  // console.log({ isLogin, accessToken, cocodusId, nickName });
+
   return (
     <div>
-      {stack.length
+      {/* {stack.length
         ? data
             .filter((x) => stack.indexOf(x.icon) > -1)
             .map((x, i, a) => {
@@ -27,7 +33,7 @@ function PriceCard({ stack }) {
             })
         : data.map((x, i) => {
             return <CardSection data={x} key={"CardSection" + i} />;
-          })}
+          })} */}
     </div>
   );
 }
