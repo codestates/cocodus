@@ -17,10 +17,11 @@ import KakaoMap from "../KakaoMap";
 import { registerStore } from "../../Store/Register-zustand";
 import KakaoSearchBox from "../KakaoSearchBox/KakaoSearchBox";
 import CalendarComponent from "../Calendar/CalendarComponent";
+import { registerUserInfoStore } from "../../Store/RegisterUserInfo-zustand";
 
 function Register() {
   const { inputs, tag, chgInput, chgOnline, chgTag, chgMsg } = registerStore();
-
+  const { nickName } = registerUserInfoStore();
   const { title, online } = inputs;
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -64,10 +65,10 @@ function Register() {
           value={title}
         />
         <FlexBox>
-          <Img src="UserIcon.png" />
+          <Img src="UserIcon7.png" />
           <InputBox
             type="text"
-            defaultValue="김코딩"
+            value={nickName}
             width="15%"
             backColor="#fff"
             Border="none"
