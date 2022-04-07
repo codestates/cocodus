@@ -6,8 +6,7 @@ module.exports = {
     let accessToken = req.query.accessToken;
     let id = req.query.cocodusId;
     let validation = await isAuthorized(accessToken, id.split("+")[0]);
-    findUserInfo(validation).then((x) => console.log(x));
-    // console.log(validation, "님이 로그인 하였습니다");
+    console.log(validation, "님이 로그인 하였습니다");
     if (validation) {
       let data = await findUserInfo(validation).then((x) =>
         x ? x.dataValues.name : x
