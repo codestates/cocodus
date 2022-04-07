@@ -52,9 +52,9 @@ export const Name = styled.div`
 `;
 
 export const Icon = styled.div`
-  position: absolute;
-  right: 10%;
   height: 50px;
+  right: 10%;
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
