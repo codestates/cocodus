@@ -1,13 +1,13 @@
 const { User, Post } = require("../../models");
 const { isAuthorized } = require("../token");
+
 module.exports = {
   saveUserInfo: async (data) => {
     const { id, accessToken, name, roadAddress, location, lat, long } = data;
-    let validation = await isAuthorized(accessToken, id.split("+")[0]);
-    // console.log(validation);
-    if (!validation) {
-      //여기서 확인
-    }
+    // let validation = await isAuthorized(accessToken, id.split("+")[0]);
+    // if (!validation) {
+    //   //여기서 확인
+    // }
     let isMember = await User.findOne({ where: { id } });
     if (isMember) {
       await User.update(
@@ -63,6 +63,27 @@ module.exports = {
     return isMember;
   },
   sortDist: async (myDist) => {
+    Array.prototype.mergeSort = function (cal = (a, b) => a - b, arr = this) {
+      const downtier = (arr) =>
+        arr.length <= 1
+          ? arr
+          : uptier(
+              downtier(arr.slice(0, parseInt(arr.length / 2))),
+              downtier(arr.slice(parseInt(arr.length / 2)))
+            );
+      const uptier = (left, right, arr = [], leftIdx = 0, rightIdx = 0) => {
+        while (leftIdx + rightIdx < left.length + right.length)
+          if (leftIdx >= left.length) arr.push(right[rightIdx++]);
+          else if (
+            rightIdx >= right.length ||
+            cal(left[leftIdx], right[rightIdx]) < 0
+          )
+            arr.push(left[leftIdx++]);
+          else arr.push(right[rightIdx++]);
+        return arr;
+      };
+      return downtier(arr);
+    };
     let data = await Post.findAll({ attributes: ["id", "lat", "long"] }).then(
       (a) => a.map((b) => b.dataValues)
     );
@@ -85,7 +106,7 @@ module.exports = {
           if (temp[0] < limit[0] && temp[1] < limit[1]) return true;
           else false;
         })
-        .sort((a, b) => {
+        .mergeSort((a, b) => {
           let m = changer(a.lat, a.long);
           let n = changer(b.lat, b.long);
           return m[0] ** 2 + m[1] ** 2 - (n[0] ** 2 + n[1] ** 2);
