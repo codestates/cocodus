@@ -52,19 +52,27 @@ function App() {
     }
     if (accessToken && cocodusId && nickName) chgIsLogin(true);
   }, []);
-  useEffect(() => {
+  useEffect(async () => {
     if (accessToken && cocodusId) {
-      axios({
+      let temp = await axios({
         url: "http://localhost:8080/user/info",
         method: "GET",
         params: {
           accessToken,
           cocodusId,
         },
-      }).then((x) =>
-        x.status === 200 ? [chgInput(x.data), chgIsLogin(true)] : null
-      );
-    } else chgIsLogin(false);
+      });
+      // .then((x) =>
+      //   x.status === 200 ? [chgInput(x.data), chgIsLogin(true)] : null
+      // );
+      if (temp.status === 200) {
+        chgInput(temp.data);
+        chgIsLogin(true);
+      }
+    } else {
+      chgInput("");
+      chgIsLogin(false);
+    }
   }, [accessToken, cocodusId]);
   const theme = {
     colors: {
