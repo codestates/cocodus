@@ -33,6 +33,7 @@ function PriceCard({ stack }) {
         nickName,
       },
     });
+
     if (temp.data) {
       console.log("목록=", temp.data);
       chgData(temp.data.map((x) => x.jsonfile));
