@@ -81,6 +81,22 @@ module.exports = {
     const userInfoCall = await axios(config[provider]).catch((err) =>
       console.log(err)
     );
-    return userInfoCall.data;
+    if (userInfoCall.data) {
+      if (provider === "github") {
+        if (userInfoCall.data)
+          return provider + "+" + userInfoCall.data.html_url.split("/")[3];
+        else return;
+      }
+      if (provider === "google") {
+        if (userInfoCall.data)
+          return provider + "+" + userInfoCall.data.email.split("@")[0];
+        else return;
+      }
+      if (provider === "kakao") {
+        if (userInfoCall.data) return provider + "+" + userInfoCall.data.id;
+        else return;
+      }
+    }
+    return;
   },
 };

@@ -30,6 +30,9 @@ router.get("/mypost", boardController.mypost.get);
 // * POST /board/cmt
 router.post("/cmt", boardController.cmt.post);
 
+// * get /board/cmt
+router.get("/cmt", boardController.cmt.get);
+
 // * PATCH /board/cmt
 router.patch("/cmt", boardController.cmt.patch);
 
