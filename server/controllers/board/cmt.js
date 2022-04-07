@@ -1,4 +1,4 @@
-const { User, Post, Post_comment, Tag, sequelize } = require("../../models");
+const { User, Post_comment, sequelize } = require("../../models");
 
 module.exports = {
   post: async (req, res) => {

@@ -1,3 +1,5 @@
+const { User_like, Post_comment, sequelize } = require("../../models");
+
 module.exports = {
   get: async (req, res) => {
     //내가 좋아요 한 모임 정보를 모아보는 페이지
@@ -36,29 +38,28 @@ module.exports = {
     res.status(200).json("내가좋아요한모든모임정보변수");
   },
   patch: async (req, res) => {
-    {
-      /*
-      보낼 때 : 헤더에 담겨서 accessToken하고 cocodusid
-      {accessToken: accessToken,
-      cocodusid: cocodusid}
-     
-      본문은(외부에 공개되도 상관 없는 내용들) Payload json
-      {
-        postId: 원래 글 번호
-        inc: 불리언 값(true면 좋아요를 표시한 것, false면 이미 좋아요를 누른 모임 정보에서 좋아요 철회한 상황)
-      }
-    */
+    const { accessToken, user_id, postId, inc } = req.body;
+
+    let postLike;
+    if (inc) {
+      postLike = await User_like.create(
+        {
+          user_id,
+          post_id: postId,
+        },
+        {
+          fields: ["user_id", "post_id"],
+        }
+      );
+    } else {
+      postLike = await User_like.destroy({
+        where: {
+          user_id,
+          post_id: postId,
+        },
+      });
     }
-
-    const 토큰하고아이디받는변수 = req.headers.data;
-    const 모임정보번호받는변수 = req.body.data;
-
-    //시퀄라이즈 db에 User_like 테이블에 해당 값만 입력
-    //(하면 나중에 모임 목록을 조회할 때, db에서 sql에서 제공하는 count 함수로 날려 드리겠습니다)
-    //inc가 true면 테이블 값을 생성
-    //inc가 false면 테이블 값을 삭제(하면 나중에 알아서 count가 -1되므로)
-    // 만약에 클라에서 정보가 부족하게 왔으면
-    //403 응답
+    console.log(postLike);
 
     //정보가 다 잘 들어갔으면 딱히 전송해줄 정보는 없음
     res.status(200).send("board yes like patch");
