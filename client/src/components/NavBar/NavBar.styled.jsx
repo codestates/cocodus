@@ -1,8 +1,13 @@
 import styled, { css } from "styled-components";
 
 export const StyledHeader = styled.header`
-  background-color: ${({ theme }) => theme.colors.header};
+  background-color: #ebfbfe;
+  opacity: 1;
   padding: 0px 0;
+  position: sticky;
+  top: 0;
+  z-index: 999999;
+  height: 120px;
 `;
 
 export const Nav = styled.nav`
@@ -15,7 +20,8 @@ export const Logo = styled.img`
   cursor: pointer;
   display: flex;
   align-items: left;
-  width: 200px;
+  width: 150px;
+  margin-top: 20px;
 `;
 
 export const Image = styled.img`
@@ -48,7 +54,7 @@ export const Name = styled.div`
 export const Icon = styled.div`
   position: absolute;
   right: 10%;
-  position: absolute;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;

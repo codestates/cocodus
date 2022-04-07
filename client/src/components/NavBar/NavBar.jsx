@@ -48,7 +48,7 @@ export default function NavBar() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <StyledHeader>
+      <StyledHeader style={{ opacity: 1 }}>
         <Container>
           <Nav>
             <Logo onClick={() => navigate("/")} src="logo2.png" alt="" />
