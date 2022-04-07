@@ -28,11 +28,12 @@ module.exports = {
   },
   get: async (req, res) => {
     let postId = Number(req.body.postId);
+
     if (isNaN(Number(postId))) {
       console.log("post 번호가 Number type이 아님"); //만약 postId가 숫자가 아닐 경우
       return res.status(400).send("Not found post id");
     }
-
+    //id에 해당하는 조회수 +1 해줘야함
     const comment = await sequelize.query(
       `select Post_comments.id, Users.name, Post_comments.comment FROM Post_comments
     INNER JOIN Users ON Post_comments.user_id = Users.id
@@ -51,7 +52,7 @@ module.exports = {
 
     if (comment[0].length === 0) {
       console.log("댓글이 없습니다");
-      return res.status(200).send("댓글이 없습니다");
+      return res.status(200).send("no comments in this post");
     }
 
     return res.status(200).json(comment[0]);
