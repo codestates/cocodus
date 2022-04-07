@@ -4,11 +4,10 @@ const { isAuthorized } = require("../token");
 module.exports = {
   saveUserInfo: async (data) => {
     const { id, accessToken, name, roadAddress, location, lat, long } = data;
-    let validation = await isAuthorized(accessToken, id.split("+")[0]);
-    // console.log(validation);
-    if (!validation) {
-      //여기서 확인
-    }
+    // let validation = await isAuthorized(accessToken, id.split("+")[0]);
+    // if (!validation) {
+    //   //여기서 확인
+    // }
     let isMember = await User.findOne({ where: { id } });
     if (isMember) {
       await User.update(
