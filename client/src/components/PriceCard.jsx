@@ -18,7 +18,7 @@ import axios from "axios";
 import { accessTokenStore } from "../Store/accesstoken-zustand";
 import { registerUserInfoStore } from "../Store/RegisterUserInfo-zustand";
 import { postData } from "../Store/postData-zustand";
-function PriceCard({ stack }) {
+function PriceCard({ stack = [] }) {
   const { data, chgData } = postData();
   const { isLogin, accessToken, cocodusId } = accessTokenStore();
   const { nickName, chgInput } = registerUserInfoStore();
@@ -35,35 +35,21 @@ function PriceCard({ stack }) {
     });
 
     if (temp.data) {
-      console.log("목록=", temp.data);
-      chgData(temp.data.map((x) => x.jsonfile));
+      chgData(
+        temp.data.map((x) =>
+          typeof x.jsonfile === "string" ? JSON.parse(x.jsonfile) : x.jsonfile
+        )
+      );
     }
   }, [isLogin, nickName]);
 
   return (
     <div>
-      {/* {data.map((x, i) => (
-        <CardSection data={x} key={"CardSection" + i} />
-      ))} */}
       {stack.length
         ? data
-            .filter((x) => stack.indexOf(x.icon) > -1)
-            .map((x, i, a) => {
-              return (
-                <CardSection
-                  data={typeof x === "string" ? JSON.parse(x) : x}
-                  key={"CardSection" + i}
-                />
-              );
-            })
-        : data.map((x, i) => {
-            return (
-              <CardSection
-                data={typeof x === "string" ? JSON.parse(x) : x}
-                key={"CardSection" + i}
-              />
-            );
-          })}
+            .filter((x) => stack.indexOf(x.tag) > -1)
+            .map((x, i) => <CardSection data={x} key={"CardSection" + i} />)
+        : data.map((x, i) => <CardSection data={x} key={"CardSection" + i} />)}
     </div>
   );
 }
