@@ -2,13 +2,13 @@ const { sortDist } = require("../database");
 const { User, Post, Post_tag } = require("../../models");
 module.exports = {
   get: async (req, res) => {
-    let { isLogin, accessToken, cocodusId, nickName, howMany } = req.query;
+    let { isLogin, accessToken, cocodusId, nickName, howMany, km } = req.query;
     if (isLogin === "true" && accessToken && cocodusId && nickName) {
       let userLoc = await User.findOne({
         where: { id: cocodusId },
         attributes: ["lat", "long"],
       });
-      let postLoc = await sortDist(userLoc.dataValues);
+      let postLoc = await sortDist(userLoc.dataValues, km);
       let result = [];
       for (let i = 0; i < postLoc.length; i++) {
         let temp = Post.findOne({
