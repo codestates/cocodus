@@ -159,6 +159,8 @@ const Button = styled.button`
   border: none;
   background: white;
   opacity: 0.6;
+  min-width: 50px;
+
   &:focus {
     opacity: 1;
   }

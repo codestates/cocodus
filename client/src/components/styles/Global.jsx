@@ -5,6 +5,7 @@ const GlobalStyles = createGlobalStyle`
 
 * {
     box-sizing: border-box;
+    
 }
 
 body {
@@ -12,7 +13,8 @@ body {
     color: hsl(192, 100%, 9%);
     font-family: 'Poppins';
     font-size: 1.15em; 
-    margin: 0
+    margin: 0;
+    min-width: 900px;
 }
 
 p {
