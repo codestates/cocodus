@@ -31,6 +31,24 @@ module.exports = {
       res.status(201).send({ message: "Successfully saved user infomation" });
     }
   },
+  patch: async (req, res) => {
+    const { user_id, name, image, roadAddress, location, long, lat } = req.body;
+    const changeInfo = await User.update(
+      {
+        name,
+        image,
+        roadAddress,
+        location,
+        long,
+        lat,
+      },
+      {
+        where: { id: user_id },
+      }
+    );
+
+    res.status(200).send("회원 정보가 변경되었습니다");
+  },
   delete: async (req, res) => {
     let { cocodusId, accessToken, isLogin } = req.query;
     let validation = await isAuthorized(accessToken, cocodusId.split("+")[0]);
