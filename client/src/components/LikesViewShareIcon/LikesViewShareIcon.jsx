@@ -18,12 +18,14 @@ import { linkModalStore } from "../../Store/Modal-zustand";
 import axios from "axios";
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
 import { registerUserInfoStore } from "../../Store/RegisterUserInfo-zustand";
+import { postData } from "../../Store/postData-zustand";
 function LikesViewShareIcon(props) {
   const { accessToken, cocodusId, isLogin } = accessTokenStore();
   const { nickName } = registerUserInfoStore();
   const [likeClick, setLikeClick] = useState(true);
-
+  const { specificdata } = postData();
   useEffect(async () => {
+    console.log({ specificdata });
     if (accessToken && cocodusId && isLogin) {
       let temp = await axios({
         method: "GET",
