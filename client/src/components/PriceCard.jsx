@@ -102,7 +102,7 @@ function CardSection({ data, stack }) {
       else if (x === "C++")
         return <Icon src={"CPlus" + ".png"} key={"CPlus" + ".png"} />;
       else if (x === "C#")
-        return <Icon src={"CSparp" + ".png"} key={"CSparp" + ".png"} />;
+        return <Icon src={"CSharp" + ".png"} key={"CSharp" + ".png"} />;
       else return <Icon src={x + ".png"} key={x + ".png"} />;
     });
     {
