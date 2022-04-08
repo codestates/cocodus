@@ -6,7 +6,7 @@ module.exports = {
     const { accessToken, user_id } = req.body;
 
     const cocodusMember = await User.findOne({
-      where: { id: user_id },
+      where: { id: user_id || "" },
     });
     if (!cocodusMember) {
       return res.status(403).send("not Authorized"); //id가 일치하지 않으므로 더이상 진행할 필요가 없습니다
