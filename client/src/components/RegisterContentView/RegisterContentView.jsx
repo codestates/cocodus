@@ -17,14 +17,14 @@ function DetailContent(props) {
 
   useEffect(() => {
     const fetchComments = async () => {
-      console.log(specificdata[0].id);
       const response = await axios({
         method: "GET",
         url: "http://localhost:8080/board/cmt",
-        data: {
+        params: {
           postId: specificdata[0].id,
         },
       });
+      console.log(response.data);
     };
     fetchComments();
   }, []);
