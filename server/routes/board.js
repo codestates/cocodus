@@ -6,27 +6,6 @@ const { boardController } = require("../controllers");
 // * GET /board/all
 router.get("/all", boardController.all.get);
 
-// * GET /board/list
-router.get("/list", boardController.list.get);
-
-// * PATCH /board/list
-router.patch("/list", boardController.list.patch);
-
-// * DELETE /board/list
-router.delete("/list", boardController.list.delete);
-
-// * GET /board/like
-router.get("/like", boardController.like.get);
-
-// * POST /board/like
-router.post("/like", boardController.like.post);
-
-// * PATCH /board/recruiting
-router.patch("/recruiting", boardController.recruiting.patch);
-
-// * GET /board/mypost
-router.get("/mypost", boardController.mypost.get);
-
 // * POST /board/cmt
 router.post("/cmt", boardController.cmt.post);
 
@@ -39,10 +18,25 @@ router.patch("/cmt", boardController.cmt.patch);
 // * DELETE /board/cmt
 router.delete("/cmt", boardController.cmt.delete);
 
+// * GET /board/like
+router.get("/like", boardController.like.get);
+
+// * POST /board/like
+router.post("/like", boardController.like.post);
+
+// * GET /board/mypost
+router.get("/mypost", boardController.mypost.get);
+
+// * PATCH /board/recruiting
+router.patch("/recruiting", boardController.recruiting.patch);
+
 // * POST /board/writing
 router.post("/writing", boardController.writing.post);
 
-module.exports = router;
+// * PATCH /board/writing
+router.patch("/writing", boardController.writing.patch);
 
-//https://server.cocodus.site/writing
-//http://localhost:8080/writing
+// * DELETE /board/writing
+router.delete("/writing", boardController.writing.delete);
+
+module.exports = router;

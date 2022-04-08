@@ -27,13 +27,14 @@ function Comment() {
     // };
     // addMsg(inputs, nextId.current);
     // nextId.current += 1;
+    const postId = specificdata[0].id;
     const comment = await axios({
       method: "POST",
       url: "http://localhost:8080/board/cmt",
-      data: {
+      params: {
         accessToken,
         user_id: cocodusId,
-        postId: specificdata[0].id,
+        postId,
         comment: inputs,
       },
     });
