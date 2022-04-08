@@ -2,12 +2,21 @@ const { User, Post, User_like } = require("../../models");
 
 module.exports = {
   get: async (req, res) => {
+    let { isLogin, accessToken, cocodusId, nickName, post_id } = req.query;
+    if (isLogin && accessToken && cocodusId && nickName && post_id) {
+      //   let temp = await User_like.findOne({
+      //     where: { user_id: Number(cocodusId), post_id },
+      //     attributes: ["user_id", "post_id"],
+      //   }).then((x) => x.dataValues);
+      //   console.log(temp);
+    }
+
     res.status(200).send("test board like");
   },
   post: async (req, res) => {
     let { isLogin, accessToken, cocodusId, nickName, post_id } = req.query;
     if (isLogin && accessToken && cocodusId && nickName && post_id) {
-      cocodusId = "github+happy5happy5";
+      // cocodusId = "github+happy5happy5";
       // let temp1 = await User.findOne({ where: { id: cocodusId } });
       let temp2 = await Post.findOne({
         where: { id: Number(post_id) },
