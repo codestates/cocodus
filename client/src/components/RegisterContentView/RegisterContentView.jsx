@@ -15,34 +15,23 @@ function DetailContent(props) {
   const { chgLoading, chgError } = boardGetLoadingStore();
   const { specificdata } = postData();
 
-  // useEffect(() => {
-  //   const fetchPosts = async () => {
-  //     try {
-  //       // 요청이 시작 할 때에는 error 초기화하고
-  //       chgError(null);
-  //       // loading 상태를 true 로 바꿉니다.
-  //       chgLoading(true);
-  //       const response = await axios({
-  //         method: "GET",
-  //         url: "http://localhost:8080/board/list",
-  //         data: {
-  //           accessToken,
-  //           user_id: cocodusId,
-  //           // post_id: postId,
-  //         },
-  //       });
-  //     } catch (e) {
-  //       chgError(e);
-  //     }
-  //     chgLoading(false);
-  //   };
-
-  //   fetchPosts();
-  // }, []);
+  useEffect(() => {
+    const fetchComments = async () => {
+      console.log(specificdata[0].id);
+      const response = await axios({
+        method: "GET",
+        url: "http://localhost:8080/board/cmt",
+        data: {
+          postId: specificdata[0].id,
+        },
+      });
+    };
+    fetchComments();
+  }, []);
 
   return (
     <Section>
-      {console.log(specificdata)}
+      {/* {console.log(specificdata[0].id)} */}
       <Title
         color="transparent"
         textShadow="0 0 0 black"
