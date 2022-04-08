@@ -9,12 +9,28 @@ import {
   ModalBtn,
 } from "./DeleteModal.styled";
 import { useNavigate } from "react-router-dom";
+import { accessTokenStore } from "../../Store/accesstoken-zustand";
+import axios from "axios";
 
 function DeleteUserModal({ closeModal }) {
+  const { cocodusId, accessToken, isLogin, chgIsLogin } = accessTokenStore();
   let navigate = useNavigate();
-  const onRemove = () => {
-    closeModal();
-    navigate("/");
+  const onRemove = async () => {
+    let temp = await axios({
+      baseURL: "http://localhost:8080",
+      url: "/user/info",
+      method: "delete",
+      params: {
+        cocodusId,
+        accessToken,
+        isLogin,
+      },
+    });
+    if (temp.status === 201) {
+      chgIsLogin(false);
+      closeModal();
+      navigate("/");
+    }
   };
   return (
     <>

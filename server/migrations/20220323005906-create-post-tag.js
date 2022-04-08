@@ -30,6 +30,8 @@ module.exports = {
         // 테이블 옵션
         timestamps: false,
         underscored: false,
+        createdAt: false,
+        updatedAt: false,
       }
     );
   },
