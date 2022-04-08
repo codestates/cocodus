@@ -18,7 +18,7 @@ import DeleteModal from "../DeleteRegisterSubModal/DeleteModal";
 import Modal from "../Modal/Modal";
 import axios from "axios";
 
-function Comment({ comment }) {
+function CommentArea({ comment }) {
   const { input, visible, visibleOpen, visibleClose, chgInput } =
     updateCommentStore();
   // 모달
@@ -102,7 +102,7 @@ function CommentList() {
     <div>
       {commentList &&
         commentList.map((comment) => (
-          <Comment comment={comment} key={comment.id} />
+          <CommentArea comment={comment} key={comment.id} />
         ))}
     </div>
   );
