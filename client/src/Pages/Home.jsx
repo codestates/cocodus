@@ -28,7 +28,7 @@ function Home() {
       <div>
         <GlobalStyles />
         <Header />
-        <LanguageIcon stackHandler={stackHandler} />
+        <LanguageIcon stackHandler={stackHandler} stack={stack} />
         <PriceCard stack={stack} />
         {scrollFlag && <TopBtn onClick={moveTop}>TOP</TopBtn>}
       </div>
