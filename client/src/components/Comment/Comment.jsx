@@ -33,7 +33,7 @@ function Comment() {
       data: {
         accessToken,
         user_id: cocodusId,
-        postId: specificdata.id,
+        postId: specificdata[0].id,
         comment: inputs,
       },
     });
