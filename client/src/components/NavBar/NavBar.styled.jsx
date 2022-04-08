@@ -35,52 +35,54 @@ export const Block = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 180px;
-  right: -8%;
+  right: 5%;
 `;
 export const Name = styled.div`
-  position: absolute;
   font-family: "Roboto", sans-serif;
   color: #3c4146;
-  left: 18%;
-  padding: 10px;
-  margin-left: 1rem;
-  /* color: #333; */
+  margin-right: 0.25rem;
+  margin-left: 0.25rem;
   &:hover {
     opacity: 0.75;
   }
 `;
 
 export const Icon = styled.div`
-  height: 50px;
-  right: 10%;
+  font-size: 1.5rem;
+  margin-left: 0.25rem;
+  color: rgb(134, 142, 150);
+  transition: all 0.125s ease-in 0s;
+  margin-top: 0.4rem;
+  margin-right: -0.4375rem;
+  &:hover {
+    opacity: 0.75;
+  }
+`;
+
+export const Icon2 = styled.div`
+  height: 100px;
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-  &:hover {
-    opacity: 0.75;
-  }
   ${(props) =>
     props.huge &&
     css`
-      /* position: absolute; */
-      right: 0.5rem;
+      position: absolute;
+      right: -17%;
       top: 0;
       z-index: 6;
     `};
 `;
 
 export const Img = styled.img`
-  /* background: rgba(223, 175, 0);
-  opacity: 0.8; */
-  position: absolute;
-  left: 0;
-  width: 2.5rem;
+  display: block;
   height: 2.5rem;
-  border: 1px solid #fff;
+  width: 2.5rem;
+  box-shadow: rgb(0 0 0 / 9%) 0px 0px 8px;
   border-radius: 50%;
-  margin-right: 0.5rem;
+  object-fit: cover;
+  transition: all 0.125s ease-in 0s;
   &:hover {
     opacity: 0.75;
   }

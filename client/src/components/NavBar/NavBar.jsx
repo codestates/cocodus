@@ -6,6 +6,7 @@ import {
   Name,
   Icon,
   Img,
+  Icon2,
 } from "./NavBar.styled";
 import { Container } from "../../components/styles/Container.styled";
 import { Button } from "../../components/styles/Button.styled";
@@ -62,9 +63,9 @@ export default function NavBar() {
                   </Icon>
                   {menuVisible && (
                     <>
-                      <Icon huge>
-                        <AiFillCaretUp style={{ color: "#fff" }} size={50} />
-                      </Icon>
+                      <Icon2 huge>
+                        <AiFillCaretUp style={{ color: "#fff" }} size={65} />
+                      </Icon2>
                       <DropDownBar />
                     </>
                   )}

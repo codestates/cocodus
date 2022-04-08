@@ -50,7 +50,7 @@ function App() {
       chgAccToken(acc_String.split("=")[1]);
       chgCocoId(decodeURIComponent(id_String.split("=")[1]));
     }
-    if (accessToken && cocodusId && nickName) chgIsLogin(true);
+    // if (accessToken && cocodusId && nickName) chgIsLogin(true);
   }, []);
   useEffect(async () => {
     if (accessToken && cocodusId) {

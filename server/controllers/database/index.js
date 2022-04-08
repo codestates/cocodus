@@ -62,7 +62,28 @@ module.exports = {
     let isMember = await User.findOne({ where: { id } });
     return isMember;
   },
-  sortDist: async (myDist) => {
+  deleteUserInfo: async (id) => {
+    let isMember = await User.findOne({ where: { id } });
+    if (isMember) {
+      let temp = await User.update(
+        {
+          name: null,
+          image: null,
+          accessToken: null,
+          roadAddress: null,
+          location: null,
+          long: null,
+          lat: null,
+        },
+        {
+          where: { id },
+        }
+      );
+      if (temp) return true;
+      else false;
+    } else false;
+  },
+  sortDist: async (myDist, km = 30) => {
     Array.prototype.mergeSort = function (cal = (a, b) => a - b, arr = this) {
       const downtier = (arr) =>
         arr.length <= 1
@@ -84,12 +105,12 @@ module.exports = {
       };
       return downtier(arr);
     };
-    let data = await Post.findAll({ attributes: ["id", "lat", "long"] }).then(
-      (a) => a.map((b) => b.dataValues)
-    );
+    let data = await Post.findAll({
+      attributes: ["id", "lat", "long"],
+    }).then((a) => a.map((b) => b.dataValues));
     // let myDist = { lat: "37.564761688865", long: "126.98342935764" };
     const accuracy = 100000; //정확도 약 1m오차
-    const limitKM = 30;
+    const limitKM = km;
     const limit = [
       parseInt((limitKM / 111) * accuracy),
       parseInt((limitKM / 91) * accuracy),

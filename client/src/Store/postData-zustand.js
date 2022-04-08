@@ -1,10 +1,15 @@
 import create from "zustand";
 
 export const postData = create((set) => ({
-  data: [],
-
-  chgData: (value) =>
+  jsonData: [],
+  specificData: [],
+  // post_id: [],
+  chgJsonData: (value) =>
     set((state) => ({
-      data: value,
+      jsonData: value,
+    })),
+  chgSpecificData: (arr) =>
+    set((state) => ({
+      specificdata: [...arr],
     })),
 }));

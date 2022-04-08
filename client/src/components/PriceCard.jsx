@@ -18,8 +18,11 @@ import axios from "axios";
 import { accessTokenStore } from "../Store/accesstoken-zustand";
 import { registerUserInfoStore } from "../Store/RegisterUserInfo-zustand";
 import { postData } from "../Store/postData-zustand";
-function PriceCard({ stack }) {
-  const { data, chgData } = postData();
+import { useNavigate } from "react-router-dom";
+function PriceCard({ stack = [] }) {
+  const [howMany, setHowMany] = useState([0, 3]); //첫번째가 시작인덱스 2번째가 몇개 받아올지 개수
+  const [km, setKm] = useState(30);
+  const { jsonData, chgJsonData } = postData();
   const { isLogin, accessToken, cocodusId } = accessTokenStore();
   const { nickName, chgInput } = registerUserInfoStore();
   // console.log({ isLogin, accessToken, cocodusId, nickName });
@@ -31,47 +34,65 @@ function PriceCard({ stack }) {
         accessToken,
         cocodusId,
         nickName,
+        howMany,
+        km,
       },
     });
-
-    if (temp.data) {
-      console.log("목록=", temp.data);
-      chgData(temp.data.map((x) => x.jsonfile));
+    if (temp.data.length) {
+      chgJsonData(temp.data);
     }
-  }, [isLogin, nickName]);
+  }, [isLogin, nickName, howMany, km]);
 
   return (
     <div>
-      {/* {data.map((x, i) => (
-        <CardSection data={x} key={"CardSection" + i} />
-      ))} */}
-      {stack.length
-        ? data
-            .filter((x) => stack.indexOf(x.icon) > -1)
-            .map((x, i, a) => {
-              return (
-                <CardSection
-                  data={typeof x === "string" ? JSON.parse(x) : x}
-                  key={"CardSection" + i}
-                />
-              );
-            })
-        : data.map((x, i) => {
-            return (
-              <CardSection
-                data={typeof x === "string" ? JSON.parse(x) : x}
-                key={"CardSection" + i}
-              />
-            );
-          })}
+      {"시작인덱스=" + `${howMany[0]}` + "  총게시물=" + `${howMany[1]}`}
+      <button onClick={() => setHowMany([howMany[0] + 1, howMany[1]])}>
+        시작인덱스 증가
+      </button>
+      <button onClick={() => setHowMany([howMany[0] - 1, howMany[1]])}>
+        시작인덱스 감소
+      </button>
+      <button onClick={() => setHowMany([howMany[0], howMany[1] + 1])}>
+        총개수 증가
+      </button>
+      <button onClick={() => setHowMany([howMany[0], howMany[1] - 1])}>
+        총개수 감소
+      </button>
+      {km}
+      <button onClick={() => setKm(km + 1)}>km증가</button>
+      <button onClick={() => setKm(km - 1)}>km감소</button>
+
+      {jsonData
+        .map((x) =>
+          typeof x.jsonfile === "string"
+            ? { jsonfile: JSON.parse(x.jsonfile), id: x.id }
+            : x
+        )
+        .filter((x) =>
+          stack.length ? stack.indexOf(x.jsonfile.tag) > -1 : true
+        )
+        .map((x, i) => (
+          <CardSection data={x} key={x.id}></CardSection>
+        ))}
     </div>
   );
 }
 
-function CardSection(props) {
+function CardSection({ data }) {
   const [like, setLike] = useState(0);
+  const { jsonData, chgSpecificData } = postData();
+  let navigate = useNavigate();
+  const findData = (id) => {
+    chgSpecificData(
+      jsonData.filter((el) => {
+        return el.id === id;
+      })
+    );
+    navigate("/RegisterContentViewPage");
+  };
   return (
     <Container>
+      {console.log(jsonData)}
       <Flex>
         <Card>
           <BackgroundSqure />
@@ -79,10 +100,10 @@ function CardSection(props) {
             <DivContainer>
               <Icon src="React-icon.svg.png" />
             </DivContainer>
-            <DivContainer>
-              <PlanTitle>{props.data.title}</PlanTitle>
+            <DivContainer onClick={() => findData(data.id)}>
+              <PlanTitle>{data.jsonfile.title}</PlanTitle>
               <FeatureListItem>
-                <span>{props.data.content}</span>
+                <span>{data.jsonfile.content}</span>
               </FeatureListItem>
 
               <span
@@ -95,9 +116,9 @@ function CardSection(props) {
               <span>👀</span>
             </DivContainer>
             <DivContainer>
-              {props.data.date}
+              {data.jsonfile.date}
               <br></br>
-              {props.data.roadAddress}
+              {data.jsonfile.roadAddress}
               {/*//도로명으로 바꾸고, 도로명 주소를 길게 보게 하고 버튼 여백 줄이기 cd */}
             </DivContainer>
           </ContentDiv>

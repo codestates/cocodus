@@ -18,8 +18,8 @@ router.delete("/list", boardController.list.delete);
 // * GET /board/like
 router.get("/like", boardController.like.get);
 
-// * PATCH /board/like
-router.patch("/like", boardController.like.patch);
+// * POST /board/like
+router.post("/like", boardController.like.post);
 
 // * PATCH /board/recruiting
 router.patch("/recruiting", boardController.recruiting.patch);
