@@ -1,5 +1,5 @@
 const { User } = require("../../models");
-const { saveUserInfo, findUserInfo } = require("../database");
+const { saveUserInfo, findUserInfo, deleteUserInfo } = require("../database");
 const { isAuthorized } = require("../token");
 module.exports = {
   get: async (req, res) => {
@@ -50,6 +50,12 @@ module.exports = {
     res.status(200).send("회원 정보가 변경되었습니다");
   },
   delete: async (req, res) => {
-    res.status(200).send("test userinfodelete");
+    let { cocodusId, accessToken, isLogin } = req.query;
+    let validation = await isAuthorized(accessToken, cocodusId.split("+")[0]);
+    if (!validation) return res.status(401).send();
+    let temp = await deleteUserInfo(cocodusId);
+    if (temp) res.status(201).send("deleted");
+
+    // res.status(200).send("test userinfodelete");
   },
 };

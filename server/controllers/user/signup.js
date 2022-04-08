@@ -18,7 +18,8 @@ module.exports = {
         maxAge: 360000, //360초 뒤에 쿠키 사라짐
       })
       .cookie("cocodusId", id);
-    if (isMember) res.redirect("http://localhost:3000");
+    if (isMember && isMember.dataValues && isMember.dataValues.name)
+      res.redirect("http://localhost:3000");
     else res.redirect("http://localhost:3000/userinforegister");
   },
 
