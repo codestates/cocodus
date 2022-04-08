@@ -14,6 +14,14 @@ module.exports = {
           lat: "37.5824487",
           long: "126.9996739",
         },
+        {
+          id: "github+sun-one95",
+          name: "수닐",
+          roadAddress: "서울 강남구 선릉로131길 11",
+          location: "카페써드",
+          lat: "37.5173923655247",
+          long: "127.039862029236",
+        },
       ],
       {}
     );
