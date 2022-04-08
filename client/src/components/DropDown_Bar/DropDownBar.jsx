@@ -5,14 +5,7 @@ import { Div, Ul, Li } from "./DropDownBar.styled";
 
 const DropDownBar = () => {
   let navigate = useNavigate();
-  //   const dispatch = useDispatch();
-  //   const handleLogout = async () => {
-  //     await authService.logout();
-  //     dispatch(clearUser());
-  //     dispatch(clearStep());
-  //     authService.resetToken();
-  //   };
-  const { isLogin, chgIsLogin, chgAccToken } = accessTokenStore();
+  const { chgIsLogin, chgAccToken } = accessTokenStore();
   const logoutHandle = () => {
     window.document.cookie = "accessToken" + "=; Max-Age=-99999999;";
     chgIsLogin(false);

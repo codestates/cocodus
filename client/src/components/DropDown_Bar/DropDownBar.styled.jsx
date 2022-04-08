@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 export const Div = styled.div`
   position: absolute;
-  top: 100%;
+  top: 60%;
   margin-top: 1rem;
-  right: 0px;
+  right: -10%;
   z-index: 5;
 `;
 
