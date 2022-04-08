@@ -29,6 +29,9 @@ router.get("/info", userController.info.get);
 // * POST /user/info
 router.post("/info", userController.info.post);
 
+// * POST /user/info
+router.patch("/info", userController.info.patch);
+
 // * DELETE /user/info
 router.delete("/info", userController.info.delete);
 

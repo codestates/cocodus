@@ -33,7 +33,7 @@ module.exports = {
       console.log("post 번호가 Number type이 아님"); //만약 postId가 숫자가 아닐 경우
       return res.status(400).send("Not found post id");
     }
-    //id에 해당하는 조회수 +1 해줘야함
+
     const comment = await sequelize.query(
       `select Post_comments.id, Users.name, Post_comments.comment FROM Post_comments
     INNER JOIN Users ON Post_comments.user_id = Users.id

@@ -84,13 +84,22 @@ function Register() {
         <FlexBox>
           <CalendarComponent />
           <Label>
-            <CheckBox
-              name="online"
-              type="checkbox"
-              id="online"
-              onChange={onCheckChange}
-              value={online}
-            />
+            {online ? (
+              <CheckBox
+                name="online"
+                type="checkbox"
+                id="online"
+                onChange={onCheckChange}
+                checked
+              />
+            ) : (
+              <CheckBox
+                name="online"
+                type="checkbox"
+                id="online"
+                onChange={onCheckChange}
+              />
+            )}
             온라인 가능
           </Label>
         </FlexBox>
