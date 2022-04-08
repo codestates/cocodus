@@ -14,17 +14,17 @@ export default function LanguageIcon({ stackHandler }) {
       <ContainerForIcon>
         <Button>
           <img
-            id={"JS"}
+            id={"JavaScript"}
             onClick={(e) => stackHandler(e.target.id)}
-            src="JS.png"
+            src="JavaScript.png"
           />
         </Button>
 
         <Button>
           <img
-            id={"TS"}
+            id={"TypeScript"}
             onClick={(e) => stackHandler(e.target.id)}
-            src="TS.png"
+            src="TypeScript.png"
           />
         </Button>
         <Button>
@@ -38,14 +38,14 @@ export default function LanguageIcon({ stackHandler }) {
           <img
             id={"View"}
             onClick={(e) => stackHandler(e.target.id)}
-            src="view.png"
+            src="View.png"
           />
         </Button>
         <Button>
           <img
-            id={"Node"}
+            id={"Node.js"}
             onClick={(e) => stackHandler(e.target.id)}
-            src="node.png"
+            src="Node.png"
           />
         </Button>
         <Button>
@@ -78,14 +78,14 @@ export default function LanguageIcon({ stackHandler }) {
         </Button>
         <Button>
           <img
-            id={"CPlus"}
+            id={"C++"}
             onClick={(e) => stackHandler(e.target.id)}
             src="CPlus.png"
           />
         </Button>
         <Button>
           <img
-            id={"Csharp"}
+            id={"C#"}
             onClick={(e) => stackHandler(e.target.id)}
             src="CSharp.png"
           />
@@ -94,7 +94,7 @@ export default function LanguageIcon({ stackHandler }) {
           <img
             id={"Go"}
             onClick={(e) => stackHandler(e.target.id)}
-            src="go.png"
+            src="Go.png"
           />
         </Button>
         <Button>
@@ -136,7 +136,7 @@ export default function LanguageIcon({ stackHandler }) {
           <img
             id={"Swift"}
             onClick={(e) => stackHandler(e.target.id)}
-            src="swift.png"
+            src="Swift.png"
           />
         </Button>
       </ContainerForIcon>
