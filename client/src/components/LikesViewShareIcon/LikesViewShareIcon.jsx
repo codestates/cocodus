@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { AiOutlineLike } from "react-icons/ai";
 import { CgEye } from "react-icons/cg";
 import { AiOutlinePaperClip } from "react-icons/ai";
@@ -17,38 +17,45 @@ import {
 import { linkModalStore } from "../../Store/Modal-zustand";
 import axios from "axios";
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
-
+import { registerUserInfoStore } from "../../Store/RegisterUserInfo-zustand";
 function LikesViewShareIcon(props) {
-  const { accessToken, cocodusId } = accessTokenStore();
+  const { accessToken, cocodusId, isLogin } = accessTokenStore();
+  const { nickName } = registerUserInfoStore();
   const [likeClick, setLikeClick] = useState(true);
+
+  useEffect(async () => {
+    if (accessToken && cocodusId && isLogin) {
+      let temp = await axios({
+        method: "GET",
+        url: "/board/like",
+        baseURL: "http://localhost:8080",
+        params: {
+          post_id,
+          accessToken,
+          user_id: cocodusId,
+          nickName,
+          isLogin,
+        },
+      });
+      setLikeClick(temp);
+    }
+  }, []);
 
   // 좋아요 버튼 클릭
   const countClick = async () => {
-    if (likeClick) {
-      await axios({
-        method: "PATCH",
-        url: "http://localhost:8080/board/like",
-        data: {
-          accessToken,
-          user_id: cocodusId,
-          // post_id,
-          inc: true,
-        },
-      });
-      setLikeClick(!likeClick);
-    } else {
-      await axios({
-        method: "PATCH",
-        url: "http://localhost:8080/board/like",
-        data: {
-          accessToken,
-          user_id: cocodusId,
-          // post_id,
-          inc: false,
-        },
-      });
-      setLikeClick(!likeClick);
-    }
+    // await axios({
+    //   method: "POST",
+    //   url: "/board/like",
+    //   baseURL: "http://localhost:8080",
+    //   params: {
+    //     post_id,
+    //     accessToken,
+    //     user_id: cocodusId,
+    //     nickName,
+    //     isLogin,
+    //   },
+    // });
+    setLikeClick(!likeClick);
   };
 
   // 모달
