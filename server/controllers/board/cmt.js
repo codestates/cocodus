@@ -1,15 +1,18 @@
 const { User, Post_comment, sequelize } = require("../../models");
+const { isAuthorized } = require("../token");
 
 module.exports = {
   post: async (req, res) => {
-    console.log(req.query);
     const { accessToken, user_id, postId, comment } = req.query;
-
-    const cocodusMember = await User.findOne({
-      where: { id: user_id },
-    });
-    if (!cocodusMember) {
-      return res.status(401).send("not Authorized"); //id가 일치하지 않으므로 더이상 진행할 필요가 없습니다
+    if (user_id.length) {
+      const cocodusMember = await User.findOne({
+        where: { id: user_id || "" },
+      });
+      const isMember = await isAuthorized(accessToken, user_id.split("+")[0]);
+      if (!cocodusMember && !isMember)
+        return res.status(401).send("not Authorized"); //id가 일치하지 않으므로 더이상 진행할 필요가 없습니다
+    } else {
+      return res.status(400).send("Bad Request");
     }
 
     if (isNaN(Number(postId))) {
@@ -17,14 +20,14 @@ module.exports = {
       return res.status(400).send("Not found post id");
     }
 
-    //const newComment =
-    await Post_comment.create({
+    const newComment = await Post_comment.create({
       user_id: user_id,
       post_id: postId,
       comment: comment,
     });
 
-    res.status(201).end();
+    if (newComment) res.status(201).end();
+    else res.status(204).send();
   },
   get: async (req, res) => {
     let postId = Number(req.query.postId);
@@ -41,17 +44,15 @@ module.exports = {
     );
 
     const commentArray = [...comment[0]];
-    console.log(commentArray);
     if (commentArray.length === 0) {
       console.log("댓글이 없습니다");
       return res.status(200).send("no comments in this post");
     }
 
     return res.status(200).json(commentArray);
-    // res.status(200).end();
   },
   patch: async (req, res) => {
-    const { accessToken, user_id, comment_id, comment } = req.query;
+    const { accessToken, user_id, postId, comment_id, comment } = req.query;
     //여기에 accessToken 확인하는 과정 추가할 예정입니다
 
     const cocodusMember = await User.findOne({
@@ -68,8 +69,7 @@ module.exports = {
       return res.status(400).send("Not found comment id");
     }
 
-    // const newComment =
-    await Post_comment.update(
+    const newComment = await Post_comment.update(
       {
         comment: comment,
       },
@@ -78,10 +78,11 @@ module.exports = {
       }
     );
 
-    res.status(201).end();
+    if (newComment) return res.status(200).json(newComment.data);
+    else return res.status(204).end();
   },
   delete: async (req, res) => {
-    const { accessToken, user_id, comment_id, postId } = req.body;
+    const { accessToken, user_id, postId, comment_id } = req.query;
     //여기에 accessToken 확인하는 과정 추가할 예정입니다
 
     const cocodusMember = await User.findOne({
