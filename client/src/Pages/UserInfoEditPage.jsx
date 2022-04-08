@@ -45,10 +45,13 @@ function UserInfoEditPage(props) {
       method: "PATCH",
       url: "http://localhost:8080/user/info",
       data: {
-        jsonFile: JSON.stringify(editData),
         user_id: cocodusId,
-        lat: latitudeY,
+        name: nickName,
+        image: "링크주소들어갈예정입니다",
+        roadAddress,
+        location: placeName,
         long: longitudeX,
+        lat: latitudeY,
       },
     });
     console.log(editPost);
