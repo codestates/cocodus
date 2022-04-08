@@ -16,4 +16,8 @@ export const Language = styled.div`
 export const ContentBlock = styled.div`
   font-size: 1.125rem;
   font-weight: 500;
+  width: 900px;
+  min-height: 200px;
+  border-top: 1px solid #ced4da;
+  padding-top: 1rem;
 `;

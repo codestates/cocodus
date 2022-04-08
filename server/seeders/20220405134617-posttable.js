@@ -8,6 +8,7 @@ module.exports = {
         {
           user_id: "github+happy5happy5",
           jsonfile: JSON.stringify({
+            cocodusId: "github+happy5happy5",
             nickName: "윤종복",
             title: "리액트 모각코 하실 분",
             content:
@@ -33,6 +34,7 @@ module.exports = {
         {
           user_id: "github+happy5happy5",
           jsonfile: JSON.stringify({
+            cocodusId: "github+happy5happy5",
             nickName: "윤종복",
             title: "리액트 하실 분",
             content:
@@ -54,9 +56,10 @@ module.exports = {
           long: "126.9997467",
         },
         {
-          user_id: "github+happy5happy5",
+          user_id: "github+sun-one95",
           jsonfile: JSON.stringify({
-            nickName: "윤종복",
+            cocodusId: "github+sun-one95",
+            nickName: "수닐",
             title: "자바스크립트 하실 분",
             content:
               "자바스크립트로 토이 공부 하실분 모십니다. Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -77,9 +80,10 @@ module.exports = {
           long: "126.9842955",
         },
         {
-          user_id: "github+happy5happy5",
+          user_id: "github+sun-one95",
           jsonfile: JSON.stringify({
-            nickName: "윤종복",
+            cocodusId: "github+sun-one95",
+            nickName: "수닐",
             title: "자바스크립트로 창업하실 분 모십니다",
             content:
               "자바스크립트로 창업 하실분??. Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -102,6 +106,7 @@ module.exports = {
         {
           user_id: "github+happy5happy5",
           jsonfile: JSON.stringify({
+            cocodusId: "github+happy5happy5",
             nickName: "윤종복",
             title: "타입스크립트 스터디원",
             content:
@@ -125,6 +130,7 @@ module.exports = {
         {
           user_id: "github+happy5happy5",
           jsonfile: JSON.stringify({
+            cocodusId: "github+happy5happy5",
             nickName: "윤종복",
             title: "타입스크립트 공부모임",
             content:
@@ -146,9 +152,10 @@ module.exports = {
           long: "127.9113692",
         },
         {
-          user_id: "github+happy5happy5",
+          user_id: "github+sun-one95",
           jsonfile: JSON.stringify({
-            nickName: "윤종복",
+            cocodusId: "github+sun-one95",
+            nickName: "수닐",
             title: "자바 공부하실분",
             content:
               "자바로 공부하실 분들을 모십니다. Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -169,9 +176,10 @@ module.exports = {
           long: "127.8692508",
         },
         {
-          user_id: "github+happy5happy5",
+          user_id: "github+sun-one95",
           jsonfile: JSON.stringify({
-            nickName: "윤종복",
+            cocodusId: "github+sun-one95",
+            nickName: "수닐",
             title: "GO 공부하실분",
             content:
               "GO 공부하실 분들을 모십니다. Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -194,6 +202,7 @@ module.exports = {
         {
           user_id: "github+happy5happy5",
           jsonfile: JSON.stringify({
+            cocodusId: "github+happy5happy5",
             nickName: "윤종복",
             title: "코틀린 공부하실분",
             content:
@@ -217,6 +226,7 @@ module.exports = {
         {
           user_id: "github+happy5happy5",
           jsonfile: JSON.stringify({
+            cocodusId: "github+happy5happy5",
             nickName: "윤종복",
             title: "뷰 공부하는 사람들 모여주세요",
             content:
@@ -238,9 +248,10 @@ module.exports = {
           long: "126.0300560",
         },
         {
-          user_id: "github+happy5happy5",
+          user_id: "github+sun-one95",
           jsonfile: JSON.stringify({
-            nickName: "윤종복",
+            cocodusId: "github+sun-one95",
+            nickName: "수닐",
             title: "뷰로 취뽀 하고 싶으신 분",
             content:
               "뷰를 공부해서 취뽀 하고 싶은 분들을 모십니다 Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -261,9 +272,10 @@ module.exports = {
           long: "126.9934368",
         },
         {
-          user_id: "github+happy5happy5",
+          user_id: "github+sun-one95",
           jsonfile: JSON.stringify({
-            nickName: "윤종복",
+            cocodusId: "github+sun-one95",
+            nickName: "수닐",
             title: "노드로 공부하고 싶으신 분",
             content:
               "노드짱노드짱짱맨 Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -286,6 +298,7 @@ module.exports = {
         {
           user_id: "github+happy5happy5",
           jsonfile: JSON.stringify({
+            cocodusId: "github+happy5happy5",
             nickName: "윤종복",
             title: "공대 공학 C로 공부하고 싶으신 분",
             content:
@@ -309,6 +322,7 @@ module.exports = {
         {
           user_id: "github+happy5happy5",
           jsonfile: JSON.stringify({
+            cocodusId: "github+happy5happy5",
             nickName: "윤종복",
             title: "C로 취업하고 싶으신 분",
             content:
@@ -330,9 +344,10 @@ module.exports = {
           long: "126.9140568",
         },
         {
-          user_id: "github+happy5happy5",
+          user_id: "github+sun-one95",
           jsonfile: JSON.stringify({
-            nickName: "윤종복",
+            cocodusId: "github+sun-one95",
+            nickName: "수닐",
             title: "파이썬 모각코 모임 ",
             content:
               "파이썬이 취업 제일 잘 됨. 그러니 ㄱㄱC Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
@@ -353,9 +368,10 @@ module.exports = {
           long: "126.8282617",
         },
         {
-          user_id: "github+happy5happy5",
+          user_id: "github+sun-one95",
           jsonfile: JSON.stringify({
-            nickName: "윤종복",
+            cocodusId: "github+sun-one95",
+            nickName: "수닐",
             title: "파이썬 토이프로젝트 ",
             content:
               "파이썬이 토이프로젝트 할거임C Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
