@@ -17,6 +17,8 @@ module.exports = {
             model: "Users",
             key: "id",
           },
+          onDelete: "cascade",
+          onUpdate: "cascade",
         },
         jsonfile: {
           type: Sequelize.JSON,
