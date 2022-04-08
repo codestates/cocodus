@@ -19,6 +19,7 @@ export const Title = styled.input`
   width: 100%;
   margin-top: ${(props) => props.top};
   margin-bottom: 2rem;
+  margin-left: ${(props) => props.left};
   padding: 30px 0;
   padding-left: 0.5rem;
   font-size: 3rem;
