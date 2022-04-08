@@ -4,7 +4,7 @@ module.exports = {
   post: async (req, res) => {
     const { accessToken, user_id, postId, comment } = req.body;
     //여기에 accessToken 확인하는 과정 추가할 예정입니다
-
+    console.log(postId);
     const cocodusMember = await User.findOne({
       where: { id: user_id },
     });
@@ -28,7 +28,7 @@ module.exports = {
   },
   get: async (req, res) => {
     let postId = Number(req.body.postId);
-
+    console.log(postId);
     if (isNaN(Number(postId))) {
       console.log("post 번호가 Number type이 아님"); //만약 postId가 숫자가 아닐 경우
       return res.status(400).send("Not found post id");
