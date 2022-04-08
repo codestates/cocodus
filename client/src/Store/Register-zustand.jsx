@@ -99,6 +99,12 @@ export const registerStore = create((set) => ({
       latitudeY: value.y,
       longitudeX: value.x,
     })),
+
+  chgPlaceName: (value) =>
+    set((state) => ({
+      placeName: value.placeName,
+      roadAddress: value.roadAddress,
+    })),
 }));
 
 // export const registerStore = create(
