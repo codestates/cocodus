@@ -22,42 +22,47 @@ import { postData } from "../../Store/postData-zustand";
 function LikesViewShareIcon(props) {
   const { accessToken, cocodusId, isLogin } = accessTokenStore();
   const { nickName } = registerUserInfoStore();
-  const [likeClick, setLikeClick] = useState(true);
+  const [likeClick, setLikeClick] = useState(false);
+  const [totalPostLike, setTotalPostLike] = useState(0);
+  const [render, setRender] = useState(false);
   const { specificdata } = postData();
   useEffect(async () => {
-    console.log({ specificdata });
-    if (accessToken && cocodusId && isLogin) {
-      let temp = await axios({
-        method: "GET",
-        url: "/board/like",
-        baseURL: "http://localhost:8080",
-        params: {
-          post_id,
-          accessToken,
-          user_id: cocodusId,
-          nickName,
-          isLogin,
-        },
-      });
-      setLikeClick(temp);
-    }
-  }, []);
+    // if (accessToken && cocodusId && isLogin) {
+    let temp = await axios({
+      method: "GET",
+      url: "/board/like",
+      baseURL: "http://localhost:8080",
+      params: {
+        post_id: specificdata[0].id,
+        accessToken,
+        cocodusId,
+        nickName,
+        isLogin,
+      },
+    });
+    // console.log(temp.total_like);
+    // console.log(temp.userLike);
+
+    setTotalPostLike(temp.data ? temp.data.total_like : 0);
+    setLikeClick(temp.data ? !!temp.data.userLike : false);
+    // }
+  }, [render]);
 
   // 좋아요 버튼 클릭
   const countClick = async () => {
-    // await axios({
-    //   method: "POST",
-    //   url: "/board/like",
-    //   baseURL: "http://localhost:8080",
-    //   params: {
-    //     post_id,
-    //     accessToken,
-    //     user_id: cocodusId,
-    //     nickName,
-    //     isLogin,
-    //   },
-    // });
-    setLikeClick(!likeClick);
+    let temp = await axios({
+      method: "POST",
+      url: "http://localhost:8080/board/like",
+      params: {
+        post_id: specificdata[0].id,
+        accessToken,
+        cocodusId,
+        nickName,
+        isLogin,
+      },
+    });
+    setLikeClick(!!likeClick);
+    setRender(!render);
   };
 
   // 모달
@@ -77,7 +82,7 @@ function LikesViewShareIcon(props) {
     <IconsBlock>
       <IconAndText>
         <AiOutlineLike className="likes" size={30} onClick={countClick} />
-        <Text>1</Text>
+        <Text>{totalPostLike}</Text>
       </IconAndText>
       <IconAndText>
         <CgEye size={30} />
