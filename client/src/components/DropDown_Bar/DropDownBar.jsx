@@ -6,19 +6,9 @@ import { registerUserInfoStore } from "../../Store/RegisterUserInfo-zustand";
 
 const DropDownBar = () => {
   let navigate = useNavigate();
-<<<<<<< HEAD
-  const { chgIsLogin, chgAccToken } = accessTokenStore();
-=======
-  //   const dispatch = useDispatch();
-  //   const handleLogout = async () => {
-  //     await authService.logout();
-  //     dispatch(clearUser());
-  //     dispatch(clearStep());
-  //     authService.resetToken();
-  //   };
-  const { nickName, chgInput } = registerUserInfoStore();
-  const { isLogin, chgIsLogin, chgAccToken, chgCocoId } = accessTokenStore();
->>>>>>> 89564aa53b5b4371312993685c4ec0859afde7ac
+
+  const { chgInput } = registerUserInfoStore();
+  const { chgIsLogin, chgAccToken, chgCocoId } = accessTokenStore();
   const logoutHandle = () => {
     window.document.cookie = "accessToken" + "=; Max-Age=-99999999;";
     window.document.cookie = "cocodusId" + "=; Max-Age=-99999999;";
