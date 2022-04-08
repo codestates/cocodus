@@ -6,9 +6,11 @@ import { Section, Btn } from "../Register/Register.styled";
 import { Text, DivBlock } from "./Comment.styled";
 import { commentStore } from "../../Store/Comment-zustand";
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
+import { postData } from "../../Store/postData-zustand";
 import axios from "axios";
 
 function Comment() {
+  const { specificdata } = postData();
   const nextId = useRef(1);
   const { chgMsg, inputs, addMsg } = commentStore();
   const onChange = (e) => {
@@ -17,22 +19,23 @@ function Comment() {
   const { accessToken, cocodusId } = accessTokenStore();
   // 댓글 등록
   const onCreate = async () => {
-    const commentInfo = {
-      accessToken,
-      cocodusId,
-      // postId,
-      inputs,
-    };
+    // const commentInfo = {
+    //   accessToken,
+    //   cocodusId,
+    //   postId: specificdata.id,
+    //   inputs,
+    // };
     // addMsg(inputs, nextId.current);
     // nextId.current += 1;
+    const postId = specificdata[0].id;
     const comment = await axios({
       method: "POST",
       url: "http://localhost:8080/board/cmt",
-      data: {
-        jsonFile: JSON.stringify(commentInfo),
+      params: {
         accessToken,
         user_id: cocodusId,
-        // post_id: postId,
+        postId,
+        comment: inputs,
       },
     });
   };
