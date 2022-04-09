@@ -86,7 +86,7 @@ function PriceCard({ stack = [] }) {
         .map((x, i, a) => {
           // typeof x.jsonfile === "string" ? console.log(x.jsonfile) : null;
           return typeof x.jsonfile === "string"
-            ? { jsonfile: JSON.parse(x.jsonfile), id: x.id }
+            ? { ...x, jsonfile: JSON.parse(x.jsonfile) }
             : x;
         })
         .filter((x) =>
