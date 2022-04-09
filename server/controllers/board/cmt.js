@@ -25,9 +25,22 @@ module.exports = {
       post_id: postId,
       comment: comment,
     });
+    let commentArray;
+    if (newComment) {
+      const comment = await sequelize.query(
+        `select Post_comments.id, Users.name, Post_comments.comment FROM Post_comments
+      INNER JOIN Users ON Post_comments.user_id = Users.id
+      WHERE Post_id = ${postId};`
+      );
+      commentArray = comment ? [...comment[0]] : [];
+      console.log(commentArray);
+    }
+    if (commentArray.length === 0) {
+      console.log("댓글을 작성하지 못했습니다");
+      return res.status(204).send(commentArray);
+    }
 
-    if (newComment) res.status(201).end();
-    else res.status(204).send();
+    return res.status(201).json(commentArray);
   },
   get: async (req, res) => {
     let postId = Number(req.query.postId);
@@ -46,14 +59,12 @@ module.exports = {
     const commentArray = [...comment[0]];
     if (commentArray.length === 0) {
       console.log("댓글이 없습니다");
-      return res.status(200).send("no comments in this post");
     }
 
     return res.status(200).json(commentArray);
   },
   patch: async (req, res) => {
     const { accessToken, user_id, postId, comment_id, comment } = req.query;
-    //여기에 accessToken 확인하는 과정 추가할 예정입니다
 
     if (user_id.length) {
       const cocodusMember = await User.findOne({
@@ -78,7 +89,7 @@ module.exports = {
       return res.status(400).send("Not found comment id");
     }
 
-    const newComment = await Post_comment.update(
+    const updateComment = await Post_comment.update(
       {
         comment: comment,
       },
@@ -87,13 +98,26 @@ module.exports = {
       }
     );
 
-    if (newComment) return res.status(200).json(newComment.data);
-    else return res.status(204).end();
+    let commentArray;
+    if (updateComment) {
+      const comment = await sequelize.query(
+        `select Post_comments.id, Users.name, Post_comments.comment FROM Post_comments
+      INNER JOIN Users ON Post_comments.user_id = Users.id
+      WHERE Post_id = ${postId};`
+      );
+      commentArray = comment ? [...comment[0]] : [];
+      console.log(commentArray);
+    }
+    if (commentArray.length === 0) {
+      console.log("댓글을 수정할 수 없습니다");
+      return res.status(204).send(commentArray);
+    }
+
+    return res.status(200).json(commentArray);
   },
   delete: async (req, res) => {
     const { accessToken, user_id, postId, comment_id } = req.query;
-    //여기에 accessToken 확인하는 과정 추가할 예정입니다
-    console.log(req.query);
+
     if (user_id.length) {
       const cocodusMember = await User.findOne({
         where: { id: user_id || "" },
@@ -121,7 +145,20 @@ module.exports = {
       where: { id: comment_id, user_id, post_id: postId },
     });
 
-    if (deleteComment) return res.status(200).send("댓글을 삭제했습니다");
-    else return res.status(204).end("댓글을 삭제하지 못했습니다");
+    let commentArray;
+    if (deleteComment) {
+      const comment = await sequelize.query(
+        `select Post_comments.id, Users.name, Post_comments.comment FROM Post_comments
+      INNER JOIN Users ON Post_comments.user_id = Users.id
+      WHERE Post_id = ${postId};`
+      );
+      commentArray = comment ? [...comment[0]] : [];
+    }
+    if (commentArray.length === 0) {
+      console.log("댓글을 삭제할 수 없습니다");
+      return res.status(204).send(commentArray);
+    }
+
+    return res.status(200).json(commentArray);
   },
 };

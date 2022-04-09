@@ -38,6 +38,7 @@ function Comment() {
         comment: inputs,
       },
     });
+    console.log(comment);
   };
 
   return (
