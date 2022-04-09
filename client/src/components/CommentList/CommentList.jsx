@@ -1,5 +1,5 @@
 // 댓글 등록 기능
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Block,
   FlexBox,
@@ -20,29 +20,22 @@ import axios from "axios";
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
 import { postData } from "../../Store/postData-zustand";
 
-function CommentArea({ msg }) {
-  useEffect(() => {
-    console.log("컴포넌트가 화면에 나타남");
-  }, [msg]);
+function CommentArea({ cmtData }) {
   const { specificdata } = postData();
-  const { input, visible, visibleOpen, visibleClose, chgInput } =
-    updateCommentStore();
-  // 모달
+  const { visible, visibleOpen, visibleClose } = updateCommentStore();
   const { modalOpen, openModal, closeModal } = commentModalStore();
-
-  const { updateMsg } = commentStore();
+  const [cmtText, setCmtText] = useState(cmtData.comment);
+  const [cmtShow, setCmtShow] = useState(false);
+  const { setReload } = commentStore();
 
   // 수정 버튼 클릭시
-  const onClick = () => {
-    chgInput(msg.comment);
+  const onClick = (e) => {
+    setCmtShow(true);
     visibleOpen();
-  };
-  const onChange = (e) => {
-    chgInput(e.target.value);
   };
 
   const { accessToken, cocodusId } = accessTokenStore();
-  const comment_id = msg.id;
+  const comment_id = cmtData.id;
 
   // 엔터키를 입력시 수정 처리되는 함수
   const handleKeydown = async (e) => {
@@ -55,43 +48,48 @@ function CommentArea({ msg }) {
           user_id: cocodusId,
           postId: specificdata[0].id,
           comment_id,
-          comment: input,
+          comment: cmtText,
         },
       });
-      console.log(comment);
-      updateMsg(input, comment_id);
-      visibleClose();
-      chgInput("");
-      // 댓글 수정 axios.patch 요청 작성
+      if (comment.status === 200 || comment.status === 204) {
+        visibleClose();
+        setCmtShow(false);
+        setCmtText("");
+        setReload();
+      } else {
+        alert("뭔가 크게 잘못됐어요! 상태코드=", comment.status);
+      }
     }
   };
-  if (!msg) return null;
+  if (!cmtData) return null;
   return (
     <Block>
       <FlexBox>
         <Img src="UserIcon.png" alt="userimg" />
         <div>
-          <UserName>{msg.name}</UserName>
+          <UserName>{cmtData.name}</UserName>
           <CreatedAt>2022-03-25</CreatedAt>
         </div>
         <BtnBlock>
-          <Btn onClick={onClick}>수정</Btn>
+          <Btn id={cmtData.id} onClick={onClick}>
+            수정
+          </Btn>
           <Btn onClick={openModal}>삭제</Btn>
           <Modal open={modalOpen} header="알림">
-            <DeleteModal id={msg.id} closeModal={closeModal} />
+            <DeleteModal id={cmtData.id} closeModal={closeModal} />
           </Modal>
         </BtnBlock>
       </FlexBox>
       <Msg>
-        {visible || input ? (
+        {visible && cmtShow ? (
           <Input
             placeholder="수정을 하신 후 Enter 키를 입력하세요"
-            value={input}
-            onChange={onChange}
+            value={cmtText}
+            onChange={(e) => setCmtText(e.target.value)}
             onKeyDown={handleKeydown}
           />
         ) : (
-          msg.comment
+          cmtData.comment
         )}
       </Msg>
     </Block>
@@ -99,31 +97,29 @@ function CommentArea({ msg }) {
 }
 
 function CommentList() {
-  const { commentList, addMsg } = commentStore();
+  const { reLoad, setReload } = commentStore();
   const { specificdata } = postData();
-  useEffect(() => {
-    const fetchComments = async () => {
-      const response = await axios({
-        method: "GET",
-        url: "http://localhost:8080/board/cmt",
-        params: {
-          postId: specificdata[0].id,
-        },
-      });
-
-      addMsg(response.data);
-      console.log(response.data);
-    };
-    fetchComments();
-  }, []);
+  const [cmtList, setCmtList] = useState([]);
+  useEffect(async () => {
+    const response = await axios({
+      method: "GET",
+      url: "http://localhost:8080/board/cmt",
+      params: {
+        postId: specificdata[0].id,
+      },
+    });
+    if (response.status === 200) {
+      setCmtList(response.data);
+    } else {
+      alert("받아오기 안된다 고쳐라");
+    }
+  }, [reLoad]);
 
   return (
     <div>
-      {commentList
-        ? commentList.map((comment) => (
-            <CommentArea msg={comment} key={comment.id} />
-          ))
-        : null}
+      {cmtList.map((x, i) => (
+        <CommentArea cmtData={x} key={"cmtData" + i} reLoad={reLoad} />
+      ))}
     </div>
   );
 }

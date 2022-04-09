@@ -3,6 +3,11 @@ import create from "zustand";
 export const commentStore = create((set) => ({
   inputs: "",
   commentList: [],
+  reLoad: false,
+  setReload: (value) =>
+    set((state) => ({
+      reLoad: !state.reLoad,
+    })),
   //댓글 변경
   chgMsg: (value) =>
     set((state) => ({
