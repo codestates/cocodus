@@ -32,6 +32,7 @@ function PriceCard({ stack = [] }) {
   useEffect(async () => {
     setIsLoading(true);
     let temp = await axios({
+      // url: process.env.URL||"localhost8080"+"/board/all"
       url: "http://localhost:8080/board/all",
       params: {
         isLogin: isLogin,
@@ -214,7 +215,6 @@ function CardSection({ data, stack }) {
               <FeatureListItem>
                 <span>{data.jsonfile.content}</span>
               </FeatureListItem>
-
               <span style={{ paddingRight: "15px" }}>♥️{data.total_like}</span>
               <span>👀{data.veiw_count}</span>
             </DivContainer>
