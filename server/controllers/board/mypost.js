@@ -4,7 +4,7 @@ module.exports = {
   // 내 정보에서 내가 쓴 모임 정보 모아보기로 조회하는 메시지
   get: async (req, res) => {
     const { accessToken, user_id } = req.body;
-    if (user_id.length) {
+    if (user_id) {
       const cocodusMember = await User.findOne({
         where: { id: user_id || "" },
       });

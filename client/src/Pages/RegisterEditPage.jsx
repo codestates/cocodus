@@ -20,19 +20,19 @@ function RegisterEditPage(props) {
   const { openModal } = registerEditModalStore();
   const { accessToken, cocodusId } = accessTokenStore();
   const {
-    // postId,
     inputs,
     tag,
     content,
     placeName,
     roadAddress,
-    // recruiting,
+    recruiting,
     latitudeY,
     longitudeX,
   } = registerStore();
-  const { postId, recruiting } = postData;
+  const { specificdata } = postData();
   const { title, date, online } = inputs;
-  console.log(postData);
+  const postId = specificdata[0].id;
+  console.log(postId);
   // 글 수정 axios call
   const onEditHandler = async () => {
     try {
@@ -52,15 +52,15 @@ function RegisterEditPage(props) {
       };
       const editPost = await axios({
         method: "PATCH",
-        url: "http://localhost:8080/board/list",
+        url: "http://localhost:8080/board/writing",
         data: {
-          jsonFile: JSON.stringify(editData),
+          jsonfile: JSON.stringify(editData),
           accessToken,
           user_id: cocodusId,
-          //postId: "1",
+          postId,
           tag,
           online,
-          //recruiting: true,
+          recruiting,
           lat: latitudeY,
           long: longitudeX,
         },
