@@ -19,6 +19,8 @@ import { accessTokenStore } from "../Store/accesstoken-zustand";
 import { registerUserInfoStore } from "../Store/RegisterUserInfo-zustand";
 import { postData } from "../Store/postData-zustand";
 import { useNavigate } from "react-router-dom";
+import { registerStore } from "../Store/Register-zustand";
+
 function PriceCard({ stack = [] }) {
   const [howMany, setHowMany] = useState([0, 3]); //첫번째가 시작인덱스 2번째가 몇개 받아올지 개수
   const [km, setKm] = useState(30);
@@ -82,9 +84,20 @@ function PriceCard({ stack = [] }) {
 }
 
 function CardSection({ data, stack }) {
-  // const [like, setLike] = useState(0);
-  const { jsonData, chgSpecificData } = postData();
+  const [like, setLike] = useState(0);
+  const { jsonData, specificdata, chgSpecificData } = postData();
+  const {
+    chgInput,
+    chgOnline,
+    chgTag,
+    chgMsg,
+    chgYear,
+    chgHour,
+    chgMin,
+    chgPlaceName,
+  } = registerStore();
   let navigate = useNavigate();
+
   const topThree = (tag, stack) => {
     let temp = tag
       .filter((x, i) => (stack.indexOf(x) > -1 ? true : false))
@@ -115,8 +128,42 @@ function CardSection({ data, stack }) {
         return el.id === id;
       })
     );
+    console.log(specificdata);
+    // chgInput("title", specificdata[0].jsonfile.title);
+    // chgOnline("online", specificdata[0].jsonfile.online);
+    // chgTag(specificdata[0].jsonfile.tag);
+    // chgMsg(specificdata[0].jsonfile.content);
+    // chgPlaceName(specificdata[0].jsonfile);
+    // const date = specificdata[0].jsonfile.date;
+    // let arr = date.split(" ");
+    // let year = arr.slice(0, 3);
+    // year = year.join(" ");
+    // chgYear(year);
+    // let hour = arr.slice(3, 5);
+    // if (hour[0] === "오후") {
+    //   let h = hour[1].split("");
+    //   h[0] = Number(h[0]) + 12;
+    //   chgHour(h[0]);
+    // } else {
+    //   let h = hour[1].split("");
+    //   h[0] = Number(h[0]);
+    //   chgHour(h[0]);
+    // }
+    // let min = arr.slice(5);
+    // if (min.length > 0) {
+    //   min = min.join("");
+    //   let m = min.split("");
+    //   if (m.length === 3) {
+    //     m = Number(`${m[0]}${m[1]}`);
+    //     chgMin(m);
+    //   } else {
+    //     m = Number(`${m[0]}`);
+    //     chgMin(m);
+    //   }
+    // }
     navigate("/RegisterContentViewPage");
   };
+
   return (
     <Container>
       <Flex>
