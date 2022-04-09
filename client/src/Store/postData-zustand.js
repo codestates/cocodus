@@ -27,10 +27,16 @@ export const postData = create(
         set((state) => ({
           jsonData: value,
         })),
-      chgSpecificData: (arr) =>
-        set((state) => ({
+      chgSpecificData: (arr) => {
+        // if (typeof arr === "string") {
+        //   return set((state) => ({
+        //     specificdata: [...JSON.parse(arr)],
+        //   }));
+        // }
+        return set((state) => ({
           specificdata: [...arr],
-        })),
+        }));
+      },
     }),
     {
       name: "postData",
