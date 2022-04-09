@@ -86,7 +86,7 @@ function PriceCard({ stack = [] }) {
         .map((x, i, a) => {
           // typeof x.jsonfile === "string" ? console.log(x.jsonfile) : null;
           return typeof x.jsonfile === "string"
-            ? { jsonfile: JSON.parse(x.jsonfile), id: x.id }
+            ? { ...x, jsonfile: JSON.parse(x.jsonfile) }
             : x;
         })
         .filter((x) =>
@@ -201,11 +201,11 @@ function CardSection({ data, stack }) {
 
   return (
     <Container>
-      {console.log(data)}
       <Flex>
         <Card>
           <BackgroundSqure />
           <ContentDiv>
+            {console.log(data)}
             <DivContainer>{topThree(data.jsonfile.tag, stack)}</DivContainer>
             <DivContainer onClick={() => findData(data.id)}>
               <PlanTitle>{data.jsonfile.title}</PlanTitle>
