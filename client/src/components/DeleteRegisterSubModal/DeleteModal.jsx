@@ -1,5 +1,7 @@
 // 모달창에서 댓글 삭제 기능
-
+import axios from "axios";
+import { accessTokenStore } from "../../Store/accesstoken-zustand";
+import { postData } from "../../Store/postData-zustand";
 import React from "react";
 import {
   ModalFlexBox,
@@ -11,27 +13,30 @@ import {
 import { commentStore } from "../../Store/Comment-zustand";
 
 function DeleteModal({ id, closeModal }) {
-  // const { removeMsg } = commentStore();
+  const { setReload } = commentStore();
   const { accessToken, cocodusId } = accessTokenStore();
-  const commentInfo = {
-    accessToken,
-    cocodusId,
-    postId,
-  };
+  const { specificdata } = postData();
+
   const onRemove = async (id) => {
     const comment = await axios({
       method: "DELETE",
       url: "http://localhost:8080/board/cmt",
-      data: {
-        jsonFile: JSON.stringify(commentInfo),
+      params: {
         accessToken,
         user_id: cocodusId,
-        post_id: postId,
-        comment_id: commentId,
+        postId: specificdata[0].id,
+        comment_id: id,
       },
     });
-    // removeMsg(id);
-    closeModal();
+    if (comment.status === 200) {
+      closeModal();
+      setReload();
+    } else {
+      console.log(comment);
+      alert(
+        "야 지우는거 진짜 클나따 여기 고쳐라 나중에 배포할때는 이거 빼는거 알지?"
+      );
+    }
   };
   return (
     <>

@@ -13,31 +13,36 @@ import { commentStore } from "../../Store/Comment-zustand";
 function DetailContent(props) {
   const { chgLoading, chgError } = boardGetLoadingStore();
   const { specificdata } = postData();
+  const [jsonData, setJsonData] = useState({});
+  useEffect(() => {
+    if (specificdata && specificdata[0]) {
+      setJsonData(specificdata[0].jsonfile);
+    }
+  }, []);
 
   return (
     <Section>
-      {/* {console.log(specificdata[0].id)} */}
       <Title
         color="transparent"
         textShadow="0 0 0 black"
         borderBottom="none"
         top="1rem"
         backGround="#fff"
-        defaultValue={specificdata[0].jsonfile.title}
+        defaultValue={jsonData.title}
         readOnly
       />
       <FlexBox>
         <Img src="UserIcon7.png" />
-        <Div>{specificdata[0].jsonfile.nickName}</Div>
+        <Div>{jsonData.nickName}</Div>
         <Div huge>2022-03-23</Div>
       </FlexBox>
       <FlexBox>
         <Div>사용 언어</Div>
-        {specificdata[0].jsonfile.tag &&
-          specificdata[0].jsonfile.tag.map((el, idx) => {
+        {jsonData.tag &&
+          jsonData.tag.map((el, idx) => {
             return <Language key={idx}>{el}</Language>;
           })}
-        {specificdata[0].jsonfile.online ? (
+        {jsonData.online ? (
           <Div
             backColor="rgba(196, 196, 196, 0.26)"
             fontSize="16px"
@@ -49,16 +54,13 @@ function DetailContent(props) {
       </FlexBox>
       <FlexBox>
         <Div>일시</Div>
-        <Div backColor="rgba(196, 196, 196, 0.26)">
-          {specificdata[0].jsonfile.date}
-        </Div>
+        <Div backColor="rgba(196, 196, 196, 0.26)">{jsonData.date}</Div>
         <Div marginLeft="4rem">장소</Div>
         <Div backColor="rgba(196, 196, 196, 0.26)">
-          {specificdata[0].jsonfile.roadAddress}{" "}
-          {specificdata[0].jsonfile.placeName}
+          {jsonData.roadAddress} {jsonData.placeName}
         </Div>
       </FlexBox>
-      <ContentBlock>{specificdata[0].jsonfile.content}</ContentBlock>
+      <ContentBlock>{jsonData.content}</ContentBlock>
       <LikesViewShareIcon />
       <Comment />
     </Section>
