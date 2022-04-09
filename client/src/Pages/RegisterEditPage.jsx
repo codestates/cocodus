@@ -19,11 +19,13 @@ function RegisterEditPage(props) {
   const { openModal } = registerEditModalStore();
   const { accessToken, cocodusId } = accessTokenStore();
   const {
+    // postId,
     inputs,
     tag,
     content,
     placeName,
     roadAddress,
+    // recruiting,
     latitudeY,
     longitudeX,
   } = registerStore();
@@ -53,9 +55,12 @@ function RegisterEditPage(props) {
           jsonFile: JSON.stringify(editData),
           accessToken,
           user_id: cocodusId,
+          //postId: "1",
+          tag,
+          online,
+          //recruiting: true,
           lat: latitudeY,
           long: longitudeX,
-          recruiting: true,
         },
       });
       console.log(editPost);
