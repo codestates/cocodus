@@ -17,6 +17,8 @@ module.exports = {
             model: "Posts",
             key: "id",
           },
+          onDelete: "cascade",
+          onUpdate: "cascade",
         },
         tag_id: {
           type: Sequelize.STRING,
@@ -24,6 +26,8 @@ module.exports = {
           //   model: "Tags",
           //   key: "id",
           // },
+          // onDelete: "cascade",
+          // onUpdate: "cascade",
         },
       },
       {
