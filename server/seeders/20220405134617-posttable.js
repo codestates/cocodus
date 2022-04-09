@@ -14,7 +14,16 @@ module.exports = {
             content:
               "모각코 구함요(<br>Lorem Ipsum is simply dummy text of the prin ting and typesetting industryLorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
             online: true,
-            tag: ["React.js", "JavaScript"],
+            tag: [
+              "React",
+              "JavaScript",
+              "TypeScript",
+              "Flutter",
+              "Ruby",
+              "Swift",
+              "C#",
+              "C++",
+            ],
             roadAddress: "서울 종로구 대학로11길 40",
 
             location: "카페선선혜화", //location 으로 바꾸기
@@ -40,7 +49,7 @@ module.exports = {
             content:
               "리액트로 함께할 멤버를 구합니다. Lorem Ipsum is simply dummy text of the prin ting and typesetting iLorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
             online: true,
-            tag: ["React.js", "JavaScript", "TypeScript"],
+            tag: ["React", "JavaScript", "TypeScript"],
             roadAddress: "서울 종로구 창경궁로 26길",
             placeName: "카페 키이로",
             lat: "37.5821065",
@@ -232,7 +241,7 @@ module.exports = {
             content:
               "뷰 공부하실 분들을 모십니다. Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
             online: true,
-            tag: ["Vue.js"],
+            tag: ["Vue"],
             roadAddress: "서울시 서초구 강남대로 51길",
             placeName: "브루티코",
             lat: "37.4911461",
@@ -256,7 +265,7 @@ module.exports = {
             content:
               "뷰를 공부해서 취뽀 하고 싶은 분들을 모십니다 Lorem Ipsum is simply dummy text of the prin ting and typesetting industry.",
             online: true,
-            tag: ["Vue.js", "Spring"],
+            tag: ["Vue", "Spring"],
             roadAddress: "서울시 서초구 방배4동 방배로 32길 30-9",
             placeName: "카페 노티드 서래",
             lat: "37.4913310",

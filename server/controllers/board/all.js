@@ -36,15 +36,28 @@ module.exports = {
           )
           .map((x, i) => {
             return {
-              jsonfile: x.dataValues.jsonfile,
               id: postLoc[i],
+              jsonfile: x.dataValues.jsonfile,
+              user_id: x.dataValues.user_id,
+              recruiting: x.dataValues.recruiting,
+              online: x.dataValues.online,
+              veiw_count: x.dataValues.veiw_count,
+              total_like: x.dataValues.total_like,
             };
           })
       );
     }
     if (isLogin === "false" && !accessToken && !nickName) {
       let temp = await Post.findAll({
-        attributes: ["id", "jsonfile"],
+        attributes: [
+          "id",
+          "user_id",
+          "jsonfile",
+          "recruiting",
+          "online",
+          "veiw_count",
+          "total_like",
+        ],
         offset: Number(howMany[0]) || 0,
         limit: Number(howMany[1]),
         subQuery: false,
