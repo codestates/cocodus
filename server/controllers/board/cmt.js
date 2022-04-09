@@ -145,6 +145,11 @@ module.exports = {
       where: { id: comment_id, user_id, post_id: postId },
     });
 
+    if (!deleteComment) {
+      console.log("댓글을 삭제할 수 없습니다");
+      return res.status(204).end();
+    }
+
     let commentArray;
     if (deleteComment) {
       const comment = await sequelize.query(
@@ -153,10 +158,6 @@ module.exports = {
       WHERE Post_id = ${postId};`
       );
       commentArray = comment ? [...comment[0]] : [];
-    }
-    if (commentArray.length === 0) {
-      console.log("댓글을 삭제할 수 없습니다");
-      return res.status(204).send(commentArray);
     }
 
     return res.status(200).json(commentArray);
