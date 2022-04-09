@@ -19,14 +19,6 @@ function Comment() {
   const { accessToken, cocodusId } = accessTokenStore();
   // 댓글 등록
   const onCreate = async () => {
-    // const commentInfo = {
-    //   accessToken,
-    //   cocodusId,
-    //   postId: specificdata.id,
-    //   inputs,
-    // };
-    // addMsg(inputs, nextId.current);
-    // nextId.current += 1;
     const postId = specificdata[0].id;
     const comment = await axios({
       method: "POST",
