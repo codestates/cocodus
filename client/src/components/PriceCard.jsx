@@ -7,8 +7,8 @@ import {
   Icon,
   BackgroundSqure,
   DivContainer,
-  Align,
-  MapButton,
+  StackContainer,
+  DateAndLocationContainer,
 } from "./styles/PriceCard.styled";
 
 import { Container } from "./styles/Container.styled";
@@ -203,16 +203,21 @@ function CardSection({ data, stack }) {
     <Container>
       <Flex>
         <Card>
-          <BackgroundSqure />
+          <BackgroundSqure />{" "}
           <ContentDiv>
-            <DivContainer>{topThree(data.jsonfile.tag, stack)}</DivContainer>
+            {" "}
+            <StackContainer>
+              {topThree(data.jsonfile.tag, stack)}
+            </StackContainer>
             <DivContainer onClick={() => findData(data.id)}>
               <PlanTitle>{data.jsonfile.title}</PlanTitle>
               <FeatureListItem>
                 <span>{data.jsonfile.content}</span>
               </FeatureListItem>
-              <span>♥️{data.total_like}</span>
-              <span>👀{data.veiw_count}</span>
+              <DateAndLocationContainer>
+                <span>♥️{data.total_like}</span>
+                <span>👀{data.veiw_count}</span>
+              </DateAndLocationContainer>
             </DivContainer>
             <DivContainer>
               {data.jsonfile.date}
