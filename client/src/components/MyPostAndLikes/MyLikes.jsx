@@ -9,6 +9,7 @@ import { likeGetLoadingStore } from "../../Store/loading-zustand";
 
 function Mylikes(props) {
   const [visible, setVisible] = useState(false);
+  const [myLike, setMyLike] = useState([]);
   const onLikesList = () => {
     setVisible(true);
   };
@@ -19,29 +20,25 @@ function Mylikes(props) {
   const { accessToken, cocodusId } = accessTokenStore();
   const { chgLoading, chgError } = likeGetLoadingStore();
 
-  useEffect(() => {
-    const fetchlikes = async () => {
-      try {
-        // 요청이 시작 할 때에는 error 초기화하고
-        chgError(null);
-        // loading 상태를 true 로 바꿉니다.
-        chgLoading(true);
-        const response = await axios({
-          method: "GET",
-          url: "http://localhost:8080/board/like",
-          data: {
-            accessToken,
-            user_id: cocodusId,
-          },
-        });
-      } catch (e) {
-        chgError(e);
-      }
-      chgLoading(false);
-    };
+  useEffect(async () => {
+    // 요청이 시작 할 때에는 error 초기화하고
+    chgError(null);
+    // loading 상태를 true 로 바꿉니다.
+    chgLoading(true);
+    const response = await axios({
+      method: "GET",
+      url: "http://localhost:8080/board/all",
+      params: {
+        // accessToken,
+        cocodusId,
+        mylike: visible,
+        myread: !visible,
+      },
+    });
+    if (response.status === 200) setMyLike(response.data);
 
-    fetchlikes();
-  }, []);
+    chgLoading(false);
+  }, [visible]);
 
   return (
     <Section>
@@ -70,6 +67,20 @@ function Mylikes(props) {
         </IconAndText>
         <WriteIcon />
       </Block>
+      {myLike.length
+        ? myLike.map((x, i) => {
+            return (
+              <div key={i}>
+                <div>{x.jsonfile.title}</div>
+                <div>{x.jsonfile.date}</div>
+                <div>{x.jsonfile.location}</div>
+                <div>{x.jsonfile.nickName}</div>
+                <div>{x.jsonfile.roadAddress}</div>
+                <div>{x.jsonfile.content}</div>
+              </div>
+            );
+          })
+        : null}
     </Section>
   );
 }
