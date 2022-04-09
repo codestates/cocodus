@@ -33,11 +33,18 @@ cocodus는 '함께, 같이'를 뜻하는 영어 접두사 'co-'와 code, 그리�
 
 ## 🧙‍♀️ Creator
 
+
 ### Trainer
+<img src="https://user-images.githubusercontent.com/61836008/162561344-80c172e1-475c-4da9-a0ea-658531eb6ca8.png" width="200px" height="200px">
 열심히 코딩 공부하는 사람들이 모였습니다. 그래서 Trainer!   
 
 ### Members
 - 자세한 소개는 여기서 → https://github.com/codestates/cocodus/wiki/Team-Introduction
+|만랩팀장|CSS능력자|컴포넌트능력자|알고리즘능력자
+|---|---|---|---|
+|김현덕|권민주|권순일|윤종복|
+|백엔드|프론트엔드|프론트엔드|백엔드|
+|[ToyCon](https://github.com/ToyCon)|[Minju20200305](https://github.com/Minju20200305)|[sun-one95](https://github.com/sun-one95)|[happy5happy5](https://github.com/happy5happy5)|
 - 김현덕 / 팀장 / 백엔드 / https://github.com/ToyCon
 - 권민주 / 프론트엔드 / https://github.com/Minju20200305
 - 권순일 / 프론트엔드 / https://github.com/sun-one95
