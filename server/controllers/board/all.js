@@ -15,7 +15,7 @@ module.exports = {
       let result = [];
       for (let i = 0; i < postLoc.length; i++) {
         let temp = Post.findOne({
-          where: { id: postLoc[i] },
+          where: { id: postLoc[i], recruiting: 1 },
           attributes: [
             "id",
             "user_id",
@@ -49,6 +49,7 @@ module.exports = {
     }
     if (isLogin === "false" && !accessToken && !nickName) {
       let temp = await Post.findAll({
+        where: { recruiting: 1 },
         attributes: [
           "id",
           "user_id",
