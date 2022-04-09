@@ -12,7 +12,7 @@ import axios from "axios";
 function Comment() {
   const { specificdata } = postData();
   const [cmtText, setCmtText] = useState("");
-  const { setReload } = commentStore();
+  const { setReload, cmtList } = commentStore();
 
   const { accessToken, cocodusId } = accessTokenStore();
   // 댓글 등록
@@ -38,7 +38,7 @@ function Comment() {
 
   return (
     <Section top="6rem" width="100%">
-      <DivBlock size="1.5rem">1개의 댓글이 있습니다.</DivBlock>
+      <DivBlock size="1.5rem">{cmtList.length}개의 댓글이 있습니다.</DivBlock>
       <Text
         type="text"
         placeholder="댓글을 입력하세요"

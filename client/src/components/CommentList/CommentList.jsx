@@ -97,23 +97,25 @@ function CommentArea({ cmtData }) {
 }
 
 function CommentList() {
-  const { reLoad, setReload } = commentStore();
+  const { reLoad, setReload, cmtList, setCmtList } = commentStore();
   const { specificdata } = postData();
-  const [cmtList, setCmtList] = useState([]);
+  // const [cmtList, setCmtList] = useState([]);
   useEffect(async () => {
-    const response = await axios({
-      method: "GET",
-      url: "http://localhost:8080/board/cmt",
-      params: {
-        postId: specificdata[0].id,
-      },
-    });
-    if (response.status === 200) {
-      setCmtList(response.data);
-    } else {
-      alert("받아오기 안된다 고쳐라");
+    if (specificdata && specificdata.length) {
+      const response = await axios({
+        method: "GET",
+        url: "http://localhost:8080/board/cmt",
+        params: {
+          postId: specificdata[0].id,
+        },
+      });
+      if (response.status === 200) {
+        setCmtList(response.data);
+      } else {
+        alert("받아오기 안된다 고쳐라");
+      }
     }
-  }, [reLoad]);
+  }, [reLoad, specificdata]);
 
   return (
     <div>
