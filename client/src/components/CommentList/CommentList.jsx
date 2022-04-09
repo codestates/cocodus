@@ -17,8 +17,11 @@ import { updateCommentStore } from "../../Store/UpdateComment-zustand";
 import DeleteModal from "../DeleteRegisterSubModal/DeleteModal";
 import Modal from "../Modal/Modal";
 import axios from "axios";
+import { accessTokenStore } from "../../Store/accesstoken-zustand";
+import { postData } from "../../Store/postData-zustand";
 
-function CommentArea({ comment }) {
+function CommentArea({ msg }) {
+  const { specificdata } = postData();
   const { input, visible, visibleOpen, visibleClose, chgInput } =
     updateCommentStore();
   // 모달
@@ -28,7 +31,7 @@ function CommentArea({ comment }) {
 
   // 수정 버튼 클릭시
   const onClick = () => {
-    chgInput(comment.msg);
+    chgInput(msg.comment);
     visibleOpen();
   };
   const onChange = (e) => {
@@ -36,47 +39,43 @@ function CommentArea({ comment }) {
   };
 
   const { accessToken, cocodusId } = accessTokenStore();
-  const commentInfo = {
-    accessToken,
-    cocodusId,
-    // postId,
-    input,
-  };
+  const comment_id = msg.id;
+
   // 엔터키를 입력시 수정 처리되는 함수
   const handleKeydown = async (e) => {
     if (e.key === "Enter") {
       const comment = await axios({
         method: "PATCH",
         url: "http://localhost:8080/board/cmt",
-        data: {
-          jsonFile: JSON.stringify(commentInfo),
+        params: {
           accessToken,
           user_id: cocodusId,
-          // post_id: postId,
-          // comment_id: commentId,
+          postId: specificdata,
+          comment_id,
+          comment: input,
         },
       });
-
-      // updateMsg(input, comment.id);
+      console.log(comment);
+      updateMsg(input, comment_id);
       visibleClose();
       chgInput("");
       // 댓글 수정 axios.patch 요청 작성
     }
   };
-
+  if (!msg) return null;
   return (
     <Block>
       <FlexBox>
         <Img src="UserIcon.png" alt="userimg" />
         <div>
-          <UserName>김코딩</UserName>
+          <UserName>{msg.name}</UserName>
           <CreatedAt>2022-03-25</CreatedAt>
         </div>
         <BtnBlock>
           <Btn onClick={onClick}>수정</Btn>
           <Btn onClick={openModal}>삭제</Btn>
           <Modal open={modalOpen} header="알림">
-            <DeleteModal id={comment.id} closeModal={closeModal} />
+            <DeleteModal id={msg.id} closeModal={closeModal} />
           </Modal>
         </BtnBlock>
       </FlexBox>
@@ -89,7 +88,7 @@ function CommentArea({ comment }) {
             onKeyDown={handleKeydown}
           />
         ) : (
-          comment.msg
+          msg.comment
         )}
       </Msg>
     </Block>
@@ -102,7 +101,7 @@ function CommentList() {
     <div>
       {commentList &&
         commentList.map((comment) => (
-          <CommentArea comment={comment} key={comment.id} />
+          <CommentArea msg={comment} key={comment.id} />
         ))}
     </div>
   );

@@ -68,8 +68,7 @@ module.exports = {
       return res.status(400).send("Not found comment id");
     }
 
-    // const newComment =
-    await Post_comment.update(
+    const newComment = await Post_comment.update(
       {
         comment: comment,
       },
@@ -78,7 +77,8 @@ module.exports = {
       }
     );
 
-    res.status(201).end();
+    if (newComment) return res.status(200).json(newComment.data);
+    else return res.status(204).end();
   },
   delete: async (req, res) => {
     const { accessToken, user_id, comment_id, postId } = req.body;
