@@ -53,7 +53,7 @@ function CommentArea({ msg }) {
         params: {
           accessToken,
           user_id: cocodusId,
-          postId: specificdata,
+          postId: specificdata[0].id,
           comment_id,
           comment: input,
         },

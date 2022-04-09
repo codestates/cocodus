@@ -29,7 +29,7 @@ export const ContentDiv = styled.div`
 
 export const DivContainer = styled.div`
   padding: 10px;
-  padding-right: 30px;
+  padding-right: 5px;
   &:hover {
     cursor: pointer;
   }
@@ -53,19 +53,8 @@ export const FeatureListItem = styled.div`
   -webkit-box-orient: vertical;
   word-wrap: break-word;
   line-height: 1.2em;
-  height: 2.4em;
+  height: 2.4em; /*라인수에서 라인 하이트 곱하기한 값: 총 높이*/
   width: 25em;
-`;
-
-export const ActionButton = styled.div`
-  flex: 0 0 auto;
-  height: 40px;
-  padding: 0 1rem;
-  border: 0;
-  border-radius: 20px;
-  color: rgba(0, 0, 0, 0.05);
-  background: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.25);
 `;
 
 export const Icon = styled.img`
@@ -95,21 +84,14 @@ export const Align = styled.div`
   align-items: center;
 `;
 
-export const MapButton = styled.button`
-  border-radius: 50px;
-  border: none;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 700;
-  padding: 15px 5px;
-  background-color: ${({ bg }) => bg || "#fff"};
-  color: ${({ color }) => color || "#333"};
-  margin-right: 20px;
-  margin-left: 10px;
+export const StackContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 20px;
+  padding-right: 20px;
+`;
 
-  &:hover {
-    opacity: 0.9;
-    transform: scale(0.9);
-  }
+export const DateAndLocationContainer = styled.div`
+  padding-right: 10px;
 `;
