@@ -6,7 +6,7 @@ export default function LanguageIcon({ stackHandler, stack }) {
     "JavaScript",
     "TypeScript",
     "React",
-    "View",
+    "Vue",
     "Node.js",
     "Java",
     "Spring",
