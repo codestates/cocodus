@@ -10,8 +10,40 @@ module.exports = {
       howMany,
       km,
       mylike,
-      myview,
+      mypost,
+      myread,
     } = req.query;
+    if (myread && cocodusId) {
+      // cocodusId = "github+happy5happy5";
+      let temp = await User_view.findAll({
+        where: { user_id: cocodusId },
+        attributes: ["post_id"],
+      });
+      let result = [];
+      if (temp.length) {
+        temp.map((x) => {
+          result.push(
+            Post.findOne({
+              where: { id: x.post_id },
+              attributes: [
+                "id",
+                "user_id",
+                "jsonfile",
+                "recruiting",
+                "online",
+                "veiw_count",
+                "total_like",
+              ],
+            })
+          );
+        });
+      }
+      let temp2 = await Promise.all(result);
+      // console.log(temp2.filter(x=>x).map((x) => x.dataValues));
+      return res
+        .status(200)
+        .send(temp2.filter((x) => x).map((x) => x.dataValues));
+    }
     if (mylike && cocodusId) {
       // cocodusId = "github+happy5happy5";
       let temp = await User_like.findAll({
@@ -43,7 +75,7 @@ module.exports = {
         .status(200)
         .send(temp2.filter((x) => x).map((x) => x.dataValues));
     }
-    if (myview && cocodusId) {
+    if (mypost && cocodusId) {
       // cocodusId = "github+happy5happy5";
       let temp = await User_view.findAll({
         where: { user_id: cocodusId },
