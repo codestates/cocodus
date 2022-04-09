@@ -1,5 +1,5 @@
 // 댓글 등록 기능
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Block,
   FlexBox,
@@ -21,6 +21,9 @@ import { accessTokenStore } from "../../Store/accesstoken-zustand";
 import { postData } from "../../Store/postData-zustand";
 
 function CommentArea({ msg }) {
+  useEffect(() => {
+    console.log("컴포넌트가 화면에 나타남");
+  }, [msg]);
   const { specificdata } = postData();
   const { input, visible, visibleOpen, visibleClose, chgInput } =
     updateCommentStore();
@@ -96,13 +99,31 @@ function CommentArea({ msg }) {
 }
 
 function CommentList() {
-  const { commentList } = commentStore();
+  const { commentList, addMsg } = commentStore();
+  const { specificdata } = postData();
+  useEffect(() => {
+    const fetchComments = async () => {
+      const response = await axios({
+        method: "GET",
+        url: "http://localhost:8080/board/cmt",
+        params: {
+          postId: specificdata[0].id,
+        },
+      });
+
+      addMsg(response.data);
+      console.log(response.data);
+    };
+    fetchComments();
+  }, []);
+
   return (
     <div>
-      {commentList &&
-        commentList.map((comment) => (
-          <CommentArea msg={comment} key={comment.id} />
-        ))}
+      {commentList
+        ? commentList.map((comment) => (
+            <CommentArea msg={comment} key={comment.id} />
+          ))
+        : null}
     </div>
   );
 }

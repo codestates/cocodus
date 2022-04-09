@@ -1,6 +1,6 @@
 // 게시글 조회 폼
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Section, Title, Div, FlexBox, Img } from "../Register/Register.styled";
 import { ContentBlock, Language } from "./RegisterContentView.styled";
 import Comment from "../Comment/Comment";
@@ -11,24 +11,8 @@ import { postData } from "../../Store/postData-zustand";
 import { commentStore } from "../../Store/Comment-zustand";
 
 function DetailContent(props) {
-  const { addMsg } = commentStore();
   const { chgLoading, chgError } = boardGetLoadingStore();
   const { specificdata } = postData();
-
-  useEffect(() => {
-    const fetchComments = async () => {
-      const response = await axios({
-        method: "GET",
-        url: "http://localhost:8080/board/cmt",
-        params: {
-          postId: specificdata[0].id,
-        },
-      });
-      addMsg(response.data);
-      console.log(response.data);
-    };
-    fetchComments();
-  }, []);
 
   return (
     <Section>
