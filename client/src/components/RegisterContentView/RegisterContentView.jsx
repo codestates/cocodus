@@ -49,6 +49,10 @@ function DetailContent(props) {
       </FlexBox>
       <FlexBox>
         <Div>사용 언어</Div>
+        {/* {typeof specificdata[0].jsonfile === "string" 
+        ? 1 
+        : 2
+        } */}
         {specificdata[0].jsonfile.tag.map((el, idx) => {
           return <Language key={idx}>{el}</Language>;
         })}

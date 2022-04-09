@@ -51,11 +51,11 @@ function LangOptTag({ onChange }) {
         isSearchable
         onChange={onChange}
         placeholder="프로젝트/스터디 진행 언어 선택"
-        value={tag.map((el) => {
-          return LangList.find((op) => {
-            return op.label === el;
-          });
-        })}
+        // value={tag.map((el) => {
+        //   return LangList.find((op) => {
+        //     return op.label === el;
+        //   });
+        // })}
       />
     </>
   );
