@@ -15,7 +15,7 @@ module.exports = {
       let result = [];
       for (let i = 0; i < postLoc.length; i++) {
         let temp = Post.findOne({
-          where: { id: postLoc[i] },
+          where: { id: postLoc[i], recruiting: "1" },
           attributes: [
             "id",
             "user_id",
@@ -34,6 +34,7 @@ module.exports = {
           .filter((x, i) =>
             i >= howMany[0] && i < howMany[0] + howMany[1] ? true : false
           )
+          .filter((x) => x)
           .map((x, i) => {
             return {
               id: postLoc[i],
@@ -49,6 +50,7 @@ module.exports = {
     }
     if (isLogin === "false" && !accessToken && !nickName) {
       let temp = await Post.findAll({
+        where: { recruiting: "1" },
         attributes: [
           "id",
           "user_id",

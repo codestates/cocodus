@@ -79,10 +79,9 @@ function PriceCard({ stack = [] }) {
   }, []);
   return (
     <div>
-      {"stack=" + "[" + `${stack}` + "]"}
-      {"  총게시물=" + `${howMany[1]}`}
+      {/*{"stack=" + "[" + `${stack}` + "]"}
+   {"  총게시물=" + `${howMany[1]}`}
       {/* <button onClick={() => setHowMany(3)}>총개수 증가</button> */}
-
       {jsonData
         .map((x, i, a) => {
           // typeof x.jsonfile === "string" ? console.log(x.jsonfile) : null;
@@ -98,7 +97,6 @@ function PriceCard({ stack = [] }) {
         .map((x, i) => {
           return <CardSection data={x} key={x.id} stack={stack}></CardSection>;
         })}
-
       {isLoading ? (
         <div>
           여기에 로딩창만들어야함
@@ -165,12 +163,15 @@ function CardSection({ data, stack }) {
     }
     chgSpecificData([temp]);
     // console.log(specificdata);
-    chgInput("title", specificdata[0].jsonfile.title);
-    chgOnline("online", specificdata[0].jsonfile.online);
-    chgTag(specificdata[0].jsonfile.tag);
-    chgMsg(specificdata[0].jsonfile.content);
-    chgPlaceName(specificdata[0].jsonfile);
-    const date = specificdata[0].jsonfile.date;
+    let date = "";
+    if (specificdata) {
+      chgInput("title", specificdata[0].jsonfile.title);
+      chgOnline("online", specificdata[0].jsonfile.online);
+      chgTag(specificdata[0].jsonfile.tag);
+      chgMsg(specificdata[0].jsonfile.content);
+      chgPlaceName(specificdata[0].jsonfile);
+      date = specificdata[0].jsonfile.date;
+    }
     let arr = date.split(" ");
     let year = arr.slice(0, 3);
     year = year.join(" ");

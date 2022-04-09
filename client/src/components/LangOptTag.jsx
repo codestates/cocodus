@@ -44,8 +44,16 @@ function LangOptTag({ onChange }) {
 
   return (
     <>
+      <Select
+        styles={customStyles}
+        options={LangList}
+        isMulti
+        isSearchable
+        onChange={onChange}
+        placeholder="프로젝트/스터디 진행 언어 선택"
+      />
       {/* 처음 글쓰기 할때 */}
-      {tag.length === 0 ? (
+      {/* {tag.length === 0 ? (
         <Select
           styles={customStyles}
           options={LangList}
@@ -69,7 +77,7 @@ function LangOptTag({ onChange }) {
             });
           })}
         />
-      )}
+      )} */}
     </>
   );
 }
