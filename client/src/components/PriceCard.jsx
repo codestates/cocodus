@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import {
   Card,
   ContentDiv,
@@ -19,16 +19,18 @@ import { accessTokenStore } from "../Store/accesstoken-zustand";
 import { registerUserInfoStore } from "../Store/RegisterUserInfo-zustand";
 import { postData } from "../Store/postData-zustand";
 import { useNavigate } from "react-router-dom";
+import { appScrollStore } from "../Store/appScroll-zustand";
 import { registerStore } from "../Store/Register-zustand";
 
 function PriceCard({ stack = [] }) {
-  const [howMany, setHowMany] = useState([0, 3]); //첫번째가 시작인덱스 2번째가 몇개 받아올지 개수
-  const [km, setKm] = useState(30);
+  const { howMany, setHowMany } = appScrollStore(); //첫번째가 시작인덱스 2번째가 몇개 받아올지 개수
   const { jsonData, chgJsonData } = postData();
   const { isLogin, accessToken, cocodusId } = accessTokenStore();
   const { nickName, chgInput } = registerUserInfoStore();
-  // console.log({ isLogin, accessToken, cocodusId, nickName });
+  const [isBottom, setIsBottom] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(async () => {
+    setIsLoading(true);
     let temp = await axios({
       url: "http://localhost:8080/board/all",
       params: {
@@ -37,40 +39,56 @@ function PriceCard({ stack = [] }) {
         cocodusId,
         nickName,
         howMany,
-        km,
+        km: 30,
       },
     });
     if (temp.data.length) {
       chgJsonData(temp.data);
     }
-  }, [isLogin, nickName, howMany, km]);
+    setIsLoading(false);
+  }, [isLogin, nickName, howMany]);
+  const handleScroll = () => {
+    const windowHeight =
+      "innerHeight" in window
+        ? window.innerHeight
+        : document.documentElement.offsetHeight;
+    const body = document.body;
+    const html = document.documentElement;
+    const docHeight = Math.max(
+      body.scrollHeight,
+      body.offsetHeight,
+      html.clientHeight,
+      html.scrollHeight,
+      html.offsetHeight
+    );
+    const windowBottom = windowHeight + window.pageYOffset;
+    if (windowBottom >= docHeight && !isBottom) {
+      setIsBottom(true);
+      setHowMany(3);
+      setIsBottom(false);
+    }
+  };
 
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
     <div>
       {"stack=" + "[" + `${stack}` + "]"}
-      {"시작인덱스=" + `${howMany[0]}` + "  총게시물=" + `${howMany[1]}`}
-      <button onClick={() => setHowMany([howMany[0] + 1, howMany[1]])}>
-        시작인덱스 증가
-      </button>
-      <button onClick={() => setHowMany([howMany[0] - 1, howMany[1]])}>
-        시작인덱스 감소
-      </button>
-      <button onClick={() => setHowMany([howMany[0], howMany[1] + 1])}>
-        총개수 증가
-      </button>
-      <button onClick={() => setHowMany([howMany[0], howMany[1] - 1])}>
-        총개수 감소
-      </button>
-      {km}
-      <button onClick={() => setKm(km + 1)}>km증가</button>
-      <button onClick={() => setKm(km - 1)}>km감소</button>
+      {"  총게시물=" + `${howMany[1]}`}
+      {/* <button onClick={() => setHowMany(3)}>총개수 증가</button> */}
 
       {jsonData
-        .map((x) =>
-          typeof x.jsonfile === "string"
+        .map((x) => {
+          // console.log(typeof x.jsonfile);
+          return typeof x.jsonfile === "string"
             ? { jsonfile: JSON.parse(x.jsonfile), id: x.id }
-            : x
-        )
+            : x;
+        })
         .filter((x) =>
           stack.length
             ? stack.filter((y) => x.jsonfile.tag.indexOf(y) > -1).length
@@ -79,6 +97,24 @@ function PriceCard({ stack = [] }) {
         .map((x, i) => {
           return <CardSection data={x} key={x.id} stack={stack}></CardSection>;
         })}
+
+      {isLoading ? (
+        <div>
+          여기에 로딩창만들어야함
+          <div>1</div>
+          <div>1</div>
+          <div>1</div>
+          <div>1</div>
+          <div>1</div>
+          <div>1</div>
+          <div>1</div>
+          <div>1</div>
+          <div>1</div>
+          <div>1</div>
+          <div>1</div>
+          <div>1</div>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -118,9 +154,6 @@ function CardSection({ data, stack }) {
         return <Icon src={"CSharp" + ".png"} key={"CSharp" + ".png"} />;
       else return <Icon src={x + ".png"} key={x + ".png"} />;
     });
-    {
-      /* <Icon src="React-icon.svg.png" /> */
-    }
   };
   const findData = (id) => {
     chgSpecificData(
