@@ -79,10 +79,9 @@ function PriceCard({ stack = [] }) {
   }, []);
   return (
     <div>
-      {"stack=" + "[" + `${stack}` + "]"}
-      {"  총게시물=" + `${howMany[1]}`}
+      {/*{"stack=" + "[" + `${stack}` + "]"}
+   {"  총게시물=" + `${howMany[1]}`}
       {/* <button onClick={() => setHowMany(3)}>총개수 증가</button> */}
-
       {jsonData
         .map((x, i, a) => {
           // typeof x.jsonfile === "string" ? console.log(x.jsonfile) : null;
@@ -98,7 +97,6 @@ function PriceCard({ stack = [] }) {
         .map((x, i) => {
           return <CardSection data={x} key={x.id} stack={stack}></CardSection>;
         })}
-
       {isLoading ? (
         <div>
           여기에 로딩창만들어야함
