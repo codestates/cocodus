@@ -117,13 +117,12 @@ function CommentList() {
     fetchComments();
   }, []);
 
+  if (commentList.length === 0) return null;
   return (
     <div>
-      {commentList
-        ? commentList.map((comment) => (
-            <CommentArea msg={comment} key={comment.id} />
-          ))
-        : null}
+      {commentList.map((comment) => (
+        <CommentArea msg={comment} key={comment.id} />
+      ))}
     </div>
   );
 }
