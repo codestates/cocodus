@@ -83,8 +83,8 @@ function PriceCard({ stack = [] }) {
       {/* <button onClick={() => setHowMany(3)}>총개수 증가</button> */}
 
       {jsonData
-        .map((x) => {
-          // console.log(typeof x.jsonfile);
+        .map((x, i, a) => {
+          // typeof x.jsonfile === "string" ? console.log(x.jsonfile) : null;
           return typeof x.jsonfile === "string"
             ? { jsonfile: JSON.parse(x.jsonfile), id: x.id }
             : x;
@@ -156,12 +156,14 @@ function CardSection({ data, stack }) {
     });
   };
   const findData = (id) => {
-    chgSpecificData(
-      jsonData.filter((el) => {
-        return el.id === id;
-      })
-    );
-    console.log(specificdata);
+    let temp = jsonData.filter((el) => {
+      return el.id === id;
+    })[0];
+    if (typeof temp.jsonfile === "string") {
+      Object.assign(temp, { jsonfile: JSON.parse(temp.jsonfile) });
+    }
+    chgSpecificData([temp]);
+    // console.log(specificdata);
     // chgInput("title", specificdata[0].jsonfile.title);
     // chgOnline("online", specificdata[0].jsonfile.online);
     // chgTag(specificdata[0].jsonfile.tag);
