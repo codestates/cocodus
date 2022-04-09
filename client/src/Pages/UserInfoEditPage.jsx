@@ -43,16 +43,17 @@ function UserInfoEditPage(props) {
       longitudeX,
     };
     const editPost = await axios({
-      method: "PATCH",
-      url: "http://localhost:8080/user/info",
+      method: "POST",
+      url: "http://localhost:8080/board/writing",
       data: {
-        user_id: cocodusId,
+        id: cocodusId,
         name: nickName,
-        image: "링크주소들어갈예정입니다",
+        accessToken,
         roadAddress,
         location: placeName,
-        long: longitudeX,
         lat: latitudeY,
+        long: longitudeX,
+        tag,
       },
     });
     console.log(editPost);
