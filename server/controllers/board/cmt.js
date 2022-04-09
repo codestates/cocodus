@@ -44,7 +44,7 @@ module.exports = {
     console.log(commentArray);
     if (commentArray.length === 0) {
       console.log("댓글이 없습니다");
-      return res.status(200).send("no comments in this post");
+      return res.status(200).send(null);
     }
 
     return res.status(200).json(commentArray);
