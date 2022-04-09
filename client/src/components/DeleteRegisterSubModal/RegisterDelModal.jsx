@@ -22,13 +22,14 @@ function RegisterDelModal({ closeModal }) {
       chgLoading4(true);
       const boardDel = await axios({
         method: "DELETE",
-        url: "http://localhost:8080/board/list",
+        url: "http://localhost:8080/board/writing",
         data: {
           accessToken,
           user_id: cocodusId,
-          // post_id: postId
+          postId,
         },
       });
+      console.log(boardDel);
       closeModal();
     } catch (e) {
       chgError4(e);

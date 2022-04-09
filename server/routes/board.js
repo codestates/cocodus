@@ -30,6 +30,12 @@ router.get("/mypost", boardController.mypost.get);
 // * PATCH /board/recruiting
 router.patch("/recruiting", boardController.recruiting.patch);
 
+// * GET /board/view
+router.get("/view", boardController.view.get);
+
+// * POST /board/view
+router.post("/view", boardController.view.post);
+
 // * POST /board/writing
 router.post("/writing", boardController.writing.post);
 

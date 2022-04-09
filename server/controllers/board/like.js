@@ -31,7 +31,6 @@ module.exports = {
         where: { user_id: cocodusId, post_id: post_id },
         attributes: ["user_id", "post_id"],
       });
-      console.log(temp);
       if (temp) {
         await Post.update(
           {
