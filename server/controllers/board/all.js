@@ -13,7 +13,7 @@ module.exports = {
       mypost,
       myread,
     } = req.query;
-    if (myread && cocodusId) {
+    if (myread === "true" && cocodusId) {
       // cocodusId = "github+happy5happy5";
       let temp = await User_view.findAll({
         where: { user_id: cocodusId },
@@ -44,7 +44,7 @@ module.exports = {
         .status(200)
         .send(temp2.filter((x) => x).map((x) => x.dataValues));
     }
-    if (mylike && cocodusId) {
+    if (mylike === "true" && cocodusId) {
       // cocodusId = "github+happy5happy5";
       let temp = await User_like.findAll({
         where: { user_id: cocodusId },
@@ -52,6 +52,7 @@ module.exports = {
       });
       let result = [];
       if (temp.length) {
+        console.log(temp.length);
         temp.map((x) => {
           result.push(
             Post.findOne({
@@ -75,7 +76,7 @@ module.exports = {
         .status(200)
         .send(temp2.filter((x) => x).map((x) => x.dataValues));
     }
-    if (mypost && cocodusId) {
+    if (mypost === "true" && cocodusId) {
       // cocodusId = "github+happy5happy5";
       let temp = await User_view.findAll({
         where: { user_id: cocodusId },
