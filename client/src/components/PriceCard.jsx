@@ -205,7 +205,6 @@ function CardSection({ data, stack }) {
         <Card>
           <BackgroundSqure />
           <ContentDiv>
-            {console.log(data)}
             <DivContainer>{topThree(data.jsonfile.tag, stack)}</DivContainer>
             <DivContainer onClick={() => findData(data.id)}>
               <PlanTitle>{data.jsonfile.title}</PlanTitle>
