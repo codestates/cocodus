@@ -28,41 +28,45 @@ function LikesViewShareIcon(props) {
   const { specificdata } = postData();
   useEffect(async () => {
     // if (accessToken && cocodusId && isLogin) {
-    let temp = await axios({
-      method: "GET",
-      url: "/board/like",
-      baseURL: "http://localhost:8080",
-      params: {
-        post_id: specificdata[0].id,
-        accessToken,
-        cocodusId,
-        nickName,
-        isLogin,
-      },
-    });
-    // console.log(temp.total_like);
-    // console.log(temp.userLike);
+    if (specificdata && specificdata.length) {
+      let temp = await axios({
+        method: "GET",
+        url: "/board/like",
+        baseURL: "http://localhost:8080",
+        params: {
+          post_id: specificdata[0].id,
+          accessToken,
+          cocodusId,
+          nickName,
+          isLogin,
+        },
+      });
+      // console.log(temp.total_like);
+      // console.log(temp.userLike);
 
-    setTotalPostLike(temp.data ? temp.data.total_like : 0);
-    setLikeClick(temp.data ? !!temp.data.userLike : false);
+      setTotalPostLike(temp.data ? temp.data.total_like : 0);
+      setLikeClick(temp.data ? !!temp.data.userLike : false);
+    }
     // }
-  }, [render]);
+  }, [render, specificdata]);
 
   // 좋아요 버튼 클릭
   const countClick = async () => {
-    let temp = await axios({
-      method: "POST",
-      url: "http://localhost:8080/board/like",
-      params: {
-        post_id: specificdata[0].id,
-        accessToken,
-        cocodusId,
-        nickName,
-        isLogin,
-      },
-    });
-    setLikeClick(!!likeClick);
-    setRender(!render);
+    if (specificdata.length) {
+      let temp = await axios({
+        method: "POST",
+        url: "http://localhost:8080/board/like",
+        params: {
+          post_id: specificdata[0].id,
+          accessToken,
+          cocodusId,
+          nickName,
+          isLogin,
+        },
+      });
+      setLikeClick(!!likeClick);
+      setRender(!render);
+    }
   };
 
   // 모달
