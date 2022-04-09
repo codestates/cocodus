@@ -201,6 +201,7 @@ function CardSection({ data, stack }) {
 
   return (
     <Container>
+      {console.log(data)}
       <Flex>
         <Card>
           <BackgroundSqure />
