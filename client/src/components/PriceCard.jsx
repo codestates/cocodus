@@ -163,12 +163,15 @@ function CardSection({ data, stack }) {
     }
     chgSpecificData([temp]);
     // console.log(specificdata);
-    chgInput("title", specificdata[0].jsonfile.title);
-    chgOnline("online", specificdata[0].jsonfile.online);
-    chgTag(specificdata[0].jsonfile.tag);
-    chgMsg(specificdata[0].jsonfile.content);
-    chgPlaceName(specificdata[0].jsonfile);
-    const date = specificdata[0].jsonfile.date;
+    let date = "";
+    if (specificdata) {
+      chgInput("title", specificdata[0].jsonfile.title);
+      chgOnline("online", specificdata[0].jsonfile.online);
+      chgTag(specificdata[0].jsonfile.tag);
+      chgMsg(specificdata[0].jsonfile.content);
+      chgPlaceName(specificdata[0].jsonfile);
+      date = specificdata[0].jsonfile.date;
+    }
     let arr = date.split(" ");
     let year = arr.slice(0, 3);
     year = year.join(" ");
