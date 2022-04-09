@@ -1,4 +1,5 @@
 import create from "zustand";
+import { EditorState } from "draft-js";
 
 export const registerStore = create((set) => ({
   // 글 등록시 데이터들을 보관할 배열
@@ -69,6 +70,12 @@ export const registerStore = create((set) => ({
     set((state) => ({
       content: text,
     })),
+
+  // editorState: EditorState.createEmpty(),
+  // onEditorStateChange: (value) =>
+  //   set((state) => ({
+  //     editorState: value,
+  //   })),
 
   // 지도(주소) 관련 변수
   // 검색명

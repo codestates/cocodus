@@ -13,7 +13,7 @@ import {
 import { commentStore } from "../../Store/Comment-zustand";
 
 function DeleteModal({ id, closeModal }) {
-  // const { removeMsg } = commentStore();
+  const { setReload } = commentStore();
   const { accessToken, cocodusId } = accessTokenStore();
   const { specificdata } = postData();
 
@@ -28,8 +28,15 @@ function DeleteModal({ id, closeModal }) {
         comment_id: id,
       },
     });
-    // removeMsg(id);
-    closeModal();
+    if (comment.status === 200) {
+      closeModal();
+      setReload();
+    } else {
+      console.log(comment);
+      alert(
+        "야 지우는거 진짜 클나따 여기 고쳐라 나중에 배포할때는 이거 빼는거 알지?"
+      );
+    }
   };
   return (
     <>

@@ -11,8 +11,10 @@ import {
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
 import { boardDeleteLoadingStore } from "../../Store/loading-zustand";
 import Modal from "../Modal/Modal";
+import { postData } from "../../Store/postData-zustand";
 
 function DelPostModal({ closeModal }) {
+  const { specificData } = postData();
   const { modalOpen2, setModalOpen } = useState(false);
   const openModal2 = () => {
     setModalOpen(true);
@@ -28,18 +30,13 @@ function DelPostModal({ closeModal }) {
     try {
       chgError4(null);
       chgLoading4(true);
-      const delData = {
-        accessToken,
-        cocodusId,
-        postId,
-      };
       const delPost = await axios({
         method: "DELETE",
         url: "http://localhost:8080/board/list",
         data: {
-          accessToken: accessToken,
+          accessToken,
           user_id: cocodusId,
-          postId,
+          postId: specificData[0].id,
         },
       });
       console.log(delPost);

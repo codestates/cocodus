@@ -32,6 +32,7 @@ function PriceCard({ stack = [] }) {
   useEffect(async () => {
     setIsLoading(true);
     let temp = await axios({
+      // url: process.env.URL||"localhost8080"+"/board/all"
       url: "http://localhost:8080/board/all",
       params: {
         isLogin: isLogin,
@@ -78,10 +79,9 @@ function PriceCard({ stack = [] }) {
   }, []);
   return (
     <div>
-      {"stack=" + "[" + `${stack}` + "]"}
-      {"  총게시물=" + `${howMany[1]}`}
+      {/*{"stack=" + "[" + `${stack}` + "]"}
+   {"  총게시물=" + `${howMany[1]}`}
       {/* <button onClick={() => setHowMany(3)}>총개수 증가</button> */}
-
       {jsonData
         .map((x, i, a) => {
           // typeof x.jsonfile === "string" ? console.log(x.jsonfile) : null;
@@ -97,7 +97,6 @@ function PriceCard({ stack = [] }) {
         .map((x, i) => {
           return <CardSection data={x} key={x.id} stack={stack}></CardSection>;
         })}
-
       {isLoading ? (
         <div>
           여기에 로딩창만들어야함
@@ -164,38 +163,38 @@ function CardSection({ data, stack }) {
     }
     chgSpecificData([temp]);
     // console.log(specificdata);
-    // chgInput("title", specificdata[0].jsonfile.title);
-    // chgOnline("online", specificdata[0].jsonfile.online);
-    // chgTag(specificdata[0].jsonfile.tag);
-    // chgMsg(specificdata[0].jsonfile.content);
-    // chgPlaceName(specificdata[0].jsonfile);
-    // const date = specificdata[0].jsonfile.date;
-    // let arr = date.split(" ");
-    // let year = arr.slice(0, 3);
-    // year = year.join(" ");
-    // chgYear(year);
-    // let hour = arr.slice(3, 5);
-    // if (hour[0] === "오후") {
-    //   let h = hour[1].split("");
-    //   h[0] = Number(h[0]) + 12;
-    //   chgHour(h[0]);
-    // } else {
-    //   let h = hour[1].split("");
-    //   h[0] = Number(h[0]);
-    //   chgHour(h[0]);
-    // }
-    // let min = arr.slice(5);
-    // if (min.length > 0) {
-    //   min = min.join("");
-    //   let m = min.split("");
-    //   if (m.length === 3) {
-    //     m = Number(`${m[0]}${m[1]}`);
-    //     chgMin(m);
-    //   } else {
-    //     m = Number(`${m[0]}`);
-    //     chgMin(m);
-    //   }
-    // }
+    chgInput("title", specificdata[0].jsonfile.title);
+    chgOnline("online", specificdata[0].jsonfile.online);
+    chgTag(specificdata[0].jsonfile.tag);
+    chgMsg(specificdata[0].jsonfile.content);
+    chgPlaceName(specificdata[0].jsonfile);
+    const date = specificdata[0].jsonfile.date;
+    let arr = date.split(" ");
+    let year = arr.slice(0, 3);
+    year = year.join(" ");
+    chgYear(year);
+    let hour = arr.slice(3, 5);
+    if (hour[0] === "오후") {
+      let h = hour[1].split("");
+      h[0] = Number(h[0]) + 12;
+      chgHour(h[0]);
+    } else {
+      let h = hour[1].split("");
+      h[0] = Number(h[0]);
+      chgHour(h[0]);
+    }
+    let min = arr.slice(5);
+    if (min.length > 0) {
+      min = min.join("");
+      let m = min.split("");
+      if (m.length === 3) {
+        m = Number(`${m[0]}${m[1]}`);
+        chgMin(m);
+      } else {
+        m = Number(`${m[0]}`);
+        chgMin(m);
+      }
+    }
     navigate("/RegisterContentViewPage");
   };
 
@@ -214,7 +213,6 @@ function CardSection({ data, stack }) {
               <FeatureListItem>
                 <span>{data.jsonfile.content}</span>
               </FeatureListItem>
-
               <span style={{ paddingRight: "15px" }}>♥️{data.total_like}</span>
               <span>👀{data.veiw_count}</span>
             </DivContainer>
