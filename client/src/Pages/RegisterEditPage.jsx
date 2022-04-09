@@ -13,6 +13,7 @@ import axios from "axios";
 import { accessTokenStore } from "../Store/accesstoken-zustand";
 import { registerStore } from "../Store/Register-zustand";
 import { boardPatchLoadingStore } from "../Store/loading-zustand";
+import { postData } from "../Store/postData-zustand";
 
 function RegisterEditPage(props) {
   const { chgLoading, chgError } = boardPatchLoadingStore();
@@ -29,8 +30,9 @@ function RegisterEditPage(props) {
     latitudeY,
     longitudeX,
   } = registerStore();
+  const { postId, recruiting } = postData;
   const { title, date, online } = inputs;
-
+  console.log(postData);
   // 글 수정 axios call
   const onEditHandler = async () => {
     try {

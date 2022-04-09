@@ -37,10 +37,9 @@ function DelPostModal({ closeModal }) {
         method: "DELETE",
         url: "http://localhost:8080/board/list",
         data: {
-          // jsonFile: JSON.stringify(delData),
           accessToken: accessToken,
           user_id: cocodusId,
-          // post_id: postId,
+          postId,
         },
       });
       console.log(delPost);
