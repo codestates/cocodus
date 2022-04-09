@@ -1,5 +1,4 @@
 import create from "zustand";
-import { EditorState } from "draft-js";
 
 export const registerStore = create((set) => ({
   // 글 등록시 데이터들을 보관할 배열
