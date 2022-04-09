@@ -214,17 +214,17 @@ function CardSection({ data, stack }) {
               <FeatureListItem>
                 <span>{data.jsonfile.content}</span>
               </FeatureListItem>
-              <DateAndLocationContainer>
-                <span>♥️{data.total_like}</span>
-                <span>👀{data.veiw_count}</span>
-              </DateAndLocationContainer>
+
+              <span style={{ paddingRight: "15px" }}>♥️{data.total_like}</span>
+              <span>👀{data.veiw_count}</span>
             </DivContainer>
-            <DivContainer>
-              {data.jsonfile.date}
-              <br></br>
-              {data.jsonfile.roadAddress}
-              {/*//도로명으로 바꾸고, 도로명 주소를 길게 보게 하고 버튼 여백 줄이기 cd */}
-            </DivContainer>
+            <DateAndLocationContainer>
+              <DivContainer>
+                {data.jsonfile.date}
+                <br></br>
+                {data.jsonfile.roadAddress}
+              </DivContainer>{" "}
+            </DateAndLocationContainer>
           </ContentDiv>
         </Card>
       </Flex>
