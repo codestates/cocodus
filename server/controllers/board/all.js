@@ -113,7 +113,7 @@ module.exports = {
         attributes: ["lat", "long"],
       });
       if (!userLoc) {
-        return res.status(404).send("no userInfo in DB");
+        return res.status(404).send([]);
       }
       let postLoc = await sortDist(userLoc.dataValues, km);
       let result = [];
