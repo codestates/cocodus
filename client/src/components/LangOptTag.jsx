@@ -2,8 +2,10 @@
 
 import React, { useMemo } from "react";
 import Select from "react-select";
+import { registerStore } from "../Store/Register-zustand";
 
 function LangOptTag({ onChange }) {
+  const { tag } = registerStore();
   const LangList = useMemo(
     () => [
       { value: "c", label: "C" },
@@ -41,14 +43,21 @@ function LangOptTag({ onChange }) {
   };
 
   return (
-    <Select
-      styles={customStyles}
-      options={LangList}
-      isMulti
-      isSearchable
-      onChange={onChange}
-      placeholder="프로젝트/스터디 진행 언어 선택"
-    />
+    <>
+      <Select
+        styles={customStyles}
+        options={LangList}
+        isMulti
+        isSearchable
+        onChange={onChange}
+        placeholder="프로젝트/스터디 진행 언어 선택"
+        value={tag.map((el) => {
+          return LangList.find((op) => {
+            return op.label === el;
+          });
+        })}
+      />
+    </>
   );
 }
 

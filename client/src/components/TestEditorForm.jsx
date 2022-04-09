@@ -5,6 +5,7 @@ import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import styled from "styled-components";
 import { EditorState } from "draft-js";
+import { registerStore } from "../Store/Register-zustand";
 
 const MyBlock = styled.div`
   .wrapper-class {
