@@ -4,6 +4,12 @@ export const commentStore = create((set) => ({
   inputs: "",
   commentList: [],
   reLoad: false,
+  cmtList: [],
+
+  setCmtList: (value) =>
+    set((state) => ({
+      cmtHowmany: value,
+    })),
   setReload: (value) =>
     set((state) => ({
       reLoad: !state.reLoad,

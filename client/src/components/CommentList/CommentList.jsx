@@ -97,9 +97,9 @@ function CommentArea({ cmtData }) {
 }
 
 function CommentList() {
-  const { reLoad, setReload } = commentStore();
+  const { reLoad, setReload, cmtList, setCmtList } = commentStore();
   const { specificdata } = postData();
-  const [cmtList, setCmtList] = useState([]);
+  // const [cmtList, setCmtList] = useState([]);
   useEffect(async () => {
     const response = await axios({
       method: "GET",
