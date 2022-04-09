@@ -5,4 +5,5 @@ module.exports = {
   mypost: require("./mypost"),
   recruiting: require("./recruiting"),
   writing: require("./writing"),
+  view: require("./view"),
 };

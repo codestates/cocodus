@@ -1,8 +1,79 @@
 const { sortDist } = require("../database");
-const { User, Post, Post_tag } = require("../../models");
+const { User, Post, Post_tag, User_like, User_view } = require("../../models");
 module.exports = {
   get: async (req, res) => {
-    let { isLogin, accessToken, cocodusId, nickName, howMany, km } = req.query;
+    let {
+      isLogin,
+      accessToken,
+      cocodusId,
+      nickName,
+      howMany,
+      km,
+      mylike,
+      myview,
+    } = req.query;
+    if (mylike && cocodusId) {
+      // cocodusId = "github+happy5happy5";
+      let temp = await User_like.findAll({
+        where: { user_id: cocodusId },
+        attributes: ["post_id"],
+      });
+      let result = [];
+      if (temp.length) {
+        temp.map((x) => {
+          result.push(
+            Post.findOne({
+              where: { id: x.post_id },
+              attributes: [
+                "id",
+                "user_id",
+                "jsonfile",
+                "recruiting",
+                "online",
+                "veiw_count",
+                "total_like",
+              ],
+            })
+          );
+        });
+      }
+      let temp2 = await Promise.all(result);
+      // console.log(temp2.filter(x=>x).map((x) => x.dataValues));
+      return res
+        .status(200)
+        .send(temp2.filter((x) => x).map((x) => x.dataValues));
+    }
+    if (myview && cocodusId) {
+      // cocodusId = "github+happy5happy5";
+      let temp = await User_view.findAll({
+        where: { user_id: cocodusId },
+        attributes: ["post_id"],
+      });
+      let result = [];
+      if (temp.length) {
+        temp.map((x) => {
+          result.push(
+            Post.findOne({
+              where: { id: x.post_id },
+              attributes: [
+                "id",
+                "user_id",
+                "jsonfile",
+                "recruiting",
+                "online",
+                "veiw_count",
+                "total_like",
+              ],
+            })
+          );
+        });
+      }
+      let temp2 = await Promise.all(result);
+      // console.log(temp2.filter(x=>x).map((x) => x.dataValues));
+      return res
+        .status(200)
+        .send(temp2.filter((x) => x).map((x) => x.dataValues));
+    }
     if (isLogin === "true" && accessToken && cocodusId && nickName) {
       let userLoc = await User.findOne({
         where: { id: cocodusId },
