@@ -63,7 +63,8 @@ function PriceCard({ stack = [] }) {
       html.offsetHeight
     );
     const windowBottom = windowHeight + window.pageYOffset;
-    if (windowBottom >= docHeight && !isBottom) {
+
+    if (windowBottom >= docHeight - 5 && !isBottom) {
       setIsBottom(true);
       setHowMany(3);
       setIsBottom(false);
