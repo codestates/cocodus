@@ -44,7 +44,7 @@ const TestEditorForm = ({ onChange }) => {
 
   return (
     <>
-      {/* {console.log(editorState.getCurrentContent().getPlainText())} */}
+      {console.log(editorState.getCurrentContent().getPlainText())}
       <MyBlock bottom="2rem">
         <Editor
           editiorState={editorState}
@@ -71,14 +71,14 @@ const TestEditorForm = ({ onChange }) => {
           editorState={editorState}
           // 에디터의 값이 변경될 때마다 onEditorStateChange 호출
           // onEditorStateChange={onEditorStateChange}
-          // onChange={onChange}
+          onChange={onChange}
           onEditorStateChange={onEditorChange}
         />
-        <textarea
+        {/* <textarea
           style={{ display: "none" }}
           value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
           onChange={onChange}
-        ></textarea>
+        ></textarea> */}
       </MyBlock>
     </>
   );
