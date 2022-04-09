@@ -49,9 +49,10 @@ function DetailContent(props) {
       </FlexBox>
       <FlexBox>
         <Div>사용 언어</Div>
-        {specificdata[0].jsonfile.tag.map((el, idx) => {
-          return <Language key={idx}>{el}</Language>;
-        })}
+        {specificdata[0].jsonfile.tag &&
+          specificdata[0].jsonfile.tag.map((el, idx) => {
+            return <Language key={idx}>{el}</Language>;
+          })}
         {specificdata[0].jsonfile.online ? (
           <Div
             backColor="rgba(196, 196, 196, 0.26)"

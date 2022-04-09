@@ -26,7 +26,7 @@ export default function LanguageIcon({ stackHandler, stack }) {
     "JavaScript.png",
     "TypeScript.png",
     "React.png",
-    "View.png",
+    "Vue.png",
     "Node.png",
     "Java.png",
     "Spring.png",
