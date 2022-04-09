@@ -117,6 +117,7 @@ function CommentList() {
     }
   }, [reLoad, specificdata]);
 
+  if (cmtList.length === 0) return null;
   return (
     <div>
       {cmtList.map((x, i) => (

@@ -163,38 +163,38 @@ function CardSection({ data, stack }) {
     }
     chgSpecificData([temp]);
     // console.log(specificdata);
-    // chgInput("title", specificdata[0].jsonfile.title);
-    // chgOnline("online", specificdata[0].jsonfile.online);
-    // chgTag(specificdata[0].jsonfile.tag);
-    // chgMsg(specificdata[0].jsonfile.content);
-    // chgPlaceName(specificdata[0].jsonfile);
-    // const date = specificdata[0].jsonfile.date;
-    // let arr = date.split(" ");
-    // let year = arr.slice(0, 3);
-    // year = year.join(" ");
-    // chgYear(year);
-    // let hour = arr.slice(3, 5);
-    // if (hour[0] === "오후") {
-    //   let h = hour[1].split("");
-    //   h[0] = Number(h[0]) + 12;
-    //   chgHour(h[0]);
-    // } else {
-    //   let h = hour[1].split("");
-    //   h[0] = Number(h[0]);
-    //   chgHour(h[0]);
-    // }
-    // let min = arr.slice(5);
-    // if (min.length > 0) {
-    //   min = min.join("");
-    //   let m = min.split("");
-    //   if (m.length === 3) {
-    //     m = Number(`${m[0]}${m[1]}`);
-    //     chgMin(m);
-    //   } else {
-    //     m = Number(`${m[0]}`);
-    //     chgMin(m);
-    //   }
-    // }
+    chgInput("title", specificdata[0].jsonfile.title);
+    chgOnline("online", specificdata[0].jsonfile.online);
+    chgTag(specificdata[0].jsonfile.tag);
+    chgMsg(specificdata[0].jsonfile.content);
+    chgPlaceName(specificdata[0].jsonfile);
+    const date = specificdata[0].jsonfile.date;
+    let arr = date.split(" ");
+    let year = arr.slice(0, 3);
+    year = year.join(" ");
+    chgYear(year);
+    let hour = arr.slice(3, 5);
+    if (hour[0] === "오후") {
+      let h = hour[1].split("");
+      h[0] = Number(h[0]) + 12;
+      chgHour(h[0]);
+    } else {
+      let h = hour[1].split("");
+      h[0] = Number(h[0]);
+      chgHour(h[0]);
+    }
+    let min = arr.slice(5);
+    if (min.length > 0) {
+      min = min.join("");
+      let m = min.split("");
+      if (m.length === 3) {
+        m = Number(`${m[0]}${m[1]}`);
+        chgMin(m);
+      } else {
+        m = Number(`${m[0]}`);
+        chgMin(m);
+      }
+    }
     navigate("/RegisterContentViewPage");
   };
 
