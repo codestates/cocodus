@@ -51,28 +51,29 @@ function PriceCard({ stack = [] }) {
       chgJsonData(temp.data);
     }
     setIsLoading(false);
-  }, [isLogin, nickName]);
+  }, []);
 
   useEffect(async () => {
-    setIsLoading(true);
-    let temp = await axios({
-      url: "https://server.cocodus.site/board/all",
-      params: {
-        isLogin: isLogin,
-        accessToken,
-        cocodusId,
-        nickName,
-        howMany,
-        km: 30,
-      },
-    });
-    await delay(2);
-    if (temp.data.length) {
-      chgJsonData(temp.data);
+    if (isLogin) {
+      let temp = await axios({
+        url: "https://server.cocodus.site/board/all",
+        params: {
+          isLogin: isLogin,
+          accessToken,
+          cocodusId,
+          nickName,
+          howMany,
+          km: 30,
+        },
+      });
+      await delay(1);
+      if (temp.data.length) {
+        chgJsonData(temp.data);
+      }
     }
     setIsLoading(false);
   }, [howMany]);
-  const handleScroll = () => {
+  const handleScroll = async () => {
     const windowHeight =
       "innerHeight" in window
         ? window.innerHeight
@@ -91,6 +92,7 @@ function PriceCard({ stack = [] }) {
     if (windowBottom >= docHeight - 5 && !isBottom) {
       setIsBottom(true);
       setHowMany(3);
+      setIsLoading(true);
       setIsBottom(false);
     }
   };
