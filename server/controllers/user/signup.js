@@ -25,7 +25,7 @@ module.exports = {
 
   google: async (req, res) => {
     const code = req.query.code;
-    if (!code) return res.status(401).redirect("https://cocodus.site/");
+    if (!code) return res.status(401).redirect("https://cocodus.site");
     let accessToken = await generateAccessToken(code, "google");
     let validation = await isAuthorized(accessToken, "google");
     let id = validation;
@@ -42,7 +42,7 @@ module.exports = {
 
   github: async (req, res) => {
     const { code } = req.query;
-    if (!code) return res.status(401).redirect("https://cocodus.site/");
+    if (!code) return res.status(401).redirect("https://cocodus.site");
     let accessToken = await generateAccessToken(code, "github");
     let validation = await isAuthorized(accessToken, "github");
     let id = validation;
