@@ -34,7 +34,7 @@ function DelPostModal({ closeModal }) {
       const delPost = await axios({
         method: "DELETE",
         url: "http://localhost:8080/board/writing",
-        data: {
+        params: {
           accessToken,
           user_id: cocodusId,
           postId,

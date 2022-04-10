@@ -67,8 +67,7 @@ function RegisterModal({ closeModal }) {
       const newPost = await axios({
         method: "POST",
         url: "http://localhost:8080/board/writing",
-        data: {
-          jsonfile: JSON.stringify(postData),
+        params: {
           accessToken,
           user_id: cocodusId,
           lat: latitudeY,
@@ -76,6 +75,7 @@ function RegisterModal({ closeModal }) {
           recruiting,
           online: online,
           tag,
+          jsonfile: JSON.stringify(postData),
         },
       });
       console.log(newPost);

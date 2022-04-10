@@ -75,12 +75,12 @@ const TestEditorForm = ({ onChange }) => {
           onEditorStateChange={onEditorChange}
           placeholder={content}
         />
-        <textarea
+        {/* <textarea
           // style={{ display: "none" }}
           // value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
           value={content}
           onChange={onChange}
-        ></textarea>
+        ></textarea> */}
       </MyBlock>
     </>
   );

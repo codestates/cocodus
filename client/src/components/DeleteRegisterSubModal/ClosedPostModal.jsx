@@ -28,11 +28,10 @@ function closedPostModal({ closeModal }) {
   const { accessToken, cocodusId } = accessTokenStore();
 
   // 마감 버튼
-  const onRecruit = async () => {
+  export const onRecruit = async () => {
     try {
       chgError(null);
       chgLoading(true);
-      chgrecruiting(false);
       const closedPost = await axios({
         method: "PATCH",
         url: "http://localhost:8080/board/recruiting",
@@ -45,6 +44,7 @@ function closedPostModal({ closeModal }) {
       });
       if (closedPost.status === 200) {
         navigate("/");
+        chgrecruiting(false);
         console.log(closedPost);
       } else {
         alert("뭔가 잘못됬어요!!");
