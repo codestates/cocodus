@@ -58,8 +58,7 @@ function ClickButton({
           placeName &&
           roadAddress &&
           year &&
-          hour &&
-          minute ? (
+          hour ? (
             <Modal open={store2().modalOpen2} header="알림">
               <Tag closeModal={store2().closeModal2} />
             </Modal>

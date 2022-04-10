@@ -11,8 +11,12 @@ import {
 import { myPostClosedLoadingStore } from "../../Store/loading-zustand";
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
 import Modal from "../Modal/Modal";
+import { postData } from "../../Store/postData-zustand";
+import { registerStore } from "../../Store/Register-zustand";
 
 function closedPostModal({ closeModal }) {
+  const { specificdata } = postData();
+  const { recruiting, chgrecruiting } = registerStore();
   const { modalOpen2, setModalOpen } = useState(false);
   const openModal2 = () => {
     setModalOpen(true);
@@ -28,19 +32,14 @@ function closedPostModal({ closeModal }) {
     try {
       chgError(null);
       chgLoading(true);
-      const data = {
-        user_id: cocodusId,
-        postId,
-        recruiting: false,
-      };
+      chgrecruiting(false);
       const closedPost = await axios({
         method: "PATCH",
         url: "http://localhost:8080/board/recruiting",
         data: {
-          // jsonFile: JSON.stringify(data),
           accessToken,
           user_id: cocodusId,
-          // post_id: postId,
+          postId: specificdata[0].id,
           recruiting: false,
         },
       });

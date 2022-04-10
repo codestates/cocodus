@@ -5,7 +5,7 @@ export const postData = create(
   persist(
     (set) => ({
       jsonData: [],
-      specificData: [],
+      specificdata: [],
       // post_id: [],
       chgJsonData: (value) =>
         set((state) => ({

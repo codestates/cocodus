@@ -18,21 +18,15 @@ import { registerStore } from "../../Store/Register-zustand";
 function OnlyUserBtn(props) {
   const { closedModalOpen, openModal1, closeModal1 } = closedPostModalStore();
   const { delModalOpen, openModal2, closeModal2 } = delPostModalStore();
-  const { recruting, chgrecruiting } = registerStore();
+  const { recruiting, chgrecruiting } = registerStore();
   let navigate = useNavigate();
-  const onChange = () => {
-    chgrecruiting(!recruting);
-  };
   return (
     <UserBlock>
-      {recruting ? ( //서버 완성되면 확인 필요함
-        <Button onClick={openModal1} onChange={onChange}>
-          마감
-        </Button>
+      {console.log(recruiting)}
+      {recruiting ? ( //서버 완성되면 확인 필요함
+        <Button onClick={openModal1}>마감</Button>
       ) : (
-        <Button onClick={openModal1} onChange={onChange}>
-          모집중
-        </Button>
+        <Button onClick={openModal1}>모집하기</Button>
       )}
 
       <Modal open={closedModalOpen} close={closeModal1} header="알림">

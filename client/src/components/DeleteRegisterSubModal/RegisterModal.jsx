@@ -85,8 +85,8 @@ function RegisterModal({ closeModal }) {
       chgTag([]);
       chgMarker({ place_name: "", road_address_name: "", y: "", x: "" });
       closeModal(); // 모달창 닫는 함수
-      openModal2();
       navigate("/");
+      // openModal2();
     } catch (e) {
       chgError(e);
     }
