@@ -35,7 +35,7 @@ function PriceCard({ stack = [] }) {
     });
   }
   useEffect(async () => {
-    setIsLoading(true);
+    // setIsLoading(true);
     let temp = await axios({
       url: "https://server.cocodus.site/board/all",
       params: {
@@ -50,11 +50,11 @@ function PriceCard({ stack = [] }) {
     if (temp.data.length) {
       chgJsonData(temp.data);
     }
-    setIsLoading(false);
+    // setIsLoading(false);
   }, []);
 
   useEffect(async () => {
-    if (isLogin) {
+    if (isBottom) {
       let temp = await axios({
         url: "https://server.cocodus.site/board/all",
         params: {
@@ -69,10 +69,11 @@ function PriceCard({ stack = [] }) {
       await delay(1);
       if (temp.data.length) {
         chgJsonData(temp.data);
+        setIsBottom(false);
       }
+      // setIsLoading(true);
     }
-    setIsLoading(false);
-  }, [howMany]);
+  }, [isBottom]);
   const handleScroll = async () => {
     const windowHeight =
       "innerHeight" in window
@@ -90,10 +91,10 @@ function PriceCard({ stack = [] }) {
     const windowBottom = windowHeight + window.pageYOffset;
 
     if (windowBottom >= docHeight - 5 && !isBottom) {
-      setIsBottom(true);
       setHowMany(3);
-      setIsLoading(true);
-      setIsBottom(false);
+      setIsBottom(true);
+      // setIsLoading(false);
+      // setIsBottom(false);
     }
   };
 
@@ -124,7 +125,7 @@ function PriceCard({ stack = [] }) {
         .map((x, i) => {
           return <CardSection data={x} key={x.id} stack={stack}></CardSection>;
         })}
-      {isLoading ? (
+      {isBottom ? (
         <div>
           <div>Loading...</div>
           <div>.</div>
