@@ -88,20 +88,24 @@ function Mylikes(props) {
                 <Flex>
                   <Card>
                     <BackgroundSqure />
-                    <ContentDiv key={i}>
-                      <DivContainer>
-                        <div>{x.jsonfile.nickName}</div>
-                        <PlanTitle>{x.jsonfile.title}</PlanTitle>
-                        <FeatureListItem>{x.jsonfile.content}</FeatureListItem>
-                      </DivContainer>
-                      <DivContainer>
-                        <DateAndLocationContainer>
-                          <div>{x.jsonfile.date}</div>
-                          <div>{x.jsonfile.location}</div>
-                          <div>{x.jsonfile.roadAddress}</div>
-                        </DateAndLocationContainer>
-                      </DivContainer>
-                    </ContentDiv>
+                    <div key={i}>
+                      <ContentDiv>
+                        <DivContainer>
+                          <div>{x.jsonfile.nickName}</div>
+                          <PlanTitle>{x.jsonfile.title}</PlanTitle>
+                          <FeatureListItem>
+                            {x.jsonfile.content}
+                          </FeatureListItem>
+                        </DivContainer>
+                        <DivContainer>
+                          <DateAndLocationContainer>
+                            <div>{x.jsonfile.date}</div>
+                            <div>{x.jsonfile.location}</div>
+                            <div>{x.jsonfile.roadAddress}</div>
+                          </DateAndLocationContainer>
+                        </DivContainer>
+                      </ContentDiv>
+                    </div>
                   </Card>
                 </Flex>
               </Container>
