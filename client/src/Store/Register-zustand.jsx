@@ -10,7 +10,7 @@ export const registerStore = create((set) => ({
     online: false,
   },
 
-  recuiting: true,
+  recruiting: true,
   //모집중 onChange 함수
   chgrecruiting: (value) =>
     set((state) => ({
