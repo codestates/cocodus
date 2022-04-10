@@ -15,8 +15,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   Post_comment.init(
     {
-      user_email: DataTypes.STRING,
-      post_id: DataTypes.UUID,
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        comment: "고유번호 UUID",
+      },
+      user_id: DataTypes.STRING,
+      post_id: DataTypes.INTEGER,
       comment: DataTypes.STRING,
     },
     {

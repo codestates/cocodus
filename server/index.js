@@ -10,19 +10,13 @@ app.use(
   cors({
     origin: ["http://localhost:3000"],
     credentials: true,
-    methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT"],
+    methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
   })
 );
 // router
 const userRouter = require("./routes/user");
 const boardRouter = require("./routes/board");
-const jwtTest = require("./controllers/token/index");
-app.get("/jwtTest", (req, res) => {
-  jwtTest.sendAccessToken(
-    res,
-    jwtTest.generateAccessToken({ email: "happy5happy5@gmail.com" })
-  );
-});
+
 app.get("/", (req, res) => {
   res.send("Cocodus, hacking!");
 });

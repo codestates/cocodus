@@ -7,8 +7,8 @@ module.exports = {
         id: {
           allowNull: false,
           primaryKey: true,
-          type: Sequelize.UUID,
-          unique: true,
+          type: Sequelize.INTEGER,
+          autoIncrement: true,
         },
         stack: {
           type: Sequelize.STRING,
@@ -18,6 +18,8 @@ module.exports = {
         // 테이블 옵션
         timestamps: false,
         underscored: true,
+        createdAt: false,
+        updatedAt: false,
       }
     );
   },

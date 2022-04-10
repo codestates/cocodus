@@ -29,6 +29,10 @@ export const ContentDiv = styled.div`
 
 export const DivContainer = styled.div`
   padding: 10px;
+  padding-right: 5px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const PlanTitle = styled.div`
@@ -40,17 +44,17 @@ export const FeatureListItem = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 0.325rem;
-`;
-
-export const ActionButton = styled.div`
-  flex: 0 0 auto;
-  height: 40px;
-  padding: 0 2rem;
-  border: 0;
-  border-radius: 20px;
-  color: rgba(0, 0, 0, 0.05);
-  background: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.25);
+  flex-direction: row;
+  justify-content: flex-start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 라인수 */
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  line-height: 1.2em;
+  height: 2.4em; /*라인수에서 라인 하이트 곱하기한 값: 총 높이*/
+  width: 25em;
 `;
 
 export const Icon = styled.img`
@@ -61,7 +65,7 @@ export const Icon = styled.img`
   height: 80px;
   flex: 0 0 auto;
   margin-bottom: 2rem;
-  border-radius: 50%;
+
   margin-right: 10px;
 `;
 
@@ -78,4 +82,16 @@ export const BackgroundSqure = styled.div`
 export const Align = styled.div`
   display: flex;
   align-items: center;
+`;
+
+export const StackContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 20px;
+  padding-right: 20px;
+`;
+
+export const DateAndLocationContainer = styled.div`
+  padding-right: 10px;
 `;

@@ -1,10 +1,9 @@
 module.exports = {
   all: require("./all"),
-  list: require("./list"),
-  like: require("./like"),
-  recruiting: require("./recruiting"),
-  sidechat: require("./sidechat"),
   cmt: require("./cmt"),
+  like: require("./like"),
+  mypost: require("./mypost"),
+  recruiting: require("./recruiting"),
   writing: require("./writing"),
-  feedback: require("./feedback"),
+  view: require("./view"),
 };

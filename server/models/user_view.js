@@ -15,12 +15,13 @@ module.exports = (sequelize, DataTypes) => {
   }
   User_view.init(
     {
-      user_email: DataTypes.STRING,
-      post_id: DataTypes.UUID,
+      user_id: DataTypes.STRING,
+      post_id: DataTypes.INTEGER,
     },
     {
       sequelize,
       modelName: "User_view",
+      timestamps: false,
     }
   );
   return User_view;

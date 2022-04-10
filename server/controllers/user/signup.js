@@ -1,54 +1,59 @@
+const { User } = require("../../models");
+const { generateAccessToken, isAuthorized } = require("../token");
+const { findUserInfo } = require("../database");
 module.exports = {
   post: async (req, res) => {
-    //let { email, password, nickname } = req.body.data;
-
     res.status(200).send("test signuppost");
   },
-  get: async (req, res) => {
-    //let { email, password, nickname } = req.body.data;
-    // console.log(req.headers.oauth);
-    // if (req.headers.oauth === "github") {
-    //   res.status(200).send("github go");
-    // } else {
-    //   res.status(200).send("test signuppost");
-    // }`https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&redirect_uri=http://localhost:8080/user/signup/github`
-    const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}`;
-    res.redirect(githubAuthUrl);
-  },
-  github: async (req, res) => {
-    const axios = require("axios");
-
-    const { session, query } = req;
-    const { code } = query;
-    //console.log(session, code);
-
-    const test = await axios.post(
-      `https://github.com/login/oauth/access_token?client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}&code=${code}`
-    );
-
-    //console.log(test);
-    //console.log(req);
-    // if (!code) {
-    //   res.status(401).end();
-    // } else {
-    //   res.status(200).send("성공");
-    // }
-    // 메소드는 POST
-    // https://github.com/login/oauth/access_token
-    // 필수 파라메더
-    //client_id = .env에 있음 Required
-    //client_secret = .env에 있음 Required
-    //code 발급받은 code Required
-    //redirectUrl Callback URL 있어야 함
-    //state
-    const tokenString = test.data;
-    let accessToken = tokenString.split("&")[0].split("=")[1];
-    console.log(accessToken);
+  get: async (req, res) => {},
+  kakao: async (req, res) => {
+    const code = req.query.code;
+    let accessToken = await generateAccessToken(code, "kakao");
+    let validation = await isAuthorized(accessToken, "kakao");
+    let id = validation;
+    let isMember = await User.findOne({ where: { id } });
     res
       .status(200)
-      .cookie("accessToken", accessToken)
-      // .send("토큰이가는지보고싶습니다")
-      //.redirect("http://cocodus.site/");
-      .redirect("http://localhost:3000");
+      .cookie("accessToken", accessToken, {
+        maxAge: 360000, //360초 뒤에 쿠키 사라짐
+      })
+      .cookie("cocodusId", id);
+    if (isMember && isMember.dataValues && isMember.dataValues.name)
+      res.redirect("http://localhost:3000");
+    else res.redirect("http://localhost:3000/userinforegister");
+  },
+
+  google: async (req, res) => {
+    const code = req.query.code;
+    if (!code) return res.status(401).redirect("http://localhost:3000/");
+    let accessToken = await generateAccessToken(code, "google");
+    let validation = await isAuthorized(accessToken, "google");
+    let id = validation;
+    let isMember = await User.findOne({ where: { id } });
+    res
+      .status(200)
+      .cookie("accessToken", accessToken, {
+        maxAge: 360000, //360초 뒤에 쿠키 사라짐
+      })
+      .cookie("cocodusId", id);
+    if (isMember) res.redirect("http://localhost:3000");
+    else res.redirect("http://localhost:3000/userinforegister");
+  },
+
+  github: async (req, res) => {
+    const { code } = req.query;
+    if (!code) return res.status(401).redirect("http://localhost:3000/");
+    let accessToken = await generateAccessToken(code, "github");
+    let validation = await isAuthorized(accessToken, "github");
+    let id = validation;
+    let isMember = await User.findOne({ where: { id } });
+    res
+      .status(200)
+      .cookie("accessToken", accessToken, {
+        maxAge: 360000, //300초 뒤에 쿠키 사라짐
+      })
+      .cookie("cocodusId", id);
+    if (isMember) res.redirect("http://localhost:3000");
+    else res.redirect("http://localhost:3000/userinforegister");
   },
 };

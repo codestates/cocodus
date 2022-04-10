@@ -14,16 +14,18 @@ export const Section = styled.section`
 // 글 제목
 export const Title = styled.input`
   color: ${(props) => props.color};
-  background: rgba(196, 196, 196, 0.26);
+  background: ${(props) => props.backGround || "rgba(196, 196, 196, 0.26)"};
   text-shadow: ${(props) => props.textShadow};
   width: 100%;
   margin-top: ${(props) => props.top};
   margin-bottom: 2rem;
+  margin-left: ${(props) => props.left};
   padding: 30px 0;
+  padding-left: 0.5rem;
   font-size: 3rem;
   font-weight: 700;
   border: none;
-  border-bottom: ${(props) => props.borderBottom || "1px solid #ced4da"};
+  border: ${(props) => props.borderBottom || "1px solid #ced4da"};
   &:focus {
     outline: none;
   }
@@ -31,8 +33,11 @@ export const Title = styled.input`
 
 export const Div = styled.div`
   font-weight: 500;
-  font-size: 18px;
+  font-size: ${(props) => props.fontSize || "18px"};
+  background: ${(props) => props.backColor};
+  margin-left: ${(props) => props.marginLeft};
   margin-right: 1rem;
+  padding: 0.25rem;
   ${(props) =>
     props.huge &&
     css`
@@ -60,17 +65,28 @@ export const FlexBox = styled.div`
     `};
 `;
 
+export const Img = styled.img`
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid rgba(196, 196, 196, 0.26);
+  border-radius: 50%;
+  margin-right: 0.5rem;
+`;
+
 // 언어, 지역 셀렉박스
 export const InputBox = styled.input`
   color: ${(props) => props.color};
   text-shadow: ${(props) => props.textShadow};
-  background: rgba(196, 196, 196, 0.26);
-  font-size: 16px;
+  //
+  background: ${(props) => props.backColor || "rgba(196, 196, 196, 0.26)"};
+  //
+  font-size: ${(props) => props.fontSize || "16px"};
   font-family: initial;
   width: ${(props) => props.width || "30%"};
   padding: 10px 8px;
   overflow: hidden;
-  border: 1px solid #ced4da;
+  //
+  border: ${(props) => props.Border || "1px solid #ced4da"};
   border-radius: 10px;
   margin-right: ${(props) => props.ri};
   ${(props) =>
@@ -83,7 +99,7 @@ export const InputBox = styled.input`
 `;
 
 export const Label = styled.label`
-  background: rgba(196, 196, 196, 0.26);
+  background: ${(props) => props.backColor || "rgba(196, 196, 196, 0.26)"};
   font-size: 16px;
   width: 15%;
   margin-left: 10rem;
@@ -115,7 +131,35 @@ export const Btn = styled.button`
   margin-top: ${(props) => props.top};
   margin-bottom: 2rem;
   cursor: pointer;
-  & + & {
-    margin-left: 1rem;
-  }
+  margin-left: 1rem;
+`;
+
+export const PlaceBox = styled.div`
+  display: flex;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+export const PlaceInputBox = styled.input`
+  color: ${(props) => props.color};
+  text-shadow: ${(props) => props.textShadow};
+  background: rgba(196, 196, 196, 0.26);
+  font-size: 16px;
+  font-family: initial;
+  width: 100%;
+  padding: 10px 8px;
+  overflow: hidden;
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: ${(props) => props.ri};
+  ${(props) =>
+    props.focus &&
+    css`
+      &:focus {
+        outline: none;
+      }
+    `}
 `;

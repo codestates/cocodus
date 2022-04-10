@@ -3,23 +3,20 @@
 import React, { useState, useRef } from "react";
 import { ImgBlock, Img, ImgInput, BtnBlock, ImgBtn } from "./ImgUpload.styled";
 import { Section } from "../styles/Section.styled";
+import { registerUserInfoStore } from "../../Store/RegisterUserInfo-zustand";
 
 function ImgUpload() {
-  const [imageSrc, setImageSrc] = useState("UserIcon.png");
+  const { userImg, chgImg, delImg } = registerUserInfoStore();
 
   const onChangeImg = (fileBlob) => {
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
     return new Promise((resolve) => {
       reader.onload = () => {
-        setImageSrc(reader.result);
+        chgImg(reader.result);
         resolve();
       };
     });
-  };
-
-  const onRemoveImg = () => {
-    setImageSrc("UserIcon.png");
   };
 
   const logoImgInput = useRef();
@@ -29,7 +26,7 @@ function ImgUpload() {
   };
 
   return (
-    <Section>
+    <Section width="60%">
       <ImgBlock>
         <ImgInput
           ref={logoImgInput}
@@ -38,10 +35,10 @@ function ImgUpload() {
             onChangeImg(e.target.files[0]);
           }}
         />
-        {imageSrc && <Img src={imageSrc} alt="preview-img" />}
+        {userImg && <Img src={userImg} alt="preview-img" />}
         <BtnBlock>
           <ImgBtn onClick={onImgInputBtnClick}>이미지 선택</ImgBtn>
-          <ImgBtn onClick={onRemoveImg}>이미지 제거</ImgBtn>
+          <ImgBtn onClick={delImg}>이미지 제거</ImgBtn>
         </BtnBlock>
       </ImgBlock>
     </Section>

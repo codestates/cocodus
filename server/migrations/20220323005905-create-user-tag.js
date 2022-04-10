@@ -4,25 +4,31 @@ module.exports = {
     await queryInterface.createTable(
       "User_tags",
       {
-        user_email: {
+        user_id: {
           type: Sequelize.STRING,
           references: {
             model: "Users",
-            key: "email",
+            key: "id",
           },
+          onDelete: "cascade",
+          onUpdate: "cascade",
         },
         tag_id: {
-          type: Sequelize.UUID,
+          type: Sequelize.INTEGER,
           references: {
             model: "Tags",
             key: "id",
           },
+          onDelete: "cascade",
+          onUpdate: "cascade",
         },
       },
       {
         // 테이블 옵션
         timestamps: false,
         underscored: true,
+        createdAt: false,
+        updatedAt: false,
       }
     );
   },

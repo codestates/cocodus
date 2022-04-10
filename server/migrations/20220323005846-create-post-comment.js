@@ -2,19 +2,30 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("Post_comments", {
-      user_email: {
+      id: {
+        allowNull: false,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        unique: true,
+      },
+      user_id: {
         type: Sequelize.STRING,
         references: {
           model: "Users",
-          key: "email",
+          key: "id",
         },
+        onDelete: "cascade",
+        onUpdate: "cascade",
       },
       post_id: {
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
         references: {
           model: "Posts",
           key: "id",
         },
+        onDelete: "cascade",
+        onUpdate: "cascade",
       },
       comment: {
         type: Sequelize.STRING,
