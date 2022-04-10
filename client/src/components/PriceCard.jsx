@@ -13,7 +13,6 @@ import {
 
 import { Container } from "./styles/Container.styled";
 import { Flex } from "./styles/Flex.styled";
-import Data from "../api/DummyData";
 import axios from "axios";
 import { accessTokenStore } from "../Store/accesstoken-zustand";
 import { registerUserInfoStore } from "../Store/RegisterUserInfo-zustand";
@@ -28,7 +27,7 @@ function PriceCard({ stack = [] }) {
   const { isLogin, accessToken, cocodusId } = accessTokenStore();
   const { nickName, chgInput } = registerUserInfoStore();
   const [isBottom, setIsBottom] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   function delay(n) {
     return new Promise(function (resolve) {
       setTimeout(resolve, n * 1000);

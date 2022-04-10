@@ -56,6 +56,8 @@ function MyPost(props) {
       <WriteIcon />
       {myPost.length
         ? myPost.map((x, i) => {
+            let temp = x.jsonfile;
+            if (typeof temp === "string") temp = JSON.parse(x.jsonfile);
             return (
               <Container>
                 <Flex>
@@ -64,17 +66,15 @@ function MyPost(props) {
                     <div key={i}>
                       <ContentDiv>
                         <DivContainer>
-                          <div>{x.jsonfile.nickName}</div>
-                          <PlanTitle>{x.jsonfile.title}</PlanTitle>
-                          <FeatureListItem>
-                            {x.jsonfile.content}
-                          </FeatureListItem>
+                          <div>{temp.nickName}</div>
+                          <PlanTitle>{temp.title}</PlanTitle>
+                          <FeatureListItem>{temp.content}</FeatureListItem>
                         </DivContainer>
                         <DivContainer>
                           <DateAndLocationContainer>
-                            <div>{x.jsonfile.date}</div>
-                            <div>{x.jsonfile.location}</div>
-                            <div>{x.jsonfile.roadAddress}</div>
+                            <div>{temp.date}</div>
+                            <div>{temp.location}</div>
+                            <div>{temp.roadAddress}</div>
                           </DateAndLocationContainer>
                         </DivContainer>
                       </ContentDiv>{" "}
