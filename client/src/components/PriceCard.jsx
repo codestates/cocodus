@@ -254,12 +254,12 @@ function CardSection({ data, stack }) {
       <Flex>
         <Card>
           <BackgroundSqure />{" "}
-          <ContentDiv>
+          <ContentDiv onClick={() => findData(data.id)}>
             {" "}
             <StackContainer>
               {topThree(data.jsonfile.tag, stack)}
             </StackContainer>
-            <DivContainer onClick={() => findData(data.id)}>
+            <DivContainer>
               <PlanTitle>{data.jsonfile.title}</PlanTitle>
               <FeatureListItem>
                 <span>{data.jsonfile.content}</span>
