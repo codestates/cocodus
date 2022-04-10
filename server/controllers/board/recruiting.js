@@ -3,7 +3,7 @@ const { Post } = require("../../models");
 module.exports = {
   patch: async (req, res) => {
     const { accessToken, user_id, postId, recruiting } = req.query;
-    if (user_id.length) {
+    if (user_id) {
       const cocodusMember = await User.findOne({
         where: { id: user_id || "" },
       });
@@ -15,7 +15,7 @@ module.exports = {
     }
 
     if (isNaN(Number(postId))) {
-      console.log(`post 번호가 ${typeof postId} type 입니다`); //만약 postId가 숫자가 아닐 경우
+      // console.log(`post 번호가 ${typeof postId} type 입니다`); //만약 postId가 숫자가 아닐 경우
       return res.status(400).send("Not found post id");
     }
 

@@ -44,7 +44,7 @@ const TestEditorForm = ({ onChange }) => {
 
   return (
     <>
-      {console.log(editorState.getCurrentContent().getPlainText())}
+      {/* {console.log(editorState.getCurrentContent().getPlainText())} */}
       <MyBlock bottom="2rem">
         <Editor
           editiorState={editorState}
@@ -73,7 +73,6 @@ const TestEditorForm = ({ onChange }) => {
           // onEditorStateChange={onEditorStateChange}
           onChange={onChange}
           onEditorStateChange={onEditorChange}
-          placeholder={content}
         />
         {/* <textarea
           // style={{ display: "none" }}

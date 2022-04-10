@@ -4,8 +4,8 @@ const axios = require("axios");
 module.exports = {
   get: async (req, res) => {},
   post: async (req, res) => {
-    console.log(req.headers.oauth_source); //Naver,Google,Kakaotalk
-    console.log(models.User === User);
+    // console.log(req.headers.oauth_source); //Naver,Google,Kakaotalk
+    // console.log(models.User === User);
     let { email, password } = req.body.data || {};
     if (email && password) {
       User.create(

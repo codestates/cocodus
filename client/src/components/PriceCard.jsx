@@ -13,7 +13,6 @@ import {
 
 import { Container } from "./styles/Container.styled";
 import { Flex } from "./styles/Flex.styled";
-import Data from "../api/DummyData";
 import axios from "axios";
 import { accessTokenStore } from "../Store/accesstoken-zustand";
 import { registerUserInfoStore } from "../Store/RegisterUserInfo-zustand";
@@ -28,11 +27,16 @@ function PriceCard({ stack = [] }) {
   const { isLogin, accessToken, cocodusId } = accessTokenStore();
   const { nickName, chgInput } = registerUserInfoStore();
   const [isBottom, setIsBottom] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
+  function delay(n) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, n * 1000);
+    });
+  }
   useEffect(async () => {
-    setIsLoading(true);
+    // setIsLoading(true);
     let temp = await axios({
-      url: "http://localhost:8080/board/all",
+      url: "https://server.cocodus.site/board/all",
       params: {
         isLogin: isLogin,
         accessToken,
@@ -45,9 +49,31 @@ function PriceCard({ stack = [] }) {
     if (temp.data.length) {
       chgJsonData(temp.data);
     }
-    setIsLoading(false);
-  }, [isLogin, nickName, howMany]);
-  const handleScroll = () => {
+    // setIsLoading(false);
+  }, []);
+
+  useEffect(async () => {
+    if (isBottom) {
+      let temp = await axios({
+        url: "https://server.cocodus.site/board/all",
+        params: {
+          isLogin: isLogin,
+          accessToken,
+          cocodusId,
+          nickName,
+          howMany,
+          km: 30,
+        },
+      });
+      await delay(1);
+      if (temp.data.length) {
+        chgJsonData(temp.data);
+        setIsBottom(false);
+      }
+      // setIsLoading(true);
+    }
+  }, [isBottom]);
+  const handleScroll = async () => {
     const windowHeight =
       "innerHeight" in window
         ? window.innerHeight
@@ -64,9 +90,10 @@ function PriceCard({ stack = [] }) {
     const windowBottom = windowHeight + window.pageYOffset;
 
     if (windowBottom >= docHeight - 5 && !isBottom) {
-      setIsBottom(true);
       setHowMany(3);
-      setIsBottom(false);
+      setIsBottom(true);
+      // setIsLoading(false);
+      // setIsBottom(false);
     }
   };
 
@@ -97,21 +124,14 @@ function PriceCard({ stack = [] }) {
         .map((x, i) => {
           return <CardSection data={x} key={x.id} stack={stack}></CardSection>;
         })}
-      {isLoading ? (
+      {isBottom ? (
         <div>
-          여기에 로딩창만들어야함
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
+          <div>Loading...</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
         </div>
       ) : null}
     </div>

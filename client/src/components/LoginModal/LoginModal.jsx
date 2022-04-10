@@ -10,7 +10,7 @@ function LoginModal({ open, close, header }) {
           href={
             "https://github.com/login/oauth/authorize" +
             "?client_id=a3992310760bdbc99e31" +
-            "&redirect_uri=http://localhost:8080/user/signup/github" +
+            "&redirect_uri=https://server.cocodus.site/user/signup/github" +
             "&scope=user:email"
           }
         >
@@ -23,7 +23,7 @@ function LoginModal({ open, close, header }) {
           href={
             "https://kauth.kakao.com/oauth/authorize" +
             "?client_id=7f6f770eb46de1c098398a5231a5909d" +
-            "&redirect_uri=http://localhost:8080/user/signup/kakao" +
+            "&redirect_uri=https://server.cocodus.site/user/signup/kakao" +
             "&response_type=code"
           }
         >
@@ -33,7 +33,7 @@ function LoginModal({ open, close, header }) {
           href={
             "https://accounts.google.com/o/oauth2/v2/auth" +
             "?client_id=286406699597-7mlmmmhid7n5dph3g3ce3s90do65bk4i.apps.googleusercontent.com" +
-            "&response_type=code&redirect_uri=http://localhost:8080/user/signup/google" +
+            "&response_type=code&redirect_uri=https://server.cocodus.site/user/signup/google" +
             "&scope=https://www.googleapis.com/auth/userinfo.email"
           }
         >

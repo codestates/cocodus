@@ -90,7 +90,7 @@ function CalendarComponent(props) {
   };
   const minuteChange = (value) => {
     chgMin(value.value);
-    console.log(value.value);
+    // console.log(value.value);
   };
   return (
     <FlexBox>

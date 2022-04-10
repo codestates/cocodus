@@ -42,7 +42,7 @@ function CommentArea({ cmtData }) {
     if (e.key === "Enter") {
       const comment = await axios({
         method: "PATCH",
-        url: "http://localhost:8080/board/cmt",
+        url: "https://server.cocodus.site/board/cmt",
         params: {
           accessToken,
           user_id: cocodusId,
@@ -56,8 +56,6 @@ function CommentArea({ cmtData }) {
         setCmtShow(false);
         setCmtText("");
         setReload();
-      } else {
-        alert("뭔가 크게 잘못됐어요! 상태코드=", comment.status);
       }
     }
   };
@@ -103,15 +101,13 @@ function CommentList() {
     if (specificdata && specificdata.length) {
       const response = await axios({
         method: "GET",
-        url: "http://localhost:8080/board/cmt",
+        url: "https://server.cocodus.site/board/cmt",
         params: {
           postId: specificdata[0].id,
         },
       });
       if (response.status === 200) {
         setCmtList(response.data);
-      } else {
-        alert("받아오기 안된다 고쳐라");
       }
     }
   }, [reLoad, specificdata]);
