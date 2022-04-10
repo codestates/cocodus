@@ -15,9 +15,15 @@ module.exports = {
     res
       .status(200)
       .cookie("accessToken", accessToken, {
-        maxAge: 360000, //360초 뒤에 쿠키 사라짐
+        maxAge: 360000, //300초 뒤에 쿠키 사라짐
+        httpOnly: true,
+        domain: ".cocodus.site",
       })
-      .cookie("cocodusId", id);
+      .cookie("cocodusId", id, {
+        maxAge: 360000, //300초 뒤에 쿠키 사라짐
+        httpOnly: true,
+        domain: ".cocodus.site",
+      });
     if (isMember && isMember.dataValues && isMember.dataValues.name)
       res.redirect("https://cocodus.site");
     else res.redirect("https://cocodus.site/userinforegister");
@@ -33,9 +39,15 @@ module.exports = {
     res
       .status(200)
       .cookie("accessToken", accessToken, {
-        maxAge: 360000, //360초 뒤에 쿠키 사라짐
+        maxAge: 360000, //300초 뒤에 쿠키 사라짐
+        httpOnly: true,
+        domain: ".cocodus.site",
       })
-      .cookie("cocodusId", id);
+      .cookie("cocodusId", id, {
+        maxAge: 360000, //300초 뒤에 쿠키 사라짐
+        httpOnly: true,
+        domain: ".cocodus.site",
+      });
     if (isMember) res.redirect("https://cocodus.site");
     else res.redirect("https://cocodus.site/userinforegister");
   },
@@ -51,8 +63,14 @@ module.exports = {
       .status(200)
       .cookie("accessToken", accessToken, {
         maxAge: 360000, //300초 뒤에 쿠키 사라짐
+        httpOnly: true,
+        domain: ".cocodus.site",
       })
-      .cookie("cocodusId", id);
+      .cookie("cocodusId", id, {
+        maxAge: 360000, //300초 뒤에 쿠키 사라짐
+        httpOnly: true,
+        domain: ".cocodus.site",
+      });
     if (isMember) res.redirect("https://cocodus.site");
     else res.redirect("https://cocodus.site/userinforegister");
   },
