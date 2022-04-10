@@ -13,7 +13,6 @@ import {
 
 import { Container } from "./styles/Container.styled";
 import { Flex } from "./styles/Flex.styled";
-import Data from "../api/DummyData";
 import axios from "axios";
 import { accessTokenStore } from "../Store/accesstoken-zustand";
 import { registerUserInfoStore } from "../Store/RegisterUserInfo-zustand";
@@ -28,12 +27,16 @@ function PriceCard({ stack = [] }) {
   const { isLogin, accessToken, cocodusId } = accessTokenStore();
   const { nickName, chgInput } = registerUserInfoStore();
   const [isBottom, setIsBottom] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
+  function delay(n) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, n * 1000);
+    });
+  }
   useEffect(async () => {
-    setIsLoading(true);
+    // setIsLoading(true);
     let temp = await axios({
-      // url: process.env.URL||"localhost8080"+"/board/all"
-      url: "http://localhost:8080/board/all",
+      url: "https://server.cocodus.site/board/all",
       params: {
         isLogin: isLogin,
         accessToken,
@@ -46,9 +49,31 @@ function PriceCard({ stack = [] }) {
     if (temp.data.length) {
       chgJsonData(temp.data);
     }
-    setIsLoading(false);
-  }, [isLogin, nickName, howMany]);
-  const handleScroll = () => {
+    // setIsLoading(false);
+  }, []);
+
+  useEffect(async () => {
+    if (isBottom) {
+      let temp = await axios({
+        url: "https://server.cocodus.site/board/all",
+        params: {
+          isLogin: isLogin,
+          accessToken,
+          cocodusId,
+          nickName,
+          howMany,
+          km: 30,
+        },
+      });
+      await delay(1);
+      if (temp.data.length) {
+        chgJsonData(temp.data);
+        setIsBottom(false);
+      }
+      // setIsLoading(true);
+    }
+  }, [isBottom]);
+  const handleScroll = async () => {
     const windowHeight =
       "innerHeight" in window
         ? window.innerHeight
@@ -65,9 +90,10 @@ function PriceCard({ stack = [] }) {
     const windowBottom = windowHeight + window.pageYOffset;
 
     if (windowBottom >= docHeight - 5 && !isBottom) {
-      setIsBottom(true);
       setHowMany(3);
-      setIsBottom(false);
+      setIsBottom(true);
+      // setIsLoading(false);
+      // setIsBottom(false);
     }
   };
 
@@ -98,21 +124,14 @@ function PriceCard({ stack = [] }) {
         .map((x, i) => {
           return <CardSection data={x} key={x.id} stack={stack}></CardSection>;
         })}
-      {isLoading ? (
+      {isBottom ? (
         <div>
-          여기에 로딩창만들어야함
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
+          <div>Loading...</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
         </div>
       ) : null}
     </div>
@@ -146,12 +165,40 @@ function CardSection({ data, stack }) {
       );
     }
     return temp.map((x) => {
-      if (x === "Node.js")
+      if (x === "Node.js" || x === "node.js")
         return <Icon src={"Node" + ".png"} key={"Node" + ".png"} />;
       else if (x === "C++" || x === "c++")
         return <Icon src={"CPlus" + ".png"} key={"CPlus" + ".png"} />;
-      else if (x === "C#")
+      else if (x === "C#" || x === "c#")
         return <Icon src={"CSharp" + ".png"} key={"CSharp" + ".png"} />;
+      else if (x === "C" || x === "c")
+        return <Icon src={"C" + ".png"} key={"C" + ".png"} />;
+      else if (x === "Django" || x === "django")
+        return <Icon src={"Django" + ".png"} key={"Django" + ".png"} />;
+      else if (x === "Flutter" || x === "flutter")
+        return <Icon src={"Flutter" + ".png"} key={"Flutter" + ".png"} />;
+      else if (x === "Go" || x === "go")
+        return <Icon src={"Go" + ".png"} key={"Go" + ".png"} />;
+      else if (x === "Java" || x === "java")
+        return <Icon src={"Java" + ".png"} key={"Java" + ".png"} />;
+      else if (x === "Javascript" || x === "javascript")
+        return <Icon src={"JavaScript" + ".png"} key={"JavaScript" + ".png"} />;
+      else if (x === "Kotlin" || x === "kotlin")
+        return <Icon src={"Kotlin" + ".png"} key={"Kotlin" + ".png"} />;
+      else if (x === "Python" || x === "python")
+        return <Icon src={"Python" + ".png"} key={"Python" + ".png"} />;
+      else if (x === "React" || x === "react")
+        return <Icon src={"React" + ".png"} key={"React" + ".png"} />;
+      else if (x === "Ruby" || x === "ruby")
+        return <Icon src={"Ruby" + ".png"} key={"Ruby" + ".png"} />;
+      else if (x === "Spring" || x === "spring")
+        return <Icon src={"Spring" + ".png"} key={"Spring" + ".png"} />;
+      else if (x === "Swift" || x === "swift")
+        return <Icon src={"Swift" + ".png"} key={"Swift" + ".png"} />;
+      else if (x === "Typescript" || x === "typescript")
+        return <Icon src={"TypeScript" + ".png"} key={"TypeScript" + ".png"} />;
+      else if (x === "Vue" || x === "vue")
+        return <Icon src={"Vue" + ".png"} key={"Vue" + ".png"} />;
       else return <Icon src={x + ".png"} key={x + ".png"} />;
     });
   };

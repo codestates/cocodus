@@ -1,12 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { Section } from "../styles/Section.styled";
 import { AiOutlineRead, AiOutlineLike } from "react-icons/ai";
-import { Block, IconAndText, Icon, Title } from "./MyPostAndLikes.styled";
 import WriteIcon from "../WriteIcon/WriteIcon";
 import axios from "axios";
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
 import { likeGetLoadingStore } from "../../Store/loading-zustand";
-
+import styled from "styled-components";
+import {
+  IconAndText,
+  Icon,
+  Title,
+  Block,
+  Card,
+  ContentDiv,
+  Container,
+  Flex,
+  PlanTitle,
+  BackgroundSqure,
+  DivContainer,
+  DateAndLocationContainer,
+  FeatureListItem,
+} from "./MyLikes.styled";
 function Mylikes(props) {
   const [visible, setVisible] = useState(false);
   const [myLike, setMyLike] = useState([]);
@@ -27,7 +41,7 @@ function Mylikes(props) {
     chgLoading(true);
     const response = await axios({
       method: "GET",
-      url: "http://localhost:8080/board/all",
+      url: "https://server.cocodus.site/board/all",
       params: {
         // accessToken,
         cocodusId,
@@ -69,15 +83,32 @@ function Mylikes(props) {
       </Block>
       {myLike.length
         ? myLike.map((x, i) => {
+            let temp = x.jsonfile;
+            if (typeof temp === "string") temp = JSON.parse(x.jsonfile);
             return (
-              <div key={i}>
-                <div>{x.jsonfile.title}</div>
-                <div>{x.jsonfile.date}</div>
-                <div>{x.jsonfile.location}</div>
-                <div>{x.jsonfile.nickName}</div>
-                <div>{x.jsonfile.roadAddress}</div>
-                <div>{x.jsonfile.content}</div>
-              </div>
+              <Container>
+                <Flex>
+                  <Card>
+                    <BackgroundSqure />
+                    <div key={i}>
+                      <ContentDiv>
+                        <DivContainer>
+                          <div>{temp.nickName}</div>
+                          <PlanTitle>{temp.title}</PlanTitle>
+                          <FeatureListItem>{temp.content}</FeatureListItem>
+                        </DivContainer>
+                        <DivContainer>
+                          <DateAndLocationContainer>
+                            <div>{temp.date}</div>
+                            <div>{temp.location}</div>
+                            <div>{temp.roadAddress}</div>
+                          </DateAndLocationContainer>
+                        </DivContainer>
+                      </ContentDiv>
+                    </div>
+                  </Card>
+                </Flex>
+              </Container>
             );
           })
         : null}

@@ -6,8 +6,6 @@ import { registerStore } from "../../Store/Register-zustand";
 function CalendarComponent(props) {
   const { year, hour, minute, chgYear, chgHour, chgMin } = registerStore();
   const { specificdata } = postData();
-  const [whichDay, setWhichDay] = useState();
-  // console.log({ year, hour, minute, chgYear, chgHour, chgMin });
   useEffect(() => {
     if (specificdata.length) {
       let temp = specificdata[0].jsonfile.date.split(" ");
@@ -92,7 +90,7 @@ function CalendarComponent(props) {
   };
   const minuteChange = (value) => {
     chgMin(value.value);
-    console.log(value.value);
+    // console.log(value.value);
   };
   return (
     <FlexBox>

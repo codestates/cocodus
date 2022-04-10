@@ -109,5 +109,7 @@ export const registerStore = create((set) => ({
     set((state) => ({
       placeName: value.placeName,
       roadAddress: value.roadAddress,
+      latitudeY: value.latitudeY,
+      longitudeX: value.longitudeX,
     })),
 }));

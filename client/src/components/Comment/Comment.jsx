@@ -21,7 +21,7 @@ function Comment() {
     if (cmtText && specificdata[0].id && cocodusId && accessToken) {
       comment = await axios({
         method: "POST",
-        url: "http://localhost:8080/board/cmt",
+        url: "https://server.cocodus.site/board/cmt",
         params: {
           accessToken,
           user_id: cocodusId,

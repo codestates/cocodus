@@ -28,23 +28,10 @@ function LikesViewShareIcon(props) {
   const { specificdata } = postData();
   const [view, setView] = useState(0);
   useEffect(async () => {
-    // if (accessToken && cocodusId && isLogin) {
     if (specificdata && specificdata.length) {
-      let temp = await axios({
-        method: "GET",
-        url: "/board/like",
-        baseURL: "http://localhost:8080",
-        params: {
-          post_id: specificdata[0].id,
-          accessToken,
-          cocodusId,
-          nickName,
-          isLogin,
-        },
-      });
       let temp2 = await axios({
         method: "POST",
-        url: "http://localhost:8080/board/view",
+        url: "https://server.cocodus.site/board/view",
         params: {
           isLogin: isLogin,
           accessToken,
@@ -56,6 +43,23 @@ function LikesViewShareIcon(props) {
       if (temp2.status === 200) {
         setView(temp2.data.veiw_count + 1);
       }
+    }
+  }, []);
+  useEffect(async () => {
+    // if (accessToken && cocodusId && isLogin) {
+    if (specificdata && specificdata.length) {
+      let temp = await axios({
+        method: "GET",
+        url: "/board/like",
+        baseURL: "https://server.cocodus.site",
+        params: {
+          post_id: specificdata[0].id,
+          accessToken,
+          cocodusId,
+          nickName,
+          isLogin,
+        },
+      });
 
       setTotalPostLike(temp.data ? temp.data.total_like : 0);
       setLikeClick(temp.data ? !!temp.data.userLike : false);
@@ -68,7 +72,7 @@ function LikesViewShareIcon(props) {
     if (specificdata.length) {
       let temp = await axios({
         method: "POST",
-        url: "http://localhost:8080/board/like",
+        url: "https://server.cocodus.site/board/like",
         params: {
           post_id: specificdata[0].id,
           accessToken,
@@ -92,7 +96,7 @@ function LikesViewShareIcon(props) {
     const el = textInput.current;
     el.select();
     document.execCommand("copy");
-    console.log("링크 복사 완료");
+    // console.log("링크 복사 완료");
   };
 
   return (

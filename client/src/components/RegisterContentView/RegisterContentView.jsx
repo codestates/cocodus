@@ -38,7 +38,7 @@ function DetailContent(props) {
       <FlexBox>
         <Img src="UserIcon7.png" />
         <Div>{jsonData.nickName}</Div>
-        <Div huge>2022-03-23</Div>
+        {/* <Div huge>2022-03-23</Div> */}
       </FlexBox>
       <FlexBox>
         <Div>사용 언어</Div>

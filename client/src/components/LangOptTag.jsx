@@ -4,7 +4,7 @@ import React, { useMemo, useState } from "react";
 import Select from "react-select";
 import { registerStore } from "../Store/Register-zustand";
 
-function LangOptTag({ onChange }) {
+function LangOptTag() {
   const { tag, chgTag } = registerStore();
   const LangList = useMemo(
     () => [
@@ -57,7 +57,7 @@ function LangOptTag({ onChange }) {
   const { selectedOptions } = state;
   return (
     <>
-      {console.log(tag)}
+      {/* {console.log(tag)} */}
       {/* 처음 글쓰기 할때 */}
       {tag.length === 0 ? (
         <Select

@@ -1,7 +1,5 @@
-const { json } = require("stream/consumers");
 const { User, Post, Post_tag, Tag } = require("../../models");
 const { isAuthorized } = require("../token");
-
 module.exports = {
   post: async (req, res) => {
     const {
@@ -13,9 +11,9 @@ module.exports = {
       lat,
       long,
       jsonfile,
-    } = req.body;
+    } = req.query;
 
-    if (user_id.length) {
+    if (user_id) {
       const cocodusMember = await User.findOne({
         where: { id: user_id || "" },
       });
@@ -47,7 +45,7 @@ module.exports = {
         where: { stack: el },
         attributes: ["id", "stack"],
       });
-      console.log(temp);
+      // console.log(temp);
       tagArray.push(temp);
     }
     let getTagId = await Promise.all(tagArray);
@@ -67,7 +65,6 @@ module.exports = {
       );
       result.push(temp);
     }
-    // console.log(result);
 
     res.status(201).end();
   },
@@ -82,8 +79,8 @@ module.exports = {
       lat,
       long,
       jsonfile,
-    } = req.body;
-    if (user_id.length) {
+    } = req.query;
+    if (user_id) {
       const cocodusMember = await User.findOne({
         where: { id: user_id || "" },
       });
@@ -95,7 +92,7 @@ module.exports = {
     }
 
     if (isNaN(Number(postId))) {
-      console.log(`post 번호가 ${typeof postId} type 입니다`); //만약 postId가 숫자가 아닐 경우
+      // console.log(`post 번호가 ${typeof postId} type 입니다`); //만약 postId가 숫자가 아닐 경우
       return res.status(400).send("Not found post id");
     }
 
@@ -113,12 +110,12 @@ module.exports = {
     );
 
     if (!updatePost) {
-      console.log("모임 정보를 수정할 수 없습니다");
+      // console.log("모임 정보를 수정할 수 없습니다");
       return res.status(204).end();
     }
 
     const deleteTag = await Post_tag.destroy({ where: { post_id: postId } });
-    console.log(deleteTag);
+    // console.log(deleteTag);
     //여기서부터 149까지 태그생성 복붙
     const tagArray = [];
 
@@ -127,7 +124,7 @@ module.exports = {
         where: { stack: el },
         attributes: ["id", "stack"],
       });
-      console.log(temp);
+      // console.log(temp);
       tagArray.push(temp);
     }
     let getTagId = await Promise.all(tagArray);
@@ -151,10 +148,8 @@ module.exports = {
     return res.status(200).send("모임 정보를 수정했습니다");
   },
   delete: async (req, res) => {
-    const { accessToken, user_id, postId } = req.body;
-    console.log("********************************************");
-    console.log(req.body);
-    if (user_id.length) {
+    const { accessToken, user_id, postId } = req.query;
+    if (user_id) {
       const cocodusMember = await User.findOne({
         where: { id: user_id || "" },
       });
@@ -166,16 +161,16 @@ module.exports = {
     }
 
     if (isNaN(Number(postId))) {
-      console.log(`post 번호가 ${typeof postId} type 입니다`); //만약 postId가 숫자가 아닐 경우
+      // console.log(`post 번호가 ${typeof postId} type 입니다`); //만약 postId가 숫자가 아닐 경우
       return res.status(400).send("Not found post id");
     }
 
     const deletePost = await Post.destroy({
       where: { id: postId },
     });
-    console.log(deletePost);
+
     if (!deletePost) {
-      console.log("모임 정보를 삭제할 수 없습니다");
+      // console.log("모임 정보를 삭제할 수 없습니다");
       return res.status(204).end();
     }
 
