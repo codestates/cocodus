@@ -32,7 +32,6 @@ function PriceCard({ stack = [] }) {
   useEffect(async () => {
     setIsLoading(true);
     let temp = await axios({
-      // url: process.env.URL||"localhost8080"+"/board/all"
       url: "http://localhost:8080/board/all",
       params: {
         isLogin: isLogin,
@@ -146,13 +145,40 @@ function CardSection({ data, stack }) {
       );
     }
     return temp.map((x) => {
-      console.log(x === "Spring");
-      if (x === "Node.js")
+      if (x === "Node.js" || x === "node.js")
         return <Icon src={"Node" + ".png"} key={"Node" + ".png"} />;
       else if (x === "C++" || x === "c++")
         return <Icon src={"CPlus" + ".png"} key={"CPlus" + ".png"} />;
-      else if (x === "C#")
+      else if (x === "C#" || x === "c#")
         return <Icon src={"CSharp" + ".png"} key={"CSharp" + ".png"} />;
+      else if (x === "C" || x === "c")
+        return <Icon src={"C" + ".png"} key={"C" + ".png"} />;
+      else if (x === "Django" || x === "django")
+        return <Icon src={"Django" + ".png"} key={"Django" + ".png"} />;
+      else if (x === "Flutter" || x === "flutter")
+        return <Icon src={"Flutter" + ".png"} key={"Flutter" + ".png"} />;
+      else if (x === "Go" || x === "go")
+        return <Icon src={"Go" + ".png"} key={"Go" + ".png"} />;
+      else if (x === "Java" || x === "java")
+        return <Icon src={"Java" + ".png"} key={"Java" + ".png"} />;
+      else if (x === "Javascript" || x === "javascript")
+        return <Icon src={"JavaScript" + ".png"} key={"JavaScript" + ".png"} />;
+      else if (x === "Kotlin" || x === "kotlin")
+        return <Icon src={"Kotlin" + ".png"} key={"Kotlin" + ".png"} />;
+      else if (x === "Python" || x === "python")
+        return <Icon src={"Python" + ".png"} key={"Python" + ".png"} />;
+      else if (x === "React" || x === "react")
+        return <Icon src={"React" + ".png"} key={"React" + ".png"} />;
+      else if (x === "Ruby" || x === "ruby")
+        return <Icon src={"Ruby" + ".png"} key={"Ruby" + ".png"} />;
+      else if (x === "Spring" || x === "spring")
+        return <Icon src={"Spring" + ".png"} key={"Spring" + ".png"} />;
+      else if (x === "Swift" || x === "swift")
+        return <Icon src={"Swift" + ".png"} key={"Swift" + ".png"} />;
+      else if (x === "Typescript" || x === "typescript")
+        return <Icon src={"TypeScript" + ".png"} key={"TypeScript" + ".png"} />;
+      else if (x === "Vue" || x === "vue")
+        return <Icon src={"Vue" + ".png"} key={"Vue" + ".png"} />;
       else return <Icon src={x + ".png"} key={x + ".png"} />;
     });
   };

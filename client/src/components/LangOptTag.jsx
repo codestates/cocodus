@@ -1,11 +1,11 @@
 // 언어 선택 태그 기능
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import Select from "react-select";
 import { registerStore } from "../Store/Register-zustand";
 
 function LangOptTag({ onChange }) {
-  const { tag } = registerStore();
+  const { tag, chgTag } = registerStore();
   const LangList = useMemo(
     () => [
       { value: "c", label: "C" },
@@ -42,25 +42,32 @@ function LangOptTag({ onChange }) {
     }),
   };
 
+  const [state, setState] = useState({
+    selectedOptions: [],
+  });
+  const handleChange = (selectedOptions) => {
+    setState({ selectedOptions });
+    chgTag(
+      selectedOptions.map((opt) => {
+        return opt.value;
+      })
+    );
+  };
+  // 객체를 요소로 가지는 배열
+  const { selectedOptions } = state;
   return (
     <>
-      <Select
-        styles={customStyles}
-        options={LangList}
-        isMulti
-        isSearchable
-        onChange={onChange}
-        placeholder="프로젝트/스터디 진행 언어 선택"
-      />
+      {console.log(tag)}
       {/* 처음 글쓰기 할때 */}
-      {/* {tag.length === 0 ? (
+      {tag.length === 0 ? (
         <Select
           styles={customStyles}
           options={LangList}
           isMulti
           isSearchable
-          onChange={onChange}
+          onChange={handleChange}
           placeholder="프로젝트/스터디 진행 언어 선택"
+          value={selectedOptions}
         />
       ) : (
         // 등록한 글을 수정할 때
@@ -69,15 +76,15 @@ function LangOptTag({ onChange }) {
           options={LangList}
           isMulti
           isSearchable
-          onChange={onChange}
+          onChange={handleChange}
           placeholder="프로젝트/스터디 진행 언어 선택"
           value={tag.map((el) => {
             return LangList.find((op) => {
-              return op.label === el;
+              return op.value === el;
             });
           })}
         />
-      )} */}
+      )}
     </>
   );
 }

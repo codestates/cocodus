@@ -1,12 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { Section } from "../styles/Section.styled";
 import { AiOutlineRead, AiOutlineLike } from "react-icons/ai";
-import { Block, IconAndText, Icon, Title } from "./MyPostAndLikes.styled";
 import WriteIcon from "../WriteIcon/WriteIcon";
 import axios from "axios";
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
 import { likeGetLoadingStore } from "../../Store/loading-zustand";
-
+import styled from "styled-components";
+import {
+  IconAndText,
+  Icon,
+  Title,
+  Block,
+  Card,
+  ContentDiv,
+  Container,
+  Flex,
+  PlanTitle,
+  BackgroundSqure,
+  DivContainer,
+  DateAndLocationContainer,
+  FeatureListItem,
+} from "./MyLikes.styled";
 function Mylikes(props) {
   const [visible, setVisible] = useState(false);
   const [myLike, setMyLike] = useState([]);
@@ -70,14 +84,27 @@ function Mylikes(props) {
       {myLike.length
         ? myLike.map((x, i) => {
             return (
-              <div key={i}>
-                <div>{x.jsonfile.title}</div>
-                <div>{x.jsonfile.date}</div>
-                <div>{x.jsonfile.location}</div>
-                <div>{x.jsonfile.nickName}</div>
-                <div>{x.jsonfile.roadAddress}</div>
-                <div>{x.jsonfile.content}</div>
-              </div>
+              <Container>
+                <Flex>
+                  <Card>
+                    <BackgroundSqure />
+                    <ContentDiv key={i}>
+                      <DivContainer>
+                        <div>{x.jsonfile.nickName}</div>
+                        <PlanTitle>{x.jsonfile.title}</PlanTitle>
+                        <FeatureListItem>{x.jsonfile.content}</FeatureListItem>
+                      </DivContainer>
+                      <DivContainer>
+                        <DateAndLocationContainer>
+                          <div>{x.jsonfile.date}</div>
+                          <div>{x.jsonfile.location}</div>
+                          <div>{x.jsonfile.roadAddress}</div>
+                        </DateAndLocationContainer>
+                      </DivContainer>
+                    </ContentDiv>
+                  </Card>
+                </Flex>
+              </Container>
             );
           })
         : null}
