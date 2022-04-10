@@ -6,7 +6,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import styled from "styled-components";
 import { EditorState, convertToRaw } from "draft-js";
 import { registerStore } from "../Store/Register-zustand";
-import draftToHtml from "draftjs-to-html";
+// import draftToHtml from "draftjs-to-html";
 
 const MyBlock = styled.div`
   .wrapper-class {
