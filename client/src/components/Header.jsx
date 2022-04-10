@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { accessTokenStore } from "../Store/accesstoken-zustand";
 import LoginModal from "./LoginModal/LoginModal";
 import { useNavigate } from "react-router-dom";
+import { registerStore } from "../Store/Register-zustand";
 
 export default function Header() {
   let navigate = useNavigate();
@@ -13,6 +14,19 @@ export default function Header() {
   const [modalOpen, setModalOpen] = useState(false);
   const modalHandle = () => {
     setModalOpen(!modalOpen);
+  };
+
+  const { chgInput, chgOnline, chgTag, chgMarker, chgYear, chgHour, chgMin } =
+    registerStore();
+  const changeHandler = () => {
+    chgInput("title", "");
+    chgOnline("online", false);
+    chgTag([]);
+    chgMarker({ place_name: "", road_address_name: "", y: "", x: "" });
+    chgYear("0000년 00월 00일");
+    chgHour("00");
+    chgMin("00");
+    navigate("/register");
   };
 
   return (
@@ -27,11 +41,7 @@ export default function Header() {
               내 주변에서 코딩할 멤버를 쉽게 모아보세요.
             </p>
             {isLogin ? (
-              <Button
-                bg="#D27E25"
-                color="#fff"
-                onClick={() => navigate("/register")}
-              >
+              <Button bg="#D27E25" color="#fff" onClick={changeHandler}>
                 멤버 모집하기
               </Button>
             ) : (
