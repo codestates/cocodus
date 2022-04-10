@@ -65,6 +65,7 @@ function App() {
       // .then((x) =>
       //   x.status === 200 ? [chgInput(x.data), chgIsLogin(true)] : null
       // );
+      console.log(temp);
       if (temp.status === 200) {
         chgInput(temp.data);
         chgIsLogin(true);
