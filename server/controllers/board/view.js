@@ -19,43 +19,43 @@ module.exports = {
           veiw_count: view.veiw_count + 1,
         },
         {
-          where: { id: post_id },
+          where: { id: Number(post_id) },
         }
       );
       let temp2;
       let temp3 = await User_view.findOne({
-        where: { user_id: cocodusId, post_id },
+        where: { user_id: cocodusId, post_id: Number(post_id) },
         attributes: ["user_id"],
       });
       if (!temp3) {
         temp2 = await User_view.create(
           {
             user_id: cocodusId,
-            post_id: post_id,
+            post_id: Number(post_id),
           },
           {
             fields: ["user_id", "post_id"],
           }
         );
       }
-      return res.status(200).send(temp3);
+      return res.status(200).send(view);
     }
     if (isLogin === "false" && !accessToken && !nickName && post_id) {
       let view = await Post.findOne({
         where: { id: Number(post_id) },
-        attributes: ["total_veiw"],
+        attributes: ["veiw_count"],
       }).then((x) => (x ? x.dataValues : false));
 
       let temp = await Post.update(
         {
-          total_veiw: view.total_veiw + 1,
+          veiw_count: view.veiw_count + 1,
         },
         {
-          where: { id: post_id },
+          where: { id: Number(post_id) },
         }
       );
 
-      return res.status(200).send(temp);
+      return res.status(200).send(view);
     }
   },
 };

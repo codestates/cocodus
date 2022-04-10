@@ -63,7 +63,8 @@ function PriceCard({ stack = [] }) {
       html.offsetHeight
     );
     const windowBottom = windowHeight + window.pageYOffset;
-    if (windowBottom >= docHeight && !isBottom) {
+
+    if (windowBottom >= docHeight - 5 && !isBottom) {
       setIsBottom(true);
       setHowMany(3);
       setIsBottom(false);
@@ -147,7 +148,7 @@ function CardSection({ data, stack }) {
     return temp.map((x) => {
       if (x === "Node.js")
         return <Icon src={"Node" + ".png"} key={"Node" + ".png"} />;
-      else if (x === "C++")
+      else if (x === "C++" || x === "c++")
         return <Icon src={"CPlus" + ".png"} key={"CPlus" + ".png"} />;
       else if (x === "C#")
         return <Icon src={"CSharp" + ".png"} key={"CSharp" + ".png"} />;
