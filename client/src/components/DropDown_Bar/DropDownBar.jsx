@@ -10,8 +10,12 @@ const DropDownBar = () => {
   const { chgInput } = registerUserInfoStore();
   const { chgIsLogin, chgAccToken, chgCocoId } = accessTokenStore();
   const logoutHandle = () => {
-    window.document.cookie = "accessToken" + "=; Max-Age=-99999999;";
-    window.document.cookie = "cocodusId" + "=; Max-Age=-99999999;";
+    window.document.cookie =
+      "cocodusId" +
+      "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=.cocodus.site;";
+    window.document.cookie =
+      "accessToken" +
+      "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=.cocodus.site;";
     chgIsLogin(false);
     chgAccToken("");
     chgInput("");
