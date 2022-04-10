@@ -3,7 +3,7 @@ const { Post } = require("../../models");
 module.exports = {
   patch: async (req, res) => {
     const { accessToken, user_id, postId, recruiting } = req.query;
-    if (user_id.length) {
+    if (user_id) {
       const cocodusMember = await User.findOne({
         where: { id: user_id || "" },
       });

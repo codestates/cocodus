@@ -4,7 +4,7 @@ const { isAuthorized } = require("../token");
 module.exports = {
   post: async (req, res) => {
     const { accessToken, user_id, postId, comment } = req.query;
-    if (user_id.length) {
+    if (user_id) {
       const cocodusMember = await User.findOne({
         where: { id: user_id || "" },
       });
@@ -66,7 +66,7 @@ module.exports = {
   patch: async (req, res) => {
     const { accessToken, user_id, postId, comment_id, comment } = req.query;
 
-    if (user_id.length) {
+    if (user_id) {
       const cocodusMember = await User.findOne({
         where: { id: user_id || "" },
       });
@@ -118,7 +118,7 @@ module.exports = {
   delete: async (req, res) => {
     const { accessToken, user_id, postId, comment_id } = req.query;
 
-    if (user_id.length) {
+    if (user_id) {
       const cocodusMember = await User.findOne({
         where: { id: user_id || "" },
       });

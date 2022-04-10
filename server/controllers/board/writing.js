@@ -1,7 +1,5 @@
-const { json } = require("stream/consumers");
 const { User, Post, Post_tag, Tag } = require("../../models");
 const { isAuthorized } = require("../token");
-
 module.exports = {
   post: async (req, res) => {
     const {
@@ -15,7 +13,7 @@ module.exports = {
       jsonfile,
     } = req.query;
 
-    if (user_id.length) {
+    if (user_id) {
       const cocodusMember = await User.findOne({
         where: { id: user_id || "" },
       });
@@ -82,7 +80,7 @@ module.exports = {
       long,
       jsonfile,
     } = req.query;
-    if (user_id.length) {
+    if (user_id) {
       const cocodusMember = await User.findOne({
         where: { id: user_id || "" },
       });
@@ -151,7 +149,7 @@ module.exports = {
   },
   delete: async (req, res) => {
     const { accessToken, user_id, postId } = req.query;
-    if (user_id.length) {
+    if (user_id) {
       const cocodusMember = await User.findOne({
         where: { id: user_id || "" },
       });
