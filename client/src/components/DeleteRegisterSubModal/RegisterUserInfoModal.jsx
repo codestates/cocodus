@@ -45,7 +45,7 @@ function RegisterUserInfoModal({ closeModal }) {
       };
       const userDataSave = await axios({
         method: "POST",
-        url: "http://localhost:8080/user/info",
+        url: "https://server.cocodus.site/user/info",
         data: {
           id: cocodusId,
           name: nickName,

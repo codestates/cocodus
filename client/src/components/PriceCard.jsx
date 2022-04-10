@@ -32,7 +32,7 @@ function PriceCard({ stack = [] }) {
   useEffect(async () => {
     setIsLoading(true);
     let temp = await axios({
-      url: "http://localhost:8080/board/all",
+      url: "https://server.cocodus.site/board/all",
       params: {
         isLogin: isLogin,
         accessToken,

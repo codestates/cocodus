@@ -22,7 +22,7 @@ function RegisterDelModal({ closeModal }) {
       chgLoading4(true);
       const boardDel = await axios({
         method: "DELETE",
-        url: "http://localhost:8080/board/writing",
+        url: "https://server.cocodus.site/board/writing",
         data: {
           accessToken,
           user_id: cocodusId,

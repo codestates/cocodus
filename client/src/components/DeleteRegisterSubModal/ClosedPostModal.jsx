@@ -35,7 +35,7 @@ function closedPostModal({ closeModal }) {
       };
       const closedPost = await axios({
         method: "PATCH",
-        url: "http://localhost:8080/board/recruiting",
+        url: "https://server.cocodus.site/board/recruiting",
         data: {
           // jsonFile: JSON.stringify(data),
           accessToken,

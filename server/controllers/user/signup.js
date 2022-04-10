@@ -19,13 +19,13 @@ module.exports = {
       })
       .cookie("cocodusId", id);
     if (isMember && isMember.dataValues && isMember.dataValues.name)
-      res.redirect("http://localhost:3000");
-    else res.redirect("http://localhost:3000/userinforegister");
+      res.redirect("https://cocodus.site");
+    else res.redirect("https://cocodus.site/userinforegister");
   },
 
   google: async (req, res) => {
     const code = req.query.code;
-    if (!code) return res.status(401).redirect("http://localhost:3000/");
+    if (!code) return res.status(401).redirect("https://cocodus.site/");
     let accessToken = await generateAccessToken(code, "google");
     let validation = await isAuthorized(accessToken, "google");
     let id = validation;
@@ -36,13 +36,13 @@ module.exports = {
         maxAge: 360000, //360초 뒤에 쿠키 사라짐
       })
       .cookie("cocodusId", id);
-    if (isMember) res.redirect("http://localhost:3000");
-    else res.redirect("http://localhost:3000/userinforegister");
+    if (isMember) res.redirect("https://cocodus.site");
+    else res.redirect("https://cocodus.site/userinforegister");
   },
 
   github: async (req, res) => {
     const { code } = req.query;
-    if (!code) return res.status(401).redirect("http://localhost:3000/");
+    if (!code) return res.status(401).redirect("https://cocodus.site/");
     let accessToken = await generateAccessToken(code, "github");
     let validation = await isAuthorized(accessToken, "github");
     let id = validation;
@@ -53,7 +53,7 @@ module.exports = {
         maxAge: 360000, //300초 뒤에 쿠키 사라짐
       })
       .cookie("cocodusId", id);
-    if (isMember) res.redirect("http://localhost:3000");
-    else res.redirect("http://localhost:3000/userinforegister");
+    if (isMember) res.redirect("https://cocodus.site");
+    else res.redirect("https://cocodus.site/userinforegister");
   },
 };

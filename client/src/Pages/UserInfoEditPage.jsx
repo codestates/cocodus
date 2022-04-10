@@ -44,7 +44,7 @@ function UserInfoEditPage(props) {
     };
     const editPost = await axios({
       method: "POST",
-      url: "http://localhost:8080/board/writing",
+      url: "https://server.cocodus.site/board/writing",
       data: {
         id: cocodusId,
         name: nickName,

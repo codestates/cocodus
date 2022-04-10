@@ -66,7 +66,7 @@ function RegisterModal({ closeModal }) {
 
       const newPost = await axios({
         method: "POST",
-        url: "http://localhost:8080/board/writing",
+        url: "https://server.cocodus.site/board/writing",
         data: {
           jsonfile: JSON.stringify(postData),
           accessToken,

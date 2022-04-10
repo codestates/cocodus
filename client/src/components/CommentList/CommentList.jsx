@@ -42,7 +42,7 @@ function CommentArea({ cmtData }) {
     if (e.key === "Enter") {
       const comment = await axios({
         method: "PATCH",
-        url: "http://localhost:8080/board/cmt",
+        url: "https://server.cocodus.site/board/cmt",
         params: {
           accessToken,
           user_id: cocodusId,
@@ -103,7 +103,7 @@ function CommentList() {
     if (specificdata && specificdata.length) {
       const response = await axios({
         method: "GET",
-        url: "http://localhost:8080/board/cmt",
+        url: "https://server.cocodus.site/board/cmt",
         params: {
           postId: specificdata[0].id,
         },

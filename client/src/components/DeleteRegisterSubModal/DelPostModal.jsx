@@ -32,7 +32,7 @@ function DelPostModal({ closeModal }) {
       chgLoading4(true);
       const delPost = await axios({
         method: "DELETE",
-        url: "http://localhost:8080/board/list",
+        url: "https://server.cocodus.site/board/list",
         data: {
           accessToken,
           user_id: cocodusId,

@@ -20,7 +20,7 @@ function DeleteModal({ id, closeModal }) {
   const onRemove = async (id) => {
     const comment = await axios({
       method: "DELETE",
-      url: "http://localhost:8080/board/cmt",
+      url: "https://server.cocodus.site/board/cmt",
       params: {
         accessToken,
         user_id: cocodusId,

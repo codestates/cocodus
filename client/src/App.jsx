@@ -55,7 +55,7 @@ function App() {
   useEffect(async () => {
     if (accessToken && cocodusId) {
       let temp = await axios({
-        url: "http://localhost:8080/user/info",
+        url: "https://server.cocodus.site/user/info",
         method: "GET",
         params: {
           accessToken,

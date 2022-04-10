@@ -19,7 +19,7 @@ function DeleteUserModal({ closeModal }) {
   let navigate = useNavigate();
   const onRemove = async () => {
     let temp = await axios({
-      baseURL: "http://localhost:8080",
+      baseURL: "https://server.cocodus.site",
       url: "/user/info",
       method: "delete",
       params: {

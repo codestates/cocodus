@@ -32,7 +32,7 @@ function MyPost(props) {
     chgLoading(true);
     const response = await axios({
       method: "GET",
-      url: "http://localhost:8080/board/all",
+      url: "https://server.cocodus.site/board/all",
       params: {
         // accessToken,
         cocodusId,
