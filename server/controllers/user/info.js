@@ -15,7 +15,7 @@ module.exports = {
     } else res.status(404).send();
   },
   post: async (req, res) => {
-    let data = req.body;
+    let data = req.query; //body로 오는 거 query로 수정했습니다
     if (!data) {
       console.log("post::user/info error");
       return res.send({}); //바디에 정보가 없을때임
@@ -32,7 +32,8 @@ module.exports = {
     }
   },
   patch: async (req, res) => {
-    const { user_id, name, image, roadAddress, location, long, lat } = req.body;
+    const { user_id, name, image, roadAddress, location, long, lat } =
+      req.query; //body로 오는 거 query로 수정했습니다
     const changeInfo = await User.update(
       {
         name,
