@@ -210,7 +210,6 @@ function CardSection({ data, stack }) {
       Object.assign(temp, { jsonfile: JSON.parse(temp.jsonfile) });
     }
     chgSpecificData([temp]);
-    // console.log(specificdata);
     let date = "";
     if (specificdata) {
       chgInput("title", specificdata[0].jsonfile.title);
@@ -220,32 +219,7 @@ function CardSection({ data, stack }) {
       chgPlaceName(specificdata[0].jsonfile);
       date = specificdata[0].jsonfile.date;
     }
-    // let arr = date.split(" ");
-    // let year = arr.slice(0, 3);
-    // year = year.join(" ");
-    // chgYear(year);
-    // let hour = arr.slice(3, 5);
-    // if (hour[0] === "오후") {
-    //   let h = hour[1].split("");
-    //   h[0] = Number(h[0]) + 12;
-    //   chgHour(h[0]);
-    // } else {
-    //   let h = hour[1].split("");
-    //   h[0] = Number(h[0]);
-    //   chgHour(h[0]);
-    // }
-    // let min = arr.slice(5);
-    // if (min.length > 0) {
-    //   min = min.join("");
-    //   let m = min.split("");
-    //   if (m.length === 3) {
-    //     m = Number(`${m[0]}${m[1]}`);
-    //     chgMin(m);
-    //   } else {
-    //     m = Number(`${m[0]}`);
-    //     chgMin(m);
-    //   }
-    // }
+
     navigate("/RegisterContentViewPage");
   };
 
