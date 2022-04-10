@@ -46,7 +46,7 @@ function RegisterUserInfoModal({ closeModal }) {
       const userDataSave = await axios({
         method: "POST",
         url: "http://localhost:8080/user/info",
-        data: {
+        params: {
           id: cocodusId,
           name: nickName,
           accessToken,
@@ -56,6 +56,16 @@ function RegisterUserInfoModal({ closeModal }) {
           long: longitudeX,
           tag,
         },
+        // data: {
+        //   id: cocodusId,
+        //   name: nickName,
+        //   accessToken,
+        //   roadAddress,
+        //   location: placeName,
+        //   lat: latitudeY,
+        //   long: longitudeX,
+        //   tag,
+        // },
       });
       if (userDataSave.status === 201) {
         // console.log(userDataSave);

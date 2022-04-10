@@ -67,8 +67,7 @@ function RegisterModal({ closeModal }) {
       const newPost = await axios({
         method: "POST",
         url: "http://localhost:8080/board/writing",
-        data: {
-          jsonfile: JSON.stringify(postData),
+        params: {
           accessToken,
           user_id: cocodusId,
           lat: latitudeY,
@@ -76,6 +75,7 @@ function RegisterModal({ closeModal }) {
           recruiting,
           online: online,
           tag,
+          jsonfile: JSON.stringify(postData),
         },
       });
       console.log(newPost);
@@ -85,8 +85,8 @@ function RegisterModal({ closeModal }) {
       chgTag([]);
       chgMarker({ place_name: "", road_address_name: "", y: "", x: "" });
       closeModal(); // 모달창 닫는 함수
-      openModal2();
       navigate("/");
+      // openModal2();
     } catch (e) {
       chgError(e);
     }
