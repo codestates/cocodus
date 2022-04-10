@@ -14,8 +14,10 @@ import { accessTokenStore } from "../Store/accesstoken-zustand";
 import { registerStore } from "../Store/Register-zustand";
 import { boardPatchLoadingStore } from "../Store/loading-zustand";
 import { postData } from "../Store/postData-zustand";
+import { useNavigate } from "react-router-dom";
 
 function RegisterEditPage(props) {
+  let navigate = useNavigate();
   const { chgLoading, chgError } = boardPatchLoadingStore();
   const { openModal } = registerEditModalStore();
   const { accessToken, cocodusId } = accessTokenStore();
@@ -53,8 +55,7 @@ function RegisterEditPage(props) {
       const editPost = await axios({
         method: "PATCH",
         url: "https://server.cocodus.site/board/writing",
-        data: {
-          jsonfile: JSON.stringify(editData),
+        params: {
           accessToken,
           user_id: cocodusId,
           postId,
@@ -63,10 +64,12 @@ function RegisterEditPage(props) {
           recruiting,
           lat: latitudeY,
           long: longitudeX,
+          jsonfile: JSON.stringify(editData),
         },
       });
       console.log(editPost);
       openModal();
+      navigate("/");
     } catch (e) {
       chgError(e);
     }

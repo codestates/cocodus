@@ -14,7 +14,7 @@ import Modal from "../Modal/Modal";
 import { postData } from "../../Store/postData-zustand";
 
 function DelPostModal({ closeModal }) {
-  const { specificData } = postData();
+  const { specificdata } = postData();
   const { modalOpen2, setModalOpen } = useState(false);
   const openModal2 = () => {
     setModalOpen(true);
@@ -24,19 +24,20 @@ function DelPostModal({ closeModal }) {
   };
   const { chgLoading4, chgError4 } = boardDeleteLoadingStore();
   const { accessToken, cocodusId } = accessTokenStore();
-
+  const postId = specificdata[0].id;
   // 삭제 버튼
   const onDelete = async () => {
     try {
       chgError4(null);
       chgLoading4(true);
+      console.log("제발");
       const delPost = await axios({
         method: "DELETE",
-        url: "https://server.cocodus.site/board/list",
+        url: "https://server.cocodus.site/board/writing",
         data: {
           accessToken,
           user_id: cocodusId,
-          postId: specificData[0].id,
+          postId,
         },
       });
       console.log(delPost);

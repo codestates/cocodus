@@ -11,8 +11,12 @@ import {
 import { myPostClosedLoadingStore } from "../../Store/loading-zustand";
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
 import Modal from "../Modal/Modal";
+import { postData } from "../../Store/postData-zustand";
+import { registerStore } from "../../Store/Register-zustand";
 
 function closedPostModal({ closeModal }) {
+  const { specificdata } = postData();
+  const { recruiting, chgrecruiting } = registerStore();
   const { modalOpen2, setModalOpen } = useState(false);
   const openModal2 = () => {
     setModalOpen(true);
@@ -24,28 +28,23 @@ function closedPostModal({ closeModal }) {
   const { accessToken, cocodusId } = accessTokenStore();
 
   // 마감 버튼
-  const onRecruit = async () => {
+  export const onRecruit = async () => {
     try {
       chgError(null);
       chgLoading(true);
-      const data = {
-        user_id: cocodusId,
-        postId,
-        recruiting: false,
-      };
       const closedPost = await axios({
         method: "PATCH",
         url: "https://server.cocodus.site/board/recruiting",
         data: {
-          // jsonFile: JSON.stringify(data),
           accessToken,
           user_id: cocodusId,
-          // post_id: postId,
+          postId: specificdata[0].id,
           recruiting: false,
         },
       });
       if (closedPost.status === 200) {
         navigate("/");
+        chgrecruiting(false);
         console.log(closedPost);
       } else {
         alert("뭔가 잘못됬어요!!");

@@ -65,7 +65,7 @@ function CommentArea({ cmtData }) {
   return (
     <Block>
       <FlexBox>
-        <Img src="UserIcon.png" alt="userimg" />
+        <Img src="UserIcon7.png" alt="userimg" />
         <div>
           <UserName>{cmtData.name}</UserName>
           <CreatedAt>2022-03-25</CreatedAt>
