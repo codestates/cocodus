@@ -1,3 +1,4 @@
+const { isError } = require("util");
 const { User, Post } = require("../../models");
 const { isAuthorized } = require("../token");
 
@@ -65,20 +66,7 @@ module.exports = {
   deleteUserInfo: async (id) => {
     let isMember = await User.findOne({ where: { id } });
     if (isMember) {
-      let temp = await User.update(
-        {
-          name: null,
-          image: null,
-          accessToken: null,
-          roadAddress: null,
-          location: null,
-          long: null,
-          lat: null,
-        },
-        {
-          where: { id },
-        }
-      );
+      let temp = await User.destroy({ where: { id } });
       if (temp) return true;
       else false;
     } else false;

@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import styled from "styled-components";
+import { postData } from "../../Store/postData-zustand";
 import { registerStore } from "../../Store/Register-zustand";
-
 function CalendarComponent(props) {
   const { year, hour, minute, chgYear, chgHour, chgMin } = registerStore();
+  const { specificdata } = postData();
+  useEffect(() => {
+    if (specificdata.length) {
+      let temp = specificdata[0].jsonfile.date.split(" ");
+      chgYear(
+        temp[0] +
+          " " +
+          (temp[1].length > 2 ? temp[1] : "0" + temp[1]) +
+          " " +
+          temp[2]
+      );
+      chgHour(temp[3] === "오전" ? temp[4] : +temp[4].split("시")[0] + 12);
+      if (temp[5]) {
+        chgMin(
+          temp[5].split("분")[0].length === 1
+            ? "0" + temp[5].split("분")[0]
+            : temp[5].split("분")[0]
+        );
+      }
+    }
+  }, []);
   // 당일로부터 14일 이후까지만의 날짜를 Select의 값으로 전해주기위함
   let dateOptions = [];
   for (let i = 0; i < 14; i++) {
@@ -63,13 +84,13 @@ function CalendarComponent(props) {
 
   const yearChange = (value) => {
     chgYear(value.value);
-    console.log(year);
   };
   const hourChange = (value) => {
     chgHour(value.value);
   };
   const minuteChange = (value) => {
     chgMin(value.value);
+    console.log(value.value);
   };
   return (
     <FlexBox>

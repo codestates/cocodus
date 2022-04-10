@@ -9,16 +9,20 @@ import axios from "axios";
 import { boardGetLoadingStore } from "../../Store/loading-zustand";
 import { postData } from "../../Store/postData-zustand";
 import { commentStore } from "../../Store/Comment-zustand";
-
+import { accessTokenStore } from "../../Store/accesstoken-zustand";
+import { registerUserInfoStore } from "../../Store/RegisterUserInfo-zustand";
 function DetailContent(props) {
   const { chgLoading, chgError } = boardGetLoadingStore();
+  const { isLogin, accessToken, cocodusId } = accessTokenStore();
+  const { nickName } = registerUserInfoStore();
   const { specificdata } = postData();
   const [jsonData, setJsonData] = useState({});
-  useEffect(() => {
+
+  useEffect(async () => {
     if (specificdata && specificdata[0]) {
       setJsonData(specificdata[0].jsonfile);
     }
-  }, []);
+  }, [specificdata]);
 
   return (
     <Section>
@@ -34,7 +38,7 @@ function DetailContent(props) {
       <FlexBox>
         <Img src="UserIcon7.png" />
         <Div>{jsonData.nickName}</Div>
-        <Div huge>2022-03-23</Div>
+        {/* <Div huge>2022-03-23</Div> */}
       </FlexBox>
       <FlexBox>
         <Div>사용 언어</Div>

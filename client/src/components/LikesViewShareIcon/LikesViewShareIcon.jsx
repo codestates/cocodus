@@ -26,6 +26,25 @@ function LikesViewShareIcon(props) {
   const [totalPostLike, setTotalPostLike] = useState(0);
   const [render, setRender] = useState(false);
   const { specificdata } = postData();
+  const [view, setView] = useState(0);
+  useEffect(async () => {
+    if (specificdata && specificdata.length) {
+      let temp2 = await axios({
+        method: "POST",
+        url: "http://localhost:8080/board/view",
+        params: {
+          isLogin: isLogin,
+          accessToken,
+          cocodusId,
+          nickName,
+          post_id: specificdata[0].id,
+        },
+      });
+      if (temp2.status === 200) {
+        setView(temp2.data.veiw_count + 1);
+      }
+    }
+  }, []);
   useEffect(async () => {
     // if (accessToken && cocodusId && isLogin) {
     if (specificdata && specificdata.length) {
@@ -41,8 +60,6 @@ function LikesViewShareIcon(props) {
           isLogin,
         },
       });
-      // console.log(temp.total_like);
-      // console.log(temp.userLike);
 
       setTotalPostLike(temp.data ? temp.data.total_like : 0);
       setLikeClick(temp.data ? !!temp.data.userLike : false);
@@ -90,7 +107,7 @@ function LikesViewShareIcon(props) {
       </IconAndText>
       <IconAndText>
         <CgEye size={30} />
-        <Text>1</Text>
+        <Text>{view}</Text>
       </IconAndText>
       <IconAndText>
         <AiOutlinePaperClip size={30} onClick={copy} />

@@ -5,7 +5,21 @@ import { accessTokenStore } from "../../Store/accesstoken-zustand";
 import { myPostGetLoadingStore } from "../../Store/loading-zustand";
 import { Section } from "../styles/Section.styled";
 import WriteIcon from "../WriteIcon/WriteIcon";
-import { Block, IconAndText, Icon, Title } from "./MyPostAndLikes.styled";
+import {
+  Block,
+  IconAndText,
+  Icon,
+  Title,
+  Card,
+  ContentDiv,
+  Container,
+  Flex,
+  PlanTitle,
+  BackgroundSqure,
+  DivContainer,
+  DateAndLocationContainer,
+  FeatureListItem,
+} from "./MyPost.styled";
 
 function MyPost(props) {
   const { chgLoading, chgError } = myPostGetLoadingStore();
@@ -55,14 +69,31 @@ title: "리액트 모각코 하실 분" */}
       {myPost.length
         ? myPost.map((x, i) => {
             return (
-              <div key={i}>
-                <div>{x.jsonfile.title}</div>
-                <div>{x.jsonfile.date}</div>
-                <div>{x.jsonfile.location}</div>
-                <div>{x.jsonfile.nickName}</div>
-                <div>{x.jsonfile.roadAddress}</div>
-                <div>{x.jsonfile.content}</div>
-              </div>
+              <Container>
+                <Flex>
+                  <Card>
+                    <BackgroundSqure />{" "}
+                    <div key={i}>
+                      <ContentDiv>
+                        <DivContainer>
+                          <div>{x.jsonfile.nickName}</div>
+                          <PlanTitle>{x.jsonfile.title}</PlanTitle>
+                          <FeatureListItem>
+                            {x.jsonfile.content}
+                          </FeatureListItem>
+                        </DivContainer>
+                        <DivContainer>
+                          <DateAndLocationContainer>
+                            <div>{x.jsonfile.date}</div>
+                            <div>{x.jsonfile.location}</div>
+                            <div>{x.jsonfile.roadAddress}</div>
+                          </DateAndLocationContainer>
+                        </DivContainer>
+                      </ContentDiv>{" "}
+                    </div>
+                  </Card>
+                </Flex>
+              </Container>
             );
           })
         : null}
