@@ -109,7 +109,6 @@ function CommentList() {
         },
       });
       if (response.status === 200) {
-        console.log(cmtList);
         setCmtList(response.data);
       } else {
         alert("받아오기 안된다 고쳐라");
@@ -120,7 +119,6 @@ function CommentList() {
   if (cmtList.length === 0) return null;
   return (
     <div>
-      {console.log(cmtList)}
       {cmtList.map((x, i) => (
         <CommentArea cmtData={x} key={"cmtData" + i} reLoad={reLoad} />
       ))}
