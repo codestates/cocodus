@@ -66,22 +66,7 @@ module.exports = {
   deleteUserInfo: async (id) => {
     let isMember = await User.findOne({ where: { id } });
     if (isMember) {
-      // let temp = await User.update(
-      //   {
-      //     name: null,
-      //     image: null,
-      //     accessToken: null,
-      //     roadAddress: null,
-      //     location: null,
-      //     long: null,
-      //     lat: null,
-      //   },
-      //   {
-      //     where: { id },
-      //   }
-      // ); 여기까지 원본 코드
       let temp = await User.destroy({ where: { id } });
-      console.log(temp); //끝나면 지울것
       if (temp) return true;
       else false;
     } else false;
