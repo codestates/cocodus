@@ -13,7 +13,7 @@ module.exports = {
       lat,
       long,
       jsonfile,
-    } = req.body;
+    } = req.query;
 
     if (user_id.length) {
       const cocodusMember = await User.findOne({
@@ -82,7 +82,7 @@ module.exports = {
       lat,
       long,
       jsonfile,
-    } = req.body;
+    } = req.query;
     if (user_id.length) {
       const cocodusMember = await User.findOne({
         where: { id: user_id || "" },
@@ -151,9 +151,7 @@ module.exports = {
     return res.status(200).send("모임 정보를 수정했습니다");
   },
   delete: async (req, res) => {
-    const { accessToken, user_id, postId } = req.body;
-    console.log("********************************************");
-    console.log(req.body);
+    const { accessToken, user_id, postId } = req.query;
     if (user_id.length) {
       const cocodusMember = await User.findOne({
         where: { id: user_id || "" },
@@ -173,7 +171,7 @@ module.exports = {
     const deletePost = await Post.destroy({
       where: { id: postId },
     });
-    console.log(deletePost);
+
     if (!deletePost) {
       console.log("모임 정보를 삭제할 수 없습니다");
       return res.status(204).end();
