@@ -146,6 +146,7 @@ function CardSection({ data, stack }) {
       );
     }
     return temp.map((x) => {
+      console.log(x === "Spring");
       if (x === "Node.js")
         return <Icon src={"Node" + ".png"} key={"Node" + ".png"} />;
       else if (x === "C++" || x === "c++")
