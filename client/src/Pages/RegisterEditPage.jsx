@@ -34,7 +34,6 @@ function RegisterEditPage(props) {
   const { specificdata } = postData();
   const { title, date, online } = inputs;
   const postId = specificdata[0].id;
-  console.log(postId);
   // 글 수정 axios call
   const onEditHandler = async () => {
     try {
@@ -67,7 +66,6 @@ function RegisterEditPage(props) {
           jsonfile: JSON.stringify(editData),
         },
       });
-      console.log(editPost);
       openModal();
       navigate("/");
     } catch (e) {

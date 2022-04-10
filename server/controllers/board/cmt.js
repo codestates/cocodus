@@ -16,7 +16,7 @@ module.exports = {
     }
 
     if (isNaN(Number(postId))) {
-      console.log(`post 번호가 ${typeof postId} type 입니다`); //만약 postId가 숫자가 아닐 경우
+      // console.log(`post 번호가 ${typeof postId} type 입니다`); //만약 postId가 숫자가 아닐 경우
       return res.status(400).send("Not found post id");
     }
 
@@ -33,10 +33,10 @@ module.exports = {
       WHERE Post_id = ${postId};`
       );
       commentArray = comment ? [...comment[0]] : [];
-      console.log(commentArray);
+      // console.log(commentArray);
     }
     if (commentArray.length === 0) {
-      console.log("댓글을 작성하지 못했습니다");
+      // console.log("댓글을 작성하지 못했습니다");
       return res.status(204).send(commentArray);
     }
 
@@ -46,7 +46,7 @@ module.exports = {
     let postId = Number(req.query.postId);
 
     if (isNaN(postId)) {
-      console.log(`get요청에 포함된 postId가 ${typeof postId} type 입니다`); //만약 postId가 숫자가 아닐 경우
+      // console.log(`get요청에 포함된 postId가 ${typeof postId} type 입니다`); //만약 postId가 숫자가 아닐 경우
       return res.status(400).send("Not found post id");
     }
 
@@ -57,9 +57,9 @@ module.exports = {
     );
 
     const commentArray = [...comment[0]];
-    if (commentArray.length === 0) {
-      console.log("댓글이 없습니다");
-    }
+    // if (commentArray.length === 0) {
+    //   console.log("댓글이 없습니다");
+    // }
 
     return res.status(200).json(commentArray);
   },
@@ -78,14 +78,14 @@ module.exports = {
     }
 
     if (isNaN(Number(postId))) {
-      console.log(`post 번호가 ${typeof postId} type 입니다`); //만약 postId가 숫자가 아닐 경우
+      // console.log(`post 번호가 ${typeof postId} type 입니다`); //만약 postId가 숫자가 아닐 경우
       return res.status(400).send("Not found post id");
     }
 
     if (isNaN(Number(comment_id))) {
-      console.log(
-        `get요청에 포함된 comment_Id가 ${typeof comment_id} type 입니다`
-      ); //만약 comment_Id가 숫자가 아닐 경우
+      // console.log(
+      //   `get요청에 포함된 comment_Id가 ${typeof comment_id} type 입니다`
+      // ); //만약 comment_Id가 숫자가 아닐 경우
       return res.status(400).send("Not found comment id");
     }
 
@@ -106,10 +106,10 @@ module.exports = {
       WHERE Post_id = ${postId};`
       );
       commentArray = comment ? [...comment[0]] : [];
-      console.log(commentArray);
+      // console.log(commentArray);
     }
     if (commentArray.length === 0) {
-      console.log("댓글을 수정할 수 없습니다");
+      // console.log("댓글을 수정할 수 없습니다");
       return res.status(204).send(commentArray);
     }
 
@@ -130,14 +130,14 @@ module.exports = {
     }
 
     if (isNaN(Number(postId))) {
-      console.log(`post 번호가 ${typeof postId} type 입니다`); //만약 postId가 숫자가 아닐 경우
+      // console.log(`post 번호가 ${typeof postId} type 입니다`); //만약 postId가 숫자가 아닐 경우
       return res.status(400).send("Not found post id");
     }
 
     if (isNaN(Number(comment_id))) {
-      console.log(
-        `get요청에 포함된 comment_Id가 ${typeof comment_id} type 입니다`
-      ); //만약 comment_Id가 숫자가 아닐 경우
+      // console.log(
+      //   `get요청에 포함된 comment_Id가 ${typeof comment_id} type 입니다`
+      // ); //만약 comment_Id가 숫자가 아닐 경우
       return res.status(400).send("Not found comment id");
     }
 
@@ -146,7 +146,7 @@ module.exports = {
     });
 
     if (!deleteComment) {
-      console.log("댓글을 삭제할 수 없습니다");
+      // console.log("댓글을 삭제할 수 없습니다");
       return res.status(204).end();
     }
 

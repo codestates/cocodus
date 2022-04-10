@@ -96,7 +96,7 @@ function LikesViewShareIcon(props) {
     const el = textInput.current;
     el.select();
     document.execCommand("copy");
-    console.log("링크 복사 완료");
+    // console.log("링크 복사 완료");
   };
 
   return (

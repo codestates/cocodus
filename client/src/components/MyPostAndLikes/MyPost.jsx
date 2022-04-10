@@ -54,18 +54,6 @@ function MyPost(props) {
         </IconAndText>
       </Block>
       <WriteIcon />
-      {/* {console.log(myPost[0].jsonfile)} */}
-      {/* cocodusId: "github+happy5happy5"
-content: "모각코 구함요(<br>Lorem Ipsum is simply dummy text of the prin ting and typesetting industryLorem Ipsum is simply dummy text of the prin ting and typesetting industry."
-date: "2022년 3월 18일 오후 6시"
-lat: "37.5824487"
-location: "카페선선혜화"
-long: "126.9996739"
-nickName: "윤종복"
-online: true
-roadAddress: "서울 종로구 대학로11길 40"
-tag: (8) ['React', 'JavaScript', 'TypeScript', 'Flutter', 'Ruby', 'Swift', 'C#', 'C++']
-title: "리액트 모각코 하실 분" */}
       {myPost.length
         ? myPost.map((x, i) => {
             return (

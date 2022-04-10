@@ -15,7 +15,7 @@ module.exports = {
     }
 
     if (isNaN(Number(postId))) {
-      console.log(`post 번호가 ${typeof postId} type 입니다`); //만약 postId가 숫자가 아닐 경우
+      // console.log(`post 번호가 ${typeof postId} type 입니다`); //만약 postId가 숫자가 아닐 경우
       return res.status(400).send("Not found post id");
     }
 

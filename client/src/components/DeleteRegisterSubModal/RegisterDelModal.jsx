@@ -29,7 +29,7 @@ function RegisterDelModal({ closeModal }) {
           postId,
         },
       });
-      console.log(boardDel);
+      // console.log(boardDel);
       closeModal();
     } catch (e) {
       chgError4(e);

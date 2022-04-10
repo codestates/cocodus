@@ -78,7 +78,7 @@ function RegisterModal({ closeModal }) {
           jsonfile: JSON.stringify(postData),
         },
       });
-      console.log(newPost);
+      // console.log(newPost);
       // 등록 정보 초기화
       chgInput("title", "");
       chgOnline("online", false);

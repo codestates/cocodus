@@ -29,6 +29,11 @@ function PriceCard({ stack = [] }) {
   const { nickName, chgInput } = registerUserInfoStore();
   const [isBottom, setIsBottom] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  function delay(n) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, n * 1000);
+    });
+  }
   useEffect(async () => {
     setIsLoading(true);
     let temp = await axios({
@@ -46,7 +51,27 @@ function PriceCard({ stack = [] }) {
       chgJsonData(temp.data);
     }
     setIsLoading(false);
-  }, [isLogin, nickName, howMany]);
+  }, [isLogin, nickName]);
+
+  useEffect(async () => {
+    setIsLoading(true);
+    let temp = await axios({
+      url: "https://server.cocodus.site/board/all",
+      params: {
+        isLogin: isLogin,
+        accessToken,
+        cocodusId,
+        nickName,
+        howMany,
+        km: 30,
+      },
+    });
+    await delay(2);
+    if (temp.data.length) {
+      chgJsonData(temp.data);
+    }
+    setIsLoading(false);
+  }, [howMany]);
   const handleScroll = () => {
     const windowHeight =
       "innerHeight" in window
@@ -99,19 +124,12 @@ function PriceCard({ stack = [] }) {
         })}
       {isLoading ? (
         <div>
-          여기에 로딩창만들어야함
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
+          <div>Loading...</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
         </div>
       ) : null}
     </div>

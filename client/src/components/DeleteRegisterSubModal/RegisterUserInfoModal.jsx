@@ -72,9 +72,7 @@ function RegisterUserInfoModal({ closeModal }) {
         closeModal();
         navigate("/");
       } else {
-        alert("RegisterUserInfoModal.jsx 이 파일에서 뭔가 잘못됐어요!!");
         closeModal();
-        console.log(userDataSave.status);
       }
     } catch (e) {
       chgError(e);

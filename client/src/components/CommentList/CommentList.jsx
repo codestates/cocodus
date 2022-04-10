@@ -56,8 +56,6 @@ function CommentArea({ cmtData }) {
         setCmtShow(false);
         setCmtText("");
         setReload();
-      } else {
-        alert("뭔가 크게 잘못됐어요! 상태코드=", comment.status);
       }
     }
   };
@@ -110,8 +108,6 @@ function CommentList() {
       });
       if (response.status === 200) {
         setCmtList(response.data);
-      } else {
-        alert("받아오기 안된다 고쳐라");
       }
     }
   }, [reLoad, specificdata]);

@@ -28,7 +28,7 @@ function closedPostModal({ closeModal }) {
   const { accessToken, cocodusId } = accessTokenStore();
 
   // 마감 버튼
-  export const onRecruit = async () => {
+  const onRecruit = async () => {
     try {
       chgError(null);
       chgLoading(true);
@@ -45,10 +45,7 @@ function closedPostModal({ closeModal }) {
       if (closedPost.status === 200) {
         navigate("/");
         chgrecruiting(false);
-        console.log(closedPost);
-      } else {
-        alert("뭔가 잘못됬어요!!");
-        console.log(userData.status);
+        // console.log(closedPost);
       }
       closeModal();
       openModal2();

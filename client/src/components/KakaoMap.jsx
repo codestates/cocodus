@@ -32,7 +32,7 @@ export default function KakaoMap({ store }) {
         // kakaoApi.placeSCB(map, infowindow, setMarkerNow)
         kakaoApi.placeSCB(map, infowindow, chgMarker)
       );
-    } else alert("야 빈칸넣지마라 오류난다");
+    }
   }
   return (
     <Div>

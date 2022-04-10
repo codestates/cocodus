@@ -56,7 +56,6 @@ function UserInfoEditPage(props) {
         tag,
       },
     });
-    console.log(editPost);
   };
 
   return (
