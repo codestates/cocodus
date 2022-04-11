@@ -38,7 +38,8 @@ export default function Header() {
             <p>
               Cocodus에서 코딩 같이 할 사람을 구해보세요! <br></br>
               멋진 아이디어, 취업 준비를 위한 공부, 알고리즘 스터디 등 <br></br>
-              내 주변에서 코딩할 멤버를 쉽게 모아보세요.
+              내 주변에서 코딩할 멤버를 쉽게 모아보세요. <br></br>
+              가입 시 위치를 입력하시면 30km 내에 있는 모임을 보여줍니다.
             </p>
             {isLogin ? (
               <Button bg="#D27E25" color="#fff" onClick={changeHandler}>

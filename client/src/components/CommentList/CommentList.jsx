@@ -73,7 +73,7 @@ function CommentArea({ cmtData }) {
             수정
           </Btn>
           <Btn onClick={openModal}>삭제</Btn>
-          <Modal open={modalOpen} header="알림">
+          <Modal open={modalOpen} header="알림" close={closeModal}>
             <DeleteModal id={cmtData.id} closeModal={closeModal} />
           </Modal>
         </BtnBlock>

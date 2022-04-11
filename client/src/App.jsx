@@ -125,11 +125,7 @@ function App() {
               path="/userinforegister"
               element={isLogin ? <UserInfoRegisterPage /> : <Home />}
             />
-            <Route
-              exact
-              path="/error"
-              element={isLogin ? <Error /> : <Home />}
-            />
+            <Route exact path="*" element={<Error />} />
           </Routes>
         </Router>
       </div>

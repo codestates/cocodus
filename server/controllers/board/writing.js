@@ -11,7 +11,7 @@ module.exports = {
       lat,
       long,
       jsonfile,
-    } = req.query;
+    } = req.body;
 
     if (user_id) {
       const cocodusMember = await User.findOne({
