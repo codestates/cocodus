@@ -39,7 +39,6 @@ module.exports = {
         });
       }
       let temp2 = await Promise.all(result);
-      // console.log(temp2.filter(x=>x).map((x) => x.dataValues));
       return res
         .status(200)
         .send(temp2.filter((x) => x).map((x) => x.dataValues));
@@ -52,7 +51,6 @@ module.exports = {
       });
       let result = [];
       if (temp.length) {
-        console.log(temp.length);
         temp.map((x) => {
           result.push(
             Post.findOne({
@@ -71,7 +69,6 @@ module.exports = {
         });
       }
       let temp2 = await Promise.all(result);
-      // console.log(temp2.filter(x=>x).map((x) => x.dataValues));
       return res
         .status(200)
         .send(temp2.filter((x) => x).map((x) => x.dataValues));
@@ -102,7 +99,6 @@ module.exports = {
         });
       }
       let temp2 = await Promise.all(result);
-      // console.log(temp2.filter(x=>x).map((x) => x.dataValues));
       return res
         .status(200)
         .send(temp2.filter((x) => x).map((x) => x.dataValues));
@@ -171,7 +167,6 @@ module.exports = {
 
       return res.status(200).send(temp);
     }
-    console.log("이 말이 나온다면 클라에서 useEffect관리해야한다.");
     res.status(204).send(null);
   },
 };

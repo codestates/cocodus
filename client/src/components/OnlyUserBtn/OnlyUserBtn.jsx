@@ -14,7 +14,6 @@ import Modal from "../Modal/Modal";
 import ClosedPostModal from "../DeleteRegisterSubModal/ClosedPostModal";
 import DelPostModal from "../DeleteRegisterSubModal/DelPostModal";
 import { registerStore } from "../../Store/Register-zustand";
-import { onRecruit } from "../DeleteRegisterSubModal/ClosedPostModal";
 
 function OnlyUserBtn(props) {
   const { closedModalOpen, openModal1, closeModal1 } = closedPostModalStore();
@@ -23,11 +22,10 @@ function OnlyUserBtn(props) {
   let navigate = useNavigate();
   return (
     <UserBlock>
-      {console.log(recruiting)}
       {recruiting ? ( //서버 완성되면 확인 필요함
         <Button onClick={openModal1}>마감하기</Button>
       ) : (
-        <Button onClick={onRecruit}>모집하기</Button>
+        <Button>모집하기</Button>
       )}
 
       <Modal open={closedModalOpen} close={closeModal1} header="알림">

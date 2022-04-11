@@ -20,7 +20,7 @@ function DeleteModal({ id, closeModal }) {
   const onRemove = async (id) => {
     const comment = await axios({
       method: "DELETE",
-      url: "http://localhost:8080/board/cmt",
+      url: "https://server.cocodus.site/board/cmt",
       params: {
         accessToken,
         user_id: cocodusId,
@@ -31,11 +31,6 @@ function DeleteModal({ id, closeModal }) {
     if (comment.status === 200) {
       closeModal();
       setReload();
-    } else {
-      console.log(comment);
-      alert(
-        "야 지우는거 진짜 클나따 여기 고쳐라 나중에 배포할때는 이거 빼는거 알지?"
-      );
     }
   };
   return (

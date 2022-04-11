@@ -30,17 +30,15 @@ function DelPostModal({ closeModal }) {
     try {
       chgError4(null);
       chgLoading4(true);
-      console.log("제발");
       const delPost = await axios({
         method: "DELETE",
-        url: "http://localhost:8080/board/writing",
-        params: {
+        url: "https://server.cocodus.site/board/writing",
+        data: {
           accessToken,
           user_id: cocodusId,
           postId,
         },
       });
-      console.log(delPost);
       closeModal();
       openModal2();
     } catch (e) {

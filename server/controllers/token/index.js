@@ -24,7 +24,7 @@ module.exports = {
         params: {
           grant_type: "authorization_code",
           client_id: process.env.KAKAO_CLIENT_ID,
-          redirect_uri: "http://localhost:8080/user/signup/kakao",
+          redirect_uri: "https://server.cocodus.site/user/signup/kakao",
           code: code,
           client_secret: process.env.KAKAO_CLIENT_SECRET,
         },
@@ -39,7 +39,7 @@ module.exports = {
           code,
           client_id: process.env.GOOGLE_CLIENT_ID,
           client_secret: process.env.GOOGLE_CLIENT_SECRET,
-          redirect_uri: "http://localhost:8080/user/signup/google",
+          redirect_uri: "https://server.cocodus.site/user/signup/google",
           grant_type: "authorization_code",
         },
       },

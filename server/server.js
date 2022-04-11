@@ -3,7 +3,7 @@ const PORT = process.env.SERVERPORT || 80;
 const Server = require("http").createServer(app);
 // const io = require("socket.io")(Server, {
 //   cors: {
-//     origin: [`http://localhost:3000`],
+//     origin: [`https://cocodus.site`],
 //     credentials: true,
 //   },
 // });

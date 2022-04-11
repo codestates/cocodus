@@ -66,8 +66,8 @@ function RegisterModal({ closeModal }) {
 
       const newPost = await axios({
         method: "POST",
-        url: "http://localhost:8080/board/writing",
-        params: {
+        url: "https://server.cocodus.site/board/writing",
+        data: {
           accessToken,
           user_id: cocodusId,
           lat: latitudeY,
@@ -78,7 +78,7 @@ function RegisterModal({ closeModal }) {
           jsonfile: JSON.stringify(postData),
         },
       });
-      console.log(newPost);
+      console.log("등록 상태코드", newPost.status);
       // 등록 정보 초기화
       chgInput("title", "");
       chgOnline("online", false);

@@ -25,15 +25,13 @@ function Register() {
   const { title, online } = inputs;
   const onChange = (e) => {
     const { name, value } = e.target;
-    // console.log(value);
     chgInput(name, value);
   };
 
   // 온라인 가능 여부
   const onCheckChange = (e) => {
-    console.log(e.target.checked);
+    // console.log(e.target.checked);
     const { name, checked } = e.target;
-    // console.log(online);
     chgOnline(name, checked);
   };
 

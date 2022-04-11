@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["https://cocodus.site"],
     credentials: true,
     methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
   })

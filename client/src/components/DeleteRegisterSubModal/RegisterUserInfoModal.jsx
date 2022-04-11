@@ -45,7 +45,7 @@ function RegisterUserInfoModal({ closeModal }) {
       };
       const userDataSave = await axios({
         method: "POST",
-        url: "http://localhost:8080/user/info",
+        url: "https://server.cocodus.site/user/info",
         params: {
           id: cocodusId,
           name: nickName,
@@ -72,9 +72,7 @@ function RegisterUserInfoModal({ closeModal }) {
         closeModal();
         navigate("/");
       } else {
-        alert("RegisterUserInfoModal.jsx 이 파일에서 뭔가 잘못됐어요!!");
         closeModal();
-        console.log(userDataSave.status);
       }
     } catch (e) {
       chgError(e);

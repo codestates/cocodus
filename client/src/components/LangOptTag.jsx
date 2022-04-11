@@ -57,7 +57,7 @@ function LangOptTag() {
   const { selectedOptions } = state;
   return (
     <>
-      {console.log(tag)}
+      {/* {console.log(tag)} */}
       {/* 처음 글쓰기 할때 */}
       {tag.length === 0 ? (
         <Select
