@@ -11,7 +11,7 @@ import { postData } from "../../Store/postData-zustand";
 import { commentStore } from "../../Store/Comment-zustand";
 import { accessTokenStore } from "../../Store/accesstoken-zustand";
 import { registerUserInfoStore } from "../../Store/RegisterUserInfo-zustand";
-function DetailContent(props) {
+function DetailContent() {
   const { chgLoading, chgError } = boardGetLoadingStore();
   const { isLogin, accessToken, cocodusId } = accessTokenStore();
   const { nickName } = registerUserInfoStore();
