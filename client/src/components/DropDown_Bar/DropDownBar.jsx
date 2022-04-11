@@ -20,6 +20,7 @@ const DropDownBar = () => {
     chgAccToken("");
     chgInput("");
     chgCocoId("");
+    navigate("/", { replace: true });
   };
 
   return (
